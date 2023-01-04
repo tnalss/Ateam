@@ -16,12 +16,14 @@ import com.example.lastproject.home.HomeFragment;
 import com.example.lastproject.login.LoginVO;
 import com.example.lastproject.login.LoginActivity;
 import com.example.lastproject.login.LogoutActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding;
         double waitTime=0;
-        LoginVO vo;
+        public BottomNavigationView btm_nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
+        btm_nav = findViewById(R.id.btm_nav);
         Intent intent = getIntent();
         Common.loginInfo=  (LoginVO) intent.getSerializableExtra("loginInfo");
 

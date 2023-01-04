@@ -9,7 +9,7 @@ select TO_CHAR(attend_date, 'YYYYMMDD') attend_date,
 TO_CHAR(attend_on, 'HH24:MI:SS') attend_on,
 TO_CHAR(attend_off, 'HH24:MI:SS') attend_off,att_code
 from tbl_attend
-where emp_no=#{emp_no}
+where emp_no=#{emp_no} and TO_CHAR(attend_date, 'YYYYMMDD')= #{date}
 </select>
 
 </mapper>

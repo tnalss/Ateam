@@ -54,7 +54,7 @@
              android:padding="10dp"
              android:layout_width="80dp"
              android:layout_height="80dp"
-             android:src="@mipmap/ic_launcher"/>
+             android:src="@drawable/user_profile"/>
 
         <LinearLayout
             android:layout_weight="1"
@@ -91,17 +91,19 @@
         <RelativeLayout
             android:layout_marginRight="10dp"
             android:layout_gravity="center"
-            android:layout_width="150dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content">
             <!--출근시 출근시간 현재 출근상태가 아니라면 출근 처리 유도해주세요.-->
             <TextView
-                android:id="@+id/ontime"
+                android:id="@+id/tv_ontime"
                 style="@style/small_size"
                 android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/fl_on_off"
                 android:text="출근시간"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <FrameLayout
+                android:id="@+id/fl_on_off"
                 android:layout_alignParentRight="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp">
@@ -126,6 +128,11 @@
     </LinearLayout>
 
     <!--일정따서 일정넣던가-->
+<devs.mulham.horizontalcalendar.HorizontalCalendarView
+    android:id="@+id/calendarView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:textColorSelected="#000000"/>
     <!--메뉴 디자인 필요-->
 
     <!--메뉴 맨 윗줄-->
