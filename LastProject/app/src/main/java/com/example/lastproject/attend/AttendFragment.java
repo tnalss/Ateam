@@ -11,15 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
+import com.example.lastproject.ea.FormListFragment;
+import com.example.lastproject.home.HomeFragment;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.zip.Inflater;
 
 public class AttendFragment extends Fragment {
 
@@ -28,6 +33,9 @@ public class AttendFragment extends Fragment {
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank;
     Button workday;
+    ImageView home;
+    MainActivity activity;
+
 
 
 
@@ -36,6 +44,16 @@ public class AttendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_attend, container, false);
+
+        /*홈으로 가기*/
+        home = v.findViewById(R.id.home);
+        activity = (MainActivity) getActivity();
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.changeFragment(new HomeFragment());
+            }
+        });
 
         /*현재위치*/
         location_now = v.findViewById(R.id.location_now);
