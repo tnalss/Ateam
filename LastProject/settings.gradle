@@ -14,8 +14,17 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
+        /*230104 주영 : 네이버 지도 사용 위해 추가함*/
+        jcenter()
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
+
     }
 }
+
+
+
 rootProject.name = "LastProject"
 include ':app'
 include ':conn'

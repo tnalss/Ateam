@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/home"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_home" />
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:layout_height="100dp">
         <RelativeLayout
             android:id="@+id/location_now"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/location"
@@ -115,7 +115,7 @@
                 style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="박주영"/>
+                android:text="김아무개님 안녕하세요"/>
 
             <LinearLayout
                 android:gravity="center"
