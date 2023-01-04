@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lo">
+
+<select id="loginInfo" resultType='login.LoginVO'>
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num
+where e.emp_no = #{emp_no} and e.emp_pw = #{emp_pw}
+</select>
+
+</mapper>

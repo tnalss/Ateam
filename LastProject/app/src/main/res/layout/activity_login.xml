@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginActivity"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_marginTop="85dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/logo" />
+
+    <!-- 아이디 -->
+    <EditText
+        android:id="@+id/edt_login_id"
+        android:hint="   ID"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:background="@drawable/item_radius"
+        android:layout_width="210dp"
+        android:layout_height="50dp"/>
+
+    <!-- 비밀번호 -->
+    <EditText
+        android:id="@+id/edt_login_pw"
+        android:hint="   PW"
+        android:textColor="#000"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_radius"
+        android:layout_width="210dp"
+        android:layout_height="50dp"/>
+
+    <!--패스워드 찾기-->
+    <TextView
+        android:id="@+id/tv_login_pwfind"
+        android:textSize="17dp"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="패스워드 찾기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- 로그인 -->
+    <Button
+        android:id="@+id/btn_login_login"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="#D2D2D1"
+        android:text="로그인"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:clickable="false" />
+
+
+    <!-- 로그인 체크박스 -->
+    <LinearLayout
+        android:gravity="center"
+        android:padding="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/chec_id"
+        android:layout_marginRight="10dp"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:text="아이디 저장"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/chec_gogo"
+      android:layout_marginRight="10dp"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:text="바로 출근"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/img_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

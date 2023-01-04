@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--메인 글씨 스타일-->
+    <style name="main_size">
+        <item name="android:textSize">18dp</item>
+    </style>
+    <style name="sub_size">
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="small_size">
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <!--최상단 아이콘 크기-->
+    <style name="top_menu_ic_size">
+        <item name="android:width">30dp</item>
+        <item name="android:height">30dp</item>
+    </style>
+
+</resources>

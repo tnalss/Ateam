@@ -1,0 +1,79 @@
+필요한 라이브러리 검색: mvnrepository.com 
+
+DB연결에 필요한 라이브러리
+		
+		<!-- 스프링에서 jdbc 사용하기 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>5.3.18</version>
+		</dependency>
+			
+		<!-- 오라클용 ojdbc 라이브러리 -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+				
+		<!-- DBCP 라이브러리 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <version>2.9.0</version>
+		</dependency>
+		
+Mybatis 프레임웤을 사용하기 위한 라이브러리
+
+		<!-- 마이바티스 라이브러리 -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.5.10</version>
+		</dependency>
+				
+		<!-- spring에서 마이바티스를 사용하도록 연결하는 라이브러리 -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>2.0.7</version>
+		</dependency>
+		
+
+데이터객체(VO,DTO)에 getter,setter 자동생성 라이브러리
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.24</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- 화면템플릿을 위한 라이브러리 -->						
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+				
+		
+화면 template 지정 : tiles 사용
+http://apache.org   ->  tiles 검색: Home - Apache Tiles - Framework 클릭
+-> 
+
+											
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

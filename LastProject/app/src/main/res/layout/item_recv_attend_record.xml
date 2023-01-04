@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_radius2"
+    android:padding="5dp"
+    android:layout_margin="2dp">
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2023.01.02 (월)"
+        style="@style/main_size"/>
+    <LinearLayout
+        android:layout_below="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/on_off"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출근 09:00 ~ 퇴근 18:00"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/work_state"
+            android:textStyle="bold"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="근무"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/sum_hour"
+            android:textStyle="bold"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8h"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_marginRight="3dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/check_circle"
+        />
+    <TextView
+        style="@style/small_size"
+        android:id="@+id/now"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="근무"/>
+
+
+</RelativeLayout>
