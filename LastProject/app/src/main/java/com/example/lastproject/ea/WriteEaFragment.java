@@ -33,7 +33,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     ArrayList<EaCodeVO> list;
     ArrayList<String> value_list;
     ArrayAdapter<String> arrayAdapter;
-    TextView tv_main;
+    TextView tv_main,tv_form;
     Spinner spinner_department;
 
     @Override
@@ -41,10 +41,12 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_write_ea, container, false);
         tv_main = v.findViewById(R.id.tv_main);
+        tv_form = v.findViewById(R.id.tv_form);
         btn_sign_add = v.findViewById(R.id.btn_sign_add);
       //  edt_sign_search = v.findViewById(R.id.edt_sign_search);
         EaCodeVO vo = (EaCodeVO) getArguments().getSerializable("form");
         tv_main.setText(vo.getCode_value());
+        tv_form.setText(vo.getCode_value());
         btn_sign_add.setOnClickListener(this);
         dialog = new BottomSheetDialog(getContext(),R.style.AppBottomSheetDialogTheme);
         dialog.setContentView(inflater.inflate(R.layout.bottom_sheet_layout, null));
