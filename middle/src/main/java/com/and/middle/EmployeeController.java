@@ -23,4 +23,8 @@ public class EmployeeController {
 		List<EmployeeVO> list = sql.selectList("emp.list");
 		return new Gson().toJson(list).toString();
 	}
+	@RequestMapping(value= "/fire.emp" , produces="text/html;charset=utf-8")
+	public void fire_emp(String emp_no) {
+		sql.update("emp.fire",emp_no);
+	}
 }

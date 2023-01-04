@@ -99,7 +99,7 @@
                 style="@style/small_size"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/fl_on_off"
-                android:text="출근시간"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <FrameLayout

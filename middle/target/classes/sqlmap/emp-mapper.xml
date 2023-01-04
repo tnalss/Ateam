@@ -15,4 +15,8 @@ on e.emp_no = a.emp_no
 order by e.emp_no
 </select>
 
+<select id="fire" >
+	UPDATE tbl_emp SET ADMIN='X0' WHERE emp_no=${emp_no}
+</select>
+
 </mapper>

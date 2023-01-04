@@ -2,6 +2,7 @@ package com.example.lastproject.employee;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentEmpDetailBinding;
 
 
@@ -56,7 +59,13 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_gender.setText(vo.getGender());
         tv_emp_email.setText(vo.getEmail());
         tv_emp_phone.setText(vo.getPhone());
-        tv_emp_admin.setText(vo.getAdmin());
+        if(vo.getAdmin().equals("L0")){
+            tv_emp_admin.setText("일반 사용자");
+        } else if(vo.getAdmin().equals("L1")){
+            tv_emp_admin.setText("관리자");
+        }else if(vo.getAdmin().equals("X0")){
+            tv_emp_admin.setText("퇴사자");
+        }
         tv_emp_hire_date.setText(vo.getHire_date());
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -65,18 +74,32 @@ public class EmpDetailFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-
+//수정
         btn_emp_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-
+//퇴사
         btn_emp_fire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(vo.getAdmin().equals("X0")) {
+                    new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("이미 퇴사한 사원입니다.")
+                            .setPositiveButton(android.R.string.yes,(dialog, which) -> {
+                                new CommonMethod().setParams("emp_no",vo.getEmp_no()).sendPost("fire.emp",(isResult, data) -> {
 
+                                });
+                            }).show();
+                    return;
+                }
+                new AlertDialog.Builder(getContext()).setTitle("확인").setMessage(vo.getEmp_name() +"님을 퇴사 시키시겠습니까?")
+                        .setPositiveButton(android.R.string.yes,(dialog, which) -> {
+                        new CommonMethod().setParams("emp_no",vo.getEmp_no()).sendPost("fire.emp",(isResult, data) -> {
+
+                        });
+                }).setNegativeButton(android.R.string.no,(dialog, which) -> {}).show();
             }
         });
 
