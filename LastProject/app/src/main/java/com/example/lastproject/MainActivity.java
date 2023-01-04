@@ -60,16 +60,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void changeFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+        //addToBackStack(null)을 이용하면 뒤로가기 누르면 이전 프래그먼트로 이동합니다! 23/1/4 csm
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        if(System.currentTimeMillis() - waitTime >=1500 ) {
-            waitTime = System.currentTimeMillis();
-        } else {
-            super.onBackPressed(); // 액티비티 종료
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(System.currentTimeMillis() - waitTime >=1500 ) {
+//            waitTime = System.currentTimeMillis();
+//        } else {
+//            super.onBackPressed(); // 액티비티 종료
+//        }
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.lastproject.employee;
 
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 
 import java.util.ArrayList;
@@ -18,10 +22,12 @@ import java.util.ArrayList;
 public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHolder> {
     LayoutInflater inflater;
     ArrayList<EmployeeVO> list;
+    MainActivity activity;
 
-    public EmpListAdapter(LayoutInflater inflater, ArrayList<EmployeeVO> list) {
+    public EmpListAdapter(LayoutInflater inflater, ArrayList<EmployeeVO> list, MainActivity activity) {
         this.inflater = inflater;
         this.list = list;
+        this.activity=activity;
     }
 
     @NonNull
@@ -40,15 +46,23 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         if(list.get(position).getAtt_code()==null){
             holder.tv_nowStatus.setText("출근 전");
         } else if(list.get(position).getAtt_code().equals("W0")){
-            holder.tv_nowStatus.setText("현재 근무중");
+            holder.tv_nowStatus.setText("근무중");
         } else if (list.get(position).getAtt_code().equals("W1")){
             holder.tv_nowStatus.setText("퇴근");
+        }   else if (list.get(position).getAtt_code().equals("W9")){
+            holder.tv_nowStatus.setText("퇴사");
         }
         int i = position;
         holder.ll_each_emp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("vo",list.get(i));
+                Fragment fragment = new EmpDetailFragment();
+                fragment.setArguments(bundle);
+               // activity.getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
+                activity.changeFragment(fragment);
 
             }
         });

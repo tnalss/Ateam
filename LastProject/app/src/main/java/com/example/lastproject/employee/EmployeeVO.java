@@ -1,8 +1,9 @@
 package com.example.lastproject.employee;
 
 
+import java.io.Serializable;
 
-public class EmployeeVO {
+public class EmployeeVO implements Serializable {
 	private String emp_no,emp_name,emp_pw,gender, phone, email, address,admin,
 	rank_name,branch_name,department_name;
 	private int salary;

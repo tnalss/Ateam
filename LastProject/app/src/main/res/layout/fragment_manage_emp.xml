@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".employee.ManageEmpFragment"
     android:orientation="vertical">
-
+<!--최상단 메뉴 뒤로가기, 사원관리, 검색-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,6 +31,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"/>
     </RelativeLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_emp_list"
         android:layout_width="match_parent"

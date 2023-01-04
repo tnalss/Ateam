@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Common.loginInfo.setAtt_code(vo.getAtt_code());
                         Common.loginInfo.setAttend_date(vo.getAttend_date());
                         Common.loginInfo.setAttend_on(vo.getAttend_on());
-                        binding.tvOntime.setText("출근 시각 : "+Common.loginInfo.getAttend_on()+" ");
+                        binding.tvOntime.setText("출근 : "+Common.loginInfo.getAttend_on()+" ");
                         binding.ivOnWork.setVisibility(View.VISIBLE);
                     }
                 } else {
