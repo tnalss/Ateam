@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_no_notice"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="25dp"
+        android:layout_height="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_no_title"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:layout_marginLeft="5dp"
+            android:text="공지글 입니다 다음 사항은"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        </LinearLayout>
+    </LinearLayout>

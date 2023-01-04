@@ -28,7 +28,7 @@ public class FormListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_form_list, container, false);
         recv_form = v.findViewById(R.id.recv_form);
-        ApiClient.setBASEURL("http://192.168.0.2/middle/");
+        ApiClient.setBASEURL("http://192.168.0.23:3303/middle/");
 
         new CommonMethod().sendPost("form.ea", (isResult, data) -> {
             list = new Gson().fromJson(data,

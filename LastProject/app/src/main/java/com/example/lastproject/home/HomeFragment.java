@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.conn.CommonMethod;
+import com.example.lastproject.MainActivity;
+import com.example.lastproject.NoticeFragment;
 import com.example.lastproject.R;
+import com.example.lastproject.attend.AttendFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
 import com.google.android.material.datepicker.SingleDateSelector;
@@ -18,13 +21,14 @@ import com.google.android.material.datepicker.SingleDateSelector;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
-
+    MainActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
+        activity = (MainActivity) getActivity();
         binding.menu11.setClipToOutline(true);
         binding.menu12.setClipToOutline(true);
         binding.menu13.setClipToOutline(true);
@@ -40,6 +44,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         });
 
+        binding.menu13.setOnClickListener(this);
+
         View v = binding.getRoot();
         binding.menu11.setOnClickListener(this);
         return v;
@@ -53,6 +59,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //문서관리
         } else if ( v.getId() == R.id.menu1_3){
             //게시판
+           activity.changeFragment(new NoticeFragment());
         } else if ( v.getId() == R.id.menu2_1){
             //지점관리
         } else if ( v.getId() == R.id.menu2_2){
@@ -61,4 +68,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             // 전자결재
         }
     }
+
 }

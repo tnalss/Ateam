@@ -23,5 +23,5 @@ public class EaController {
 
 		return new Gson().toJson(list);
 	}
-	
+
 }
