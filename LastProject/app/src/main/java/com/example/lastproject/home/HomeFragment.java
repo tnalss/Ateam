@@ -22,6 +22,7 @@ import java.util.Calendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
+import com.example.lastproject.notice.NoticeFragment;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         activity = (MainActivity) getActivity();
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
+        activity = (MainActivity) getActivity();
         binding.menu11.setClipToOutline(true);
         binding.menu12.setClipToOutline(true);
         binding.menu13.setClipToOutline(true);
@@ -114,6 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //문서관리
         } else if ( v.getId() == R.id.menu1_3){
             //게시판
+           activity.changeFragment(new NoticeFragment());
         } else if ( v.getId() == R.id.menu2_1){
             //지점관리
         } else if ( v.getId() == R.id.menu2_2){
@@ -130,4 +133,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             activity.btm_nav.setSelectedItemId(R.id.btm_item3);
         }
     }
+
 }

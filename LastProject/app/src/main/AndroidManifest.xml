@@ -69,6 +69,13 @@
         </activity>
 
         <activity
+            android:name=".notice.Insert_noActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".login.LogoutActivity"
             android:exported="false">
             <meta-data
@@ -87,6 +94,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
+        <activity
+            android:name=".attend.AttendActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".login.LoginActivity"
             android:exported="false">
