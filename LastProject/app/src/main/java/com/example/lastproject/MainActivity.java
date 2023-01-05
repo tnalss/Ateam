@@ -17,12 +17,14 @@ import com.example.lastproject.home.HomeFragment;
 import com.example.lastproject.login.LoginVO;
 import com.example.lastproject.login.LoginActivity;
 import com.example.lastproject.login.LogoutActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding;
         double waitTime=0;
-        LoginVO vo;
+        public BottomNavigationView btm_nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
+        btm_nav = findViewById(R.id.btm_nav);
         Intent intent = getIntent();
         Common.loginInfo=  (LoginVO) intent.getSerializableExtra("loginInfo");
 
@@ -58,16 +61,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void changeFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+        //addToBackStack(null)을 이용하면 뒤로가기 누르면 이전 프래그먼트로 이동합니다! 23/1/4 csm
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        if(System.currentTimeMillis() - waitTime >=1500 ) {
-            waitTime = System.currentTimeMillis();
-        } else {
-            super.onBackPressed(); // 액티비티 종료
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(System.currentTimeMillis() - waitTime >=1500 ) {
+//            waitTime = System.currentTimeMillis();
+//        } else {
+//            super.onBackPressed(); // 액티비티 종료
+//        }
+//    }
 
 }

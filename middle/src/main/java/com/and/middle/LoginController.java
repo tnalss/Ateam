@@ -22,10 +22,10 @@ public class LoginController {
 		map.put("emp_no", emp_no);
 		map.put("emp_pw", emp_pw);
 		LoginVO vo = sql.selectOne("lo.loginInfo", map);
-		System.out.println(vo.getEmp_name());
-		System.out.println(vo.getEmp_no());
-		System.out.println(vo.getEmp_pw());
-		System.out.println(vo.getPhone());
+		//System.out.println(vo.getEmp_name());
+		//System.out.println(vo.getEmp_no());
+		//System.out.println(vo.getEmp_pw());
+		//System.out.println(vo.getPhone());
 		session.setAttribute("loginInfo", vo);
 		
 		return new Gson().toJson(vo).toString();

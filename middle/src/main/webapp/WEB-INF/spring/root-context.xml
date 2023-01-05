@@ -7,7 +7,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<context:component-scan base-package="and,customer,member,common,ea,login" />
+	<context:component-scan base-package="and,customer,member,common,ea,login,employee" />
 
 	
 	<import resource="classpath:dbconn/conn.xml"/>

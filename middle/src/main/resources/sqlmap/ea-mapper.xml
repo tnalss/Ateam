@@ -2,8 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ea">
 
+<!-- 문서 양식명 불러오기 -->
 <select id="formlist" resultType='ea.EaCodeVO'>
-select code_num, code_value, code_comments from get_code_table('P')
+select * from get_code_table('P')
+</select>
+
+<select id="recentlist" resultType="ea.EaVO">
+select * from tbl_ea
+where emp_no = #{no}
+order by ea_date desc
 </select>
 
 </mapper>
