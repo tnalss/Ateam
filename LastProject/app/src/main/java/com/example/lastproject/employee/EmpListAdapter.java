@@ -56,14 +56,13 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
-                Bundle bundle = new Bundle();
-                bundle.putString("emp_no",list.get(i).getEmp_no());
-                //bundle.putSerializable("vo",list.get(i));
-                Fragment fragment = new EmpDetailFragment();
-                fragment.setArguments(bundle);
-               // activity.getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
-                activity.changeFragment(fragment);
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("vo",list.get(i));
+                Fragment fragment = new EmpDetailFragment();
+
+                fragment.setArguments(bundle);
+                activity.changeFragment(fragment);
             }
         });
     }

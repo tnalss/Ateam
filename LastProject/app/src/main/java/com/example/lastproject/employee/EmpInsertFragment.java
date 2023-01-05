@@ -15,6 +15,7 @@ import com.example.lastproject.R;
 import com.example.lastproject.databinding.FragmentEmpInsertBinding;
 import com.example.lastproject.databinding.FragmentManageEmpBinding;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class EmpInsertFragment extends Fragment {
@@ -50,8 +51,10 @@ public class EmpInsertFragment extends Fragment {
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",null,(isResult, data) -> {
                 if(isResult) {
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    EmployeeVO vo2 = gson.fromJson(data,EmployeeVO.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("emp_no",data);
+                    bundle.putSerializable("vo",vo2);
                     Fragment fragment = new EmpDetailFragment();
                     fragment.setArguments(bundle);
                     activity.changeFragment(fragment);

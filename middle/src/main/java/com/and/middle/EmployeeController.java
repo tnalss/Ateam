@@ -41,7 +41,7 @@ public class EmployeeController {
 	
 	
 	//회원가입
-	@RequestMapping("/insert.emp")
+	@RequestMapping(value="/insert.emp" , produces="text/html;charset=utf-8")
 	public String insert_emp(String param) {
 		EmployeeVO vo = new Gson().fromJson(param, EmployeeVO.class);
 		
@@ -55,10 +55,9 @@ public class EmployeeController {
 		map.put("emp_name", vo.getEmp_name());
 		map.put("email", vo.getEmail());
 		////////////////////////////////////////////////이메일로 비밀번호 보내주는 처리 필요
-			
-		
-		return sql.selectOne("emp.search_emp_no",map);
-	
+		EmployeeVO vo2 = sql.selectOne("emp.search_emp",map);
+		System.out.println(vo2.getAdmin());
+		return new Gson().toJson(vo2).toString();
 	}
 	
 	//퇴사자?어드민? 조회
