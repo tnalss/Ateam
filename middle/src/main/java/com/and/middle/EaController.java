@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import ea.EaCodeVO;
+import ea.EaVO;
 
 @RestController
 public class EaController {
@@ -29,7 +30,12 @@ public class EaController {
 
 		return gson.toJson(list);
 	}
-
+	@RequestMapping(value="/recent_all_list.ea", produces="text/html;charset=utf-8")
+	public String ea_recent_list(String no) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+		List<EaVO> list = sql.selectList("ea.recentlist",no);
+		return gson.toJson(list);
+	}
 	
 	  @RequestMapping(value="/code_list.ea",produces="text/html;charset=utf-8") 
 	  public String code_list(String cate){ 
@@ -37,6 +43,12 @@ public class EaController {
 		  List<EaCodeVO> list = sql.selectList("code.list", cate);
 	
 		  return gson.toJson(list); }
-	 
+	  
+	  //사원 이름 검색
+	  @RequestMapping(value="/name_search.ea", produces="text/html;charset=utf-8")
+	  public  String ea_search_name(String name) {
+		  
+		  return "";
+	  }
 
 }

@@ -169,6 +169,10 @@
         app:tabSelectedTextColor="#000"
         app:tabIndicatorColor="#000"
         app:tabIndicatorHeight="2dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_recent_ea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="300dp"/>

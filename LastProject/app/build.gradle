@@ -3,7 +3,6 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
-
 android {
     namespace 'com.example.lastproject'
     compileSdk 32
@@ -82,5 +81,9 @@ dependencies {
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    //23. 01. 05 JHW - Chips(수신 이름 이쁘게)
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+
 
 }

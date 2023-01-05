@@ -7,4 +7,10 @@
 select * from get_code_table('P')
 </select>
 
+<select id="recentlist" resultType="ea.EaVO">
+select * from tbl_ea
+where emp_no = #{no}
+order by ea_date desc
+</select>
+
 </mapper>

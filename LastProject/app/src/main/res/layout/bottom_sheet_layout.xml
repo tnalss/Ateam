@@ -11,6 +11,13 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:orientation="vertical"
    >
+
+    <Button
+        android:id="@+id/btn_test"
+        android:text=" 검색"
+        android:backgroundTint="@color/main_color"
+        android:layout_width="80dp"
+        android:layout_height="50dp"/>
     <View
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
@@ -29,11 +36,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/btn_search"
             android:text=" 검색"
             android:backgroundTint="@color/main_color"
             android:layout_width="80dp"
             android:layout_height="50dp"/>
     </LinearLayout>
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_sign_search"
         android:layout_width="match_parent"

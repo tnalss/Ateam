@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ea.WriteEaFragment">
+    tools:context=".ea.WriteEaFragment"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,14 +117,16 @@
                 android:paddingRight="25dp"
                 android:text="비공개" />
         </RadioGroup>
-
         <TextView
+            android:id="@+id/tv_dep_title"
+            android:visibility="gone"
             android:layout_marginTop="15dp"
             android:text="기안부서"
             android:textColor="@color/light_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Spinner
+            android:visibility="gone"
             android:layout_gravity="center"
             android:id="@+id/spinner_department"
             android:layout_width="match_parent"
@@ -153,7 +161,64 @@
             android:layout_gravity="center"
             android:layout_width="250dp"
             android:layout_height="50dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
+            android:text="참조(선택)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_refer_check"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="결제선이 비어있습니다. 결재선을 추가해주세요."
+            android:layout_width="140dp"
+            android:layout_height="100dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_refer_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_refer_add"
+            android:backgroundTint="@color/main_color"
+            android:text="참조 추가"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_temp_save"
+            android:backgroundTint="#3C3B3B"
+            android:textColor="@color/white"
+            android:text="임시저장"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="60dp"/>
+        <Button
+            android:id="@+id/btn_apply"
+            android:backgroundTint="@color/main_color"
+            android:textColor="@color/white"
+            android:text="상신하기"
+           android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="60dp"/>
+
     </LinearLayout>
 
-
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>
