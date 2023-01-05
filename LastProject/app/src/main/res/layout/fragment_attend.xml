@@ -38,16 +38,18 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/location" />
+
             <TextView
-                style="@style/sub_size"
+                android:id="@+id/location_tv"
+                style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/location"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/location"
-                android:textStyle="bold"
-                android:text="현재 위치" />
+                android:text="현재 위치 확인"
+                android:textStyle="bold" />
 
         </RelativeLayout>
         <RelativeLayout

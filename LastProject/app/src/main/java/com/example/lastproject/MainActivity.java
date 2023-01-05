@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import com.example.lastproject.calendar.CalendarFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.attend.AttendFragment;
 import com.example.lastproject.databinding.ActivityMainBinding;
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 //홈
                 changeFragment(new HomeFragment());
             }   else if ( item.getItemId() == R.id.btm_item2 ){
-                //일정
+                changeFragment(new CalendarFragment());
             }   else if ( item.getItemId() == R.id.btm_item3 ){
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,new AttendFragment()).commit();
+                changeFragment(new AttendFragment());
             }   else if ( item.getItemId() == R.id.btm_item4 ){
                 changeFragment(new EaFragment());
                 //전자결재

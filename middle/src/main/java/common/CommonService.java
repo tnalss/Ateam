@@ -42,4 +42,6 @@ public class CommonService {
 		return request.getRequestURL().toString().replace(request.getServletPath(),"");
 	}
 		
+	
+
 }

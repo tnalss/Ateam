@@ -152,9 +152,7 @@ public class LocationNowActivity extends AppCompatActivity  implements OnMapRead
                 String aa = " ";
             }else{
                 Log.d("찾은 주소",addresses.get(0).toString());
-            //    tv_nowlocation.setText(addresses.get(0).getAddressLine(0).toString());
-            //    CommonVal.defaultAddr = addresses.get(0).getAddressLine(0).toString() ;
-                //txt.setText(address.get(0).getAddressLine(0));
+
             }
         }
     }

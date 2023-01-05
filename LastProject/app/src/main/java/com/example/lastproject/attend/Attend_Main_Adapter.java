@@ -1,5 +1,6 @@
 package com.example.lastproject.attend;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,19 @@ import com.example.lastproject.R;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapter.ViewHolder> {
     LayoutInflater inflater;
-
-    public Attend_Main_Adapter(LayoutInflater inflater) {
+    ArrayList<AttendVO> list;
+    Context context;
+    public Attend_Main_Adapter(LayoutInflater inflater, ArrayList<AttendVO> list, Context context) {
         this.inflater = inflater;
+        this.list = list;
+        this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -32,6 +39,8 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
         h.date.setText(getDate());
+        h.on.setText(list.get(i).getAttend_on());
+        h.off.setText(list.get(i).getAttend_off());
 
     }
 
@@ -41,14 +50,15 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  date, on_off, work_state, sum_hour, now;
+        TextView  date, on,off, work_state, sum_hour, now;
 
         public ViewHolder(@NonNull View v) {
             super(v);
             date = v.findViewById(R.id.date);
-            on_off = v.findViewById(R.id.on_off);
-            work_state = v.findViewById(R.id.work_state);
-            sum_hour = v.findViewById(R.id.sum_hour);
+            on= v.findViewById(R.id.on);
+            off=v.findViewById(R.id.off);
+            //work_state = v.findViewById(R.id.work_state);
+            //sum_hour = v.findViewById(R.id.sum_hour);
             now = v.findViewById(R.id.now);
 
         }
