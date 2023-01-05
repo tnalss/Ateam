@@ -575,3 +575,13 @@ values (2,'W0', sysdate);
 UPDATE tbl_attend
 SET attend_off = sysdate , att_code='W1'
 WHERE emp_no=2; 
+
+//23/1/4 csm tbl_emp의 admin 속성을 변경하였습니다.
+퇴사자 판단을 위한 칼럼을 만드려고 보니 차라리
+관리자권한으로 판단을 하는게 맞다고 생각
+기존 y와 n으로 구별하던 코드를 공통코드 L0 L1 으로 변경
+X0을 공통코드에 추가하였고 이는 tbl_emp의 admin에 들어가는 값이며 퇴사자를 뜻합니다.
+check도 지웁니다.
+ADMIN	VARCHAR2(1)		default 'N' check (admin in('Y','N')),
+
+ADMIN	VARCHAR2(3)		default'L0'

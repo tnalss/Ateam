@@ -45,12 +45,17 @@ public class ManageEmpFragment extends Fragment {
                 binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
             }
         });
-        binding.ivPersonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
+        //사원검색기능 구현해야됨
+        binding.ivPersonSearch.setOnClickListener(v->{
+
         });
+
+        //신규사원추가버튼
+        binding.btnNewEmp.setOnClickListener(v -> {
+            activity.changeFragment(new EmpInsertFragment());
+        });
+
 
         View v = binding.getRoot();
         return v;

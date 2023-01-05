@@ -14,9 +14,7 @@ import android.widget.TextView;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
-import com.example.lastproject.common.Common;
-import com.example.lastproject.databinding.FragmentEmpDetailBinding;
-
+import com.google.gson.Gson;
 
 public class EmpDetailFragment extends Fragment {
 
@@ -25,13 +23,21 @@ public class EmpDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         TextView tv_emp_name,tv_emp_birth,tv_emp_address,tv_emp_branch,tv_emp_dept,tv_emp_hire_date
-                ,tv_emp_rank,tv_emp_no,tv_emp_gender,tv_emp_email,tv_emp_phone,tv_emp_admin;
+                ,tv_emp_rank,tv_emp_no,tv_emp_gender,tv_emp_email,tv_emp_phone,tv_emp_admin,tv_emp_salary,tv_emp_comm_pct;
         Button btn_emp_edit, btn_emp_fire;
         ImageView iv_back;
 
         View v = inflater.inflate(R.layout.fragment_emp_detail, container, false);
         Bundle bundle = getArguments();
-        EmployeeVO vo = (EmployeeVO) bundle.getSerializable("vo");
+        //EmployeeVO vo = (EmployeeVO) bundle.getSerializable("vo");
+        //EmployeeVO vo = new EmployeeVO();
+        String emp_no=bundle.getString("emp_no");
+/*        String adminCode;
+        new CommonMethod().setParams("emp_no",emp_no).sendPost("adminCode.emp",(isResult, data) -> {
+            if(isResult){
+                adminCode = data;
+            }
+        });*/
 
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_birth = v.findViewById(R.id.tv_emp_birth);
@@ -47,26 +53,41 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_rank = v.findViewById(R.id.tv_emp_rank);
         btn_emp_edit = v.findViewById(R.id.btn_emp_edit);
         btn_emp_fire = v.findViewById(R.id.btn_emp_fire);
+        tv_emp_comm_pct = v.findViewById(R.id.tv_emp_comm_pct);
+        tv_emp_salary = v.findViewById(R.id.tv_emp_salary);
         iv_back = v.findViewById(R.id.iv_back);
 
-        tv_emp_name.setText(vo.getEmp_name());
-        tv_emp_birth.setText(vo.getBirth());
-        tv_emp_address.setText(vo.getAddress());
-        tv_emp_branch.setText(vo.getBranch_name());
-        tv_emp_dept.setText(vo.getDepartment_name());
-        tv_emp_rank.setText(vo.getRank_name());
-        tv_emp_no.setText(vo.getEmp_no());
-        tv_emp_gender.setText(vo.getGender());
-        tv_emp_email.setText(vo.getEmail());
-        tv_emp_phone.setText(vo.getPhone());
-        if(vo.getAdmin().equals("L0")){
-            tv_emp_admin.setText("일반 사용자");
-        } else if(vo.getAdmin().equals("L1")){
-            tv_emp_admin.setText("관리자");
-        }else if(vo.getAdmin().equals("X0")){
-            tv_emp_admin.setText("퇴사자");
-        }
-        tv_emp_hire_date.setText(vo.getHire_date());
+        //사번으로 조회
+        new CommonMethod().setParams("emp_no",emp_no).sendPost("info.emp", new CommonMethod.CallbackResult() {
+            @Override
+            public void result(boolean isResult, String data) {
+                if(isResult){
+                    EmployeeVO vo = new Gson().fromJson(data,EmployeeVO.class);
+
+                    tv_emp_name.setText(vo.getEmp_name());
+                    tv_emp_birth.setText(vo.getBirth());
+                    tv_emp_address.setText(vo.getAddress());
+                    tv_emp_branch.setText(vo.getBranch_name());
+                    tv_emp_dept.setText(vo.getDepartment_name());
+                    tv_emp_rank.setText(vo.getRank_name());
+                    tv_emp_no.setText(vo.getEmp_no());
+                    tv_emp_gender.setText(vo.getGender());
+                    tv_emp_email.setText(vo.getEmail());
+                    tv_emp_phone.setText(vo.getPhone());
+                    if(vo.getAdmin().equals("L0")){
+                        tv_emp_admin.setText("일반 사용자");
+                    } else if(vo.getAdmin().equals("L1")){
+                        tv_emp_admin.setText("관리자");
+                    }else if(vo.getAdmin().equals("X0")){
+                        tv_emp_admin.setText("퇴사자");
+                    }
+                    tv_emp_hire_date.setText(vo.getHire_date());
+                    if(vo.getCommission_pct()!=0)
+                    {tv_emp_comm_pct.setText(vo.getCommission_pct()*100+"%");}
+                    else {tv_emp_comm_pct.setText("0");}
+                    tv_emp_salary.setText(vo.getSalary()+"");
+                }}});
+
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,18 +106,18 @@ public class EmpDetailFragment extends Fragment {
         btn_emp_fire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(vo.getAdmin().equals("X0")) {
+ /*               if(adminCode.equals("X0")) {
                     new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("이미 퇴사한 사원입니다.")
                             .setPositiveButton(android.R.string.yes,(dialog, which) -> {
-                                new CommonMethod().setParams("emp_no",vo.getEmp_no()).sendPost("fire.emp",(isResult, data) -> {
+                                new CommonMethod().setParams("emp_no",emp_no).sendPost("fire.emp",(isResult, data) -> {
 
                                 });
                             }).show();
                     return;
-                }
-                new AlertDialog.Builder(getContext()).setTitle("확인").setMessage(vo.getEmp_name() +"님을 퇴사 시키시겠습니까?")
+                }*/
+                new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("퇴사 시키시겠습니까?")
                         .setPositiveButton(android.R.string.yes,(dialog, which) -> {
-                        new CommonMethod().setParams("emp_no",vo.getEmp_no()).sendPost("fire.emp",(isResult, data) -> {
+                        new CommonMethod().setParams("emp_no",emp_no).sendPost("fire.emp",(isResult, data) -> {
 
                         });
                 }).setNegativeButton(android.R.string.no,(dialog, which) -> {}).show();

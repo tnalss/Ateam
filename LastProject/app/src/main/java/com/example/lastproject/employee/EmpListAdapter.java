@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.MainActivity;
@@ -58,7 +57,8 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("vo",list.get(i));
+                bundle.putString("emp_no",list.get(i).getEmp_no());
+                //bundle.putSerializable("vo",list.get(i));
                 Fragment fragment = new EmpDetailFragment();
                 fragment.setArguments(bundle);
                // activity.getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
