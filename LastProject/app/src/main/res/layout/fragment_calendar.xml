@@ -6,17 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".calendar.CalendarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+    <!--현재일정 모양 몇개 잡고 밑에 달력?-->
     <!--달력-->
+<!--
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:layout_margin="10dp"
         android:id="@+id/calendarview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mcv_selectionMode="range"     />
+        app:mcv_selectionMode="range"/>
+-->
 
 </FrameLayout>

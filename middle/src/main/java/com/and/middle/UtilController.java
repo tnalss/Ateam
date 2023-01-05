@@ -25,7 +25,6 @@ public class UtilController {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
 		
-		
 		HashMap<String,String> map = new HashMap<>();
 		map.put("emp_no", emp_no);
 		map.put("date", sdf.format(date).toString());

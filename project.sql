@@ -585,3 +585,6 @@ check도 지웁니다.
 ADMIN	VARCHAR2(1)		default 'N' check (admin in('Y','N')),
 
 ADMIN	VARCHAR2(3)		default'L0'
+
+//23/1/5 csm
+tbl_emp 커미션 기본값줬습니다 0으로

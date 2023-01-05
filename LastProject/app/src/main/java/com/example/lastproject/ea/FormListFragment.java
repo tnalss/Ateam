@@ -32,7 +32,7 @@ public class FormListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_form_list, container, false);
         recv_form = v.findViewById(R.id.recv_form);
         activity = (MainActivity)getActivity();
-        ApiClient.setBASEURL("http://192.168.0.23:3303/middle/");
+        //ApiClient.setBASEURL("http://192.168.0.23:3303/middle/");
 
         new CommonMethod().sendPost("form.ea", (isResult, data) -> {
 

@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     MainActivity activity;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
-        //쿼리 날려서 출퇴근 여부 파악
+        // 쿼리 날려서 출퇴근 여부 파악
+        // 올때마다 쿼리날리는게 거슬리는데? 방법없나?
         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attendOrNot",(isResult, data) -> {
             LoginVO vo = new Gson().fromJson(data,LoginVO.class);
             if(isResult) {

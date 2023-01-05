@@ -7,6 +7,7 @@
     android:orientation="vertical">
     <!--최상단-->
     <RelativeLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -43,7 +44,7 @@
             style="@style/main_size"
             android:text="성명"
             android:textAlignment="center"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:layout_margin="10dp"
@@ -64,7 +65,7 @@
             android:layout_margin="10dp"
             android:text="성별"
             android:textAlignment="center"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"/>
         <RadioButton
             android:id="@+id/radio_male"
@@ -91,7 +92,7 @@
             style="@style/main_size"
             android:text="이메일"
             android:textAlignment="center"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:layout_margin="10dp"
@@ -111,7 +112,7 @@
             style="@style/main_size"
             android:text="연락처"
             android:textAlignment="center"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:layout_margin="10dp"
@@ -121,8 +122,49 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_birth"
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_margin="10dp"
+            style="@style/main_size"
+            android:text="생년월일"
+            android:textAlignment="center"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            style="@style/main_size"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/tv_birth"
+            android:text="클릭하여 입력하세요."
+            android:layout_weight="1"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_margin="10dp"
+            style="@style/main_size"
+            android:text="부서"
+            android:textAlignment="center"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
     <Button
+        android:layout_gravity="center"
         android:id="@+id/btn_emp_insert"
         android:text="저장"
         android:layout_width="wrap_content"
