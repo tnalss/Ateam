@@ -51,8 +51,7 @@ public class EmpInsertFragment extends Fragment {
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",null,(isResult, data) -> {
                 if(isResult) {
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    EmployeeVO vo2 = gson.fromJson(data,EmployeeVO.class);
+                    EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("vo",vo2);
                     Fragment fragment = new EmpDetailFragment();

@@ -69,7 +69,7 @@ public class EmpDetailFragment extends Fragment {
         } else if (vo.getAdmin().equals("X0")) {
             tv_emp_admin.setText("퇴사자");
         }
-        tv_emp_hire_date.setText(vo.getHire_date());
+        tv_emp_hire_date.setText(vo.getHire_date().substring(0,10));
         if (vo.getCommission_pct() != 0) {
             tv_emp_comm_pct.setText(vo.getCommission_pct() * 100 + "%");
         } else {
