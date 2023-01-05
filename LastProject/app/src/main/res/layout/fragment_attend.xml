@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
         <ImageView
-            android:id="@+id/back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:id="@+id/home"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_home" />
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,13 +30,14 @@
         android:layout_height="100dp">
         <RelativeLayout
             android:id="@+id/location_now"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/location"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/location"  />
+            android:src="@drawable/location" />
             <TextView
                 style="@style/sub_size"
                 android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/location"
+                android:textStyle="bold"
                 android:text="현재 위치" />
 
         </RelativeLayout>
@@ -84,12 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-            <TextView
-                android:id="@+id/emp_name"
-                style="@style/sub_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="김 아무개" />
+
             <TextView
                 android:id="@+id/emp_dep_rank"
                 android:padding="5dp"
@@ -97,6 +94,13 @@
                 android:text="부서명/ 직급"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/emp_name"
+                    android:padding="5dp"
+                    style="@style/sub_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김 아무개" />
             </LinearLayout>
             <TextView
                 android:id="@+id/now"
@@ -115,7 +119,7 @@
                 style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="박주영"/>
+                android:text="김아무개님 안녕하세요"/>
 
             <LinearLayout
                 android:gravity="center"
@@ -131,7 +135,7 @@
             <Button
                 android:id="@+id/off"
                 android:layout_marginLeft="10dp"
-                android:backgroundTint="#000"
+                android:backgroundTint="@color/sub_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="퇴근"/>
@@ -158,7 +162,7 @@
                 android:id="@+id/workday"
                 android:layout_gravity="center"
                 style="@style/small_size"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:background="@drawable/item_radius"
                 android:text="근무현황 조회"/>

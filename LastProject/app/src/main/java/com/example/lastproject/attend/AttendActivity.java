@@ -22,6 +22,7 @@ public class AttendActivity extends AppCompatActivity {
             back.setOnClickListener(v -> {
                 finish();
             });
+        getSupportActionBar().hide();
 
         /*리사이클러뷰_근태관리*/
         recv_attend_apply =findViewById(R.id.recv_attend_apply);
