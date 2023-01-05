@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -14,6 +15,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 rootProject.name = "LastProject"
