@@ -3,7 +3,6 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
-
 android {
     namespace 'com.example.lastproject'
     compileSdk 32
@@ -85,4 +84,8 @@ dependencies {
 
     // 23/1/4 가로 달력 csm
     implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
+    //23. 01. 05 JHW - Chips(수신 이름 이쁘게)
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+
+
 }
