@@ -7,16 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
-import com.example.lastproject.NoticeFragment;
+import com.example.lastproject.notice.NoticeFragment;
 import com.example.lastproject.R;
-import com.example.lastproject.attend.AttendFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
-import com.google.android.material.datepicker.SingleDateSelector;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {

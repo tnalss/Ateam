@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="no">
+
+<!-- 공지사항 목록 -->
+<select id="list" resultType='notice.NoticeVO'>
+<![CDATA[select *
+from (select * from tbl_board where board_cate = 'O0' order by 1 desc)
+where rownum <=5]]>
+</select>
+<!-- 익명게시판 목록 -->
+<select id="se_list" resultType='notice.NoticeVO'>
+select *
+from tbl_board
+where board_cate = 'O1'
+</select> 
+
+<!-- 글쓰기 -->
+<insert id="se_insert">
+insert into tbl_board (board_title, board_content, board_cate, emp_no)
+values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
+</insert>
+
+
+
+</mapper>

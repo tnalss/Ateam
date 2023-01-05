@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/li_no_title">
 
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" >
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/img_no_notice"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="25dp"
-        android:layout_height="25dp"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/img_no_img"
+            android:src="@drawable/notice1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
 
         <TextView
+            android:layout_gravity="center"
             android:id="@+id/tv_no_title"
-            android:layout_marginTop="5dp"
-            android:textSize="16dp"
+            android:textSize="22dp"
             android:textColor="#000"
             android:layout_marginLeft="5dp"
             android:text="공지글 입니다 다음 사항은"
@@ -26,6 +32,24 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="end"/>
+    </LinearLayout>
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+            android:id="@+id/tv_no_date"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:text="23/01/05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         </LinearLayout>
+    <View
+        android:background="#B1B0B0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     </LinearLayout>
