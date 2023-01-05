@@ -5,8 +5,7 @@ begin
     where to_char(attend_date, 'yyyy/mm/dd hh:mi:ss') = to_char(sysdate, 'yyyy/mm/dd hh:mi:ss') and emp_no = emp ;
     
     if( cnt=0 ) then
-        insert into tbl_attend(emp_no, attend_on, att_code, att_state)
-        values(emp, sysdate, 'W0','출근');
+        
     else 
         update tbl_attend set attend_off = sysdate, att_code ='W1',att_state='퇴근'
         where emp_no = emp and to_char(attend_date, 'yyyy/mm/dd hh:mi:ss') = to_char(sysdate, 'yyyy/mm/dd hh:mi:ss');
@@ -20,7 +19,7 @@ commit;
 --, to_char(attend_date, 'yyyy/mm/dd hh:mi:ss')aa
 
 --출퇴근처리
-exec pro_attend(3);
+exec pro_attend(4);
 
 
 --전체목록조회
@@ -49,16 +48,15 @@ from tbl_attend a left join tbl_emp e
 on a.emp_no = e.emp_no
 order by emp_no , attend_on;
 
-
-
-
+SELECT *
+ FROM tbl_attend 
+ WHERE  att_state = '퇴근' ;
 --
+
+--update 조건 . ?
 create or replace procedure pro_attend_state  is
-   begin 
-    if  att_state = '퇴근'  
-    then 
-    update tbl_atttend set att_state = '정상'; 
-    end if; 
+begin 
+    update tbl_attend set att_state = '정상' WHERE  att_state = '퇴근' or att_state ='출근' ; 
 end;
 
 
