@@ -56,12 +56,18 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
         binding.llBirth.setOnClickListener(this);
 
-
-        //List<String> dataset = new LinkedList<>(Arrays.asList("One", "Two", "Three", "Four", "Five"));
-        //binding.spnDept.attachDataSource(dataset);
-
         // 지점 목록
-
+        new CommonMethod().setParams("top_code","B").sendPost("codeList.cm",(isResult, data) -> {
+            if(isResult){
+                ArrayList<SimpleCode> dep_list;
+                dep_list = new Gson().fromJson(data,new TypeToken<ArrayList<SimpleCode>>(){}.getType());
+                ArrayList<String> b = new ArrayList<>();
+                for (int i = 0 ; i < dep_list.size() ; i++){
+                    b.add(dep_list.get(i).getCode_value());
+                }
+                binding.spnBranch.attachDataSource(b);
+            }
+        });
 
         //부서 목록
         new CommonMethod().setParams("top_code","D").sendPost("codeList.cm",(isResult, data) -> {
@@ -75,19 +81,22 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
             binding.spnDept.attachDataSource(d);
             }
         });
-
-
-
-
-
-
-
-
-
+        //직책 목록
+        new CommonMethod().setParams("top_code","R").sendPost("codeList.cm",(isResult, data) -> {
+            if(isResult){
+                ArrayList<SimpleCode> dep_list;
+                dep_list = new Gson().fromJson(data,new TypeToken<ArrayList<SimpleCode>>(){}.getType());
+                ArrayList<String> r = new ArrayList<>();
+                for (int i = 0 ; i < dep_list.size() ; i++){
+                    r.add(dep_list.get(i).getCode_value());
+                }
+                binding.spnRank.attachDataSource(r);
+            }
+        });
 
 
         binding.btnEmpInsert.setOnClickListener(v -> {
-            //입력판단해야됨 길이로?
+            //입력판단해야됨 길이로?/////////////////////////////////////////입력유무판단.
 
 
             //문자열로변환필요
@@ -98,7 +107,10 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
                 vo.setGender("남");
             vo.setEmail(binding.edtEmpEmail.getText().toString());
             vo.setPhone(binding.edtEmpPhone.getText().toString());
-            //다른정보들도 추가 요함
+            //다른정보들도 추가 요함 생일은 다이어로그에서 알아서 넣음
+            vo.setBranch_name(binding.spnBranch.getText().toString());
+            vo.setDepartment_name(binding.spnDept.getText().toString());
+            vo.setRank_name(binding.spnRank.getText().toString());
 
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",null,(isResult, data) -> {

@@ -47,16 +47,31 @@ public class EmployeeController {
 		
 		String emp_pw = new CommonService().rand6num();
 		vo.setEmp_pw(emp_pw);
-		//System.out.println(emp_pw);
 		sql.insert("emp.insert",vo);
-		
+				
 		//새로운사번 알려줘야됨
 		HashMap<String, String> map = new HashMap<>();
 		map.put("emp_name", vo.getEmp_name());
 		map.put("email", vo.getEmail());
-		////////////////////////////////////////////////이메일로 비밀번호 보내주는 처리 필요
+		////////////////////////////////////////////////이메일로 비밀번호 보내주는 처리 필요		
+		String emp_no = sql.selectOne("emp.emp_no",map);
+		
+		//System.out.println(vo2.getAdmin());
+		//이름에해당하는 코드 찾아주는 처리 필요
+		
+		String branch_code = sql.selectOne("code.whatCode",vo.getBranch_name());
+		String dept_code = sql.selectOne("code.whatCode",vo.getDepartment_name());
+		String rank_code = sql.selectOne("code.whatCode",vo.getRank_name());
+		HashMap<String, String> codemap = new HashMap<>();
+		codemap.put("branch_code", branch_code);
+		codemap.put("dept_code", dept_code);
+		codemap.put("rank_code", rank_code);
+		codemap.put("emp_no", emp_no);
+		
+		
 		EmployeeVO vo2 = sql.selectOne("emp.search_emp",map);
-		System.out.println(vo2.getAdmin());
+		sql.update("emp.codeInsert",codemap);
+		
 		return new Gson().toJson(vo2).toString();
 	}
 	

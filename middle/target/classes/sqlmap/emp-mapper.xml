@@ -21,7 +21,7 @@ order by e.emp_no
 
 <insert id="insert" >
 	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth)
-	VALUES ('${emp_name}','${emp_pw}','${gender}','${phone}','${email}','${birth}')
+	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth})
 </insert>
 
 <select id="info" resultType="employee.EmployeeVO">
@@ -34,12 +34,12 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num left join tbl_attend a
 on e.emp_no = a.emp_no
-WHERE e.emp_no=${emp_no}
+WHERE e.emp_no=#{emp_no}
 </select>
 
 <select id="emp.adminCode">
 select admin from tbl_emp
-where emp_no=${no}
+where emp_no=#{no}
 </select>
 
 <select id="emp.search_emp" resultType="employee.EmployeeVO">
@@ -52,6 +52,19 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num left join tbl_attend a
 on e.emp_no = a.emp_no
-where emp_name='${emp_name}' and email='${email}'
+where emp_name=#{emp_name} and email=#{email}
 </select>
+
+<select id="emp_no" resultType="String">
+select emp_no
+from tbl_emp
+where emp_name=#{emp_name} and email=#{email}
+</select>
+
+
+<!-- org 테이블 신규사원 코드 추가 -->
+<insert id="codeInsert">
+INSERT INTO tbl_org (emp_no,rank_code,branch_code,dept_code)
+VALUES (#{emp_no},#{rank_code},#{branch_code},#{dept_code})
+</insert>
 </mapper>
