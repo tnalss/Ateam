@@ -3,14 +3,12 @@ package com.and.middle;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +44,34 @@ public class NoticeController {
 		int cnt = sql.insert("no.se_insert", temp_vo);
 		return new Gson().toJson(cnt).toString();
 	}
+	
+	// 공지사항 글쓰기
+		@RequestMapping(value="/noinsert.no", produces="text/html;charset=utf-8")
+		public String noinsert(String vo) {
+			System.out.println(vo);
+			NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);
+			int cnt = sql.insert("no.se_insert", temp_vo);
+			return new Gson().toJson(cnt).toString();
+		}
 
-
+	// 공지사항 내용
+	@RequestMapping(value="/info.no", produces="text/html;charset=utf-8")
+	public String noticeinfo(String no ) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	 	NoticeVO vo = sql.selectOne("no.no_info", no);
+		return gson.toJson(vo);
+	}	
+	
+	// 익명게시판 내용
+	@RequestMapping(value="/secinfo.no", produces="text/html;charset=utf-8")
+	public String secretinfo(String no ) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	 	NoticeVO vo = sql.selectOne("no.no_info", no);
+		return gson.toJson(vo);
+	}	
+		
+	public void nodelete() {
+		
+	}
 	
 }

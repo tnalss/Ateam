@@ -30,7 +30,8 @@ public class NoticeFragment extends Fragment {
         RecyclerView recv_notice, recv_secret;
         ArrayList<NoticeVO> notice;
         ArrayList<NoticeVO> secret;
-        TextView tv_no_writing;
+        TextView tv_no_writing, tv_sec_writing;
+
 
     @Override
     public void onResume() {
@@ -48,6 +49,7 @@ public class NoticeFragment extends Fragment {
         recv_notice = v.findViewById(R.id.recv_notice);
         recv_secret = v.findViewById(R.id.recv_secret);
         tv_no_writing = v.findViewById(R.id.tv_no_writing);
+        tv_sec_writing = v.findViewById(R.id.tv_sec_writing);
         ApiClient.setBASEURL("http://192.168.0.28/middle/");
 
         /* 게시판 */
@@ -55,14 +57,22 @@ public class NoticeFragment extends Fragment {
         secret(inflater);
 
 
-            // 글쓰기
+            // 익명게시판 글쓰기
             tv_no_writing.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Insert_noActivity.class);
                     startActivity(intent);
-
                 }
+            });
+
+            // 공지사항 글쓰기
+        tv_sec_writing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Insert_secActivity.class);
+                startActivity(intent);
+            }
         });
         return v;
     }
@@ -74,7 +84,7 @@ public class NoticeFragment extends Fragment {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data,
                     new TypeToken<ArrayList<NoticeVO>>(){}.getType());
-            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice));
+            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice, NoticeFragment.this ));
             recv_notice.setLayoutManager(CommonMethod.getVManager(getContext()));
         });
     }
@@ -92,4 +102,6 @@ public class NoticeFragment extends Fragment {
             recv_secret.setLayoutManager(CommonMethod.getVManager(getContext()));
         });
     }
+
+
 }
