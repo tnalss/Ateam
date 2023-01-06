@@ -3,6 +3,7 @@ package com.and.middle;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import common.SimpleCode;
 import login.LoginVO;
 
 @RestController
@@ -34,5 +36,12 @@ public class UtilController {
 		
 		return new Gson().toJson(vo).toString();
 		
+	}
+	
+	@RequestMapping(value = "/codeList.cm",produces="text/html;charset=utf-8")
+	public String codeList(String top_code) {
+		List<SimpleCode> list = sql.selectList("code.simpleList",top_code);
+				
+		return new Gson().toJson(list).toString();
 	}
 }

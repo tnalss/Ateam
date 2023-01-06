@@ -6,4 +6,11 @@
 select * from get_code_table (#{cate}) 
 </select>
 
+<select id="simpleList" resultType='common.SimpleCode'>
+select code_category||code_num code, code_value
+from tbl_code
+where code_category='${top_code}'
+
+</select>
+
 </mapper>

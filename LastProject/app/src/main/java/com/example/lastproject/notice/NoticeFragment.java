@@ -48,7 +48,7 @@ public class NoticeFragment extends Fragment {
         recv_notice = v.findViewById(R.id.recv_notice);
         recv_secret = v.findViewById(R.id.recv_secret);
         tv_no_writing = v.findViewById(R.id.tv_no_writing);
-        ApiClient.setBASEURL("http://192.168.0.28/middle/");
+        //ApiClient.setBASEURL("http://192.168.0.28/middle/");
 
         /* 게시판 */
         notice(inflater);
