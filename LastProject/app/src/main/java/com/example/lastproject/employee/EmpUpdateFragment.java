@@ -55,7 +55,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
         int div = vo.getAddress().indexOf("/");
         if(div != -1){
-            String tempAddress = vo.getAddress().substring(0,div);
+            String tempAddress = vo.getAddress().substring(0,div-1);
             binding.edtAddress.setText(tempAddress);
             binding.edtAddressDetail.setText(vo.getAddress().substring(div+2));
         } else{
@@ -86,7 +86,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
             vo.setEmail(binding.edtEmpEmail.getText().toString());
             vo.setPhone(binding.edtEmpPhone.getText().toString());
             //생일 년/월/일 포맷으로 변경해서 넣어줘야함.
-            binding.tvBirth.getText();
+            vo.setBirth( binding.tvBirth.getText().toString());
             vo.setBranch_name(binding.spnBranch.getText().toString());
             vo.setDepartment_name(binding.spnDept.getText().toString());
             vo.setRank_name(binding.spnRank.getText().toString());
@@ -180,7 +180,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            binding.tvBirth.setText(year+"년 "+monthOfYear+"월 "+dayOfMonth+"일");
+            binding.tvBirth.setText(year+"/"+monthOfYear+"/"+dayOfMonth);
             vo.setBirth(year+"/"+monthOfYear+"/"+dayOfMonth);
         }
     };

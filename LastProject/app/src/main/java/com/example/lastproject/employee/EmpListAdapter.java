@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 
@@ -42,6 +43,7 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         holder.tv_emp_name.setText(list.get(position).getEmp_name());
         holder.tv_emp_branch_dept_rank.setText(list.get(position).getBranch_name()+" / "+ list.get(position).getDepartment_name()+" / " +list.get(position).getRank_name());
         //현재근무상태 W0출근 W1퇴근
+
         if  (list.get(position).getAdmin().equals("X0")){
             holder.tv_nowStatus.setText("퇴사");
         } else if(list.get(position).getAtt_code()==null){
