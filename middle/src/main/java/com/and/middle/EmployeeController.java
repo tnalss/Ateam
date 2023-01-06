@@ -79,4 +79,23 @@ public class EmployeeController {
 	public String adminCode(String emp_no) {
 		return sql.selectOne("emp.adminCode",emp_no);
 	}
+	
+	//수정
+	@RequestMapping(value="/update.emp" , produces="text/html;charset=utf-8")
+	public String update_emp(String param) {
+		EmployeeVO vo = new Gson().fromJson(param, EmployeeVO.class);
+		sql.update("emp.update",vo);
+		
+		String branch_code = sql.selectOne("code.whatCode",vo.getBranch_name());
+		String dept_code = sql.selectOne("code.whatCode",vo.getDepartment_name());
+		String rank_code = sql.selectOne("code.whatCode",vo.getRank_name());
+		HashMap<String, String> codemap = new HashMap<>();
+		codemap.put("branch_code", branch_code);
+		codemap.put("dept_code", dept_code);
+		codemap.put("rank_code", rank_code);
+		codemap.put("emp_no", vo.getEmp_no());
+		sql.update("emp.orgUpdate",codemap);
+		vo = sql.selectOne("emp.info",vo.getEmp_no());
+		return new Gson().toJson(vo).toString();
+	}
 }

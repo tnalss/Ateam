@@ -2,6 +2,8 @@ package com.example.lastproject.employee;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 
 
 public class EmpInsertFragment extends Fragment implements View.OnClickListener {
-    private static final int SEARCH_ADDRESS_ACTIVITY = 1001;
+
     private FragmentEmpInsertBinding binding;
     private MainActivity activity;
     private EmployeeVO vo= new EmployeeVO();
@@ -103,7 +105,7 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
             vo.setBranch_name(binding.spnBranch.getText().toString());
             vo.setDepartment_name(binding.spnDept.getText().toString());
             vo.setRank_name(binding.spnRank.getText().toString());
-            vo.setAddress(binding.edtAddress.getText().toString()+" "+binding.edtAddressDetail.getText().toString());
+            vo.setAddress(binding.edtAddress.getText().toString()+" / "+binding.edtAddressDetail.getText().toString());
             vo.setSalary(Integer.parseInt(binding.edtSalary.getText().toString()));
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",null,(isResult, data) -> {

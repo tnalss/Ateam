@@ -14,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.conn.CommonMethod;
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 
 
 public class EmpDetailFragment extends Fragment {
     private EmployeeVO vo;
+    private MainActivity activity;
 
 //상세화면 오기전에 해당회원의 정보를 조회해서 번들에 담아줘서 보내줘야합니다!
     @Override
@@ -29,7 +31,7 @@ public class EmpDetailFragment extends Fragment {
         ImageView iv_back;
 
         View v = inflater.inflate(R.layout.fragment_emp_detail, container, false);
-
+        activity = (MainActivity) getActivity();
         Bundle bundle = getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
 
@@ -89,6 +91,9 @@ public class EmpDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+            Fragment fr = new EmpUpdateFragment();
+            fr.setArguments(bundle);
+            activity.changeFragment(fr);
             }
         });
 //퇴사
