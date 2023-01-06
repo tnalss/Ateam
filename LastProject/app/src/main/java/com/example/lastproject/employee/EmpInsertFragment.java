@@ -1,46 +1,39 @@
 package com.example.lastproject.employee;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.Toast;
+
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.common.Common;
+
 import com.example.lastproject.common.SimpleCode;
+import com.example.lastproject.common.WebViewActivity;
 import com.example.lastproject.databinding.FragmentEmpInsertBinding;
-import com.example.lastproject.databinding.FragmentManageEmpBinding;
-import com.example.lastproject.ea.EaCodeVO;
+
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+
 
 
 public class EmpInsertFragment extends Fragment implements View.OnClickListener {
+    private static final int SEARCH_ADDRESS_ACTIVITY = 1001;
     private FragmentEmpInsertBinding binding;
     private MainActivity activity;
     private EmployeeVO vo= new EmployeeVO();
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,9 +46,8 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
         });
         // 신규사원 저장하는 부분인데 비밀번호를 난수로 이메일로 보내줘야할듯?
 
-
         binding.llBirth.setOnClickListener(this);
-
+        binding.edtAddress.setOnClickListener(this);
         // 지점 목록
         new CommonMethod().setParams("top_code","B").sendPost("codeList.cm",(isResult, data) -> {
             if(isResult){
@@ -111,7 +103,8 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
             vo.setBranch_name(binding.spnBranch.getText().toString());
             vo.setDepartment_name(binding.spnDept.getText().toString());
             vo.setRank_name(binding.spnRank.getText().toString());
-
+            vo.setAddress(binding.edtAddress.getText().toString()+" "+binding.edtAddressDetail.getText().toString());
+            vo.setSalary(Integer.parseInt(binding.edtSalary.getText().toString()));
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",null,(isResult, data) -> {
                 if(isResult) {
@@ -127,6 +120,7 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
 
         View v = binding.getRoot();
+
         return v;
     }
 
@@ -147,8 +141,26 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
             dialog.getDatePicker().setCalendarViewShown(false);
             //스피너로 보이게 왜 안되냐?
             dialog.show();
+        } else if (v.getId() == R.id.edt_address){
+            //주소검색 웹 뷰를 띄움
+            Intent i = new Intent(getContext(), WebViewActivity.class);
+            startActivityForResult(i, SEARCH_ADDRESS_ACTIVITY);
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+            case SEARCH_ADDRESS_ACTIVITY:
+                if (resultCode == RESULT_OK) {
+                    String data = intent.getExtras().getString("data");
+                    if (data != null) {
+                        binding.edtAddress.setText(data);
+                    }
+                }
+                break;
+        }
+    }
 
 }

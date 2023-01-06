@@ -20,8 +20,8 @@ order by e.emp_no
 </update>
 
 <insert id="insert" >
-	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth)
-	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth})
+	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth ,address,salary)
+	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth},#{address},#{salary})
 </insert>
 
 <select id="info" resultType="employee.EmployeeVO">

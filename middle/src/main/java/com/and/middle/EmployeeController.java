@@ -67,10 +67,9 @@ public class EmployeeController {
 		codemap.put("dept_code", dept_code);
 		codemap.put("rank_code", rank_code);
 		codemap.put("emp_no", emp_no);
-		
+		sql.update("emp.codeInsert",codemap);
 		
 		EmployeeVO vo2 = sql.selectOne("emp.search_emp",map);
-		sql.update("emp.codeInsert",codemap);
 		
 		return new Gson().toJson(vo2).toString();
 	}
