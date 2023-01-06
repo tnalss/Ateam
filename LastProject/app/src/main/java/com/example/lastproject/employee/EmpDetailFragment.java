@@ -56,7 +56,7 @@ public class EmpDetailFragment extends Fragment {
         //사번으로 조회
         tv_emp_name.setText(vo.getEmp_name());
         tv_emp_birth.setText(vo.getBirth().substring(0,10));
-        tv_emp_address.setText(vo.getAddress());
+        tv_emp_address.setText(vo.getAddress().replace("/",""));
         tv_emp_branch.setText(vo.getBranch_name());
         tv_emp_dept.setText(vo.getDepartment_name());
         tv_emp_rank.setText(vo.getRank_name());

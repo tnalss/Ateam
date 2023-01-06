@@ -55,20 +55,26 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".common.WebViewActivity"
+            android:name=".MyInfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!-- 주영: 네이버 클라이언트 ID 지정 -->
+        <activity
+            android:name=".common.WebViewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- 주영: 네이버 클라이언트 ID 지정 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="vn9fpkooyv" />
 
         <activity
             android:name=".attend.LocationNowActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".notice.Insert_noActivity"
             android:exported="false">

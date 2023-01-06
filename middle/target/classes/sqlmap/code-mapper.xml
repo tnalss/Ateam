@@ -10,7 +10,7 @@ select * from get_code_table (#{cate})
 select code_category||code_num code, code_value
 from tbl_code
 where code_category=#{top_code}
-
+order by 1 desc
 </select>
 
 <select id="whatCode" resultType='String'>

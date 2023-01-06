@@ -123,6 +123,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                     b.add(dep_list.get(i).getCode_value());
                 }
                 binding.spnBranch.attachDataSource(b);
+                binding.spnBranch.setText(vo.getBranch_name());
             }
         });
 
@@ -136,6 +137,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                     d.add(dep_list.get(i).getCode_value());
                 }
                 binding.spnDept.attachDataSource(d);
+                binding.spnDept.setText(vo.getDepartment_name());
             }
         });
         //직책 목록
@@ -148,16 +150,13 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                     r.add(dep_list.get(i).getCode_value());
                 }
                 binding.spnRank.attachDataSource(r);
+                binding.spnRank.setText(vo.getRank_name());
             }
         });
 
 
-        if(vo.getBranch_name()!=null)
-            binding.spnBranch.setText(vo.getBranch_name());
-        if(vo.getDepartment_name()!=null)
-            binding.spnDept.setText(vo.getDepartment_name());
-        if(vo.getRank_name()!=null)
-            binding.spnRank.setText(vo.getRank_name());
+
+
 
         return binding.getRoot();
     }
