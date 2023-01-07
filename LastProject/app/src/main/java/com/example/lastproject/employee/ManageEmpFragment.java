@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
-import com.example.lastproject.R;
-import com.example.lastproject.databinding.FragmentHomeBinding;
+
 import com.example.lastproject.databinding.FragmentManageEmpBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

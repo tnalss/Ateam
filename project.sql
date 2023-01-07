@@ -590,3 +590,8 @@ ADMIN	VARCHAR2(3)		default'L0'
 tbl_emp 커미션 기본값줬습니다 0으로
 //23/1/6 csm
 부서,지점,직위 없음의 값을 99로 각각 줬습니다 ㅠㅠ
+//23/1/7 csm
+tbl_emp 길이 조정
+ALTER TABLE TBL_EMP  
+MODIFY (SALARY NUMBER(30, 2) );
+

@@ -13,10 +13,15 @@ where code_category=#{top_code}
 order by 1 desc
 </select>
 
+<!-- 코드명으로 코드 조회 -->
 <select id="whatCode" resultType='String'>
 select code_category||code_num code
 from tbl_code
 where code_value=#{name}
 </select>
 
+<!-- 사번으로 부서코드 조회 -->
+<select id="whatDepCode" resultType="String">
+select dept_code from tbl_org where emp_no = #{emp_no}
+</select>
 </mapper>

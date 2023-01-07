@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.SimpleCode;
 import com.example.lastproject.common.WebViewActivity;
-import com.example.lastproject.databinding.FragmentEmpInsertBinding;
 import com.example.lastproject.databinding.FragmentEmpUpdateBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -74,8 +74,13 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         });
 
         binding.btnEmpUpdate.setOnClickListener(v -> {
-            //입력판단해야됨 길이로?/////////////////////////////////////////입력유무판단.
-
+            //입력판단 입력유무판단.
+            if(binding.edtEmpName.getText().length()<1 || binding.edtEmpPhone.getText().length()<1||
+                    binding.edtAddress.getText().length()<1||binding.edtSalary.getText().length()<1|| binding.tvBirth.getText().length()<1||
+                    binding.edtAddressDetail.getText().length()<1) {
+                Toast.makeText(activity, "빈칸을 입력하세요", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             //문자열로변환필요
             vo.setEmp_name(binding.edtEmpName.getText().toString());

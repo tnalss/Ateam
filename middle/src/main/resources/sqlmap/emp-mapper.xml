@@ -68,7 +68,7 @@ VALUES (#{emp_no},#{rank_code},#{branch_code},#{dept_code})
 <update id="update">
 UPDATE tbl_emp
 SET emp_name = #{emp_name}, gender = #{gender },phone= #{ phone},email= #{ email},birth= TO_DATE(#{birth},'YYYY/MM/DD'),address= #{address},
-salary= #{salary },admin= #{ admin}
+salary= #{salary },admin= #{admin}
 WHERE emp_no= #{emp_no}
 </update>
 
@@ -77,5 +77,6 @@ UPDATE tbl_org
 SET rank_code=#{rank_code}, branch_code = #{branch_code},dept_code= #{dept_code}
 WHERE emp_no= #{emp_no}
 </update>
+
 
 </mapper>

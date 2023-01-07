@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.conn.CommonMethod;
@@ -47,6 +48,8 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
            activity.onBackPressed();
         });
         // 신규사원 저장하는 부분인데 비밀번호를 난수로 이메일로 보내줘야할듯?
+
+        //스피너 클릭시 키보드 끄기 기능 필요함!
 
         binding.llBirth.setOnClickListener(this);
         binding.edtAddress.setOnClickListener(this);
@@ -90,7 +93,13 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
 
         binding.btnEmpInsert.setOnClickListener(v -> {
-            //입력판단해야됨 길이로?/////////////////////////////////////////입력유무판단.
+            //입력유무판단.
+            if(binding.edtEmpName.getText().length()<1 || binding.edtEmpPhone.getText().length()<1||
+            binding.edtAddress.getText().length()<1||binding.edtSalary.getText().length()<1|| binding.tvBirth.getText().length()<1||
+            binding.edtAddressDetail.getText().length()<1) {
+                Toast.makeText(activity, "빈칸을 입력하세요", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
 
             //문자열로변환필요

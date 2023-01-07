@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         } else if (v.getId() == R.id.iv_emp_detail){
             //사원명 옆에 > 눌렀을때
-            Intent detailIntent= new Intent(getContext(),MyInfoActivity.class);
+            Intent detailIntent = new Intent(activity,MyInfoActivity.class);
             startActivity(detailIntent);
 
         } else if(v.getId() == R.id.fl_on_off){

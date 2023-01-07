@@ -55,7 +55,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MyInfoActivity"
+            android:name=".home.MyInfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -124,13 +124,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".attend.AttendActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />

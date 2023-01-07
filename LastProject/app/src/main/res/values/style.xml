@@ -10,7 +10,9 @@
     <style name="small_size">
         <item name="android:textSize">12dp</item>
     </style>
-
+    <style name="tabTextSize" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item>
+    </style>
     <!--최상단 아이콘 크기-->
     <style name="top_menu_ic_size">
         <item name="android:width">30dp</item>

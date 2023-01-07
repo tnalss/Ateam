@@ -20,7 +20,7 @@ import notice.NoticeVO;
 @RestController
 public class NoticeController {
 	
-	// 공지사항
+
 	@Autowired @Qualifier("hanul") SqlSession sql;
 	@RequestMapping(value= "/notice.no", produces="text/html;charset=utf-8")
 	public String notice() {
@@ -30,7 +30,7 @@ public class NoticeController {
 		return gson.toJson(notice);
 	}
 	
-	// 익명게시판
+
 	@RequestMapping(value= "/secret.no", produces="text/html;charset=utf-8")
 	public String secret() {		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -38,7 +38,7 @@ public class NoticeController {
 		return gson.toJson(secret);
 	}
 	
-	// 익명게시판 글쓰기
+
 	@RequestMapping(value="/insert.no", produces="text/html;charset=utf-8")
 	public String insert(String vo) {
 		System.out.println(vo);
