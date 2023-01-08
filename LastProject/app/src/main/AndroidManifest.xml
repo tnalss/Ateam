@@ -82,7 +82,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- 주영: 네이버 클라이언트 ID 지정 -->
+        </activity>
+        <!-- 주영: 네이버 클라이언트 ID 지정 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="vn9fpkooyv" />
@@ -90,7 +91,7 @@
         <activity
             android:name=".attend.LocationNowActivity"
             android:exported="false" />
-        </activity>
+
         <activity
             android:name=".notice.ListInfo_sec_Activity"
             android:exported="false">
