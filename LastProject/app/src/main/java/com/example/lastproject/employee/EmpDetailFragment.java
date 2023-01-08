@@ -24,8 +24,8 @@ public class EmpDetailFragment extends Fragment {
     private EmployeeVO vo;
     private MainActivity activity;
 
-    //상세화면 오기전에 해당회원의 정보를 조회해서 번들에 담아줘서 보내줘야합니다!
-    //출근상태 status 변수를 활용해야합니다 프로필 위에 뭔가를 표시할까?
+    //상세화면 오기전에 해당회원의 정보를 조회해서 번들 vo에 담아줘서 보내줘야합니다!
+    //출근상태 활용 vo에 att_code 프로필 위에 뭔가를 표시할까?
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +38,7 @@ public class EmpDetailFragment extends Fragment {
         activity = (MainActivity) getActivity();
         Bundle bundle = getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
-        String status = bundle.getString("status");
+        //String status = bundle.getString("status");
 
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_birth = v.findViewById(R.id.tv_emp_birth);
@@ -86,7 +86,7 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_salary.setText(vo.getSalary() + "");
 
         if(vo.getProfile_path()!=null){
-            Glide.with(this).load(vo.getProfile_path()).into(iv_emp_profile);
+            Glide.with(this).load(vo.getProfile_path()).error(R.drawable.error_user_profile).into(iv_emp_profile);
         }
 
         iv_back.setOnClickListener(new View.OnClickListener() {

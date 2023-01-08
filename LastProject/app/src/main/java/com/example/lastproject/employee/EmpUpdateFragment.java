@@ -63,7 +63,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         new Common().checkDangerousPermissions(getActivity());
 
         if(vo.getProfile_path()!=null){
-            Glide.with(this).load(vo.getProfile_path()).into(binding.ivEmpProfile);
+            Glide.with(this).load(vo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.ivEmpProfile);
         }
         binding.svForm.setOnTouchListener(new View.OnTouchListener() {
             @Override

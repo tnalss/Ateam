@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,16 @@ import com.example.lastproject.employee.ManageEmpFragment;
 import com.example.lastproject.login.LoginVO;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
+import devs.mulham.horizontalcalendar.model.CalendarEvent;
+import devs.mulham.horizontalcalendar.utils.CalendarEventsPredicate;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 import com.example.lastproject.notice.NoticeFragment;
 
@@ -51,7 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
         if(Common.loginInfo.getProfile_path()!=null){
-            Glide.with(this).load(Common.loginInfo.getProfile_path()).into(binding.ivEmpProfile);
+            Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.ivEmpProfile);
         }
         // 쿼리 날려서 출퇴근 여부 파악
         // 올때마다 쿼리날리는게 거슬리는데? 방법없나?
@@ -80,13 +87,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(binding.getRoot(), R.id.calendarView).range(startDate, endDate)
+                .addEvents(new CalendarEventsPredicate() {
+                    @Override
+                    public List<CalendarEvent> events(Calendar date) {
+                        //Circle Indicator
+                        // test the date and return a list of CalendarEvent to assosiate with this Date.
+                        //비교해서 list를 반환해야한다는디?
+                        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        //Log.d("TAG", "events: "+sdf.format(date.getTime()).toString());
+                        //ArrayList<CalendarEvent> test = new ArrayList<>();
+                        //test.add(new CalendarEvent(123,"몰루"));
+                        //쿼리날려서List <devs.mulham.horizontalcalendar.model.CalendarEvent
+                        return null;
+                    }
+                })
                 .datesNumberOnScreen(5)
                 .build();
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                Log.d("TAG", "events: "+sdf.format(date.getTime()).toString()+position);
             }
             @Override
             public void onCalendarScroll(HorizontalCalendarView calendarView,

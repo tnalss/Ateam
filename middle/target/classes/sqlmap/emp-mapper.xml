@@ -3,14 +3,15 @@
 <mapper namespace="emp">
 
 <select id="list" resultType="employee.EmployeeVO">
-select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name,a.att_code
 from tbl_emp e left join tbl_org o
 on e.emp_no = o.emp_no
 left join tbl_code c
 on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
+on o.dept_code  = c3.code_category||c3.code_num left join tbl_Attend a
+on to_char(sysdate,'yyyy-MM-dd') = to_char(a.attend_date,'yyyy-MM-dd')
 order by e.emp_no
 </select>
 <!-- 검색기능 -->
@@ -38,14 +39,15 @@ order by e.emp_no
 </insert>
 
 <select id="info" resultType="employee.EmployeeVO">
-select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name,a.att_code
 from tbl_emp e left join tbl_org o
 on e.emp_no = o.emp_no
 left join tbl_code c
 on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
+on o.dept_code  = c3.code_category||c3.code_num left join tbl_Attend a
+on to_char(sysdate,'yyyy-MM-dd') = to_char(a.attend_date,'yyyy-MM-dd')
 WHERE e.emp_no=#{emp_no}
 </select>
 
