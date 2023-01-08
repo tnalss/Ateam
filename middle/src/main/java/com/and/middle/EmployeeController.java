@@ -3,11 +3,15 @@ package com.and.middle;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 
@@ -19,6 +23,8 @@ import employee.EmployeeVO;
 public class EmployeeController {
 	@Autowired @Qualifier("hanul")
 	SqlSession sql;
+	@Autowired
+	private CommonService common;
 	
 	@RequestMapping(value= "/list.emp" , produces="text/html;charset=utf-8")
 	public String attendOrNot() {
@@ -42,8 +48,16 @@ public class EmployeeController {
 	
 	//회원가입
 	@RequestMapping(value="/insert.emp" , produces="text/html;charset=utf-8")
-	public String insert_emp(String param) {
+	public String insert_emp(String param, HttpServletRequest req) {
 		EmployeeVO vo = new Gson().fromJson(param, EmployeeVO.class);
+		
+		//첨부파일 
+		MultipartRequest mReq= (MultipartRequest) req;
+		MultipartFile file = mReq.getFile("file");
+		if(file!=null) {
+			String path = common.fileUpload("and",file,req);
+			vo.setProfile_path(path);
+		}
 		
 		String emp_pw = new CommonService().rand6num();
 		vo.setEmp_pw(emp_pw);
@@ -82,8 +96,17 @@ public class EmployeeController {
 	
 	//수정
 	@RequestMapping(value="/update.emp" , produces="text/html;charset=utf-8")
-	public String update_emp(String param) {
+	public String update_emp(String param, HttpServletRequest req) {
 		EmployeeVO vo = new Gson().fromJson(param, EmployeeVO.class);
+		
+		//첨부파일 
+		MultipartRequest mReq= (MultipartRequest) req;
+		MultipartFile file = mReq.getFile("file");
+		if(file!=null) {
+			String path = common.fileUpload("and",file,req);
+			vo.setProfile_path(path);
+		}	
+		
 		sql.update("emp.update",vo);
 		
 		String branch_code = sql.selectOne("code.whatCode",vo.getBranch_name());

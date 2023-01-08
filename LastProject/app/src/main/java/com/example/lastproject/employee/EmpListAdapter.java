@@ -13,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,11 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         //추후 프로필도 추가해야함.
         holder.tv_emp_name.setText(list.get(position).getEmp_name());
         holder.tv_emp_branch_dept_rank.setText(list.get(position).getBranch_name()+" / "+ list.get(position).getDepartment_name()+" / " +list.get(position).getRank_name());
+        if(list.get(position).getProfile_path()!=null){
+            Glide.with(activity).load(list.get(position).getProfile_path()).into(holder.iv_emp_profile);
+        }
+
+
         //현재근무상태 W0출근 W1퇴근
 
         if  (list.get(position).getAdmin().equals("X0")){

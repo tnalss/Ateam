@@ -2,15 +2,23 @@ package com.example.lastproject.employee;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.example.lastproject.common.Common.CAMERA_CODE;
+import static com.example.lastproject.common.Common.GALLERY_CODE;
 import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,15 +26,18 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 import com.example.lastproject.common.SimpleCode;
 import com.example.lastproject.common.WebViewActivity;
 import com.example.lastproject.databinding.FragmentEmpUpdateBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -34,7 +45,10 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     private MainActivity activity;
     private FragmentEmpUpdateBinding binding;
     private EmployeeVO vo;
+    String img_path;
+    String[] dialog_item={"카메라", "갤러리"};
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +58,12 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         Bundle bundle=getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
 
+        //권한확인
+        new Common().checkDangerousPermissions(getActivity());
 
+        if(vo.getProfile_path()!=null){
+            Glide.with(this).load(vo.getProfile_path()).into(binding.ivEmpProfile);
+        }
         binding.svForm.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -114,7 +133,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                 vo.setAdmin("L1");
             }
 
-            new CommonMethod().setParams("param",vo).sendPostFile("update.emp",null,(isResult, data) -> {
+            new CommonMethod().setParams("param",vo).sendPostFile("update.emp",img_path,(isResult, data) -> {
                 if(isResult) {
                     EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
                     Bundle bundle2 = new Bundle();
@@ -126,7 +145,9 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
             });
 
         });
-
+        binding.ivEmpProfile.setOnClickListener(v -> {
+            showDialog();
+        });
         binding.llBirth.setOnClickListener(this);
         binding.edtAddress.setOnClickListener(this);
         // 지점 목록
@@ -202,15 +223,21 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
         super.onActivityResult(requestCode, resultCode, intent);
-        switch (requestCode) {
-            case SEARCH_ADDRESS_ACTIVITY:
-                if (resultCode == RESULT_OK) {
-                    String data = intent.getExtras().getString("data");
-                    if (data != null) {
-                        binding.edtAddress.setText(data);
-                    }
-                }
-                break;
+
+        if( requestCode == CAMERA_CODE && resultCode == RESULT_OK ){
+            Glide.with(this).load(img_path).into(binding.ivEmpProfile);
+
+        } else if (requestCode == GALLERY_CODE && resultCode == RESULT_OK ){
+
+            img_path = new CommonMethod().getRealPath(intent.getData(),getActivity()); // 가짜 URI 주소로 실제 물리적인 사진파일 위치를 받아옴.
+            Glide.with(this).load(img_path).into(binding.ivEmpProfile);
+
+        } else if (requestCode == SEARCH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+
+            String data = intent.getExtras().getString("data");
+            if (data != null) {
+                binding.edtAddress.setText(data);
+            }
         }
     }
     //키보드 숨겨주는 메소드
@@ -221,4 +248,44 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+    public void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("사진 업로드 방법 선택").setSingleChoiceItems(dialog_item, -1, (dialog, i) -> {
+            if((dialog_item[i]).equals("카메라")){
+                cameraMethod();
+            }else{
+                galleryMethod();
+            }
+        } );
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //갤러리
+    public void galleryMethod(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(Intent.createChooser(intent,"select picture"),GALLERY_CODE);
+
+    }
+    //카메라
+    public void cameraMethod(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        File file = new CommonMethod().createFile(getActivity());//임시파일 만들어 오기 <- provider 사용시 필요함.
+        img_path=file.getAbsolutePath(); //파일의 실제경로 저장 storage/emulated/0......
+        if(file !=null){//파일이 만들어졌다면
+            Uri imgUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName()+".fileprovider",file);
+            //manifest의 provider를 보면 authorities를 보면 위 내용을 적어야 된다고 해놓았음.
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,imgUri);
+            }else{
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(file));
+            }
+        }
+
+        startActivityForResult(intent,CAMERA_CODE);
+
+    }
 }

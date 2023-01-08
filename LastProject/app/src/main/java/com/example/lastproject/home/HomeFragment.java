@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
@@ -49,6 +50,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
+        if(Common.loginInfo.getProfile_path()!=null){
+            Glide.with(this).load(Common.loginInfo.getProfile_path()).into(binding.ivEmpProfile);
+        }
         // 쿼리 날려서 출퇴근 여부 파악
         // 올때마다 쿼리날리는게 거슬리는데? 방법없나?
         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attendOrNot",(isResult, data) -> {

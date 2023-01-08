@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 
 
 public class EmpDetailFragment extends Fragment {
@@ -30,7 +32,7 @@ public class EmpDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         TextView tv_emp_name, tv_emp_birth, tv_emp_address, tv_emp_branch, tv_emp_dept, tv_emp_hire_date, tv_emp_rank, tv_emp_no, tv_emp_gender, tv_emp_email, tv_emp_phone, tv_emp_admin, tv_emp_salary, tv_emp_comm_pct;
         Button btn_emp_edit, btn_emp_fire;
-        ImageView iv_back;
+        ImageView iv_back,iv_emp_profile;
 
         View v = inflater.inflate(R.layout.fragment_emp_detail, container, false);
         activity = (MainActivity) getActivity();
@@ -55,6 +57,7 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_comm_pct = v.findViewById(R.id.tv_emp_comm_pct);
         tv_emp_salary = v.findViewById(R.id.tv_emp_salary);
         iv_back = v.findViewById(R.id.iv_back);
+        iv_emp_profile = v.findViewById(R.id.iv_emp_profile);
 
         //사번으로 조회
         tv_emp_name.setText(vo.getEmp_name());
@@ -82,6 +85,9 @@ public class EmpDetailFragment extends Fragment {
         }
         tv_emp_salary.setText(vo.getSalary() + "");
 
+        if(vo.getProfile_path()!=null){
+            Glide.with(this).load(vo.getProfile_path()).into(iv_emp_profile);
+        }
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override

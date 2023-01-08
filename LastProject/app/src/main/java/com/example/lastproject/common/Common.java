@@ -12,8 +12,9 @@ import com.example.lastproject.login.LoginVO;
 
 public class Common {
     public static LoginVO loginInfo;
-    public static final int SEARCH_ADDRESS_ACTIVITY = 1001;
-
+    public static final int SEARCH_ADDRESS_ACTIVITY = 1003;
+    public static final int CAMERA_CODE = 1000;
+    public static final int GALLERY_CODE = 1001;
     //권한체크
     public void checkDangerousPermissions(Activity activity) {
         String[] permissions = {
@@ -32,7 +33,7 @@ public class Common {
         }
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(activity, "권한 있음", Toast.LENGTH_LONG).show();
+           // Toast.makeText(activity, "권한 있음", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(activity, "권한 없음", Toast.LENGTH_LONG).show();
 

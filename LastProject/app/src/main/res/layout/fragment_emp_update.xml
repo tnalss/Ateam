@@ -39,6 +39,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_emp_profile"
             android:layout_gravity="center"
             android:src="@drawable/img_unknown"
             android:layout_width="100dp"
