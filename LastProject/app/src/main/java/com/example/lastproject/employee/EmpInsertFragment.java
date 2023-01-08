@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
     private MainActivity activity;
     private EmployeeVO vo= new EmployeeVO();
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
