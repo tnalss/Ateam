@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //임시 로그아웃
                 Intent intent2 = new Intent(MainActivity.this, LogoutActivity.class);
                 startActivity(intent2);
+                finish();
             }
             return true;
         });

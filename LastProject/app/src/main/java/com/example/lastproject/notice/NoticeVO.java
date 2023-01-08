@@ -1,8 +1,9 @@
 package com.example.lastproject.notice;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class NoticeVO {
+public class NoticeVO implements Serializable {
     private int board_no, emp_no, board_hits, img_no_img;
     private String board_title;
     private String board_content;
