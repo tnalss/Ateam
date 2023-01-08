@@ -86,6 +86,7 @@ public class NoticeFragment extends Fragment {
                     new TypeToken<ArrayList<NoticeVO>>(){}.getType());
             recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice, NoticeFragment.this ));
             recv_notice.setLayoutManager(CommonMethod.getVManager(getContext()));
+
         });
     }
 

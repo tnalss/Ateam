@@ -14,21 +14,23 @@ select *
 from tbl_board
 where board_cate = 'O1' 
 order by 1 desc
-
 </select> 
-
 <!-- 글쓰기 -->
 <insert id="se_insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)
 values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
 </insert>
-
 <!-- 공지사항 / 익명게시판 내용 -->
 <select id="no_info" resultType="notice.NoticeVO">
 select * 
 from tbl_board
 where board_no = #{no}
 </select>
+<!-- 공지사항 / 익명게시판 글삭제 -->
+<delete id="delete">
+delete from tbl_board 
+where board_no = #{board_no}
+</delete>
 
 
 </mapper>
