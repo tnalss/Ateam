@@ -1,8 +1,11 @@
 package com.example.lastproject.calendar;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +45,13 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         if(list.get(position).getSche_status().equals("L0")){
             holder.tv_complete.setVisibility(View.VISIBLE);
         }
+        int i = position;
+        holder.ll_each_schedule.setOnClickListener(v -> {
+            ScheduleDialog dialog = new ScheduleDialog(v.getContext(),list.get(i));
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+        });
     }
 
     @Override
@@ -51,6 +61,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_sche_title,tv_sche_content,tv_period,tv_complete;
+        LinearLayout ll_each_schedule;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,7 +69,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             tv_sche_content = itemView.findViewById(R.id.tv_sche_content);
             tv_period = itemView.findViewById(R.id.tv_period);
             tv_complete = itemView.findViewById(R.id.tv_complete);
-
+            ll_each_schedule = itemView.findViewById(R.id.ll_each_schedule);
         }
     }
 
