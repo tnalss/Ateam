@@ -47,6 +47,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     private EmployeeVO vo;
     String img_path;
     String[] dialog_item={"카메라", "갤러리"};
+    AlertDialog dialog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -201,10 +202,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.ll_birth || v.getId()==R.id.tv_birth){
-            DatePickerDialog dialog = new DatePickerDialog(getContext(), listener, 1990, 6, 1);
-            dialog.getDatePicker().setSpinnersShown(true);
-            dialog.getDatePicker().setCalendarViewShown(false);
-            //스피너로 보이게 왜 안되냐?
+            DatePickerDialog dialog = new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT, listener, 1990, 0, 1);
             dialog.show();
         } else if (v.getId() == R.id.edt_address){
             //주소검색 웹 뷰를 띄움
@@ -215,9 +213,9 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
         @Override
-        public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            binding.tvBirth.setText(year+"/"+monthOfYear+"/"+dayOfMonth);
-            vo.setBirth(year+"/"+monthOfYear+"/"+dayOfMonth);
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+            binding.tvBirth.setText(year+"/"+(month+1)+"/"+dayOfMonth);
+            vo.setBirth(year+"/"+(month+1)+"/"+dayOfMonth);
         }
     };
     public void onActivityResult(int requestCode, int resultCode, Intent intent)
@@ -226,12 +224,12 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
         if( requestCode == CAMERA_CODE && resultCode == RESULT_OK ){
             Glide.with(this).load(img_path).into(binding.ivEmpProfile);
-
+            dialog.dismiss();
         } else if (requestCode == GALLERY_CODE && resultCode == RESULT_OK ){
 
             img_path = new CommonMethod().getRealPath(intent.getData(),getActivity()); // 가짜 URI 주소로 실제 물리적인 사진파일 위치를 받아옴.
             Glide.with(this).load(img_path).into(binding.ivEmpProfile);
-
+            dialog.dismiss();
         } else if (requestCode == SEARCH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
 
             String data = intent.getExtras().getString("data");
@@ -257,7 +255,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                 galleryMethod();
             }
         } );
-        AlertDialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
     }
 

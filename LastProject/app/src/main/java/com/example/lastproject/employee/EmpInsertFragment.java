@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 
@@ -52,11 +53,10 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
     private FragmentEmpInsertBinding binding;
     private MainActivity activity;
     private EmployeeVO vo= new EmployeeVO();
-    //public final int CAMERA_CODE = 1000;
-    //public final int GALLERY_CODE = 1001;
+
     String img_path;
     String[] dialog_item={"카메라", "갤러리"};
-
+    AlertDialog dialog;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -175,8 +175,8 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            binding.tvBirth.setText(year+"년 "+monthOfYear+"월 "+dayOfMonth+"일");
-            vo.setBirth(year+"/"+monthOfYear+"/"+dayOfMonth);
+            binding.tvBirth.setText(year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
+            vo.setBirth(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
         }
     };
 
@@ -184,10 +184,8 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.ll_birth || v.getId()==R.id.tv_birth){
-            DatePickerDialog dialog = new DatePickerDialog(getContext(), listener, 1990, 6, 1);
-            dialog.getDatePicker().setSpinnersShown(true);
-            dialog.getDatePicker().setCalendarViewShown(false);
-            //스피너로 보이게 왜 안되냐?
+
+            DatePickerDialog dialog = new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT, listener, 1990, 0, 1);
             dialog.show();
         } else if (v.getId() == R.id.edt_address){
             //주소검색 웹 뷰를 띄움
@@ -211,23 +209,15 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
         if( requestCode == CAMERA_CODE && resultCode == RESULT_OK ){
             Glide.with(this).load(img_path).into(binding.cvEmpProfile);
-            //vo.setProfile_path(img_path);
-        } else if (requestCode == GALLERY_CODE && resultCode == RESULT_OK ){
-            //Log.d("TAG", "onActivityResult: "+intent.getData());
-            //Log.d("TAG", "onActivityResult: "+intent.getData().getPath());
-            //storage <= 실제 물리적 주소 위에있는 정보가 실제 물리적 주소인지 확인
-            //찍어보니 가짜 주소임 //진짜 주소를 가져오는 메소드를 만들자
-            ///-1/1/content://media/external/images/media/34/ORIGINAL/NONE/image/jpeg/1299421766
-            //getRealPath 메소드를 만들어주었음.
+            dialog.dismiss();
 
+        } else if (requestCode == GALLERY_CODE && resultCode == RESULT_OK ){
             img_path = new CommonMethod().getRealPath(intent.getData(),getActivity()); // 가짜 URI 주소로 실제 물리적인 사진파일 위치를 받아옴.
             Glide.with(this).load(img_path).into(binding.cvEmpProfile);
-           // vo.setProfile_path(img_path);
-
+            dialog.dismiss();
         } else if (requestCode == SEARCH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
 
             String data = intent.getExtras().getString("data");
-            //String data = intent.getData().toString();
                     if (data != null) {
                         binding.edtAddress.setText(data);
                     }
@@ -250,7 +240,7 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
                 galleryMethod();
             }
         } );
-        AlertDialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
     }
 
