@@ -36,6 +36,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"/>
         <EditText
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="사원명으로 검색"
             android:visibility="gone"
             android:id="@+id/edt_find"

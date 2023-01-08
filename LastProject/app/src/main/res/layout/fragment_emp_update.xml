@@ -78,6 +78,8 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
                 android:layout_margin="10dp"
                 android:id="@+id/edt_emp_name"
                 android:layout_weight="1"
@@ -151,6 +153,8 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:inputType="text"
+                android:maxLines="1"
                 android:hint="ex@example.com"
                 android:layout_margin="10dp"
                 android:id="@+id/edt_emp_email"
@@ -173,6 +177,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:inputType="number"
+                android:maxLines="1"
                 android:hint="ex) 01012345678"
                 android:layout_margin="10dp"
                 android:id="@+id/edt_emp_phone"
@@ -269,6 +274,8 @@
             <EditText
                 android:id="@+id/edt_address_detail"
                 android:layout_margin="10dp"
+                android:inputType="text"
+                android:maxLines="1"
                 android:hint="상세주소를 입력하세요."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -287,6 +294,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:inputType="number"
+                android:maxLines="1"
                 android:layout_margin="10dp"
                 android:id="@+id/edt_salary"
                 android:layout_weight="1"
