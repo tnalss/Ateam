@@ -5,14 +5,17 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.conn.CommonMethod;
@@ -41,6 +44,14 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         Bundle bundle=getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
 
+
+        binding.svForm.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
         binding.tvEmpNo.setText(vo.getEmp_no());
         binding.edtEmpName.setText(vo.getEmp_name());
         binding.tvBirth.setText(vo.getBirth().substring(0,10));
@@ -200,6 +211,13 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                     }
                 }
                 break;
+        }
+    }
+    //키보드 숨겨주는 메소드
+    private void hideKeyboard()    {
+        if (getActivity() != null && getActivity().getCurrentFocus() != null)        {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 

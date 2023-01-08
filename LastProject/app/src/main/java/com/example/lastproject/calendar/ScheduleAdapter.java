@@ -39,6 +39,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         } else {
             holder.tv_period.setText(list.get(position).getSche_start().substring(0, 10) + " ~ " + list.get(position).getSche_end().substring(0, 10));
         }
+        if(list.get(position).getSche_status().equals("L0")){
+            holder.tv_complete.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -47,12 +50,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_sche_title,tv_sche_content,tv_period;
+        TextView tv_sche_title,tv_sche_content,tv_period,tv_complete;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_sche_title = itemView.findViewById(R.id.tv_sche_title);
             tv_sche_content = itemView.findViewById(R.id.tv_sche_content);
             tv_period = itemView.findViewById(R.id.tv_period);
+            tv_complete = itemView.findViewById(R.id.tv_complete);
 
         }
     }

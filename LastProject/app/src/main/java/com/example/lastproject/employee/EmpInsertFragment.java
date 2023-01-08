@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,8 +13,10 @@ import androidx.fragment.app.Fragment;
 
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 
@@ -49,7 +52,14 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
         });
         // 신규사원 저장하는 부분인데 비밀번호를 난수로 이메일로 보내줘야할듯?
 
-        //스피너 클릭시 키보드 끄기 기능 필요함!
+        //스피너 클릭시 키보드 끄기 기능 필요함!//터치리스너로 하였음!
+        binding.svForm.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
 
         binding.llBirth.setOnClickListener(this);
         binding.edtAddress.setOnClickListener(this);
@@ -173,5 +183,11 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
                 break;
         }
     }
-
+    //키보드 숨겨주는 메소드
+    private void hideKeyboard()    {
+        if (getActivity() != null && getActivity().getCurrentFocus() != null)        {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 }
