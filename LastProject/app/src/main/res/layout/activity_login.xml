@@ -16,7 +16,6 @@
 
     <!-- 아이디 -->
     <EditText
-        android:text="1"
         android:id="@+id/edt_login_id"
         android:hint="   ID"
         android:textColor="#000"
@@ -29,7 +28,6 @@
 
     <!-- 비밀번호 -->
     <EditText
-        android:text="1234"
         android:id="@+id/edt_login_pw"
         android:hint="   PW"
         android:textColor="#000"
