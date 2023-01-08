@@ -29,6 +29,7 @@ public class LogoutActivity extends AppCompatActivity {
         editor.commit(); //완료한다.
         Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
 
     }
 

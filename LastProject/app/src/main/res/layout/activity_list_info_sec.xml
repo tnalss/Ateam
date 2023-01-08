@@ -7,11 +7,13 @@
     tools:context=".notice.ListInfo_no_Activity"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:padding="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/img_sec_info_close"
@@ -124,7 +126,6 @@
         android:background="#B3B2B2"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-
 
 
 </LinearLayout>

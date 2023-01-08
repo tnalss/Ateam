@@ -2,8 +2,10 @@ package com.example.lastproject.notice;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.conn.CommonMethod;
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
 
 public class ListInfo_sec_Activity extends AppCompatActivity {
     String TAG = "로그";
@@ -21,7 +26,16 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
     TextView tv_sec_info_title, tv_sec_info_content, tv_sec_info_date;
     Button btn_sec_delete, btn_sec_update;
     RecyclerView recv_sec_noticeInfo;
+    NoticeVO notice;
     int bo = 0;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        update();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +53,7 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         // 익명게시판 상세목록
         new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            NoticeVO notice = gson.fromJson(data, NoticeVO.class);
+            notice = gson.fromJson(data, NoticeVO.class);
             notice.getWrite_date();
             notice.getBoard_no();
             bo = notice.getBoard_no();
@@ -47,8 +61,6 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
             tv_sec_info_content.setText("내용 : " +notice.getBoard_content());
             tv_sec_info_date.setText("작성일 : " +notice.getWrite_date());
         });
-
-
         /* 익명게시판 글삭제 */
         btn_sec_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +74,15 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
                         }).show();
             }
         });
-
-
-
-
+        /* 익명게시판 글수정 이동 */
+        btn_sec_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(ListInfo_sec_Activity.this, Update_sec_Activity.class);
+                    intent.putExtra("notice", notice);
+                    startActivity(intent);
+            }
+        });
         /* 취소 / 뒤로가기 */
         img_sec_info_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +91,17 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
             }
         });
 
+    }
+public void update() {
+        new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            notice = gson.fromJson(data, NoticeVO.class);
+            notice.getWrite_date();
+            notice.getBoard_no();
+            bo = notice.getBoard_no();
+            tv_sec_info_title.setText("제목 : " +notice.getBoard_title());
+            tv_sec_info_content.setText("내용 : " +notice.getBoard_content());
+            tv_sec_info_date.setText("작성일 : " +notice.getWrite_date());
+        });
     }
 }

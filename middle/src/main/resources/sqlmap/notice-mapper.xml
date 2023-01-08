@@ -32,5 +32,20 @@ delete from tbl_board
 where board_no = #{board_no}
 </delete>
 
+<!-- 조회수 -->
+<update id="hits">
+update tbl_board
+set board_hits = board_hits + 1
+where board_no = #{board_no}
+</update>
+
+<!-- 게시글 수정 -->
+<update id="update">
+update tbl_board
+set board_title = #{board_title}, board_content = #{board_content}
+where board_no = #{board_no}
+</update>
+
+
 
 </mapper>

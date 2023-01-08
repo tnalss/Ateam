@@ -54,7 +54,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
                 }
             });
 
+
+        // 조회수
+        h.tv_no_views.setText(" 조회수 : " + notice.get(i).getBoard_hits());
+
+
     }
+
 
 
     @Override
@@ -63,7 +69,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_no_title, tv_no_date;
+        TextView tv_no_title, tv_no_date, tv_no_views;
         ImageView img_no_img;
         LinearLayout li_no_title;
 
@@ -73,6 +79,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             img_no_img = v.findViewById(R.id.img_no_img);
             tv_no_date = v.findViewById(R.id.tv_no_date);
             li_no_title = v.findViewById(R.id.li_no_title);
+            tv_no_views = v.findViewById(R.id.tv_no_views);
 
         }
     }
