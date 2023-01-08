@@ -98,4 +98,10 @@ public class EmployeeController {
 		vo = sql.selectOne("emp.info",vo.getEmp_no());
 		return new Gson().toJson(vo).toString();
 	}
+	
+	@RequestMapping(value="/keyword.emp", produces="text/html;charset=utf-8")
+	public String find_with_keyword(String keyword) {
+		List<EmployeeVO> list = sql.selectList("emp.keyword",keyword);
+		return new Gson().toJson(list).toString();
+	}
 }

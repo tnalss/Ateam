@@ -30,6 +30,7 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         this.activity=activity;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,8 +66,6 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
                     activity.changeFragment(fragment);
 
                 });
-
-
             }
         });
     }
