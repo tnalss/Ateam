@@ -54,11 +54,10 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
 
         if  (list.get(position).getAdmin().equals("X0")){
             holder.tv_nowStatus.setText("퇴사");
-        }  else if (list.get(position).getAtt_code()==null){
-            holder.tv_nowStatus.setText("출근전");
-        } else if (list.get(position).getAtt_code().equals("W0")){
-            holder.tv_nowStatus.setText("출근");
+        }  else {
+            holder.tv_nowStatus.setText("재직중");
         }
+
 
         int i = position;
         holder.ll_each_emp.setOnClickListener(new View.OnClickListener() {
@@ -66,22 +65,20 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
                 // 오늘의 해당사원 근무상태를 긁어서 detail로 전송
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("vo",list.get(i));
-                    Fragment fragment = new EmpDetailFragment();
-                    fragment.setArguments(bundle);
-                    activity.changeFragment(fragment);
+                new CommonMethod().setParams("emp_no",list.get(i).getEmp_no()).sendPost("attendString",(isResult, data) -> {
+                    if(isResult){
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("vo",list.get(i));
+                        if(data!=null){
+                            bundle.putString("status",data);
+                        }
+                        Fragment fragment = new EmpDetailFragment();
+                        fragment.setArguments(bundle);
+                        activity.changeFragment(fragment);
+                    }
+                });
 
-//                new CommonMethod().setParams("emp_no",list.get(i).getEmp_no()).sendPost("attendString",(isResult, data) -> {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("vo",list.get(i));
-//                    if(data!=null){
-//                    bundle.putString("status",data);}
-//                    Fragment fragment = new EmpDetailFragment();
-//                    fragment.setArguments(bundle);
-//                    activity.changeFragment(fragment);
-//
-//                });
+
             }
         });
     }

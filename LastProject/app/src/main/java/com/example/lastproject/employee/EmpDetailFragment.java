@@ -25,7 +25,7 @@ public class EmpDetailFragment extends Fragment {
     private MainActivity activity;
 
     //상세화면 오기전에 해당회원의 정보를 조회해서 번들 vo에 담아줘서 보내줘야합니다!
-    //출근상태 활용 vo에 att_code 프로필 위에 뭔가를 표시할까?
+    //출근상태 활용 status String에 값있음.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +39,7 @@ public class EmpDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
         //String status = bundle.getString("status");
-
+        String status = bundle.getString("status");
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_birth = v.findViewById(R.id.tv_emp_birth);
         tv_emp_address = v.findViewById(R.id.tv_emp_address);

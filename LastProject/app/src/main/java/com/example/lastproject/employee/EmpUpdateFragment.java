@@ -49,6 +49,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     String[] dialog_item={"카메라", "갤러리"};
     AlertDialog dialog;
 
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
