@@ -13,6 +13,19 @@ public class LoginVO implements Serializable {
 	private String attend_date, attend_on, attend_off;
 	private String att_code;
 
+	public String getAtt_state() {
+		return att_state;
+	}
+
+	public void setAtt_state(String att_state) {
+		this.att_state = att_state;
+	}
+
+	private String att_state;
+
+
+
+
 	public String getAttend_date() {
 		return attend_date;
 	}

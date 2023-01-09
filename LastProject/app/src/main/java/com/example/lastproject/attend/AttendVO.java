@@ -1,8 +1,31 @@
 package com.example.lastproject.attend;
 
+import java.text.DateFormat;
+
 public class AttendVO {
-    String emp_name, attend_date,attend_on, attend_off, att_code;
+    public AttendVO(String att_state) {
+        this.att_state = att_state;
+    }
+
+    String emp_name;
+    String attend_date;
+    String attend_on;
+    String attend_off;
+    String att_code;
+    String att_state;
     int emp_no;
+
+
+
+
+    public String getAtt_state() {
+        return att_state;
+    }
+
+    public void setAtt_state(String att_state) {
+        this.att_state = att_state;
+    }
+
 
 
     public String getEmp_name() {
@@ -17,8 +40,12 @@ public class AttendVO {
         return attend_date;
     }
 
+
     public void setAttend_date(String attend_date) {
+
         this.attend_date = attend_date;
+
+
     }
 
     public String getAttend_on() {

@@ -28,9 +28,11 @@ import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
+import com.example.lastproject.ea.EaCodeVO;
 import com.example.lastproject.home.HomeFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 
 import java.text.SimpleDateFormat;
@@ -42,15 +44,15 @@ public class AttendFragment extends Fragment {
     RelativeLayout location_now;
     Button on, off;
     RecyclerView recv_attend_record;
-    TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv;
+    TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
     Button workday;
     ImageView home;
     MainActivity activity;
     ArrayList<AttendVO> list;
 
+    AttendVO vo = null;
 
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,7 +79,8 @@ public class AttendFragment extends Fragment {
         });
 
         /*현재위치 주소값*/
-        //location_tv = v.findViewById(R.id.location_tv);
+        location_tv = v.findViewById(R.id.location_tv);
+
 
         /*현재시각 표시*/
         current_time = v.findViewById(R.id.current_time);
@@ -94,42 +97,57 @@ public class AttendFragment extends Fragment {
         emp_dep_rank = v.findViewById(R.id.emp_dep_rank);
         emp_dep_rank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
 
-        /*로그인한 사원의 출퇴근 상태 */
+        /*로그인한 사원의 상태 조회*/
+        now = v.findViewById(R.id.now);
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_today.at",(isResult, data) -> {
+             vo =new Gson().fromJson(data,AttendVO.class);
+            if(vo != null && vo.getAtt_state() != null){
+            now.setText(vo.getAtt_state());
+            }
+        });
 
 
 
         /*출근 버튼 클릭*/
+
         on = v.findViewById(R.id.on);
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog_on();
+               if(vo != null && vo.getAttend_on() != null) {
+                   Toast.makeText(getActivity(), "출근 처리가 완료된 상태입니다.", Toast.LENGTH_SHORT).show();
+               }else {
+                   showDialog_on();
+               }
 
-                /*출근 버튼 클릭시 출근 버튼 비활성화 처리*/
-               // on.setVisibility(View.INVISIBLE);
+                on.setEnabled(false);
 
-                /* 출근 버튼 클릭시 근무 상태(출근/지각) 바뀌게 처리 */
+                selectList();
             }
         });
+
+
+
         /*퇴근 버튼 클릭*/
         off = v.findViewById(R.id.off);
         off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog_off();
-                /*퇴근 버튼 클릭시 출근 버튼 비활성화 처리*/
-
-                /*퇴근 버튼 클릭시 근무 상태 퇴근으로 바뀌게 처리*/
-
+                if(vo != null && vo.getAttend_off() != null) {
+                    Toast.makeText(getActivity(), "퇴근 처리가 완료된 상태입니다.", Toast.LENGTH_SHORT).show();
+                }else {
+                    showDialog_off();
+                }
+                selectList();
             }
         });
 
 
 
-        /*리사이클러뷰_출퇴근기록*/
+        /*리사이클러뷰_로그인한 사원의 전체 출퇴근기록*/
         recv_attend_record = v.findViewById(R.id.recv_attend_record);
-        recv_attend_record.setAdapter(new Attend_Main_Adapter(inflater,list,getContext()));
-        recv_attend_record.setLayoutManager(CommonMethod.getVManager(getContext()));
+        selectList();
+
 
         /*근무현황조회 클릭시 attend_activity로 화면전환*/
         workday = v.findViewById(R.id.workday);
@@ -138,6 +156,7 @@ public class AttendFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AttendActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -164,6 +183,11 @@ public class AttendFragment extends Fragment {
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                    /*출근처리*/
+                        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_on.at",(isResult, data) -> {
+                              AttendVO vo =new Gson().fromJson(data,AttendVO.class);
+                                now.setText(vo.getAtt_state());
+                        });
                         Toast.makeText(getActivity(), "출근 처리되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -181,12 +205,16 @@ public class AttendFragment extends Fragment {
     public void showDialog_off() {
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(getActivity())
                 .setTitle("퇴근")
-                .setMessage("퇴근하시겠습니까? \n퇴근 시 앱이 자동으로 종료됩니다. ")
+                .setMessage("퇴근하시겠습니까?  ")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        /*퇴근  처리*/
+                        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_off.at",(isResult, data) -> {
+                            AttendVO vo =new Gson().fromJson(data,AttendVO.class);
+                            now.setText(vo.getAtt_state());
+                        });
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
-                        activity.finish();
                     }
                 })
                 .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -197,5 +225,17 @@ public class AttendFragment extends Fragment {
                 });
         AlertDialog msgDlg = msgBuilder.create();
         msgDlg.show();
+    }
+
+    /*출퇴근 기록 가져오기 */
+    public void selectList(){
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("list_emp_since.at",(isResult, data) -> {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+            list = gson.fromJson(data,
+                    new TypeToken<ArrayList<AttendVO>>(){}.getType());
+            recv_attend_record.setAdapter(new Attend_Main_Adapter(getLayoutInflater(),list,activity));
+            recv_attend_record.setLayoutManager(CommonMethod.getVManager(getContext()));
+        });
+
     }
 }

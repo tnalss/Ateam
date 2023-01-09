@@ -108,8 +108,7 @@
                 android:id="@+id/now"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="출근 중" />
-
+                android:text="" />
             <ImageView
                 android:layout_marginTop="5dp"
                 android:layout_width="100dp"
@@ -129,12 +128,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <Button
+
                 android:id="@+id/on"
                 android:backgroundTint="@color/main_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="출근"/>
             <Button
+
                 android:id="@+id/off"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/sub_color"
@@ -145,6 +146,7 @@
         </LinearLayout>
     <!--출퇴근 기록-->
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/item_radius2"
             android:gravity="center"
@@ -153,11 +155,12 @@
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 style="@style/main_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="출퇴근 기록"/>
+                android:textStyle="bold"
+                android:text="출 퇴근 기록"/>
             <android.widget.Button
                 android:layout_marginTop="5dp"
                 android:gravity="center"
@@ -170,6 +173,7 @@
                 android:text="근무현황 조회"/>
 
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/recv_attend_record"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>

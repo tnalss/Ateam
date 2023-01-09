@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.ImageView;
+
+import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
@@ -20,7 +23,8 @@ public class AttendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attend);
 
-        calendarView = findViewById(R.id.calendarview);
+
+        calendarView = findViewById(R.id.calendarview_monthly);
 
 
 
@@ -31,8 +35,11 @@ public class AttendActivity extends AppCompatActivity {
             });
         getSupportActionBar().hide();
 
-        /*리사이클러뷰_근태관리*/
+
+
+        /*리사이클러뷰_로그인한 사원의 연차.휴가 신청 현황 */
         recv_attend_apply =findViewById(R.id.recv_attend_apply);
+
 
 
     }//oncreate

@@ -42,10 +42,13 @@
 
             <!--달력-->
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/calendarview"
+                android:id="@+id/calendarview_monthly"
+                app:mcv_calendarMode="month"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                    />
+                app:mcv_firstDayOfWeek="monday"   />
+
+
 
         </LinearLayout>
 
