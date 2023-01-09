@@ -50,17 +50,6 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         btn_sec_delete = findViewById(R.id.btn_sec_delete);
         recv_sec_noticeInfo = findViewById(R.id.recv_sec_noticeInfo);
 
-        // 익명게시판 상세목록
-        new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            notice = gson.fromJson(data, NoticeVO.class);
-            notice.getWrite_date();
-            notice.getBoard_no();
-            bo = notice.getBoard_no();
-            tv_sec_info_title.setText("제목 : " +notice.getBoard_title());
-            tv_sec_info_content.setText("내용 : " +notice.getBoard_content());
-            tv_sec_info_date.setText("작성일 : " +notice.getWrite_date());
-        });
         /* 익명게시판 글삭제 */
         btn_sec_delete.setOnClickListener(new View.OnClickListener() {
             @Override

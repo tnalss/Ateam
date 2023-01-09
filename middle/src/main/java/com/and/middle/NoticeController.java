@@ -61,9 +61,7 @@ public class NoticeController {
 		NoticeVO temp_vo = new Gson().fromJson(no, NoticeVO.class);
 		int cnt = sql.update("no.update", temp_vo);
 		return new Gson().toJson(cnt).toString();
-		
 	}
-	
 
 	// 공지사항 내용
 	@RequestMapping(value = "/info.no", produces = "text/html;charset=utf-8")

@@ -41,7 +41,22 @@
         android:background="#B3B2B2"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <!--작성자 -->
+        <TextView
+        android:id="@+id/tv_no_info_name"
+        android:padding="2dp"
+        android:background="@drawable/item_radius"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_gravity="center"
+        android:text="작성자 :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <!-- 작성일 -->
     <TextView
         android:id="@+id/tv_no_info_date"
@@ -55,6 +70,7 @@
         android:text="2023/01/06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    </LinearLayout>
     <View
         android:background="#B3B2B2"
         android:layout_width="match_parent"

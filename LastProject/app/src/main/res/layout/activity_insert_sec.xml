@@ -30,7 +30,7 @@
             android:textColor="#111"
             android:layout_gravity="center"
             android:textSize="20dp"
-            android:text="공지사항 작성"
+            android:text="공지사항 쓰기"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
