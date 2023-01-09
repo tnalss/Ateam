@@ -132,17 +132,48 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-    <!-- 목록 -->
+    <LinearLayout
+
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <!-- 댓글 -->
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:text="댓글"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_no_reply"
+        android:padding="2dp"
+        android:background="@drawable/item_radius5"
+        android:layout_margin="10dp"
+        android:gravity="right"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="댓글 작성"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edt_no_reply"
+        android:hint="댓글 작성"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="3dp"
         android:layout_margin="5dp"
-        android:id="@+id/recv_no_noticeInfo"
+        android:id="@+id/recv_no_reply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <View
-        android:background="#B3B2B2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+
 
 
 

@@ -83,9 +83,8 @@ public class NoticeFragment extends Fragment {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data,
                     new TypeToken<ArrayList<NoticeVO>>(){}.getType());
-            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice, NoticeFragment.this ));
+            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice ));
             recv_notice.setLayoutManager(CommonMethod.getVManager(getContext()));
-
         });
     }
 
