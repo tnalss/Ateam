@@ -2,6 +2,7 @@ package com.and.middle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -84,5 +85,18 @@ public class ScheController {
 		return sql.selectOne("sche.findName",sche_no);
 		
 	}	
+	
+	@RequestMapping("/delete.sche")
+	public void delete_sche(String sche_no) {
+		sql.delete("sche.delete",sche_no);
+	}	
+	
+	@RequestMapping("/statusDone.sche")
+	public void status_done(String sche_no,String status) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("sche_no", sche_no);
+		map.put("status",status);
+		sql.update("sche.done",map);
+	}
 	
 }

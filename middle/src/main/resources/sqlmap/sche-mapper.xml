@@ -64,4 +64,14 @@ Select emp_name from tbl_Emp
  where emp_no = (select emp_no from tbl_Sche where sche_no=#{sche_no})
 </select>
 
+<delete id="delete">
+DELETE FROM tbl_sche WHERE sche_no = #{sche_no}
+</delete>
+
+<update id="done">
+UPDATE tbl_sche
+SET sche_status = #{status} 
+WHERE sche_no = #{sche_no} 
+</update>
+
 </mapper>

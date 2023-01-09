@@ -79,11 +79,14 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         binding.tvCalendarIntro.setText(Common.loginInfo.getEmp_name()+"님");
         binding.tvDeptSchedule.setText(Common.loginInfo.getDepartment_name()+ " 일정");
 
-        if(!Common.loginInfo.getAdmin().equals("L1")){
-            binding.tvAddCompanySchedule.setVisibility(View.GONE);
-        }
         if( Common.loginInfo.getRank_name().equals("사원")){
             binding.tvAddDepartmentSchedule.setVisibility(View.GONE);
+        }
+        if( Common.loginInfo.getAdmin().equals("L1")){
+            binding.tvAddCompanySchedule.setVisibility(View.VISIBLE);
+            binding.tvAddDepartmentSchedule.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvAddCompanySchedule.setVisibility(View.GONE);
         }
 
         binding.tvAddCompanySchedule.setOnClickListener(this);
