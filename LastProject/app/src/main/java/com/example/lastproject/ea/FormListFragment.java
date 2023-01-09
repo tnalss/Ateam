@@ -32,7 +32,6 @@ public class FormListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_form_list, container, false);
         recv_form = v.findViewById(R.id.recv_form);
         activity = (MainActivity)getActivity();
-
         new CommonMethod().sendPost("form.ea", (isResult, data) -> {
 
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();

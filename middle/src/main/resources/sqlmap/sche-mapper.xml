@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sche">
+
+<!-- 회사일정조회 -->
+<select id="compSche" resultType="schedule.ScheduleVO">
+select *
+from tbl_sche
+where SCHE_type = 'C1'
+order by SCHE_NO
+</select>
+
+
+<!-- 기간내 회사일정조회 -->
+
+<select id="compPeriod" resultType="schedule.ScheduleVO">
+<![CDATA[
+select *
+from tbl_sche
+where SCHE_type = 'C1' and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+order by SCHE_NO
+]]>
+</select>
+
+<!-- 기간내 부서일정조회 -->
+<select id="deptPeriod" resultType="schedule.ScheduleVO">
+<![CDATA[
+select *
+from tbl_sche
+where SCHE_type = #{dept_code} and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+order by SCHE_NO
+]]>
+</select>
+
+<!-- 기간내 개인일정조회 -->
+<select id="personalPeriod" resultType="schedule.ScheduleVO">
+<![CDATA[
+select *
+from tbl_sche
+where SCHE_type = #{emp_no} and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+order by SCHE_NO
+]]>
+</select>
+</mapper>

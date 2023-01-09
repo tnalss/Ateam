@@ -22,7 +22,9 @@
         android:layout_gravity="center"
         android:background="@drawable/item_radius"
         android:layout_width="210dp"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:singleLine="true"
+        android:lines="1"/>
 
     <!-- 비밀번호 -->
     <EditText
@@ -33,7 +35,22 @@
         android:layout_gravity="center"
         android:background="@drawable/item_radius"
         android:layout_width="210dp"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:singleLine="true"
+        android:lines="1"/>
+
+    <!-- 로그인 -->
+    <Button
+        android:id="@+id/btn_login_login"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="#D2D2D1"
+        android:text="로그인"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
+        android:clickable="false" />
 
     <!--패스워드 찾기-->
     <TextView
@@ -44,21 +61,8 @@
         android:layout_gravity="center"
         android:text="패스워드 찾기"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- 로그인 -->
-    <Button
-        android:id="@+id/btn_login_login"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:backgroundTint="#D2D2D1"
-        android:text="로그인"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:layout_width="210dp"
-        android:layout_height="60dp"
-        android:clickable="false" />
-
+        android:layout_height="wrap_content"
+        />
 
     <!-- 로그인 체크박스 -->
     <LinearLayout

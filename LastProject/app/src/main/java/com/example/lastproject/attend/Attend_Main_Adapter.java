@@ -23,7 +23,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.fragment_attend_main,parent,false);
+        View v = inflater.inflate(R.layout.fragment_attend,parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
 
         return viewHolder;

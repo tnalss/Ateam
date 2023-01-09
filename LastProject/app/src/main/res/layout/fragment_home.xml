@@ -282,7 +282,7 @@
                 android:padding="10dp"
                 style="@style/main_size"
                 android:textColor="@color/white"
-                android:text="일정관리"
+                android:text="일정 관리"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView

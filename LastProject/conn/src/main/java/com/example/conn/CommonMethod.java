@@ -29,6 +29,13 @@ public class CommonMethod {
 
     HashMap<String, Object> params = new HashMap<>();
 
+    public static LinearLayoutManager getManager(Context context) {//Context를 화면에 보이는 객체로부터 받아온다.
+
+        LinearLayoutManager manager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+
+        return manager;
+    }
+
     // 갤러리에서 가져온 이미지 경로가 uri 형태로 실제 물리적인 주소가 X -> File로 만들 수 없음
     //해당하는 메소드는 URI를 통해 실제 이미지 물리적 주소를 얻어오는 메소드
     //2022.12.26 kym만듦

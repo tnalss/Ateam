@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import com.example.lastproject.calendar.CalendarFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.attend.AttendFragment;
 import com.example.lastproject.databinding.ActivityMainBinding;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btm_nav = findViewById(R.id.btm_nav);
         Intent intent = getIntent();
-        Common.loginInfo=  (LoginVO) intent.getSerializableExtra("loginInfo");
+        Common.loginInfo = (LoginVO) intent.getSerializableExtra("loginInfo");
 
         changeFragment(new HomeFragment());
         binding.btmNav.setOnItemSelectedListener(item -> {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new HomeFragment());
             }   else if ( item.getItemId() == R.id.btm_item2 ){
                 //일정
+                changeFragment(new CalendarFragment());
             }   else if ( item.getItemId() == R.id.btm_item3 ){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,new AttendFragment()).commit();
             }   else if ( item.getItemId() == R.id.btm_item4 ){
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //임시 로그아웃
                 Intent intent2 = new Intent(MainActivity.this, LogoutActivity.class);
                 startActivity(intent2);
+                finish();
             }
             return true;
         });

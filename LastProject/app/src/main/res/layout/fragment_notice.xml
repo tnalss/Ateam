@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notice.NoticeFragment"
+    android:orientation="vertical" >
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- 공지사항 -->
+    <TextView
+        android:layout_weight="1"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:text="공지사항"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_sec_writing"
+        android:textColor="@color/white"
+        android:padding="2dp"
+        android:background="@drawable/item_radius5"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:text="글쓰기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+    <View
+        android:layout_marginTop="5dp"
+        android:background="#979494"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="5dp"
+        android:id="@+id/recv_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 익명 게시판 -->
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="25dp"
+       android:gravity="center"
+        android:text="익명게시판"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_no_writing"
+            android:textColor="@color/white"
+            android:padding="2dp"
+            android:background="@drawable/item_radius5"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:text="글쓰기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="8dp"
+        android:background="#979494"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recv_secret"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

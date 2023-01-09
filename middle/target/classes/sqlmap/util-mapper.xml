@@ -12,4 +12,12 @@ from tbl_attend
 where emp_no=#{emp_no} and TO_CHAR(attend_date, 'YYYYMMDD')= #{date}
 </select>
 
+<!-- 사원 코드만불러오기 -->
+<select id="attendString" resultType='String'>
+Select att_code
+from tbl_attend
+where emp_no=#{emp_no} and TO_CHAR(attend_date, 'YYYYMMDD')= #{date}
+</select>
+
+
 </mapper>

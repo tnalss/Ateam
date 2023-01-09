@@ -5,55 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.PwfindingActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical" >
 
+    <ImageView
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+    <TextView
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:text="비밀번호 찾기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- 이름 -->
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:text="이름 : "
             android:textSize="18dp"
+            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    <EditText
-        android:hint="이름"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_pwf_name"
+            android:hint="이름"
+            android:textColor="#000"
+            android:backgroundTint="#6A6A6A"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <!-- 사번 -->
     <LinearLayout
+        android:layout_gravity="center"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:text="사번 : "
             android:textSize="18dp"
+            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <EditText
+            android:id="@+id/edt_pwf_no"
             android:hint="사번"
-            android:layout_width="150dp"
+            android:textColor="#000"
+            android:backgroundTint="#6A6A6A"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <!-- 이메일 -->
     <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="이메일 : "
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_pwf_email"
+            android:hint="sim2022@naver.com"
+            android:backgroundTint="#6A6A6A"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- 버튼 -->
+    <LinearLayout
+        android:layout_gravity="center"
         android:layout_margin="10dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <Button
-        android:layout_marginRight="5dp"
-        android:text="확인"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_pw_ok"
+            android:backgroundTint="@color/main_color"
+            android:layout_marginRight="5dp"
+            android:text="확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btn_cancel"
+            android:backgroundTint="@color/grey"
             android:layout_marginLeft="5dp"
             android:text="취소"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 </LinearLayout>
