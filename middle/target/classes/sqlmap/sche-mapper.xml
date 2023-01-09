@@ -57,4 +57,11 @@ values(#{emp_no}, 'C1' , #{sche_title},#{sche_content}, #{sche_start}, #{sche_en
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
 values(#{emp_no}, #{emp_no} , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
 </insert>
+
+<!-- 스케줄 번호에 해당하는 사원명 찾아줌 -->
+<select id="findName" resultType="String">
+Select emp_name from tbl_Emp
+ where emp_no = (select emp_no from tbl_Sche where sche_no=#{sche_no})
+</select>
+
 </mapper>

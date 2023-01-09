@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 
@@ -53,19 +54,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         }
         int i = position;
         holder.ll_each_schedule.setOnClickListener(v -> {
-//            ScheduleDialog dialog = new ScheduleDialog(v.getContext(),list.get(i));
-//
-//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//            dialog.show();
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("vo",list.get(i));
-//            //이름이랑도 필요할것같은데?
-//
-//
-//            Fragment fragment = new ScheduleDetailFragment();
-//            fragment.setArguments(bundle);
-//            activity.changeFragment(new ScheduleDetailFragment());
-//
+
+            //이름이랑도 필요할것같은데?
+            new CommonMethod().setParams("sche_no",list.get(i).getSche_no()).sendPost("findName.sche",(isResult, data) -> {
+                if(isResult){
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("vo",list.get(i));
+                    bundle.putString("emp_name",data);
+                    Fragment fragment = new ScheduleInfoFragment();
+                    fragment.setArguments(bundle);
+                    activity.changeFragment(fragment);
+                }
+            });
 
         });
     }

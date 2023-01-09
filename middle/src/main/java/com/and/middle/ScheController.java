@@ -78,4 +78,11 @@ public class ScheController {
 		
 	}	
 	
+	@RequestMapping(value="/findName.sche", produces="text/html;charset=utf-8")
+	public String find_name_sche(String sche_no) {
+		
+		return sql.selectOne("sche.findName",sche_no);
+		
+	}	
+	
 }
