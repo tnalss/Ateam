@@ -1,43 +1,47 @@
 package com.example.lastproject.attend;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
-import com.example.lastproject.ea.EaCodeVO;
 import com.example.lastproject.home.HomeFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AttendFragment extends Fragment {
 
@@ -46,7 +50,7 @@ public class AttendFragment extends Fragment {
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
     Button workday;
-    ImageView home;
+    ImageView home, iv_emp_profile;
     MainActivity activity;
     ArrayList<AttendVO> list;
 
@@ -82,6 +86,7 @@ public class AttendFragment extends Fragment {
         location_tv = v.findViewById(R.id.location_tv);
 
 
+
         /*현재시각 표시*/
         current_time = v.findViewById(R.id.current_time);
         current_time.setText(getCurrentTime());
@@ -97,6 +102,11 @@ public class AttendFragment extends Fragment {
         emp_dep_rank = v.findViewById(R.id.emp_dep_rank);
         emp_dep_rank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
 
+        /*로그인한 사원의 프로필 이미지*/
+        iv_emp_profile = v.findViewById(R.id.iv_emp_profile);
+        if(Common.loginInfo.getProfile_path()!=null){
+            Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(iv_emp_profile);
+        }
         /*로그인한 사원의 상태 조회*/
         now = v.findViewById(R.id.now);
         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_today.at",(isResult, data) -> {
@@ -235,7 +245,14 @@ public class AttendFragment extends Fragment {
                     new TypeToken<ArrayList<AttendVO>>(){}.getType());
             recv_attend_record.setAdapter(new Attend_Main_Adapter(getLayoutInflater(),list,activity));
             recv_attend_record.setLayoutManager(CommonMethod.getVManager(getContext()));
+
+
+
+
+
         });
 
     }
+
+
 }

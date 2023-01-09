@@ -1,5 +1,6 @@
 package com.example.lastproject.attend;
 
+import java.sql.Date;
 import java.text.DateFormat;
 
 public class AttendVO {
@@ -9,23 +10,10 @@ public class AttendVO {
 
     String emp_name;
     String attend_date;
-    String attend_on;
-    String attend_off;
+    String attend_on,attend_off;
     String att_code;
     String att_state;
     int emp_no;
-
-
-
-
-    public String getAtt_state() {
-        return att_state;
-    }
-
-    public void setAtt_state(String att_state) {
-        this.att_state = att_state;
-    }
-
 
 
     public String getEmp_name() {
@@ -40,12 +28,8 @@ public class AttendVO {
         return attend_date;
     }
 
-
     public void setAttend_date(String attend_date) {
-
         this.attend_date = attend_date;
-
-
     }
 
     public String getAttend_on() {
@@ -70,6 +54,14 @@ public class AttendVO {
 
     public void setAtt_code(String att_code) {
         this.att_code = att_code;
+    }
+
+    public String getAtt_state() {
+        return att_state;
+    }
+
+    public void setAtt_state(String att_state) {
+        this.att_state = att_state;
     }
 
     public int getEmp_no() {

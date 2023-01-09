@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new CalendarFragment());
             }   else if ( item.getItemId() == R.id.btm_item3 ){
                 changeFragment(new AttendFragment());
+                //출퇴근관리
             }   else if ( item.getItemId() == R.id.btm_item4 ){
                 changeFragment(new EaFragment());
                 //전자결재

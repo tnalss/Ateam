@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.R;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapter.ViewHolder> {
     LayoutInflater inflater;

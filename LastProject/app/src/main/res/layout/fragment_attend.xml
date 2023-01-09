@@ -109,8 +109,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="" />
-            <ImageView
-                android:layout_marginTop="5dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_emp_profile"
+                android:padding="10dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/user_profile"/>
