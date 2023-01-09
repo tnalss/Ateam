@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/line_write_search"
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_emp_no"
+        android:layout_weight="1"
+        android:text="사번"
+        android:textAlignment="center"
+        style="@style/sub_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_emp_name"
+        android:layout_weight="1"
+        android:text="이름"
+        android:textAlignment="center"
+        style="@style/sub_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_emp_dep"
+        android:layout_weight="1"
+        android:text="부서"
+        android:textAlignment="center"
+        style="@style/sub_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_emp_rank"
+        android:layout_weight="1"
+        android:text="직급"
+        android:textAlignment="center"
+        style="@style/sub_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
