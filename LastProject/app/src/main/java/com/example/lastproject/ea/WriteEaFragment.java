@@ -40,9 +40,12 @@ import java.util.ArrayList;
 
 public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     MainActivity activity;
+    ArrayList<EaVO> send_list;
+    EaVO send_vo;
+    EaCodeVO vo;
     ChipGroup chip_sgroup, chip_rgroup;
     Chip chip;
-    EditText edt_sign_search, edt_refer_search;
+    EditText edt_sign_search, edt_refer_search, edt_ea_title, edt_ea_content;
     RadioGroup radioGroup;
     Button btn_sign_add, btn_refer_add,btn_apply,btn_signer_search,btn_refer_search;
     BottomSheetDialog sign_dialog, refer_dialog;
@@ -68,12 +71,14 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         tv_sign_check = v.findViewById(R.id.tv_sign_check);
         tv_dep_title = v.findViewById(R.id.tv_dep_title);
         tv_refer_check = v.findViewById(R.id.tv_refer_check);
+        edt_ea_title = v.findViewById(R.id.edt_ea_title);
+        edt_ea_content = v.findViewById(R.id.edt_ea_content);
         btn_sign_add = v.findViewById(R.id.btn_sign_add);
         btn_refer_add = v.findViewById(R.id.btn_refer_add);
         btn_apply = v.findViewById(R.id.btn_apply);
         radioGroup = v.findViewById((R.id.radioGroup));
 
-        EaCodeVO vo = (EaCodeVO) getArguments().getSerializable("form");
+        vo = (EaCodeVO) getArguments().getSerializable("form");
         tv_main.setText(vo.getCode_value());
         tv_form.setText(vo.getCode_value());
 
@@ -251,10 +256,24 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         else if(v.getId() == R.id.btn_apply){
             my_alert.setTitle("알림");
             my_alert.setMessage("상신하시겠습니까?");
+            send_list = new ArrayList<>();
+
+            for(int i=0;i<signer_list.size();i++){
+                send_vo = new EaVO();
+                send_vo.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
+                send_vo.setEa_receiver(Integer.parseInt(signer_list.get(i).getEmp_no()));
+                send_vo.setEa_title("["+vo.getCode_value()+"]" + edt_ea_title.getText().toString());
+                send_vo.setEa_content(edt_ea_content.getText().toString());
+                send_list.add(send_vo);
+            }
+            Log.d("로그", "onClick: "+ send_list.size());
             //OK 버튼 눌렀을 때
             my_alert.setPositiveButton("상신하기", (dialog, which) -> {
                 Toast.makeText(getContext(), "상신완료", Toast.LENGTH_SHORT).show();
-                activity.changeFragment(new EaFragment());
+                new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
+                    Log.d("로그", "onClick: " + data);
+                    activity.changeFragment(new EaFragment());
+                });
             });
             my_alert.setNegativeButton("취소하기",(dialog, which) -> {
                 Toast.makeText(getContext(), "돼지", Toast.LENGTH_SHORT).show();

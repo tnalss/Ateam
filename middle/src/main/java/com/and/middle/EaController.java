@@ -1,6 +1,7 @@
 package com.and.middle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import ea.EaCodeVO;
 import ea.EaVO;
@@ -23,6 +25,17 @@ public class EaController {
 	@Qualifier("hanul")
 	SqlSession sql;
 
+	//전자결재 상신하기
+	@RequestMapping(value="/insert.ea", produces="text/html;charset=utf-8")
+	public void ea_insert(String send_list) {
+		System.out.println(new Date().getTime());
+		List<EaVO> list = new Gson().fromJson(send_list, new TypeToken<List<EaVO>>() {}.getType());
+	for(int i= 0; i< list.size(); i++) {
+	
+	}
+		sql.insert("ea.insert",list);
+	}
+	
 	//기안서 목록 불러오기
 	@RequestMapping(value = "/form.ea", produces = "text/html;charset=utf-8")
 	public String ea_select() {

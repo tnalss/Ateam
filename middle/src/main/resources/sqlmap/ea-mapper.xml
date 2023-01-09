@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ea">
+<!-- 
+<foreach collection='list' item='l' separator=';'>
+insert into tbl_ea(ea_receiver, emp_no, ea_title, ea_content)
+values(#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content})
+
+</foreach> -->
+<!-- 전자결재 상신하기 -->
+<insert id="insert">
+DECLARE 
+v_EA_NUM NUMBER :=0;
+
+BEGIN
+v_EA_NUM := seq_ea_num.nextval;
+<foreach collection='list' item='l' open="INSERT ALL" close="select * from dual;"  separator=" ">
+
+into tbl_ea (ea_num,ea_receiver, emp_no, ea_title, ea_content)
+values (v_EA_NUM,#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content})
+
+
+</foreach>
+COMMIT;
+END;
+
+</insert>
 
 <!-- 문서 양식명 불러오기 -->
 <select id="formlist" resultType='ea.EaCodeVO'>
@@ -9,8 +33,9 @@ select * from get_code_table('P')
 
 <!-- 최근 작성 기안 리스트 -->
 <select id="recentlist" resultType="ea.EaVO">
-select * from tbl_ea
-where emp_no = #{no}
+select ea_num, ea_title, ea_status, ea_date from tbl_ea
+where emp_no = #{emp_no}
+group by ea_num, ea_title, ea_status, ea_date
 order by ea_date desc
 </select>
 
