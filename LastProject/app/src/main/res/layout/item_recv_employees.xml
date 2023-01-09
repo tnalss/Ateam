@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:id="@+id/ll_each_emp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_emp_profile"
         android:layout_margin="10dp"
         android:src="@drawable/user_profile"

@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
-import com.example.lastproject.R;
-import com.example.lastproject.databinding.FragmentHomeBinding;
+
 import com.example.lastproject.databinding.FragmentManageEmpBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +24,13 @@ public class ManageEmpFragment extends Fragment {
     ArrayList<EmployeeVO> list;
     MainActivity activity;
 
+    void noResult(){
+        if(list.size()==0){
+            binding.tvNoResult.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvNoResult.setVisibility(View.GONE);
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,12 +49,37 @@ public class ManageEmpFragment extends Fragment {
 
                 binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
                 binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+                noResult();
             }
         });
 
         //사원검색기능 구현해야됨
         binding.ivPersonSearch.setOnClickListener(v->{
+            if(binding.tvMenuTitle.getVisibility()==View.VISIBLE) {
+                binding.tvMenuTitle.setVisibility(View.GONE);
+                binding.edtFind.setVisibility(View.VISIBLE);
+                binding.ivPersonSearch.setVisibility(View.GONE);
+                binding.searchButton.setVisibility(View.VISIBLE);
+            }
+        });
+        binding.searchButton.setOnClickListener(v -> {
 
+            binding.tvMenuTitle.setVisibility(View.VISIBLE);
+            binding.edtFind.setVisibility(View.GONE);
+            binding.ivPersonSearch.setVisibility(View.VISIBLE);
+            binding.searchButton.setVisibility(View.GONE);
+            if(binding.edtFind.length()>0){
+                //쿼리날려서 리스트잡고 리스트바꿔서보내주자.
+                new CommonMethod().setParams("keyword",binding.edtFind.getText().toString().trim()).sendPost("keyword.emp",(isResult, data) -> {
+                    if(isResult){
+                        list = new Gson().fromJson(data,new TypeToken<ArrayList<EmployeeVO>>(){}.getType());
+
+                        binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
+                        binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+                        noResult();
+                    }
+                });
+            }
         });
 
         //신규사원추가버튼

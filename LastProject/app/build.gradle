@@ -91,5 +91,7 @@ dependencies {
     //23. 01. 05 JHW - Chips(수신 이름 이쁘게)
     implementation 'com.google.android.material:material:1.0.0-beta01'
 
+    //23/1/6 스피너 csm
+    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 
 }

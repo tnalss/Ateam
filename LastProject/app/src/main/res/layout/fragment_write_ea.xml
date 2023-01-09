@@ -151,7 +151,8 @@
             android:layout_width="140dp"
             android:layout_height="100dp"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recv_sgin_add"
+            android:background="#F2EEEE"
+            android:id="@+id/recv_sign_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
@@ -175,23 +176,94 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="결제선이 비어있습니다. 결재선을 추가해주세요."
+            android:text="참조가 비어있습니다. 참조를 추가해주세요."
             android:layout_width="140dp"
             android:layout_height="100dp"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:background="#F2EEEE"
             android:id="@+id/recv_refer_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btn_refer_add"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/main_color"
             android:text="참조 추가"
             android:layout_gravity="center"
             android:layout_width="250dp"
             android:layout_height="50dp"/>
+        <View
+            android:layout_marginBottom="15dp"
+            android:background="#7A7979"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
         <TextView
+            style="@style/sub_size"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기안 내용" />
+        <TextView
+            android:text="기안제목"
+            android:textColor="@color/light_color"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_ea_title"
+            android:layout_marginBottom="10dp"
+            android:hint="기안제목 입력"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:text="참조문서"
+            android:textColor="@color/light_color"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_marginBottom="10dp"
+            android:text="문서추가 +"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:text="첨부파일"
+            android:textColor="@color/light_color"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="파일추가 +"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <View
+            android:layout_marginBottom="20dp"
+            android:background="#DDDDDB"
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:text="내용작성"
+            android:textColor="@color/light_color"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_ea_content"
+            android:background="#F2EEEE"
+            android:scrollbars = "vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="100dp"/>
@@ -215,6 +287,7 @@
             android:backgroundTint="@color/main_color"
             android:textColor="@color/white"
             android:text="상신하기"
+            android:layout_marginBottom="10dp"
            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="60dp"/>

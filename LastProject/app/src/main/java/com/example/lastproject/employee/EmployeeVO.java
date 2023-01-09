@@ -12,6 +12,15 @@ public class EmployeeVO implements Serializable {
 	
 	private String attend_date, attend_on, attend_off;
 	private String att_code;
+	private String profile_path;
+
+	public String getProfile_path() {
+		return profile_path;
+	}
+
+	public void setProfile_path(String profile_path) {
+		this.profile_path = profile_path;
+	}
 
 	public String getEmp_no() {
 		return emp_no;

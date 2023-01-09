@@ -13,26 +13,33 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 
 
 public class EmpDetailFragment extends Fragment {
     private EmployeeVO vo;
+    private MainActivity activity;
 
-//상세화면 오기전에 해당회원의 정보를 조회해서 번들에 담아줘서 보내줘야합니다!
+    //상세화면 오기전에 해당회원의 정보를 조회해서 번들 vo에 담아줘서 보내줘야합니다!
+    //출근상태 활용 status String에 값있음.
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         TextView tv_emp_name, tv_emp_birth, tv_emp_address, tv_emp_branch, tv_emp_dept, tv_emp_hire_date, tv_emp_rank, tv_emp_no, tv_emp_gender, tv_emp_email, tv_emp_phone, tv_emp_admin, tv_emp_salary, tv_emp_comm_pct;
         Button btn_emp_edit, btn_emp_fire;
-        ImageView iv_back;
+        ImageView iv_back,iv_emp_profile;
 
         View v = inflater.inflate(R.layout.fragment_emp_detail, container, false);
-
+        activity = (MainActivity) getActivity();
         Bundle bundle = getArguments();
         vo = (EmployeeVO) bundle.getSerializable("vo");
-
+        //String status = bundle.getString("status");
+        String status = bundle.getString("status");
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_birth = v.findViewById(R.id.tv_emp_birth);
         tv_emp_address = v.findViewById(R.id.tv_emp_address);
@@ -50,11 +57,12 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_comm_pct = v.findViewById(R.id.tv_emp_comm_pct);
         tv_emp_salary = v.findViewById(R.id.tv_emp_salary);
         iv_back = v.findViewById(R.id.iv_back);
+        iv_emp_profile = v.findViewById(R.id.iv_emp_profile);
 
         //사번으로 조회
         tv_emp_name.setText(vo.getEmp_name());
-        tv_emp_birth.setText(vo.getBirth());
-        tv_emp_address.setText(vo.getAddress());
+        tv_emp_birth.setText(vo.getBirth().substring(0,10));
+        tv_emp_address.setText(vo.getAddress().replace("/",""));
         tv_emp_branch.setText(vo.getBranch_name());
         tv_emp_dept.setText(vo.getDepartment_name());
         tv_emp_rank.setText(vo.getRank_name());
@@ -77,6 +85,9 @@ public class EmpDetailFragment extends Fragment {
         }
         tv_emp_salary.setText(vo.getSalary() + "");
 
+        if(vo.getProfile_path()!=null){
+            Glide.with(this).load(vo.getProfile_path()).error(R.drawable.error_user_profile).into(iv_emp_profile);
+        }
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +100,9 @@ public class EmpDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+            Fragment fr = new EmpUpdateFragment();
+            fr.setArguments(bundle);
+            activity.changeFragment(fr);
             }
         });
 //퇴사

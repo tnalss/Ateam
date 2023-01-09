@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class CommonService {
 
 	
-	public String fileUplaod(String category, MultipartFile file, HttpServletRequest request) {
+	public String fileUpload(String category, MultipartFile file, HttpServletRequest request) {
 		
 		String path = "d://app"+request.getContextPath();
 		String upload = "/upload/"+category+"/"+ new SimpleDateFormat("yyyy_MM_dd").format(new Date()) ;

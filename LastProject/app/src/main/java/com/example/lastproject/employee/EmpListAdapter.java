@@ -13,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         this.activity=activity;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,28 +45,40 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         //추후 프로필도 추가해야함.
         holder.tv_emp_name.setText(list.get(position).getEmp_name());
         holder.tv_emp_branch_dept_rank.setText(list.get(position).getBranch_name()+" / "+ list.get(position).getDepartment_name()+" / " +list.get(position).getRank_name());
+        if(list.get(position).getProfile_path()!=null){
+            Glide.with(activity).load(list.get(position).getProfile_path()).error(R.drawable.error_user_profile).into(holder.iv_emp_profile);
+        }
+
+
         //현재근무상태 W0출근 W1퇴근
+
         if  (list.get(position).getAdmin().equals("X0")){
             holder.tv_nowStatus.setText("퇴사");
-        } else if(list.get(position).getAtt_code()==null){
-            holder.tv_nowStatus.setText("출근 전");
-        } else if(list.get(position).getAtt_code().equals("W0")){
-            holder.tv_nowStatus.setText("근무중");
-        } else if (list.get(position).getAtt_code().equals("W1")){
-            holder.tv_nowStatus.setText("퇴근");
+        }  else {
+            holder.tv_nowStatus.setText("재직중");
         }
+
+
         int i = position;
         holder.ll_each_emp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
+                // 오늘의 해당사원 근무상태를 긁어서 detail로 전송
+                new CommonMethod().setParams("emp_no",list.get(i).getEmp_no()).sendPost("attendString",(isResult, data) -> {
+                    if(isResult){
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("vo",list.get(i));
+                        if(data!=null){
+                            bundle.putString("status",data);
+                        }
+                        Fragment fragment = new EmpDetailFragment();
+                        fragment.setArguments(bundle);
+                        activity.changeFragment(fragment);
+                    }
+                });
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("vo",list.get(i));
-                Fragment fragment = new EmpDetailFragment();
 
-                fragment.setArguments(bundle);
-                activity.changeFragment(fragment);
             }
         });
     }

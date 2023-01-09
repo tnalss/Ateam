@@ -52,4 +52,12 @@
 
     <string name="title_activity_attend_maps">AttendMapsActivity</string>
 
+
+    <!--230106 스피너 array csm-->
+    <string-array name="spinner_item_array">
+        <item>item1</item>
+        <item>item2</item>
+        <item>item3</item>
+    </string-array>
+
 </resources>
