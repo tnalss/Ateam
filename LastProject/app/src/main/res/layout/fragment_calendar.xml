@@ -11,9 +11,10 @@
     <RelativeLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -138,13 +139,51 @@
     <!-- 여기다가 각 일정 개수를 표현 -->
 
     </LinearLayout>
-    <TextView
-        android:layout_margin="10dp"
-        style="@style/main_size"
-        android:textStyle="bold"
-        android:text="회사 일정"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_margin="10dp"
+                style="@style/main_size"
+                android:textStyle="bold"
+                android:text="회사 일정"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_add_company_schedule"
+                android:textColor="#69B4FF"
+                android:layout_margin="10dp"
+                style="@style/sub_size"
+                android:textStyle="bold"
+                android:text="일정 추가"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@drawable/item_radius2"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:id="@+id/ll_company_schedule">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_sche_content"
+                android:layout_margin="10dp"
+                android:text="예정된 회사 일정이 없습니다."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="10dp"
         android:id="@+id/recv_compSchedule"
@@ -160,27 +199,93 @@
         android:layout_height="match_parent"
         app:mcv_selectionMode="range"/>
 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
     <TextView
         android:layout_margin="10dp"
         style="@style/main_size"
         android:textStyle="bold"
         android:id="@+id/tv_dept_schedule"
         android:text="부서 일정"
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_add_department_schedule"
+            android:textColor="#69B4FF"
+            android:layout_margin="10dp"
+            style="@style/sub_size"
+            android:textStyle="bold"
+            android:text="일정 추가"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@drawable/item_radius2"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:id="@+id/ll_department_schedule">
+            <TextView
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:text="예정된 부서 일정이 없습니다."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="10dp"
         android:id="@+id/recv_deptSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
     <TextView
         android:layout_margin="10dp"
         style="@style/main_size"
         android:textStyle="bold"
         android:text="개인 일정"
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"/>
+<TextView
+    android:id="@+id/tv_add_personal_schedule"
+    android:textColor="#69B4FF"
+    android:layout_margin="10dp"
+    style="@style/sub_size"
+    android:textStyle="bold"
+    android:text="일정 추가"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:id="@+id/ll_personal_schedule">
+
+            <TextView
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:text="예정된 개인 일정이 없습니다."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="10dp"
         android:id="@+id/recv_personalSchedule"

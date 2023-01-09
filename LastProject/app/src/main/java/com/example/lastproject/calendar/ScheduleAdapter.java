@@ -1,7 +1,9 @@
 package com.example.lastproject.calendar;
 
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 
 import java.util.ArrayList;
@@ -18,9 +22,11 @@ import java.util.ArrayList;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder>{
     LayoutInflater inflater;
     ArrayList<ScheduleVO> list;
-    public ScheduleAdapter(LayoutInflater inflater, ArrayList<ScheduleVO> list) {
+    MainActivity activity;
+    public ScheduleAdapter(LayoutInflater inflater, ArrayList<ScheduleVO> list, MainActivity activity) {
         this.inflater = inflater;
         this.list = list;
+        this.activity = activity;
 
     }
 
@@ -47,9 +53,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         }
         int i = position;
         holder.ll_each_schedule.setOnClickListener(v -> {
-            ScheduleDialog dialog = new ScheduleDialog(v.getContext(),list.get(i));
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.show();
+//            ScheduleDialog dialog = new ScheduleDialog(v.getContext(),list.get(i));
+//
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            dialog.show();
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("vo",list.get(i));
+//            //이름이랑도 필요할것같은데?
+//
+//
+//            Fragment fragment = new ScheduleDetailFragment();
+//            fragment.setArguments(bundle);
+//            activity.changeFragment(new ScheduleDetailFragment());
+//
 
         });
     }

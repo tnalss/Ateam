@@ -41,4 +41,20 @@ where SCHE_type = #{emp_no} and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end
 order by SCHE_NO
 ]]>
 </select>
+
+
+<insert id="dept_insert">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
+values(#{emp_no}, (select code_category||code_num code from tbl_code where code_value=' #{department_name}')  , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+</insert>
+
+<insert id="company_insert">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
+values(#{emp_no}, 'C1' , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+</insert>
+
+<insert id="personal_insert">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
+values(#{emp_no}, #{emp_no} , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+</insert>
 </mapper>

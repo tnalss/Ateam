@@ -59,5 +59,23 @@ public class ScheController {
 		return today;
 	}
 	
+	@RequestMapping(value="/dept_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_dept_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.dept_insert",each);
+		
+	}
+	@RequestMapping(value="/company_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_company_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.company_insert",each);
+		
+	}	
+	@RequestMapping(value="/personal_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_personal_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.personal_insert",each);
+		
+	}	
 	
 }

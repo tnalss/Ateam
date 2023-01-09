@@ -4,7 +4,15 @@ import java.io.Serializable;
 
 public class ScheduleVO implements Serializable {
     private String sche_no,emp_no,sche_type,sche_title,sche_content;
-    private String sche_red,sche_start,sche_end,sche_status;
+    private String sche_red,sche_start,sche_end,sche_status,department_name;
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
 
     public String getSche_no() {
         return sche_no;
