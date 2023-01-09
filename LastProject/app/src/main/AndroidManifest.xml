@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" /> <!-- API30이상에서는 queries사용해서 권한부여를 한번 더 해야함. -->
@@ -53,7 +54,7 @@
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
+         <activity
             android:name=".notice.Update_no_Activity"
             android:exported="false">
             <meta-data
@@ -61,6 +62,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".home.MyInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+         <activity
             android:name=".notice.Update_sec_Activity"
             android:exported="false">
             <meta-data
@@ -68,12 +76,29 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".common.WebViewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
             android:name=".notice.Insert_secActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <!-- 주영: 네이버 클라이언트 ID 지정 -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="vn9fpkooyv" />
+
+        <activity
+            android:name=".attend.LocationNowActivity"
+            android:exported="false" />
+
         <activity
             android:name=".notice.ListInfo_sec_Activity"
             android:exported="false">
@@ -137,6 +162,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />

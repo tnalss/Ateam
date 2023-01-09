@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ea">
+<!-- 
+<foreach collection='list' item='l' separator=';'>
+insert into tbl_ea(ea_receiver, emp_no, ea_title, ea_content)
+values(#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content})
 
+</foreach> -->
+<!-- 전자결재 상신하기 -->
+<insert id="insert">
+DECLARE 
+v_EA_NUM NUMBER :=0;
+
+BEGIN
+v_EA_NUM := seq_ea_num.nextval;
+<foreach collection='list' item='l' open="INSERT ALL" close="select * from dual;"  separator=" ">
+
+into tbl_ea (ea_num,ea_receiver, emp_no, ea_title, ea_content)
+values (v_EA_NUM,#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content})
+
+
+</foreach>
+COMMIT;
+END;
+
+</insert>
+
+<!-- 문서 양식명 불러오기 -->
 <select id="formlist" resultType='ea.EaCodeVO'>
-select code_num, code_value, code_comments from get_code_table('P')
+select * from get_code_table('P')
 </select>
+
+<!-- 최근 작성 기안 리스트 -->
+<select id="recentlist" resultType="ea.EaVO">
+select ea_num, ea_title, ea_status, ea_date from tbl_ea
+where emp_no = #{emp_no}
+group by ea_num, ea_title, ea_status, ea_date
+order by ea_date desc
+</select>
+
+<!-- 결재자 이름으로 검색 -->
+<select id="name_search" resultType="employee.EmployeeVO">
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
+= c.code_category||c.code_num left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
+left join tbl_code c3 on o.dept_code = c3.code_category||c3.code_num 
+where emp_name = #{name} order by e.emp_no
+</select>
+
+<select id="signer" resultType="employee.EmployeeVO">
+select e.emp_no,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
+= c.code_category||c.code_num left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
+left join tbl_code c3 on o.dept_code = c3.code_category||c3.code_num 
+where emp_name in
+<foreach collection='name' index='i' item='n' open='(' close=')' separator=','>
+#{n}
+</foreach>
+</select>
+
+
 
 </mapper>

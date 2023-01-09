@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import com.example.lastproject.calendar.CalendarFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.attend.AttendFragment;
 import com.example.lastproject.databinding.ActivityMainBinding;
@@ -16,12 +17,14 @@ import com.example.lastproject.home.HomeFragment;
 import com.example.lastproject.login.LoginVO;
 import com.example.lastproject.login.LoginActivity;
 import com.example.lastproject.login.LogoutActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding;
         double waitTime=0;
-        LoginVO vo;
+        public BottomNavigationView btm_nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
+        btm_nav = findViewById(R.id.btm_nav);
         Intent intent = getIntent();
-        Common.loginInfo=  (LoginVO) intent.getSerializableExtra("loginInfo");
+        Common.loginInfo = (LoginVO) intent.getSerializableExtra("loginInfo");
 
         changeFragment(new HomeFragment());
         binding.btmNav.setOnItemSelectedListener(item -> {
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(new HomeFragment());
             }   else if ( item.getItemId() == R.id.btm_item2 ){
                 //일정
+                changeFragment(new CalendarFragment());
             }   else if ( item.getItemId() == R.id.btm_item3 ){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,new AttendFragment()).commit();
             }   else if ( item.getItemId() == R.id.btm_item4 ){
@@ -58,16 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void changeFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+        //addToBackStack(null)을 이용하면 뒤로가기 누르면 이전 프래그먼트로 이동합니다! 23/1/4 csm
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        if(System.currentTimeMillis() - waitTime >=1500 ) {
-            waitTime = System.currentTimeMillis();
-        } else {
-            super.onBackPressed(); // 액티비티 종료
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(System.currentTimeMillis() - waitTime >=1500 ) {
+//            waitTime = System.currentTimeMillis();
+//        } else {
+//            super.onBackPressed(); // 액티비티 종료
+//        }
+//    }
 
 }

@@ -43,7 +43,7 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_info_no);
         getSupportActionBar().hide();
-        ApiClient.setBASEURL("http://192.168.0.28/middle/");
+        //ApiClient.setBASEURL("http://192.168.0.28/middle/");
 
         img_no_info_close = findViewById(R.id.img_no_info_close);
         tv_no_info_title = findViewById(R.id.tv_no_info_title);

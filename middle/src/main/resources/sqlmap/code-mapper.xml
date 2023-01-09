@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code">
+
+<select id="list" resultType='ea.EaCodeVO'>
+select * from get_code_table (#{cate}) 
+</select>
+
+<select id="simpleList" resultType='common.SimpleCode'>
+select code_category||code_num code, code_value
+from tbl_code
+where code_category=#{top_code}
+order by 1 desc
+</select>
+
+<!-- 코드명으로 코드 조회 -->
+<select id="whatCode" resultType='String'>
+select code_category||code_num code
+from tbl_code
+where code_value=#{name}
+</select>
+
+<!-- 사번으로 부서코드 조회 -->
+<select id="whatDepCode" resultType="String">
+select dept_code from tbl_org where emp_no = #{emp_no}
+</select>
+</mapper>

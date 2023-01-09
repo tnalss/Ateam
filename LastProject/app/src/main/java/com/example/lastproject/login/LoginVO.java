@@ -10,6 +10,49 @@ public class LoginVO implements Serializable {
 	private int salary;
 	private double commission_pct;
 	private String birth,hire_date,end_date;
+	private String attend_date, attend_on, attend_off;
+	private String att_code;
+	private String profile_path;
+
+	public String getProfile_path() {
+		return profile_path;
+	}
+
+	public void setProfile_path(String profile_path) {
+		this.profile_path = profile_path;
+	}
+
+	public String getAttend_date() {
+		return attend_date;
+	}
+
+	public void setAttend_date(String attend_date) {
+		this.attend_date = attend_date;
+	}
+
+	public String getAttend_on() {
+		return attend_on;
+	}
+
+	public void setAttend_on(String attend_on) {
+		this.attend_on = attend_on;
+	}
+
+	public String getAttend_off() {
+		return attend_off;
+	}
+
+	public void setAttend_off(String attend_off) {
+		this.attend_off = attend_off;
+	}
+
+	public String getAtt_code() {
+		return att_code;
+	}
+
+	public void setAtt_code(String att_code) {
+		this.att_code = att_code;
+	}
 
 	public String getEmp_no() {
 		return emp_no;
