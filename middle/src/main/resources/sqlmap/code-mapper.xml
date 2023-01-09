@@ -13,6 +13,13 @@ where code_category=#{top_code}
 order by 1 desc
 </select>
 
+<!-- 코드로 코드명 조회 -->
+<select id="whatCodeName" resultType='String'>
+select code_value
+from tbl_code
+where  code_category||code_num = #{code};
+</select>
+
 <!-- 코드명으로 코드 조회 -->
 <select id="whatCode" resultType='String'>
 select code_category||code_num code

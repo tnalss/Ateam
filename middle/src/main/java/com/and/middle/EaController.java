@@ -25,14 +25,21 @@ public class EaController {
 	@Qualifier("hanul")
 	SqlSession sql;
 
+	
+	//결재함 리스트
+	@RequestMapping(value="/signboxlist.ea", produces="text/html;charset=utf-8")
+	public String ea_signbox_list(String no) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+		List<EaVO> list = sql.selectList("ea.signboxlist",no);
+		return gson.toJson(list);
+	}
+	
 	//전자결재 상신하기
 	@RequestMapping(value="/insert.ea", produces="text/html;charset=utf-8")
 	public void ea_insert(String send_list) {
 		System.out.println(new Date().getTime());
 		List<EaVO> list = new Gson().fromJson(send_list, new TypeToken<List<EaVO>>() {}.getType());
-	for(int i= 0; i< list.size(); i++) {
 	
-	}
 		sql.insert("ea.insert",list);
 	}
 	

@@ -31,11 +31,21 @@ END;
 select * from get_code_table('P')
 </select>
 
+
+<!-- 결재함 리스트 -->
+<select id="signboxlist" resultType="ea.EaVO">
+select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date, GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = #{emp_no}) ea_dummy  
+from tbl_ea
+where ea_receiver = #{emp_no}
+order by ea_date desc
+</select>
+
 <!-- 최근 작성 기안 리스트 -->
 <select id="recentlist" resultType="ea.EaVO">
-select ea_num, ea_title, ea_status, ea_date from tbl_ea
+select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date, GET_CODE_VALUE(ea_read ) ea_read 
+from tbl_ea
 where emp_no = #{emp_no}
-group by ea_num, ea_title, ea_status, ea_date
+group by ea_num, ea_title, ea_status, ea_date, ea_a_date,ea_read 
 order by ea_date desc
 </select>
 
@@ -45,9 +55,11 @@ select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value depar
 from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
 = c.code_category||c.code_num left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
 left join tbl_code c3 on o.dept_code = c3.code_category||c3.code_num 
-where emp_name = #{name} order by e.emp_no
+where emp_name like '%'||#{name}||'%'  
+order by e.emp_no
 </select>
 
+<!-- 결재자 이름 선택 후 화면 리스트 -->
 <select id="signer" resultType="employee.EmployeeVO">
 select e.emp_no,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
 from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
