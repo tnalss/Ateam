@@ -14,10 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lastproject.R;
-import com.github.florent37.materialviewpager.MaterialViewPager;
-import com.github.florent37.materialviewpager.header.HeaderDesign;
-import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
-import com.google.android.material.tabs.TabLayout;
+
 
 public class Org_MainActivity extends AppCompatActivity {
 
