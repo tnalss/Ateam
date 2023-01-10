@@ -67,13 +67,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             LoginVO vo = new Gson().fromJson(data,LoginVO.class);
             if(isResult) {
                 if (vo != null) {
-                    if(vo.getAtt_code().equals("W0")) {
+                    //if(vo.getAtt_code().equals("W0")) {
                         Common.loginInfo.setAtt_code(vo.getAtt_code());
                         Common.loginInfo.setAttend_date(vo.getAttend_date());
                         Common.loginInfo.setAttend_on(vo.getAttend_on());
                         binding.tvOntime.setText("출근 : "+Common.loginInfo.getAttend_on()+" ");
                         binding.ivOnWork.setVisibility(View.VISIBLE);
-                    }
+                    //}
                 } else {
                     binding.tvOntime.setText("");
                 }
