@@ -97,9 +97,13 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
         if(vo.getAdmin().equals("L0")){
             binding.radioEmp.setChecked(true);
-        }else{
+        }else if(vo.getAdmin().equals("L1")){
             binding.radioL1.setChecked(true);
+        } else {
+            binding.radioOut.setVisibility(View.VISIBLE);
+            binding.radioOut.setChecked(true);
         }
+
 
         binding.ivBack.setOnClickListener(v -> {
             activity.onBackPressed();
@@ -131,18 +135,24 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
             vo.setSalary(Integer.parseInt(binding.edtSalary.getText().toString()));
             if(binding.radioEmp.isChecked()){
                 vo.setAdmin("L0");
-            } else {
+            } else if(binding.radioEmp.isChecked()) {
                 vo.setAdmin("L1");
+            } else if(binding.radioEmp.isChecked()){
+                vo.setAdmin("X0");
             }
 
             new CommonMethod().setParams("param",vo).sendPostFile("update.emp",img_path,(isResult, data) -> {
                 if(isResult) {
-                    EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
-                    Bundle bundle2 = new Bundle();
-                    bundle2.putSerializable("vo",vo2);
-                    Fragment fragment = new EmpDetailFragment();
-                    fragment.setArguments(bundle2);
-                    activity.changeFragment(fragment);
+//                    EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
+//                    Bundle bundle2 = new Bundle();
+//                    bundle2.putSerializable("vo",vo2);
+//                    bundle2.putString("status",vo2.getAtt_code());
+//                    Fragment fragment = new EmpDetailFragment();
+//                    fragment.setArguments(bundle2);
+//                    activity.changeFragment(fragment);
+                    activity.getSupportFragmentManager().popBackStack();
+                    //팝백스택이 되면 update.emp 스프링도 바꿔야되는데? 버그있나 더 확인하고 바꾸기
+
                 }
             });
 
@@ -192,9 +202,6 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                 binding.spnRank.setText(vo.getRank_name());
             }
         });
-
-
-
 
 
         return binding.getRoot();

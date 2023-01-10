@@ -3,7 +3,6 @@ package com.example.lastproject.employee;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -19,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.common.Common;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,7 +45,7 @@ public class EmpDetailFragment extends Fragment {
 
 
         String status = bundle.getString("status");
-        Log.d("TAG", "onCreateView: "+status);
+
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_birth = v.findViewById(R.id.tv_emp_birth);
         tv_emp_address = v.findViewById(R.id.tv_emp_address);
@@ -96,8 +95,8 @@ public class EmpDetailFragment extends Fragment {
             Glide.with(this).load(vo.getProfile_path()).error(R.drawable.error_user_profile).into(iv_emp_profile);
         }
         iv_emp_profile.setBorderColor(Color.parseColor("#00FF00"));
-        iv_emp_profile.setBorderWidth(2);
-        if(status.equals("")) {
+        iv_emp_profile.setBorderWidth(4);
+        if(status==null||status.equals("")) {
             iv_emp_profile.setBorderColor(Color.parseColor("#FF0000"));
             iv_emp_profile.setBorderWidth(4);
         }
@@ -133,7 +132,9 @@ public class EmpDetailFragment extends Fragment {
                 new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("퇴사 시키시겠습니까?")
                         .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                             new CommonMethod().setParams("emp_no", vo.getEmp_no()).sendPost("fire.emp", (isResult, data) -> {
-
+                                if(isResult){
+                                    tv_emp_admin.setText("퇴사자");
+                                }
                             });
                         }).setNegativeButton(android.R.string.no, (dialog, which) -> {
                         }).show();
