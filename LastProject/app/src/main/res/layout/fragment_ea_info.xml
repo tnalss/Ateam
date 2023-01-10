@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
     <TextView
+        android:id="@+id/tv_info_ea_title"
         android:layout_marginBottom="15dp"
         android:textSize="18dp"
         android:text="업무협조 요청 드립니다."
@@ -48,7 +49,7 @@
                 android:text="업무협조"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <View
                 android:layout_marginLeft="15dp"
@@ -57,7 +58,7 @@
                 android:layout_height="match_parent"/>
             <TextView
                 android:layout_marginLeft="15dp"
-                android:text="기안양식"
+                android:text="문서번호"
                 android:textSize="13dp"
                 android:layout_gravity="center"
                 android:layout_width="65dp"
@@ -103,7 +104,7 @@
                 android:textSize="13dp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <View
                 android:layout_marginLeft="15dp"
@@ -159,7 +160,7 @@
                 android:text="지현우"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:layout_width="90dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
             <View
                 android:layout_marginLeft="15dp"

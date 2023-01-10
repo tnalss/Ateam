@@ -54,7 +54,7 @@ public class EaDraftAdapter extends RecyclerView.Adapter<EaDraftAdapter.ViewHold
         h.line_draft.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             Fragment f = new EaInfoFragment();
-            bundle.putSerializable("form", list.get(i));
+            bundle.putString("ea_num", list.get(i).getEa_num());
             f.setArguments(bundle);
             activity.changeFragment(f);
         });

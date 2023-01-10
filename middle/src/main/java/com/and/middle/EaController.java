@@ -25,6 +25,13 @@ public class EaController {
 	@Qualifier("hanul")
 	SqlSession sql;
 
+	//기안 상세정보 조회
+	@RequestMapping(value="/info.ea", produces="text/html;charset=utf-8")
+	public String ea_info(String ea_num) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+		List<EaVO> list = sql.selectList("ea.info", ea_num);
+		return gson.toJson(list);	
+	}
 	
 	//결재함 리스트
 	@RequestMapping(value="/signboxlist.ea", produces="text/html;charset=utf-8")

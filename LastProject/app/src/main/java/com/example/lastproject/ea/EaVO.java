@@ -1,54 +1,11 @@
 package com.example.lastproject.ea;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 
-
-public class EaVO implements Serializable {
-	private int ea_num, ea_receiver, emp_no;
-	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy;
+public class EaVO {
+	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no;
 	private Date ea_date, ea_cdate, ea_u_date, ea_r_date, ea_a_date;
-
-	public String getEa_dummy() {
-		return ea_dummy;
-	}
-
-	public void setEa_dummy(String ea_dummy) {
-		this.ea_dummy = ea_dummy;
-	}
-
-	public Date getEa_a_date() {
-		return ea_a_date;
-	}
-
-	public void setEa_a_date(Date ea_a_date) {
-		this.ea_a_date = ea_a_date;
-	}
-
-	public int getEa_num() {
-		return ea_num;
-	}
-
-	public void setEa_num(int ea_num) {
-		this.ea_num = ea_num;
-	}
-
-	public int getEa_receiver() {
-		return ea_receiver;
-	}
-
-	public void setEa_receiver(int ea_receiver) {
-		this.ea_receiver = ea_receiver;
-	}
-
-	public int getEmp_no() {
-		return emp_no;
-	}
-
-	public void setEmp_no(int emp_no) {
-		this.emp_no = emp_no;
-	}
 
 	public String getEa_title() {
 		return ea_title;
@@ -98,6 +55,38 @@ public class EaVO implements Serializable {
 		this.ea_read = ea_read;
 	}
 
+	public String getEa_dummy() {
+		return ea_dummy;
+	}
+
+	public void setEa_dummy(String ea_dummy) {
+		this.ea_dummy = ea_dummy;
+	}
+
+	public String getEa_num() {
+		return ea_num;
+	}
+
+	public void setEa_num(String ea_num) {
+		this.ea_num = ea_num;
+	}
+
+	public String getEa_receiver() {
+		return ea_receiver;
+	}
+
+	public void setEa_receiver(String ea_receiver) {
+		this.ea_receiver = ea_receiver;
+	}
+
+	public String getEmp_no() {
+		return emp_no;
+	}
+
+	public void setEmp_no(String emp_no) {
+		this.emp_no = emp_no;
+	}
+
 	public Date getEa_date() {
 		return ea_date;
 	}
@@ -128,5 +117,13 @@ public class EaVO implements Serializable {
 
 	public void setEa_r_date(Date ea_r_date) {
 		this.ea_r_date = ea_r_date;
+	}
+
+	public Date getEa_a_date() {
+		return ea_a_date;
+	}
+
+	public void setEa_a_date(Date ea_a_date) {
+		this.ea_a_date = ea_a_date;
 	}
 }

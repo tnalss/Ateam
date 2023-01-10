@@ -260,8 +260,8 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
            if(signer_list !=null) {
                for (int i = 0; i < signer_list.size(); i++) {
                    send_vo = new EaVO();
-                   send_vo.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
-                   send_vo.setEa_receiver(Integer.parseInt(signer_list.get(i).getEmp_no()));
+                   send_vo.setEmp_no(Common.loginInfo.getEmp_no());
+                   send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
                    send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
                    send_vo.setEa_content(edt_ea_content.getText().toString());
                    send_list.add(send_vo);
