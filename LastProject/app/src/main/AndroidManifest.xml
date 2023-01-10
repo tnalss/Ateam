@@ -55,6 +55,13 @@
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+         <activity
+            android:name=".notice.Update_no_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Org_Chart.Org_MainActivity"
             android:exported="false">

@@ -45,7 +45,6 @@ public class NoticeFragment extends Fragment {
                              Bundle savedInstanceState) {
       View v = inflater.inflate(R.layout.fragment_notice, container, false);
 
-
         recv_notice = v.findViewById(R.id.recv_notice);
         recv_secret = v.findViewById(R.id.recv_secret);
         tv_no_writing = v.findViewById(R.id.tv_no_writing);
@@ -84,9 +83,8 @@ public class NoticeFragment extends Fragment {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data,
                     new TypeToken<ArrayList<NoticeVO>>(){}.getType());
-            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice, NoticeFragment.this ));
+            recv_notice.setAdapter( new NoticeAdapter(inflater, getContext(), notice ));
             recv_notice.setLayoutManager(CommonMethod.getVManager(getContext()));
-
         });
     }
 

@@ -14,28 +14,28 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_sec_close"
+            android:id="@+id/img_no_up_close"
             android:layout_margin="13dp"
             android:layout_gravity="center"
             android:src="@drawable/close"
             android:layout_width="18dp"
             android:layout_height="18dp"/>
 
-    <TextView
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="60dp"
-        android:textColor="#111"
-       android:layout_gravity="center"
-        android:textSize="20dp"
-        android:text="게시판 작성"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="60dp"
+            android:textColor="#111"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="공지사항 수정"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tv_sec_ok"
+            android:id="@+id/tv_no_up_ok"
             android:textStyle="bold"
             android:textColor="#8134FF"
             android:layout_weight="1"
@@ -59,13 +59,12 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/img_sec_file"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/plus"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
-
+        <ImageView
+            android:id="@+id/img_no_up_file"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/plus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
     </LinearLayout>
     <View
@@ -74,19 +73,19 @@
         android:layout_height="1dp"/>
 
     <EditText
-        android:id="@+id/edt_sec_title"
+        android:id="@+id/edt_no_up_title"
         android:lines="1"
         android:textColor="#000"
         android:textSize="20dp"
         android:layout_margin="5dp"
-        android:hint="글제목"
+        android:hint="제목"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/edt_sec_content"
+        android:id="@+id/edt_no_up_content"
         android:gravity="start"
-        android:hint="내용 욕설 금지"
+        android:hint="내용"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

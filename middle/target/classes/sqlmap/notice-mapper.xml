@@ -8,6 +8,8 @@
 from (select * from tbl_board where board_cate = 'O0' order by 1 desc)
 where rownum <=5]]>
 </select>
+
+
 <!-- 익명게시판 목록 -->
 <select id="se_list" resultType='notice.NoticeVO'>
 select *
@@ -22,9 +24,11 @@ values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
 </insert>
 <!-- 공지사항 / 익명게시판 내용 -->
 <select id="no_info" resultType="notice.NoticeVO">
-select * 
-from tbl_board
-where board_no = #{no}
+select o.*, e.emp_name
+from tbl_board o
+left join tbl_emp e 
+on o.emp_no = e.emp_no
+where o.board_no = #{o.board_no}
 </select>
 <!-- 공지사항 / 익명게시판 글삭제 -->
 <delete id="delete">

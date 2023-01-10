@@ -23,11 +23,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     ArrayList<NoticeVO> notice;
 
 
-    public NoticeAdapter(LayoutInflater inflater, Context context, ArrayList<NoticeVO> notice,  NoticeFragment fragment) {
+    public NoticeAdapter(LayoutInflater inflater, Context context, ArrayList<NoticeVO> notice) {
         this.inflater = inflater;
         this.context = context;
         this.notice = notice;
-
     }
 
     @NonNull
@@ -43,6 +42,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
             h.tv_no_title.setText(notice.get(i).getBoard_title());
             h.tv_no_date.setText(notice.get(i).getWrite_date());
+        h.tv_no_views.setText(" 조회수 : " + notice.get(i).getBoard_hits());
         final int index = i;
             // 공지사항 내용
             h.li_no_title.setOnClickListener(new View.OnClickListener() {
@@ -53,11 +53,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
                     context.startActivity(intent);
                 }
             });
-
-
-        // 조회수
-        h.tv_no_views.setText(" 조회수 : " + notice.get(i).getBoard_hits());
-
 
     }
 

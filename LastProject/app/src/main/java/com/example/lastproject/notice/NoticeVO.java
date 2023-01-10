@@ -5,10 +5,15 @@ import java.util.Date;
 
 public class NoticeVO implements Serializable {
     private int board_no, emp_no, board_hits, img_no_img;
-    private String board_title;
-    private String board_content;
-    private String write_date;
-    private String board_cate;
+    private String board_title, board_cate, board_content, write_date, emp_name;
+
+    public String getEmp_name() {
+        return emp_name;
+    }
+
+    public void setEmp_name(String emp_name) {
+        this.emp_name = emp_name;
+    }
 
     public String getBoard_cate() {
         return board_cate;
