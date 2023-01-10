@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ea">
 
+<!-- 결재 상태 변경 -->
+<update id="status_update">
+update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
+</update>
+
 <!-- 결재 상세정보 불러오기 -->
 <select id="info" resultType="ea.EaVO">
-select m.emp_name emp_no, e.ea_num, e.ea_receiver,
+select m.emp_name emp_name, e.emp_no, e.ea_num, e.ea_receiver,
 e.ea_title, e.ea_content, GET_CODE_VALUE(e.ea_status) ea_status, e.ea_date, e.ea_cdate, GET_CODE_VALUE(o.dept_code) ea_dummy,
 e.ea_u_date, ea_a_date, ea_r_date,GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, GET_CODE_VALUE(ea_pop) ea_pop,
 GET_CODE_VALUE(ea_read) ea_read, ea_file_name, ea_file_path
@@ -40,9 +45,10 @@ select * from get_code_table('P')
 
 <!-- 결재함 리스트 -->
 <select id="signboxlist" resultType="ea.EaVO">
-select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date, GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = #{emp_no}) ea_dummy  
-from tbl_ea
-where ea_receiver = #{emp_no}
+select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
+GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
+from tbl_ea e
+where ea_receiver = #{no}
 order by ea_date desc
 </select>
 

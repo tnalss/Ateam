@@ -25,6 +25,14 @@ public class EaController {
 	@Qualifier("hanul")
 	SqlSession sql;
 
+	
+	//문서 상태(대기,회수,결재완료,반려) 변경
+	@RequestMapping(value="/update_status.ea", produces="text/html;charset=utf-8")
+	public void ea_status_update(String map) {
+		HashMap<String, Object> m = new Gson().fromJson(map, HashMap.class);
+		sql.update("ea.status_update", m);
+	}
+	
 	//기안 상세정보 조회
 	@RequestMapping(value="/info.ea", produces="text/html;charset=utf-8")
 	public String ea_info(String ea_num) {
