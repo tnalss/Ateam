@@ -17,6 +17,7 @@ import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
     Button btn_sec_delete, btn_sec_update;
     RecyclerView recv_sec_noticeInfo;
     NoticeVO notice;
+    ArrayList<ReplyVO> reply;
     int bo = 0;
 
     @Override
@@ -91,6 +93,16 @@ public void update() {
             tv_sec_info_title.setText("제목 : " +notice.getBoard_title());
             tv_sec_info_content.setText("내용 : " +notice.getBoard_content());
             tv_sec_info_date.setText("작성일 : " +notice.getWrite_date());
+
+            new CommonMethod().setParams("board_no", bo).sendPost("sec_reply.no", (isResult1, data1) -> {
+                Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                reply = gson1.fromJson(data1,
+                        new TypeToken<ArrayList<ReplyVO>>() {
+                        }.getType());
+                recv_sec_noticeInfo.setAdapter(new Reply_sec_Adapter(getLayoutInflater(), reply, ListInfo_sec_Activity.this));
+                recv_sec_noticeInfo.setLayoutManager(CommonMethod.getVManager(ListInfo_sec_Activity.this));
+
+            });
         });
     }
 }

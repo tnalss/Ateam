@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import notice.NoticeVO;
+import notice.ReplyVO;
 
 @RestController
 public class NoticeController {
@@ -20,6 +21,7 @@ public class NoticeController {
 	@Autowired
 	@Qualifier("hanul")
 	SqlSession sql;
+
 	@RequestMapping(value = "/notice.no", produces = "text/html;charset=utf-8")
 	public String notice() {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -32,7 +34,6 @@ public class NoticeController {
 	public String secret() {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		List<NoticeVO> secret = sql.selectList("no.se_list");
-
 		return gson.toJson(secret);
 	}
 
@@ -59,9 +60,7 @@ public class NoticeController {
 		NoticeVO temp_vo = new Gson().fromJson(no, NoticeVO.class);
 		int cnt = sql.update("no.update", temp_vo);
 		return new Gson().toJson(cnt).toString();
-		
 	}
-	
 
 	// 공지사항 내용
 	@RequestMapping(value = "/info.no", produces = "text/html;charset=utf-8")
@@ -87,9 +86,41 @@ public class NoticeController {
 		sql.delete("no.delete", board_no);
 	}
 
-	// 공지사항 댓글
-	@RequestMapping(value= "/reply.no", produces = "text/html;charset=utf-8")
-	public void reply(String no) {
+	// 공지사항 댓글목록
+	@RequestMapping(value = "/reply.no", produces = "text/html;charset=utf-8")
+	public String reply(int board_no) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		List<ReplyVO> reply = sql.selectList("re.reply_list", board_no);
+		return gson.toJson(reply);
+	}
+
+	// 익명게시판 댓글목록
+	@RequestMapping(value = "/sec_reply.no", produces = "text/html;charset=utf-8")
+	public String sec_reply(int board_no) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		List<ReplyVO> reply = sql.selectList("re.reply_list", board_no);
+		return gson.toJson(reply);
+	}
+	
+	// 공지사항 댓글작성
+	@RequestMapping(value="/re_insert.no", produces="text/html;charset=utf-8")
+	public void replryinsert() {
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

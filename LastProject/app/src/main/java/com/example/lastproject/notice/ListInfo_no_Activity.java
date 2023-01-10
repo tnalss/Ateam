@@ -33,7 +33,7 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     String TAG = "로그";
     ImageView img_no_info_close;
     TextView tv_no_info_title, tv_no_info_content, tv_no_info_date, tv_no_info_name, tv_no_reply;
-    Button btn_no_update, btn_no_delete;
+    Button btn_no_update, btn_no_delete, bnt_no_reply;
     RecyclerView recv_no_reply;
     EditText edt_no_reply;
     NoticeVO notice;
@@ -47,7 +47,9 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         super.onResume();
         update();
 
+
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +65,8 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         tv_no_reply = findViewById(R.id.tv_no_reply);
         btn_no_update = findViewById(R.id.btn_no_update);
         btn_no_delete = findViewById(R.id.btn_no_delete);
+        bnt_no_reply = findViewById(R.id.bnt_no_reply);
         recv_no_reply = findViewById(R.id.recv_no_reply);
-
-
 
         /* 공지사항 글수정 이동 */
         btn_no_update.setOnClickListener(new View.OnClickListener() {
@@ -81,13 +82,13 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         btn_no_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    new AlertDialog.Builder(ListInfo_no_Activity.this).setTitle("확인").setMessage("공지글을 삭제하겠습니까")
-                            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                      new CommonMethod().setParams("board_no", bo).sendPost("delete.no", (isResult, data) -> {
-                        onBackPressed();
-                });
-                            }).setNegativeButton(android.R.string.no, (dialog, which) -> {
-                            }).show();
+                new AlertDialog.Builder(ListInfo_no_Activity.this).setTitle("확인").setMessage("공지글을 삭제하겠습니까")
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            new CommonMethod().setParams("board_no", bo).sendPost("delete.no", (isResult, data) -> {
+                                onBackPressed();
+                            });
+                        }).setNegativeButton(android.R.string.no, (dialog, which) -> {
+                        }).show();
             }
         });
 
@@ -96,20 +97,14 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         tv_no_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bnt_no_reply.setVisibility(View.VISIBLE);
                 edt_no_reply.setVisibility(View.VISIBLE);
             }
         });
-        new CommonMethod().sendPost("reply.no", (isResult, data) -> {
-            recv_no_reply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    recv_no_reply.setAdapter(new ReplyAdapter(getLayoutInflater(), reply, ListInfo_no_Activity.this));
-                    recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
+        new CommonMethod().sendPost("re_insert.no", (isResult, data) -> {
+            
 
-                }
-            });
         });
-
 
 
         /* 취소 / 뒤로가기 */
@@ -120,18 +115,30 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             }
         });
     }
+
     // 공지사항 상세내용
     public void update() {
         new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("info.no", (isResult, data) -> {
+
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data, NoticeVO.class);
-            //notice.getWrite_date();
-            //notice.getBoard_no();
             bo = notice.getBoard_no();
             tv_no_info_name.setText("작성자 : " + notice.getEmp_name());
-            tv_no_info_title.setText("제목 : " +notice.getBoard_title());
-            tv_no_info_content.setText("내용 : " +notice.getBoard_content());
-            tv_no_info_date.setText("작성일 : " +notice.getWrite_date());
+            tv_no_info_title.setText("제목 : " + notice.getBoard_title());
+            tv_no_info_content.setText("내용 : " + notice.getBoard_content());
+            tv_no_info_date.setText("작성일 : " + notice.getWrite_date());
+
+            new CommonMethod().setParams("board_no", bo).sendPost("reply.no", (isResult1, data1) -> {
+                Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                reply = gson1.fromJson(data1,
+                        new TypeToken<ArrayList<ReplyVO>>() {
+                        }.getType());
+                recv_no_reply.setAdapter(new ReplyAdapter(getLayoutInflater(), reply, ListInfo_no_Activity.this));
+                recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
+
+            });
+
         });
+
     }
 }
