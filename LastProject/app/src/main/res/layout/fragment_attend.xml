@@ -11,7 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
+        <!--회사 로고& 이름-->
+            <LinearLayout
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+        <!--홈 바로가기 버튼-->
         <ImageView
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/home"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -29,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <RelativeLayout
+            android:layout_marginLeft="10dp"
             android:id="@+id/location_now"
             android:layout_width="wrap_content"
             android:layout_height="30dp">
@@ -38,7 +60,6 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/location" />
-
             <TextView
                 android:id="@+id/location_tv"
                 style="@style/small_size"
@@ -136,7 +157,6 @@
                 android:layout_height="wrap_content"
                 android:text="출근"/>
             <Button
-
                 android:id="@+id/off"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/sub_color"
@@ -174,13 +194,13 @@
                 android:text="근무현황 조회"/>
 
             <androidx.recyclerview.widget.RecyclerView
-
                 android:id="@+id/recv_attend_record"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
         </LinearLayout>
 
-        <!--QR 출퇴근
+
+       <!--QR코드 로그인
         <LinearLayout
             android:background="@drawable/item_radius2"
             android:gravity="center"
@@ -193,9 +213,8 @@
                 style="@style/sub_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="qr출퇴근"/>
-        </LinearLayout>
-        -->
+                android:text=" QR코드 바로가기 "/>
+        </LinearLayout>    -->
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

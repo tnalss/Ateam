@@ -246,10 +246,6 @@ public class AttendFragment extends Fragment {
             recv_attend_record.setAdapter(new Attend_Main_Adapter(getLayoutInflater(),list,activity));
             recv_attend_record.setLayoutManager(CommonMethod.getVManager(getContext()));
 
-
-
-
-
         });
 
     }
