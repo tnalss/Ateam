@@ -36,9 +36,6 @@ public class EaInfoFragment extends Fragment implements View.OnClickListener {
         new CommonMethod().setParams("ea_num",ea_num).sendPost("info.ea", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
             list = gson.fromJson(data,
-
-
-                    
                     new TypeToken<ArrayList<EaVO>>(){}.getType());
             binding.tvInfoForm.setText(list.get(0).getEa_title().substring(list.get(0).getEa_title().indexOf("[")+1,list.get(0).getEa_title().indexOf("]")));
             binding.tvInfoEaTitle.setText(list.get(0).getEa_title());

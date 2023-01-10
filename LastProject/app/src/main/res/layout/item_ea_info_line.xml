@@ -57,5 +57,26 @@
                 android:text="21.10.18 13:27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <Button
+                android:layout_marginRight="5dp"
+                android:text="결제"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"/>
+            <Button
+                android:text="반려"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"/>
+            </LinearLayout>
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/ea_stamp_approved"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
         </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
