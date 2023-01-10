@@ -92,18 +92,27 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             }
         });
 
-
-        /* 댓글 작성 */
+        /* 댓글작성 클릭 */
         tv_no_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 bnt_no_reply.setVisibility(View.VISIBLE);
                 edt_no_reply.setVisibility(View.VISIBLE);
             }
         });
-        new CommonMethod().sendPost("re_insert.no", (isResult, data) -> {
-            
-
+        /* 댓글 작성 */
+        bnt_no_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReplyVO re = new ReplyVO();
+                re.setBoard_no(bo);
+                re.setReply_content(edt_no_reply.getText().toString());
+                re.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
+        new CommonMethod().setParams("re", new Gson().toJson( re )).sendPost("re_insert.no", (isResult, data) -> {
+            replylist();
+        });
+            }
         });
 
 
@@ -128,17 +137,22 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             tv_no_info_content.setText("내용 : " + notice.getBoard_content());
             tv_no_info_date.setText("작성일 : " + notice.getWrite_date());
 
-            new CommonMethod().setParams("board_no", bo).sendPost("reply.no", (isResult1, data1) -> {
-                Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                reply = gson1.fromJson(data1,
-                        new TypeToken<ArrayList<ReplyVO>>() {
-                        }.getType());
-                recv_no_reply.setAdapter(new ReplyAdapter(getLayoutInflater(), reply, ListInfo_no_Activity.this));
-                recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
-
-            });
+        replylist();
 
         });
 
     }
+    public void replylist() {
+        // 댓글 목록
+        new CommonMethod().setParams("board_no", bo).sendPost("reply.no", (isResult1, data1) -> {
+            Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            reply = gson1.fromJson(data1,
+                    new TypeToken<ArrayList<ReplyVO>>() {
+                    }.getType());
+            recv_no_reply.setAdapter(new ReplyAdapter(getLayoutInflater(), reply, ListInfo_no_Activity.this));
+            recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
+
+        });
+    }
+
 }

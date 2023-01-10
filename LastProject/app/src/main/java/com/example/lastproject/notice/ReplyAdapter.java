@@ -40,6 +40,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         h.tv_no_reply_date.setText(reply.get(i).getReply_create_date().toString().substring(0,11));
     }
 
+
     @Override
     public int getItemCount() {
         return reply.size();

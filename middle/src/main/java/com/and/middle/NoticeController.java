@@ -104,8 +104,10 @@ public class NoticeController {
 	
 	// 공지사항 댓글작성
 	@RequestMapping(value="/re_insert.no", produces="text/html;charset=utf-8")
-	public void replryinsert() {
-		
+	public String replryinsert(String re) {
+		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
+		int cnt = sql.insert("re.reply_no_insert", temp_vo);
+		return new Gson().toJson(cnt).toString();
 	}
 	
 	
