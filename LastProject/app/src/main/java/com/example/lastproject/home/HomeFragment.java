@@ -54,6 +54,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu21.setClipToOutline(true);
         binding.menu22.setClipToOutline(true);
         binding.menu23.setClipToOutline(true);
+        binding.menu31.setClipToOutline(true);
+        binding.menu32.setClipToOutline(true);
+        binding.menu33.setClipToOutline(true);
         //visibility 속성을 이용해서 일반회원의 경우 메뉴 몇 개를 숨겨야함..
 
 
@@ -110,7 +113,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDateSelected(Calendar date, int position) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                Log.d("TAG", "events: "+sdf.format(date.getTime()).toString()+position);
+                Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
+
+
             }
             @Override
             public void onCalendarScroll(HorizontalCalendarView calendarView,

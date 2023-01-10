@@ -126,7 +126,9 @@
     android:id="@+id/calendarView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:textColorSelected="#000000"/>
+    app:textColorSelected="#000000"
+    app:selectorColor="@color/p_color"
+    />
     <!--메뉴 디자인 필요-->
 
     <!--메뉴 맨 윗줄-->
