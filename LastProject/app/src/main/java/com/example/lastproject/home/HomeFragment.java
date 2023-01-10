@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
+import com.example.lastproject.Org_Chart.Org_MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
@@ -54,7 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu22.setClipToOutline(true);
         binding.menu23.setClipToOutline(true);
         //visibility 속성을 이용해서 일반회원의 경우 메뉴 몇 개를 숨겨야함..
-        // ->조직도 관리 메뉴는 관리자에게만 보이게 나중에 처리할게욥 23.01.09 주영
+
 
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
@@ -128,8 +129,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu13.setOnClickListener(this);
         binding.menu21.setOnClickListener(this);
         binding.menu22.setOnClickListener(this);
-
         binding.menu23.setOnClickListener(this);
+        binding.menu31.setOnClickListener(this);
+        binding.menu32.setOnClickListener(this);
+
         binding.ivEmpDetail.setOnClickListener(this);
         binding.flOnOff.setOnClickListener(this);
         View v = binding.getRoot();
@@ -162,6 +165,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if(v.getId() == R.id.fl_on_off){
             //상단에 x나 v버튼눌렀을때 출퇴근 화면으로
             activity.btm_nav.setSelectedItemId(R.id.btm_item3);
+        } else if(v.getId() == R.id.menu3_2){
+            //조직도 눌렀을때 조직도 화면으로
+           Intent orgIntent = new Intent(activity, Org_MainActivity.class);
+           startActivity(orgIntent);
         }
     }
 

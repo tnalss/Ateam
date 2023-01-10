@@ -5,26 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Org_Chart.Org_MainActivity"
-    android:orientation="vertical"
-    >
+    android:padding="10dp"
+    android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/title_org"
+    <!--상단 메뉴-->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+        <!--회사 로고& 이름-->
+        <LinearLayout
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="조직도"
+            android:orientation="horizontal">
+                <ImageView
+                    android:src="@drawable/onlylogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    style="@style/main_size"
+                    android:text="JK COMPANY"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
 
-            android:textSize="20dp" />
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            app:tabGravity="start"
-            app:tabTextColor="#787878"
-            app:tabSelectedTextColor="#000"
-            app:tabIndicatorColor="#000"
-            app:tabIndicatorHeight="2dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </LinearLayout>
 
 
 
