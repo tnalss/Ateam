@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu22.setClipToOutline(true);
         binding.menu23.setClipToOutline(true);
         //visibility 속성을 이용해서 일반회원의 경우 메뉴 몇 개를 숨겨야함..
+        // ->조직도 관리 메뉴는 관리자에게만 보이게 나중에 처리할게욥 23.01.09 주영
 
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
@@ -127,6 +128,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu13.setOnClickListener(this);
         binding.menu21.setOnClickListener(this);
         binding.menu22.setOnClickListener(this);
+
         binding.menu23.setOnClickListener(this);
         binding.ivEmpDetail.setOnClickListener(this);
         binding.flOnOff.setOnClickListener(this);

@@ -6,7 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
 import android.content.Context;
@@ -35,10 +38,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class LocationNowActivity extends AppCompatActivity  implements OnMapReadyCallback {
-    //LocationFragment LocationFragment;
+
     MapFragment MapFragment;
     ImageView back;
-
+    private SwipeRefreshLayout s;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
@@ -48,10 +51,21 @@ public class LocationNowActivity extends AppCompatActivity  implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_now);
+       s = findViewById(R.id.swiperefreshlayout);
+        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                locationSource.getLastLocation();
+                /*swipe 업데이트 완료*/
+                s.setRefreshing(false);
+            }
+        });
+
         checkDangerousPermissions();
-        getNowLocation();
+
         getSupportActionBar().hide();
 
+        /*뒤로가기*/
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,16 +74,16 @@ public class LocationNowActivity extends AppCompatActivity  implements OnMapRead
             }
         });
 
-      //LocationFragment = new LocationFragment();
-      FragmentManager fm = getSupportFragmentManager();
-      MapFragment map_fragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+       // LocationFragment = new LocationFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment map_fragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
         if (map_fragment == null) {
             map_fragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, map_fragment).commit();
         }
         map_fragment.getMapAsync(this);
 
-      /*LocationNow activity 내부의 프레임레이아웃에 locationfragment를 붙이는 처리*/
+        /*LocationNow activity 내부의 프레임레이아웃에 locationfragment를 붙이는 처리*/
         fm.beginTransaction().replace(R.id.map_fragment,map_fragment).commit();
 
         locationSource =
@@ -130,34 +144,7 @@ public class LocationNowActivity extends AppCompatActivity  implements OnMapRead
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
     }
 
-    public void getNowLocation() {
 
-        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) == null ? lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) :  lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) ;
-
-
-        Geocoder g = new Geocoder(this);
-        List<Address> addresses = null;
-        try {
-            addresses = g.getFromLocation(location.getLatitude() ,  location.getLongitude()  , 10);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(addresses!=null){
-            if(addresses.size()==0){
-                String aa = " ";
-            }else{
-                Log.d("찾은 주소",addresses.get(0).toString());
-            //    tv_nowlocation.setText(addresses.get(0).getAddressLine(0).toString());
-            //    CommonVal.defaultAddr = addresses.get(0).getAddressLine(0).toString() ;
-                //txt.setText(address.get(0).getAddressLine(0));
-            }
-        }
-    }
 
 
 

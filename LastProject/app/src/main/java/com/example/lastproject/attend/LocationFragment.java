@@ -20,7 +20,6 @@ public class LocationFragment extends Fragment {
 
         View v =  inflater.inflate(R.layout.fragment_location, container, false);
 
-
         return v;
     }
 }
