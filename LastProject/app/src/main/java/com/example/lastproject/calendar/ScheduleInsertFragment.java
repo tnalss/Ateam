@@ -37,6 +37,7 @@ public class ScheduleInsertFragment extends Fragment implements View.OnClickList
     private ScheduleVO vo;
     private String cate;
     private Calendar cal;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +79,8 @@ public class ScheduleInsertFragment extends Fragment implements View.OnClickList
                 Toast.makeText(activity, "모든 값을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+
 //입력확인요
             vo.setEmp_no(Common.loginInfo.getEmp_no());
             vo.setDepartment_name(Common.loginInfo.getDepartment_name());
@@ -115,14 +118,12 @@ public class ScheduleInsertFragment extends Fragment implements View.OnClickList
 
 
         } else if (v.getId() == R.id.tv_sche_start){
-            DatePickerDialog dialog = new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT, listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)
-
-                    , cal.get(Calendar.DATE));
+            DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                     listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             dialog.show();
         } else if (v.getId() == R.id. tv_sche_end){
-            DatePickerDialog dialog = new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT, elistener,cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)
-
-                    , cal.get(Calendar.DATE));
+            DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                    elistener,cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             dialog.show();
         }
     }
@@ -142,6 +143,7 @@ public class ScheduleInsertFragment extends Fragment implements View.OnClickList
         public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             binding.tvScheStart.setText(year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
             vo.setSche_start(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+
         }
     };
     private DatePickerDialog.OnDateSetListener elistener = new DatePickerDialog.OnDateSetListener() {
@@ -149,6 +151,7 @@ public class ScheduleInsertFragment extends Fragment implements View.OnClickList
         public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             binding.tvScheEnd.setText(year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
             vo.setSche_end(year+"/"+(monthOfYear+1)+"/"+dayOfMonth);
+
         }
     };
 }

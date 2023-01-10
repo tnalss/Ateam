@@ -74,4 +74,10 @@ SET sche_status = #{status}
 WHERE sche_no = #{sche_no} 
 </update>
 
+<update id="modify">
+UPDATE tbl_sche
+SET sche_title = #{sche_title}, sche_content=#{sche_content}, sche_start=TO_DATE(#{sche_start},'YYYY-MM-DD HH24:MI:SS'),sche_end=TO_DATE(#{sche_end}, 'YYYY-MM-DD HH24:MI:SS')
+WHERE sche_no = #{sche_no} 
+</update>
+
 </mapper>

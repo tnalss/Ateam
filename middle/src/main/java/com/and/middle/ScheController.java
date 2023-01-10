@@ -98,5 +98,10 @@ public class ScheController {
 		map.put("status",status);
 		sql.update("sche.done",map);
 	}
-	
+	@RequestMapping("/modify.sche")
+	public void modify(String param) {
+		ScheduleVO vo = new Gson().fromJson(param, ScheduleVO.class);
+		
+		sql.update("sche.modify",vo);
+	}
 }

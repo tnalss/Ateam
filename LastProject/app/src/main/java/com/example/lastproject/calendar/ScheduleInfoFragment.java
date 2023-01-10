@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.conn.CommonMethod;
+import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentScheduleInfoBinding;
@@ -19,6 +20,8 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
 
     FragmentScheduleInfoBinding binding;
     private ScheduleVO vo;
+    private MainActivity activity;
+    private Bundle bundle;
     @Override
     public void onResume() {
         super.onResume();
@@ -32,16 +35,22 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentScheduleInfoBinding.inflate(inflater,container,false);
-        Bundle bundle = getArguments();
+        bundle = getArguments();
         vo = (ScheduleVO) bundle.getSerializable("vo");
         String emp_name = bundle.getString("emp_name");
 
+        activity = (MainActivity) getActivity();
         binding.tvEmpName.setText(emp_name);
         binding.tvScheTitle.setText(vo.getSche_title());
         binding.tvScheContent.setText(vo.getSche_content());
         binding.tvScheRed.setText(vo.getSche_red());
-        binding.tvScheStart.setText(vo.getSche_start().substring(0,11));
-        binding.tvScheEnd.setText(vo.getSche_end().substring(0,11));
+        binding.tvScheStart.setText(vo.getSche_start());
+        binding.tvScheEnd.setText(vo.getSche_end());
+
+        if(vo.getSche_start().length()>12)
+            binding.tvScheStart.setText(vo.getSche_start().substring(0,11));
+        if(vo.getSche_end().length()>12)
+            binding.tvScheEnd.setText(vo.getSche_end().substring(0,11));
 
         binding.ivBack.setOnClickListener(this);
         binding.btnDone.setOnClickListener(this);
@@ -69,13 +78,13 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
                 new CommonMethod().setParams("sche_no",vo.getSche_no()).setParams("status","L1").sendPost("statusDone.sche",(isResult, data) -> {
                     if(isResult){
                     vo.setSche_status("L1");
-                        Toast.makeText(getContext(), "완료 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "진행중으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
                 new CommonMethod().setParams("sche_no",vo.getSche_no()).setParams("status","L0").sendPost("statusDone.sche",(isResult, data) -> {
                     vo.setSche_status("L0");
-                        Toast.makeText(getContext(), "진행중으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "완료 처리되었습니다.", Toast.LENGTH_SHORT).show();
                 });
         }
 
@@ -90,7 +99,9 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
                     }).setNegativeButton(android.R.string.no, (dialog, which) -> {
                     }).show();
         } else if ( v.getId() == R.id.btn_modify){
-
+            Fragment fragment = new ScheduleModifyFragment();
+            fragment.setArguments(bundle);
+            activity.changeFragment(fragment);
 
         } else if ( v.getId() == R.id.iv_back){
             getActivity().onBackPressed();
