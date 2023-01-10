@@ -133,7 +133,9 @@
 
     <!--메뉴 맨 윗줄-->
     <LinearLayout
-        android:layout_margin="10dp"
+
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -141,6 +143,7 @@
         <RelativeLayout
             android:id="@+id/menu1_1"
             android:layout_margin="5dp"
+
             android:background="@drawable/item_radius"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -227,7 +230,8 @@
     </LinearLayout>
     <!--메뉴 두번째줄-->
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -322,7 +326,8 @@
     <!--메뉴 세번째줄-->
     <!--메뉴 두번째줄-->
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -417,7 +422,7 @@
 
     <!--(위치는 추후 지정)회사 주요 공지사항 캐러셀-->
     <RelativeLayout
-        android:layout_margin="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

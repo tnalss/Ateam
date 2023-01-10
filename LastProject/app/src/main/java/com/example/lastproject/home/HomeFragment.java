@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarView;
@@ -37,15 +41,15 @@ import com.example.lastproject.notice.NoticeFragment;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
-
-    MainActivity activity;
-
+    private MainActivity activity;
+    private int cnt=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
         binding = FragmentHomeBinding.inflate(inflater,container,false);
+        Timer timer;
 
         activity = (MainActivity) getActivity();
         binding.menu11.setClipToOutline(true);
@@ -58,6 +62,43 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu32.setClipToOutline(true);
         binding.menu33.setClipToOutline(true);
         //visibility 속성을 이용해서 일반회원의 경우 메뉴 몇 개를 숨겨야함..
+
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.drawable.banner1);
+        images.add(R.drawable.banner2);
+        images.add(R.drawable.banner3);
+        //공지첨부생기면 위에꺼랑 어댑터 소스 바꿔야됩니다!
+        binding.vpSlider.setClipToOutline(true); // 레이아웃에 낑겨줌
+        binding.vpSlider.setOffscreenPageLimit(1);
+        binding.vpSlider.setAdapter(new SlideBannerAdapter(inflater,getContext(),images));
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            @Override
+            public void run() {
+                if(cnt == images.size()) {
+                    cnt = 0;
+                }
+                binding.vpSlider.setCurrentItem(cnt++, true);
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 300, 2000);
+
+        binding.vpSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                binding.tvSliderIndicator.setText(position+1+ "/"+images.size());
+            }
+        });
+
+
 
 
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
@@ -133,6 +174,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 return true;
             }
         });
+
+
 
 
         binding.menu11.setOnClickListener(this);
