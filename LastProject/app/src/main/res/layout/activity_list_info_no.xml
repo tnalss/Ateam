@@ -138,9 +138,9 @@
         android:background="#B3B2B2" />
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#F3EEEE"
         android:gravity="center"
         android:orientation="horizontal">
         <!-- 댓글 -->
@@ -177,6 +177,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="댓글 작성"
+            android:textColor="#111"
+            android:textColorHighlight="#111"
             android:visibility="gone" />
 
         <Button
@@ -189,6 +191,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/recv_no_reply"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

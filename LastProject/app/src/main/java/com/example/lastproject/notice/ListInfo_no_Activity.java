@@ -38,16 +38,12 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     EditText edt_no_reply;
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
-
-
     int bo = 0;
 
     @Override
     public void onResume() {
         super.onResume();
         update();
-
-
     }
 
     @Override
@@ -96,7 +92,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         tv_no_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 bnt_no_reply.setVisibility(View.VISIBLE);
                 edt_no_reply.setVisibility(View.VISIBLE);
             }
@@ -109,9 +104,12 @@ public class ListInfo_no_Activity extends AppCompatActivity {
                 re.setBoard_no(bo);
                 re.setReply_content(edt_no_reply.getText().toString());
                 re.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
-        new CommonMethod().setParams("re", new Gson().toJson( re )).sendPost("re_insert.no", (isResult, data) -> {
-            replylist();
-        });
+                new CommonMethod().setParams("re", new Gson().toJson(re)).sendPost("re_insert.no", (isResult, data) -> {
+                    bnt_no_reply.setVisibility(View.GONE);
+                    edt_no_reply.setVisibility(View.GONE);
+                    edt_no_reply.setText("");
+                    replylist();
+                });
             }
         });
 
@@ -137,11 +135,12 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             tv_no_info_content.setText("내용 : " + notice.getBoard_content());
             tv_no_info_date.setText("작성일 : " + notice.getWrite_date());
 
-        replylist();
+            replylist();
 
         });
 
     }
+
     public void replylist() {
         // 댓글 목록
         new CommonMethod().setParams("board_no", bo).sendPost("reply.no", (isResult1, data1) -> {

@@ -87,6 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
+
     <LinearLayout
         android:padding="2dp"
         android:gravity="center"
@@ -114,7 +115,56 @@
         android:background="#B3B2B2"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <!-- 댓글 -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="댓글"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
 
+        <TextView
+            android:id="@+id/tv_sec_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/item_radius5"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="댓글 작성"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_sec_reply"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="댓글 작성"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_sec_reply"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#FF764F82"
+            android:text="완료"
+            android:visibility="gone" />
+    </LinearLayout>
     <!-- 목록 -->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="5dp"

@@ -46,6 +46,8 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         return reply.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_no_reply_content, tv_no_reply_date;
         public ViewHolder(@NonNull View v) {

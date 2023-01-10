@@ -17,7 +17,7 @@ import notice.ReplyVO;
 @RestController
 public class NoticeController {
 
-	// °øÁö»çÇ×
+	// ê³µì§€ì‚¬í•­
 	@Autowired
 	@Qualifier("hanul")
 	SqlSession sql;
@@ -29,7 +29,7 @@ public class NoticeController {
 		return gson.toJson(notice);
 	}
 
-	// ÀÍ¸í°Ô½ÃÆÇ
+	// ìµëª…ê²Œì‹œíŒ
 	@RequestMapping(value = "/secret.no", produces = "text/html;charset=utf-8")
 	public String secret() {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -37,7 +37,7 @@ public class NoticeController {
 		return gson.toJson(secret);
 	}
 
-	// ÀÍ¸í°Ô½ÃÆÇ ±Û¾²±â
+	// ìµëª…ê²Œì‹œíŒ ê¸€ì“°ê¸°
 	@RequestMapping(value = "/insert.no", produces = "text/html;charset=utf-8")
 	public String insert(String vo) {
 		System.out.println(vo);
@@ -46,7 +46,7 @@ public class NoticeController {
 		return new Gson().toJson(cnt).toString();
 	}
 
-	// °øÁö»çÇ× ±Û¾²±â
+	// ê³µì§€ì‚¬í•­ ê¸€ì“°ê¸°
 	@RequestMapping(value = "/noinsert.no", produces = "text/html;charset=utf-8")
 	public String noinsert(String vo) {
 		NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);
@@ -54,7 +54,7 @@ public class NoticeController {
 		return new Gson().toJson(cnt).toString();
 	}
 
-	// ÀÍ¸í°Ô½ÃÆÇ ¼öÁ¤
+	// ìµëª…ê²Œì‹œíŒ ìˆ˜ì •
 	@RequestMapping("/secupdate.no")
 	public String secupdate(String no) {
 		NoticeVO temp_vo = new Gson().fromJson(no, NoticeVO.class);
@@ -62,7 +62,7 @@ public class NoticeController {
 		return new Gson().toJson(cnt).toString();
 	}
 
-	// °øÁö»çÇ× ³»¿ë
+	// ê³µì§€ì‚¬í•­ ë‚´ìš©
 	@RequestMapping(value = "/info.no", produces = "text/html;charset=utf-8")
 	public String noticeinfo(String no) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -71,7 +71,7 @@ public class NoticeController {
 		return gson.toJson(vo);
 	}
 
-	// ÀÍ¸í°Ô½ÃÆÇ ³»¿ë
+	// ìµëª…ê²Œì‹œíŒ ë‚´ìš©
 	@RequestMapping(value = "/secinfo.no", produces = "text/html;charset=utf-8")
 	public String secretinfo(String no) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -80,13 +80,13 @@ public class NoticeController {
 		return gson.toJson(vo);
 	}
 
-	// °øÁö»çÇ×/ÀÍ¸í°Ô½ÃÆÇ ±Û»èÁ¦
+	// ê³µì§€ì‚¬í•­/ìµëª…ê²Œì‹œíŒ ê¸€ì‚­ì œ
 	@RequestMapping(value = "/delete.no", produces = "text/html;charset=utf-8")
 	public void nodelete(int board_no) {
 		sql.delete("no.delete", board_no);
 	}
 
-	// °øÁö»çÇ× ´ñ±Û¸ñ·Ï
+	// ê³µì§€ì‚¬í•­ ëŒ“ê¸€ëª©ë¡
 	@RequestMapping(value = "/reply.no", produces = "text/html;charset=utf-8")
 	public String reply(int board_no) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -94,7 +94,7 @@ public class NoticeController {
 		return gson.toJson(reply);
 	}
 
-	// ÀÍ¸í°Ô½ÃÆÇ ´ñ±Û¸ñ·Ï
+	// ìµëª…ê²Œì‹œíŒ ëŒ“ê¸€ëª©ë¡
 	@RequestMapping(value = "/sec_reply.no", produces = "text/html;charset=utf-8")
 	public String sec_reply(int board_no) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -102,7 +102,7 @@ public class NoticeController {
 		return gson.toJson(reply);
 	}
 	
-	// °øÁö»çÇ× ´ñ±ÛÀÛ¼º
+	// ê³µì§€ì‚¬í•­ ëŒ“ê¸€ì‘ì„±
 	@RequestMapping(value="/re_insert.no", produces="text/html;charset=utf-8")
 	public String replryinsert(String re) {
 		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
