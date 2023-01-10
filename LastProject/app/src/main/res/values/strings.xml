@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">LastProject</string>
-    <string name="login_text">Login to access \nbookmarks and idontknow what i typed.</string>
+    <string name="app_name">JK Company</string>
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

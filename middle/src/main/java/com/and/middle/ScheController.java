@@ -2,6 +2,7 @@ package com.and.middle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -59,5 +60,48 @@ public class ScheController {
 		return today;
 	}
 	
+	@RequestMapping(value="/dept_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_dept_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.dept_insert",each);
+		
+	}
+	@RequestMapping(value="/company_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_company_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.company_insert",each);
+		
+	}	
+	@RequestMapping(value="/personal_insert.sche", produces="text/html;charset=utf-8")
+	public void insert_personal_sche(String vo) {
+		ScheduleVO each= new Gson().fromJson(vo, ScheduleVO.class);
+		sql.insert("sche.personal_insert",each);
+		
+	}	
 	
+	@RequestMapping(value="/findName.sche", produces="text/html;charset=utf-8")
+	public String find_name_sche(String sche_no) {
+		
+		return sql.selectOne("sche.findName",sche_no);
+		
+	}	
+	
+	@RequestMapping("/delete.sche")
+	public void delete_sche(String sche_no) {
+		sql.delete("sche.delete",sche_no);
+	}	
+	
+	@RequestMapping("/statusDone.sche")
+	public void status_done(String sche_no,String status) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("sche_no", sche_no);
+		map.put("status",status);
+		sql.update("sche.done",map);
+	}
+	@RequestMapping("/modify.sche")
+	public void modify(String param) {
+		ScheduleVO vo = new Gson().fromJson(param, ScheduleVO.class);
+		
+		sql.update("sche.modify",vo);
+	}
 }

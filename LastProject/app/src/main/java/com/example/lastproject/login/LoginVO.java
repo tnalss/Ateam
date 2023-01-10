@@ -22,6 +22,19 @@ public class LoginVO implements Serializable {
 		this.profile_path = profile_path;
 	}
 
+	public String getAtt_state() {
+		return att_state;
+	}
+
+	public void setAtt_state(String att_state) {
+		this.att_state = att_state;
+	}
+
+	private String att_state;
+
+
+
+
 	public String getAttend_date() {
 		return attend_date;
 	}

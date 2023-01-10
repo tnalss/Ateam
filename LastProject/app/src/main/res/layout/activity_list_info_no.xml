@@ -4,130 +4,196 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notice.ListInfo_no_Activity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".notice.ListInfo_no_Activity">
 
     <LinearLayout
 
-        android:padding="5dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/img_no_info_close"
-            android:layout_margin="13dp"
-            android:layout_gravity="center"
-            android:src="@drawable/back"
             android:layout_width="21dp"
-            android:layout_height="21dp"/>
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_margin="13dp"
+            android:src="@drawable/back" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:text="공지사항"
             android:textColor="#000"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:text="공지사항"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
 
 
     </LinearLayout>
 
     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_marginTop="-5dp"
-        android:background="#B3B2B2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:background="#B3B2B2" />
 
-    <!-- 작성일 -->
-    <TextView
-        android:id="@+id/tv_no_info_date"
-        android:padding="2dp"
-        android:background="@drawable/item_radius5"
-        android:layout_margin="5dp"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:gravity="right"
-        android:layout_gravity="center"
-        android:text="2023/01/06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <View
-        android:background="#B3B2B2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--작성자 -->
+        <TextView
+            android:id="@+id/tv_no_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/item_radius"
+            android:padding="2dp"
+            android:text="작성자 :"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+        <!-- 작성일 -->
+        <TextView
+            android:id="@+id/tv_no_info_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/item_radius5"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="2023/01/06"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#B3B2B2" />
 
     <!-- 제목 -->
     <TextView
         android:id="@+id/tv_no_info_title"
-        android:textColor="#000"
-        android:layout_margin="10dp"
-        android:textSize="18dp"
-        android:text="제목"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="제목"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
     <View
-        android:background="#B3B2B2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#B3B2B2" />
 
     <!-- 내용 -->
     <TextView
-        android:textColor="#111"
         android:id="@+id/tv_no_info_content"
-        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="내용"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textColor="#111"
+        android:textSize="16dp" />
+
     <View
-        android:background="#B3B2B2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#B3B2B2" />
 
     <LinearLayout
-        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:padding="2dp">
 
         <Button
             android:id="@+id/btn_no_update"
-            android:backgroundTint="@color/main_color"
-            android:layout_margin="5dp"
-            android:text="수정"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/main_color"
+            android:text="수정" />
 
         <Button
             android:id="@+id/btn_no_delete"
-            android:backgroundTint="#F83D3D"
-            android:layout_margin="5dp"
-            android:text="삭제"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="#F83D3D"
+            android:text="삭제" />
     </LinearLayout>
-    <View
-        android:background="#B3B2B2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
 
-    <!-- 목록 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#B3B2B2" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <!-- 댓글 -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="댓글"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_no_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/item_radius5"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="댓글 작성"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_no_reply"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="댓글 작성"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/bnt_no_reply"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#FF764F82"
+            android:text="완료"
+            android:visibility="gone" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recv_no_reply"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:id="@+id/recv_no_noticeInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View
-        android:background="#B3B2B2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
+        android:padding="3dp" />
 
 
 </LinearLayout>
