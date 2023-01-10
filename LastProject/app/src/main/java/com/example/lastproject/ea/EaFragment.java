@@ -26,10 +26,10 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 
-public class EaFragment extends Fragment {
+public class EaFragment extends Fragment implements View.OnClickListener {
     RecyclerView recv_recent_ea;
     TabLayout tab_layout;
-    CardView cardv_write;
+    CardView cardv_write,cardv_draft,cardv_sign,cardv_return;
     MainActivity activity;
     TextView tv_emp_name;
     ArrayList<EaVO> list;
@@ -41,15 +41,18 @@ public class EaFragment extends Fragment {
         recv_recent_ea = v.findViewById(R.id.recv_recent_ea);
         tab_layout = v.findViewById(R.id.tab_layout);
         cardv_write = v.findViewById(R.id.cardv_write);
+        cardv_draft = v.findViewById(R.id.cardv_draft);
+        cardv_sign = v.findViewById(R.id.cardv_sign);
+        cardv_return = v.findViewById(R.id.cardv_return);
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_name.setText(Common.loginInfo.getEmp_name() +"("+ Common.loginInfo.getRank_name() +")"+"님");
         activity = (MainActivity) getActivity();
-        cardv_write.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.changeFragment(new FormListFragment());
-            }
-        });
+
+        cardv_write.setOnClickListener(this);
+        cardv_draft.setOnClickListener(this);
+        cardv_sign.setOnClickListener(this);
+        cardv_return.setOnClickListener(this);
+
         tab_layout.addTab(tab_layout.newTab().setText("전체"));
         tab_layout.addTab(tab_layout.newTab().setText("결재완료"));
         tab_layout.addTab(tab_layout.newTab().setText("결재전"));
@@ -98,5 +101,18 @@ public class EaFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.cardv_write){
+                activity.changeFragment(new FormListFragment());
+        }else if(v.getId() == R.id.cardv_draft){
+                activity.changeFragment(new EaDraftBoxFragment());
+        }else if(v.getId() == R.id.cardv_sign){
+                activity.changeFragment(new EaSignBoxFragment());
+        }else if(v.getId() == R.id.cardv_return){
+
+        }
     }
 }

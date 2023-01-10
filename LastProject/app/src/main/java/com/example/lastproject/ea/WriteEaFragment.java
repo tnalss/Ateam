@@ -257,28 +257,34 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
             my_alert.setTitle("알림");
             my_alert.setMessage("상신하시겠습니까?");
             send_list = new ArrayList<>();
+           if(signer_list !=null) {
+               for (int i = 0; i < signer_list.size(); i++) {
+                   send_vo = new EaVO();
+                   send_vo.setEmp_no(Common.loginInfo.getEmp_no());
+                   send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
+                   send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
+                   send_vo.setEa_content(edt_ea_content.getText().toString());
+                   send_list.add(send_vo);
+               }
 
-            for(int i=0;i<signer_list.size();i++){
-                send_vo = new EaVO();
-                send_vo.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
-                send_vo.setEa_receiver(Integer.parseInt(signer_list.get(i).getEmp_no()));
-                send_vo.setEa_title("["+vo.getCode_value()+"]" + edt_ea_title.getText().toString());
-                send_vo.setEa_content(edt_ea_content.getText().toString());
-                send_list.add(send_vo);
-            }
-            Log.d("로그", "onClick: "+ send_list.size());
-            //OK 버튼 눌렀을 때
-            my_alert.setPositiveButton("상신하기", (dialog, which) -> {
-                Toast.makeText(getContext(), "상신완료", Toast.LENGTH_SHORT).show();
-                new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
-                    Log.d("로그", "onClick: " + data);
-                    activity.changeFragment(new EaFragment());
-                });
-            });
-            my_alert.setNegativeButton("취소하기",(dialog, which) -> {
-                Toast.makeText(getContext(), "돼지", Toast.LENGTH_SHORT).show();
-            });
-            my_alert.show();
+               Log.d("로그", "onClick: "+ send_list.size());
+                   //OK 버튼 눌렀을 때
+                   my_alert.setPositiveButton("상신하기", (dialog, which) -> {
+                       Toast.makeText(getContext(), "상신완료", Toast.LENGTH_SHORT).show();
+                       new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
+                           Log.d("로그", "onClick: " + data);
+                           activity.changeFragment(new EaFragment());
+                       });
+                   });
+               my_alert.setNegativeButton("취소하기",(dialog, which) -> {
+                   Toast.makeText(getContext(), "취소 되었습니다.", Toast.LENGTH_SHORT).show();
+               });
+               my_alert.show();
+           }else{
+               Toast.makeText(activity, "결재자를 추가해주세요.", Toast.LENGTH_SHORT).show();
+           }
+           
+
         }
     }
     //chip 만들기

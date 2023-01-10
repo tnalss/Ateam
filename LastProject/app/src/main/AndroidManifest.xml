@@ -166,7 +166,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
+        </activity>
+        <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />

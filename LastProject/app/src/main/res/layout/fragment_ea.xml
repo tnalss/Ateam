@@ -45,7 +45,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardv_send"
+            android:id="@+id/cardv_draft"
             android:layout_weight="1"
             android:layout_margin="10dp"
             app:cardCornerRadius="20dp"
@@ -56,12 +56,12 @@
                 android:layout_gravity="center"
                 android:textColor="@color/white"
                 style="@style/main_size"
-                android:text="상신한 문서"
+                android:text="기안함"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardv_before"
+            android:id="@+id/cardv_sign"
             android:layout_weight="1"
             android:layout_margin="10dp"
             app:cardCornerRadius="20dp"
@@ -72,7 +72,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/white"
                 style="@style/main_size"
-                android:text="결재전 문서"
+                android:text="결재함"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </androidx.cardview.widget.CardView>
