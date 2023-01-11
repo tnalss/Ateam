@@ -4,8 +4,16 @@ import java.sql.Date;
 
 
 public class EaVO {
-	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no;
+	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no, emp_name;
 	private Date ea_date, ea_cdate, ea_u_date, ea_r_date, ea_a_date;
+
+	public String getEmp_name() {
+		return emp_name;
+	}
+
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
+	}
 
 	public String getEa_title() {
 		return ea_title;

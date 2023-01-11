@@ -312,6 +312,7 @@
                     android:layout_height="match_parent"/>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardv_retry"
                 android:layout_marginLeft="50dp"
                 app:strokeColor="#DDD9D9"
                 app:strokeWidth="2dp"

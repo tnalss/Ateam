@@ -55,6 +55,7 @@ public class EaDraftAdapter extends RecyclerView.Adapter<EaDraftAdapter.ViewHold
             Bundle bundle = new Bundle();
             Fragment f = new EaInfoFragment();
             bundle.putString("ea_num", list.get(i).getEa_num());
+            bundle.putInt("no",0);
             f.setArguments(bundle);
             activity.changeFragment(f);
         });
