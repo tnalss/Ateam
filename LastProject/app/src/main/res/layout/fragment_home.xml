@@ -5,47 +5,55 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeFragment"
+    android:padding="10dp"
     android:orientation="vertical">
 
-    <!--최상단 로고, 알림,설정, 버거메뉴 -->
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/onlylogo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-        <TextView
-            android:layout_gravity="center"
-            style="@style/main_size"
-            android:text="@string/app_name"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:id="@+id/iv_noti"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_noti"
-            android:layout_width="25dp"
-            android:layout_height="25dp"/>
+        <!--상단메뉴바-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+            <!--회사 로고& 이름-->
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:src="@drawable/onlylogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    style="@style/main_size"
+                    android:text="JK COMPANY"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_burger"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_burger2"
-            android:layout_gravity="center"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            <ImageView
+                android:id="@+id/iv_noti"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/iv_burger"
+                android:src="@drawable/ic_alert_c" />
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_burger"
+                android:src="@drawable/ic_menu_c"
+                android:layout_width="25dp"
+                android:layout_height="25dp"   />
+        </RelativeLayout>
 
-    </LinearLayout>
     <!--상단 사용자 정보-->
     <LinearLayout
         android:background="@drawable/item_radius2"
-        android:layout_margin="10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -55,7 +63,6 @@
              android:layout_width="80dp"
              android:layout_height="80dp"
              android:src="@drawable/user_profile"/>
-
         <RelativeLayout
             android:layout_gravity="center"
             android:id="@+id/r1"
@@ -135,8 +142,6 @@
     <!--메뉴 맨 윗줄-->
     <LinearLayout
 
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -231,8 +236,6 @@
     </LinearLayout>
     <!--메뉴 두번째줄-->
     <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -325,11 +328,8 @@
 
     </LinearLayout>
     <!--메뉴 세번째줄-->
-    <!--메뉴 두번째줄-->
     <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
+               android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -423,7 +423,6 @@
 
     <!--(위치는 추후 지정)회사 주요 공지사항 캐러셀-->
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

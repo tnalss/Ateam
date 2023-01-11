@@ -4,8 +4,8 @@
 
 <!--로그인한 사원의 출근처리(지각이면 지각으로 )  -->
 <insert id = "attend_on">
-INSERT INTO tbl_attend (attend_date,emp_no,attend_on,att_code)
-VALUES (to_char(sysdate,'yyyy/mm/dd'),#{emp_no},to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'),'W0')
+INSERT INTO tbl_attend (emp_no,attend_on,att_code)
+VALUES (#{emp_no},to_char(current_date,'yyyy/mm/dd hh24:mm'),'W0')
 </insert>
 
 
@@ -13,15 +13,15 @@ VALUES (to_char(sysdate,'yyyy/mm/dd'),#{emp_no},to_char(sysdate,'yyyy/mm/dd hh24
 <select id = "emp_today" resultType="Attend.AttendVO">
 select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a
-where to_char(attend_date, 'yyyy/mm/dd') = to_char(sysdate, 'yyyy/mm/dd') and emp_no =  #{emp_no}   
+where to_char(attend_date, 'yyyy/mm/dd') = to_char(current_date, 'yyyy/mm/dd') and emp_no =  #{emp_no}   
 </select>
 
 
 <!--로그인한 사원의 퇴근 처리(지각이어도 퇴근으로 찍힘) -->
 <update id ="attend_off">
 UPDATE tbl_attend
-SET attend_off = to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') , att_code='W1'
-WHERE emp_no=#{emp_no} and to_char(attend_date, 'yyyy/mm/dd') =  to_char(sysdate, 'yyyy/mm/dd')
+SET attend_off = to_char(current_date,'yyyy/mm/dd hh24:mm') , att_code='W1'
+WHERE emp_no=#{emp_no} and to_char(attend_date, 'yyyy/mm/dd') =  to_char(current_date, 'yyyy/mm/dd')
 </update>
 
 
@@ -30,7 +30,7 @@ WHERE emp_no=#{emp_no} and to_char(attend_date, 'yyyy/mm/dd') =  to_char(sysdate
 select a.*,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a inner join tbl_emp e
 on a.emp_no = e.emp_no
-<![CDATA[WHERE to_char(attend_date, 'yyyy/mm/dd') <= to_char(sysdate, 'yyyy/mm/dd') ]]>
+<![CDATA[WHERE to_char(attend_date, 'yyyy/mm/dd') <= to_char(current_date, 'yyyy/mm/dd') ]]>
 and a.emp_no = #{emp_no}
 order by attend_date desc
 </select>
@@ -49,6 +49,8 @@ and a.emp_no = #{emp_no}
 order by attend_date desc
 
 </select>
+
+
 
 
 	

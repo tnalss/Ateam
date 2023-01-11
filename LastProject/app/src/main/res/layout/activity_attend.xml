@@ -20,7 +20,7 @@
             android:id="@+id/back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
     </RelativeLayout>
 
         <LinearLayout
@@ -40,17 +40,9 @@
                 android:layout_height="wrap_content"
                 android:text="현재 근무 상황"/>
 
-            <!--달력-->
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/calendarview_monthly"
-                app:mcv_calendarMode="month"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:mcv_firstDayOfWeek="monday"   />
 
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,18 +57,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="근태신청관리" />
+                android:layout_marginBottom="10dp"
+                android:text="휴가 및 연차 신청관리" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="근태 신청 현황"
-                    android:textStyle="bold" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -149,7 +132,6 @@
                         android:textColor="@color/red" />
                 </LinearLayout>
             </RelativeLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recv_attend_apply"
                 android:layout_width="match_parent"
