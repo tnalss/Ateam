@@ -27,7 +27,7 @@ public class EmployeeController {
 	private CommonService common;
 	
 	@RequestMapping(value= "/list.emp" , produces="text/html;charset=utf-8")
-	public String attendOrNot() {
+	public String emp_list() {
 		List<EmployeeVO> list = sql.selectList("emp.list");
 		return new Gson().toJson(list).toString();
 	}

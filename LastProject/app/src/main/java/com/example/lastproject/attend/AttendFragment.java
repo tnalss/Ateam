@@ -199,6 +199,7 @@ public class AttendFragment extends Fragment {
                                 now.setText(vo.getAtt_state());
                         });
                         Toast.makeText(getActivity(), "출근 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                        selectList(); //1/11 csm 출근후 바로 기록찍히게 처리
                     }
                 })
                 .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -223,6 +224,7 @@ public class AttendFragment extends Fragment {
                         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_off.at",(isResult, data) -> {
                             AttendVO vo =new Gson().fromJson(data,AttendVO.class);
                             now.setText(vo.getAtt_state());
+                            selectList();//1/11 csm 퇴근후 바로 기록찍히게 처리
                         });
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
                     }
