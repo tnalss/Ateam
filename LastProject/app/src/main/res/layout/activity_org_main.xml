@@ -8,38 +8,57 @@
     android:padding="10dp"
     android:orientation="vertical">
 
-    <!--상단 메뉴-->
+    <!--상단메뉴바-->
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
         <!--회사 로고& 이름-->
         <LinearLayout
+            android:id="@+id/l1"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-                <ImageView
-                    android:src="@drawable/onlylogo"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"/>
-                <TextView
-                    android:layout_gravity="center"
-                    style="@style/main_size"
-                    android:text="JK COMPANY"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"/>
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_burger"
+            android:src="@drawable/ic_menu_c"
+            android:layout_width="25dp"
+            android:layout_height="25dp"   />
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/layout_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:tabGravity="center"
+        app:tabMode="scrollable"
+        app:tabTextColor="#000000"
+        app:tabSelectedTextColor="#FF0000"
+        app:tabIndicatorColor="#00FF00" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
-    </LinearLayout>
+
 
 
 

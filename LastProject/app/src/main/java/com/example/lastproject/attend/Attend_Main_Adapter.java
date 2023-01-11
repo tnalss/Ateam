@@ -32,7 +32,6 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.item_recv_attend_record,parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
-
         return viewHolder;
     }
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org">
+
+<!--전체 사원의 프로필사진,이름, 직급, 지점명, 부서명 조회  -->
+<select id ="org_all" resultType="Org.OrgVO">
+select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num
+order by  e.emp_name asc
+</select>
+
+<!-- 지점별 -->
+<select id ="org_branch" resultType="Org.OrgVO">
+select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num
+order by c2.code_value, e.emp_name,c.code_num
+</select>
+
+<!--직급별 가나다 순으로 조회 & 이름도 가나다 순으로   -->
+<select id = "org_rank" resultType="Org.OrgVO">
+select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num
+order by  c.code_num, e.emp_name
+</select>
+
+<!--부서별 가나다 순으로 조회 & 직급 높-낮 & 이름 가나다 조회  -->
+<select id = "org_dept"  resultType="Org.OrgVO">
+select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num
+order by  c3.code_value,c.code_num, e.emp_name
+</select>
+
+</mapper>

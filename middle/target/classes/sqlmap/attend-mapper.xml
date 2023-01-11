@@ -5,7 +5,7 @@
 <!--로그인한 사원의 출근처리(지각이면 지각으로 )  -->
 <insert id = "attend_on">
 INSERT INTO tbl_attend (attend_date,emp_no,attend_on,att_code)
-VALUES (to_char(sysdate,'yyyy/mm/dd'),#{emp_no},to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'),'W0')
+VALUES (to_char(sysdate,'yyyy/mm/dd'),#{emp_no},to_char(sysdate,'yyyy/mm/dd hh24:mm'),'W0')
 </insert>
 
 
@@ -20,7 +20,7 @@ where to_char(attend_date, 'yyyy/mm/dd') = to_char(sysdate, 'yyyy/mm/dd') and em
 <!--로그인한 사원의 퇴근 처리(지각이어도 퇴근으로 찍힘) -->
 <update id ="attend_off">
 UPDATE tbl_attend
-SET attend_off = to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') , att_code='W1'
+SET attend_off = to_char(sysdate,'yyyy/mm/dd hh24:mm') , att_code='W1'
 WHERE emp_no=#{emp_no} and to_char(attend_date, 'yyyy/mm/dd') =  to_char(sysdate, 'yyyy/mm/dd')
 </update>
 
@@ -34,6 +34,8 @@ on a.emp_no = e.emp_no
 and a.emp_no = #{emp_no}
 order by attend_date desc
 </select>
+
+
 
 
 

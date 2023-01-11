@@ -20,7 +20,7 @@
             android:id="@+id/back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
     </RelativeLayout>
 
         <LinearLayout
@@ -46,11 +46,9 @@
                 app:mcv_calendarMode="month"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:mcv_firstDayOfWeek="monday"   />
-
+                app:mcv_firstDayOfWeek="monday" />
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

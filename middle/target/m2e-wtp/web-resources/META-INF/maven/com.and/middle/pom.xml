@@ -199,6 +199,24 @@
           <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
           <version>1.16</version>
       </dependency>  
+      <dependency>
+    <groupId>com.oracle.database.security</groupId>
+    <artifactId>oraclepki</artifactId>
+    <version>19.13.0.0</version>
+	</dependency>
+      <!-- https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core -->
+<dependency>
+    <groupId>com.oracle.database.security</groupId>
+    <artifactId>osdt_core</artifactId>
+    <version>19.13.0.0</version>
+</dependency>
+   <!-- https://mvnrepository.com/artifact/com.oracle.database.security/osdt_cert -->
+<dependency>
+    <groupId>com.oracle.database.security</groupId>
+    <artifactId>osdt_cert</artifactId>
+    <version>19.7.0.0</version>
+</dependency>
+      
       
 	</dependencies>
     <build>

@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
+import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,6 +38,8 @@ public class AttendActivity extends AppCompatActivity {
 
 
         calendarView = findViewById(R.id.calendarview_monthly);
+        calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
+        calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
 
 
 
@@ -45,7 +49,6 @@ public class AttendActivity extends AppCompatActivity {
                 finish();
             });
         getSupportActionBar().hide();
-
 
 
         /*리사이클러뷰_로그인한 사원의 연차.휴가 신청 현황 */
