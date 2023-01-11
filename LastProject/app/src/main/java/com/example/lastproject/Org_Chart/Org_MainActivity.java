@@ -1,5 +1,6 @@
 package com.example.lastproject.Org_Chart;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -31,7 +32,9 @@ public class Org_MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
     private ContentsPagerAdapter mContentPagerAdapter;
-    LinearLayout l1;
+
+    ImageView back;
+
 
 
 
@@ -41,15 +44,14 @@ public class Org_MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_org_main);
         getSupportActionBar().hide();
 
-
-        l1 = findViewById(R.id.l1);
-        l1.setOnClickListener(new View.OnClickListener() {
+        back = findViewById(R.id.ic_back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            finish();
+
+                finish();
             }
         });
-
 
 
 

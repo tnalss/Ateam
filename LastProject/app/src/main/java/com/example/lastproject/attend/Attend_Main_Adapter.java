@@ -39,9 +39,14 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
 
-        h.date.setText(list.get(i).getAttend_date());
-        h.on.setText(list.get(i).getAttend_on());
-        h.off.setText(list.get(i).getAttend_off());
+        h.date.setText(list.get(i).getAttend_date().substring(0,10));
+        h.on.setText(list.get(i).getAttend_on().substring(0,16));
+        if(list.get(i).getAttend_off()!=null) {
+            h.off.setText(list.get(i).getAttend_off().substring(0, 16));
+        } else {
+            h.off.setText("");
+            h.tv_off.setVisibility(View.GONE);
+        }
         h.now.setText(list.get(i).getAtt_state());
 
 
@@ -66,7 +71,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
 
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  date, on,off, now;
+        TextView  date, on,off, now,tv_off;
 
         public ViewHolder(@NonNull View v) {
             super(v);
@@ -74,6 +79,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
+            tv_off=v.findViewById(R.id.tv_off);
 
         }
     }

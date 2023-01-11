@@ -33,6 +33,13 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <ImageView
+            android:layout_toLeftOf="@+id/iv_burger"
+            android:layout_centerVertical="true"
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back_c"
+            android:layout_width="25dp"
+            android:layout_height="25dp"   />
+        <ImageView
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -49,13 +56,15 @@
         app:tabGravity="center"
         app:tabMode="scrollable"
         app:tabTextColor="#000000"
-        app:tabSelectedTextColor="#FF0000"
-        app:tabIndicatorColor="#00FF00" />
+        app:tabSelectedTextColor="@color/black"
+        app:tabIndicatorColor="@color/main_color" />
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
 
 
 

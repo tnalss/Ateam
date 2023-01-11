@@ -113,6 +113,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
 
 
-    //tablayout..?
+    //230110 주영 tablayout..?
     implementation 'com.google.android.material:material:1.2.0'
+
+    //230111 주영 qr스캐너
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
 }

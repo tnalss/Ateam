@@ -37,10 +37,6 @@ public class AttendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_attend);
 
 
-        calendarView = findViewById(R.id.calendarview_monthly);
-        calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
-        calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
-
 
 
         /*뒤로가기*/

@@ -185,8 +185,8 @@ public class AttendFragment extends Fragment {
                     /*출근처리*/
                         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_on.at",(isResult, data) -> {
                               AttendVO vo =new Gson().fromJson(data,AttendVO.class);
-                                now.setText(vo.getAtt_state());
                                 selectList();
+                                now.setText(vo.getAtt_state());
                         });
                         Toast.makeText(getActivity(), "출근 처리되었습니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -212,11 +212,10 @@ public class AttendFragment extends Fragment {
                         /*퇴근  처리*/
                         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_off.at",(isResult, data) -> {
                             AttendVO vo =new Gson().fromJson(data,AttendVO.class);
-                            now.setText(vo.getAtt_state());
                             selectList();
+                            now.setText(vo.getAtt_state());
+
                         });
-
-
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -233,7 +232,7 @@ public class AttendFragment extends Fragment {
     /*출퇴근 기록 가져오기 */
     public void selectList(){
         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("list_emp_since.at",(isResult, data) -> {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
             list = gson.fromJson(data,
                     new TypeToken<ArrayList<AttendVO>>(){}.getType());
             recv_attend_record.setAdapter(new Attend_Main_Adapter(getLayoutInflater(),list,activity));
