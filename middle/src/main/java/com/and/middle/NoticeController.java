@@ -108,10 +108,20 @@ public class NoticeController {
 		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
 		int cnt = sql.insert("re.reply_no_insert", temp_vo);
 		return new Gson().toJson(cnt).toString();
+	}	
+	// 공지사항 / 익명게시판 댓글 삭제
+	@RequestMapping(value="/reply_delete.no", produces="text/html;charset=utf-8")
+	public void reply_delete(int reply_no) {
+		sql.delete("re.reply_delete", reply_no);		
+	}		
+	// 공지사항 수정
+	@RequestMapping(value="/reply_update.no", produces="text/html;charset=utf-8")
+	public String reply_update(String re) {
+		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
+		int cnt = sql.update("re.reply_update", temp_vo);
+		System.out.println("dd" + re);
+		return new Gson().toJson(cnt).toString();
 	}
-	
-	
-	
 	
 	
 	

@@ -50,6 +50,7 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         tv_sec_info_title = findViewById(R.id.tv_sec_info_title);
         tv_sec_info_content = findViewById(R.id.tv_sec_info_content);
         tv_sec_info_date = findViewById(R.id.tv_sec_info_date);
+        tv_sec_info_date = findViewById(R.id.tv_sec_info_date);
         tv_sec_reply = findViewById(R.id.tv_sec_reply);
         edt_sec_reply = findViewById(R.id.edt_sec_reply);
         btn_sec_reply = findViewById(R.id.btn_sec_reply);
@@ -106,8 +107,6 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
             }
         });
 
-
-
         /* 취소 / 뒤로가기 */
         img_sec_info_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +128,6 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
             tv_sec_info_title.setText("제목 : " + notice.getBoard_title());
             tv_sec_info_content.setText("내용 : " + notice.getBoard_content());
             tv_sec_info_date.setText("작성일 : " + notice.getWrite_date());
-
             re_sec_plylist();
         });
     }

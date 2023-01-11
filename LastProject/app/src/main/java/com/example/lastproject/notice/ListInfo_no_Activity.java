@@ -45,13 +45,9 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     EditText edt_no_reply;
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
-    private List<String> mlist = new ArrayList<>();
-    private ActivityMainBinding mBinding;
-
-
 
     int bo = 0;
-
+    int tmp;
     @Override
     public void onResume() {
         super.onResume();
@@ -126,13 +122,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             }
         });
 
-        /* 댓글 삭제 */
-
-
-
-
-
-
 
                 /* 취소 / 뒤로가기 */
         img_no_info_close.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +135,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     // 공지사항 상세내용
     public void update() {
         new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("info.no", (isResult, data) -> {
-
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data, NoticeVO.class);
             bo = notice.getBoard_no();
@@ -157,9 +145,7 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             replylist();
 
         });
-
     }
-
     public void replylist() {
         // 댓글 목록
         new CommonMethod().setParams("board_no", bo).sendPost("reply.no", (isResult1, data1) -> {
@@ -171,8 +157,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
 
         });
-
-
     }
 
 }
