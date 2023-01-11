@@ -45,7 +45,7 @@ on a.emp_no = e.emp_no
 <![CDATA[
 WHERE to_char(attend_date, 'yyyy/mm/dd') <= to_char(current_date, 'yyyy/mm/dd')
 AND to_char(attend_date, 'yyyy/mm/dd') > = to_char(current_date-7, 'yyyy/mm/dd')]]>
-and a.emp_no = 1
+and a.emp_no = #{emp_no}
 order by attend_date desc
 
 </select>

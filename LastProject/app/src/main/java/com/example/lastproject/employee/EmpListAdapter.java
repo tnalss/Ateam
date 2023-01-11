@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.common.Common;
 
 import java.util.ArrayList;
 
@@ -49,11 +48,8 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
             Glide.with(activity).load(list.get(position).getProfile_path()).error(R.drawable.error_user_profile).into(holder.iv_emp_profile);
         }
 
-
-        //현재근무상태 W0출근 W1퇴근
-
         if  (list.get(position).getAdmin().equals("X0")){
-            holder.tv_nowStatus.setText("퇴사");
+            holder.tv_nowStatus.setText("퇴사 ");
         }  else {
             holder.tv_nowStatus.setText("재직중");
         }
@@ -81,9 +77,6 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
 
             }
         });
-
-        //임시비밀번호 발급버튼
-
 
     }
 

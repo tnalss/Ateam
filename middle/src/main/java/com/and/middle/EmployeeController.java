@@ -128,5 +128,23 @@ public class EmployeeController {
 		return new Gson().toJson(list).toString();
 	}
 	
-
+	//아이디 찾기
+	@RequestMapping(value="/findId.emp", produces="text/html;charset=utf-8")
+	public String findId(String vo) {
+		EmployeeVO info = new Gson().fromJson(vo, EmployeeVO.class);
+	
+		return sql.selectOne("lo.findId",info);
+	}
+	
+	//패스워드찾기
+	@RequestMapping(value="/findPw.emp", produces="text/html;charset=utf-8")
+	public void findPw(String vo) {
+		EmployeeVO info = new Gson().fromJson(vo, EmployeeVO.class);
+		String pw = common.rand6num();
+		info.setEmp_pw(pw);
+		
+		
+		common.sendPassword(info);
+		sql.update("lo.findPw",info);
+	}
 }
