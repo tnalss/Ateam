@@ -48,6 +48,7 @@ public class MyInfoFragment extends Fragment {
             activity.getSupportFragmentManager().popBackStack();
         });
 
+        // 일정 조회 세가지
         new CommonMethod().sendPost("compPeriod.sche",(isResult, data) -> {
             if(isResult){
                 ArrayList<ScheduleVO> list = new Gson().fromJson(data,new TypeToken<ArrayList<ScheduleVO>>(){}.getType());
@@ -82,6 +83,7 @@ public class MyInfoFragment extends Fragment {
             activity.changeFragment(new MyInfoUpdateFragment());
         });
 
+        // 7일간 본인의 근태 조회
         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("list_7days.at",(isResult, data) -> {
            ArrayList<AttendVO> list  = new Gson().fromJson(data,new TypeToken<ArrayList<AttendVO>>(){}.getType());
         binding.recvAttend7daysRecord.setAdapter(new DaysAdapter(getLayoutInflater(),list));
