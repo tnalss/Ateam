@@ -69,7 +69,11 @@ public class EmpDetailFragment extends Fragment {
 
         //사번으로 조회
         tv_emp_name.setText(vo.getEmp_name());
+        if(vo.getBirth().length()>9)
         tv_emp_birth.setText(vo.getBirth().substring(0,10));
+        else
+        tv_emp_birth.setText(vo.getBirth());
+
         tv_emp_address.setText(vo.getAddress().replace("/",""));
         tv_emp_branch.setText(vo.getBranch_name());
         tv_emp_dept.setText(vo.getDepartment_name());

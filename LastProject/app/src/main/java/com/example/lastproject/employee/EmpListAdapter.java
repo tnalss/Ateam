@@ -49,7 +49,7 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
         }
 
         if  (list.get(position).getAdmin().equals("X0")){
-            holder.tv_nowStatus.setText("퇴사 ");
+            holder.tv_nowStatus.setText("퇴사  ");
         }  else {
             holder.tv_nowStatus.setText("재직중");
         }
