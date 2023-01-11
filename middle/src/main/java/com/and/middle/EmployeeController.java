@@ -127,4 +127,6 @@ public class EmployeeController {
 		List<EmployeeVO> list = sql.selectList("emp.keyword",keyword);
 		return new Gson().toJson(list).toString();
 	}
+	
+
 }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,35 @@ public class ManageEmpFragment extends Fragment {
             binding.tvNoResult.setVisibility(View.GONE);
         }
     }
+    void search(){
+        if(binding.edtFind.length()>0){
+            //쿼리날려서 리스트잡고 리스트바꿔서보내주자.
+            new CommonMethod().setParams("keyword",binding.edtFind.getText().toString().trim()).sendPost("keyword.emp",(isResult, data) -> {
+                if(isResult){
+                    list = new Gson().fromJson(data,new TypeToken<ArrayList<EmployeeVO>>(){}.getType());
+
+                    binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
+                    binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+                    noResult();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new CommonMethod().sendPost("list.emp",(isResult, data) -> {
+            if(isResult){
+                list = new Gson().fromJson(data,new TypeToken<ArrayList<EmployeeVO>>(){}.getType());
+
+                binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
+                binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+                noResult();
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,17 +74,9 @@ public class ManageEmpFragment extends Fragment {
             }
         });
 
-        new CommonMethod().sendPost("list.emp",(isResult, data) -> {
-            if(isResult){
-                list = new Gson().fromJson(data,new TypeToken<ArrayList<EmployeeVO>>(){}.getType());
 
-                binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
-                binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-                noResult();
-            }
-        });
 
-        //사원검색기능 구현해야됨
+        //사원검색기능을 위한 디자인
         binding.ivPersonSearch.setOnClickListener(v->{
             if(binding.tvMenuTitle.getVisibility()==View.VISIBLE) {
                 binding.tvMenuTitle.setVisibility(View.GONE);
@@ -62,24 +85,15 @@ public class ManageEmpFragment extends Fragment {
                 binding.searchButton.setVisibility(View.VISIBLE);
             }
         });
+
         binding.searchButton.setOnClickListener(v -> {
 
             binding.tvMenuTitle.setVisibility(View.VISIBLE);
             binding.edtFind.setVisibility(View.GONE);
             binding.ivPersonSearch.setVisibility(View.VISIBLE);
             binding.searchButton.setVisibility(View.GONE);
-            if(binding.edtFind.length()>0){
-                //쿼리날려서 리스트잡고 리스트바꿔서보내주자.
-                new CommonMethod().setParams("keyword",binding.edtFind.getText().toString().trim()).sendPost("keyword.emp",(isResult, data) -> {
-                    if(isResult){
-                        list = new Gson().fromJson(data,new TypeToken<ArrayList<EmployeeVO>>(){}.getType());
+            search();
 
-                        binding.recvEmpList.setAdapter(new EmpListAdapter(getLayoutInflater(),list,activity));
-                        binding.recvEmpList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-                        noResult();
-                    }
-                });
-            }
         });
 
         //신규사원추가버튼
@@ -87,8 +101,26 @@ public class ManageEmpFragment extends Fragment {
             activity.changeFragment(new EmpInsertFragment());
         });
 
+        //edittext 값변하면 실시간 검색기능
+        binding.edtFind.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        View v = binding.getRoot();
-        return v;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+        return binding.getRoot();
     }
 }

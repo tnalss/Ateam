@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.google.gson.Gson;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,7 +36,7 @@ public class EmpDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         TextView tv_emp_name, tv_emp_birth, tv_emp_address, tv_emp_branch, tv_emp_dept, tv_emp_hire_date, tv_emp_rank, tv_emp_no, tv_emp_gender, tv_emp_email, tv_emp_phone, tv_emp_admin, tv_emp_salary, tv_emp_comm_pct;
-        Button btn_emp_edit, btn_emp_fire;
+        Button btn_emp_edit, btn_emp_fire,btn_temp_password;
         ImageView iv_back;
         CircleImageView iv_emp_profile;
 
@@ -64,6 +66,7 @@ public class EmpDetailFragment extends Fragment {
         tv_emp_salary = v.findViewById(R.id.tv_emp_salary);
         iv_back = v.findViewById(R.id.iv_back);
         iv_emp_profile = v.findViewById(R.id.iv_emp_profile);
+        btn_temp_password = v.findViewById(R.id.btn_temp_password);
 
         //사번으로 조회
         tv_emp_name.setText(vo.getEmp_name());
@@ -140,6 +143,25 @@ public class EmpDetailFragment extends Fragment {
                         }).show();
             }
         });
+
+        //임시비밀번호 발급버튼
+        btn_temp_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("임시비밀번호를 메일로 전송하시겠습니까?")
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            // 발급 요청 쿼리날리기
+                            new CommonMethod().setParams("vo",new Gson().toJson(vo)).sendPost("tempPW.cm",(isResult, data) -> {
+                                if(isResult){
+                                    Toast.makeText(getContext(), "발송 성공", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }).setNegativeButton(android.R.string.no, (dialog, which) -> {
+                        }).show();
+
+            }
+        });
+
 
         return v;
     }

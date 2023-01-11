@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.lastproject.common.Common.CAMERA_CODE;
 import static com.example.lastproject.common.Common.GALLERY_CODE;
 import static com.example.lastproject.common.Common.SEARCH_ADDRESS_ACTIVITY;
+import static com.example.lastproject.common.Common.loginInfo;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -45,9 +46,9 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     private MainActivity activity;
     private FragmentEmpUpdateBinding binding;
     private EmployeeVO vo;
-    String img_path;
-    String[] dialog_item={"카메라", "갤러리"};
-    AlertDialog dialog;
+    private String img_path;
+    private String[] dialog_item={"카메라", "갤러리"};
+    private AlertDialog dialog;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -109,6 +110,8 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
             activity.onBackPressed();
         });
 
+
+        // 수정 버튼을 누름.
         binding.btnEmpUpdate.setOnClickListener(v -> {
             //입력판단 입력유무판단.
             if(binding.edtEmpName.getText().length()<1 || binding.edtEmpPhone.getText().length()<1||
@@ -139,6 +142,16 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
                 vo.setAdmin("L1");
             } else if(binding.radioEmp.isChecked()){
                 vo.setAdmin("X0");
+            }
+            // 본인이 본인 정보를 변경한 경우는 loginInfo의 내용도 수정해주어야함.
+            if(loginInfo.getEmp_no().equals(vo.getEmp_no())){
+                loginInfo.setEmp_name(vo.getEmp_name());
+                loginInfo.setEmail(vo.getEmail());
+                loginInfo.setPhone(vo.getPhone());
+                loginInfo.setBirth(vo.getBirth());
+                loginInfo.setBranch_name(vo.getBranch_name());
+                loginInfo.setRank_name(vo.getRank_name());
+                loginInfo.setSalary(vo.getSalary());
             }
 
             new CommonMethod().setParams("param",vo).sendPostFile("update.emp",img_path,(isResult, data) -> {
@@ -254,7 +267,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    public void showDialog(){
+    private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("사진 업로드 방법 선택").setSingleChoiceItems(dialog_item, -1, (dialog, i) -> {
             if((dialog_item[i]).equals("카메라")){
@@ -268,7 +281,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
     }
 
     //갤러리
-    public void galleryMethod(){
+    private void galleryMethod(){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
@@ -276,7 +289,7 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
     }
     //카메라
-    public void cameraMethod(){
+    private void cameraMethod(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         File file = new CommonMethod().createFile(getActivity());//임시파일 만들어 오기 <- provider 사용시 필요함.

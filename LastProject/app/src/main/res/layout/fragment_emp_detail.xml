@@ -461,6 +461,16 @@
 
             </LinearLayout>
             <!--버튼-->
+            <Button
+                android:id="@+id/btn_temp_password"
+                style="@style/sub_size"
+                android:backgroundTint="#0C7E9A"
+                android:layout_margin="10dp"
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:text="임시 비밀번호 발급"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -487,7 +497,9 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"/>
 
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

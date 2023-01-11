@@ -28,6 +28,7 @@
 
     <!-- 비밀번호 -->
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/edt_login_pw"
         android:hint="   PW"
         android:textColor="#000"

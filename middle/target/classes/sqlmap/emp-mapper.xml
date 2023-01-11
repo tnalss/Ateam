@@ -29,7 +29,7 @@ order by e.emp_no
 
 
 <update id="fire" >
-	UPDATE tbl_emp SET ADMIN='X0',end_Date =to_char(sysdate,'yyyy-MM-dd') WHERE emp_no=${emp_no}
+	UPDATE tbl_emp SET ADMIN='X0',end_Date =to_char(current_date,'yyyy-MM-dd') WHERE emp_no=${emp_no}
 </update>
 
 <insert id="insert" >
