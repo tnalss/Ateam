@@ -2,16 +2,21 @@ package com.example.lastproject.notice;
 
 import static java.security.AccessController.getContext;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +27,14 @@ import com.example.conn.ApiClient;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
+import com.example.lastproject.databinding.ActivityMainBinding;
 import com.example.lastproject.login.LoginVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListInfo_no_Activity extends AppCompatActivity {
     String TAG = "로그";
@@ -38,6 +45,11 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     EditText edt_no_reply;
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
+    private List<String> mlist = new ArrayList<>();
+    private ActivityMainBinding mBinding;
+
+
+
     int bo = 0;
 
     @Override
@@ -51,6 +63,7 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_info_no);
         getSupportActionBar().hide();
+
 
         img_no_info_close = findViewById(R.id.img_no_info_close);
         tv_no_info_title = findViewById(R.id.tv_no_info_title);
@@ -113,8 +126,15 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             }
         });
 
+        /* 댓글 삭제 */
 
-        /* 취소 / 뒤로가기 */
+
+
+
+
+
+
+                /* 취소 / 뒤로가기 */
         img_no_info_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +154,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             tv_no_info_title.setText("제목 : " + notice.getBoard_title());
             tv_no_info_content.setText("내용 : " + notice.getBoard_content());
             tv_no_info_date.setText("작성일 : " + notice.getWrite_date());
-
             replylist();
 
         });
@@ -152,6 +171,8 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             recv_no_reply.setLayoutManager(CommonMethod.getVManager(ListInfo_no_Activity.this));
 
         });
+
+
     }
 
 }

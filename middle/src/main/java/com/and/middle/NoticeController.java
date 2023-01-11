@@ -102,7 +102,7 @@ public class NoticeController {
 		return gson.toJson(reply);
 	}
 	
-	// 공지사항 댓글작성
+	// 공지사항 / 익명게시판 댓글작성
 	@RequestMapping(value="/re_insert.no", produces="text/html;charset=utf-8")
 	public String replryinsert(String re) {
 		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
