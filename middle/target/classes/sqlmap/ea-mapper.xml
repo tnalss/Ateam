@@ -108,6 +108,16 @@ where emp_name in
 </foreach>
 </select>
 
-
+<!-- 마지막 결재자가 결재 완료  -->
+<update id="allSignComplete">
+update tbl_ea
+set ea_status = 'E7'
+where ea_num = #{ea_num}
+</update>
+<!-- 몇명이 결재 완료? -->
+<select id = "howManySigned" resultType="Integer">
+select count(*) from tbl_Ea
+where ea_num = #{ea_num} and ea_r_statuas='E7'
+</select>
 
 </mapper>

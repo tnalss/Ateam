@@ -135,5 +135,17 @@ public class EaController {
 		 
 		  return new Gson().toJson(list);
 	  }
+	  
+	  //결재자 정보(사번, 이름, 부서, 계급) 불러오기.
+	  @RequestMapping(value="/allSignComplete.ea", produces="text/html;charset=utf-8")
+	  public void allSignComplete(String ea_num) {
+		  sql.update("ea.allSignComplete",ea_num);
+	  }
+	  
+	  //결재자 몇명인지
+	  @RequestMapping("/howManySigned.ea")
+	  public Object howManySigned(String ea_num) {
+		  return sql.selectOne("ea.howManySigned",ea_num);
+	  }
 
 }
