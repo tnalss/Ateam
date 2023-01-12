@@ -8,13 +8,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <!--상단 메뉴-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+            <!--회사 로고& 이름-->
+            <LinearLayout
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:src="@drawable/onlylogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    style="@style/main_size"
+                    android:text="JK COMPANY"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
     <TextView
         android:id="@+id/tv_info_ea_title"
-        android:layout_marginBottom="15dp"
+        android:layout_marginVertical="15dp"
         android:textSize="18dp"
         android:text="업무협조 요청 드립니다."
         android:textColor="@color/black"
@@ -289,17 +313,18 @@
             android:background="#DDD9D9"
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
+
         <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardv_back"
                 app:strokeColor="#DDD9D9"
                 app:strokeWidth="2dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="120dp"
                 android:layout_height="40dp">
                 <TextView
@@ -312,11 +337,13 @@
                     android:layout_height="match_parent"/>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
+                android:layout_weight="1"
+                android:id="@+id/cardv_retry"
                 android:layout_marginLeft="50dp"
                 app:strokeColor="#DDD9D9"
                 app:strokeWidth="2dp"
-                android:layout_marginTop="30dp"
-                android:layout_width="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp">
                 <TextView
                     android:background="#666464"
@@ -328,8 +355,74 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </com.google.android.material.card.MaterialCardView>
-
+            <com.google.android.material.card.MaterialCardView
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:id="@+id/cardv_delete"
+                android:layout_marginLeft="20dp"
+                app:strokeColor="#DDD9D9"
+                app:strokeWidth="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/tv_delete"
+                    android:background="#D55959"
+                    android:text="삭제"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:id="@+id/cardv_modify"
+                android:layout_marginLeft="20dp"
+                app:strokeColor="#DDD9D9"
+                app:strokeWidth="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp">
+            <TextView
+                android:id="@+id/tv_modify"
+                android:background="#42909D"
+                android:text="수정"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+               android:visibility="gone"
+                android:layout_weight="1"
+                android:id="@+id/cardv_apply"
+                android:layout_marginLeft="20dp"
+                app:strokeColor="#DDD9D9"
+                app:strokeWidth="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/tv_apply"
+                    android:background="#4358D0"
+                    android:text="상신"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
     </LinearLayout>
 
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
+    android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:strokeWidth="1dp"
     app:strokeColor="#DDD9D9"
     android:layout_margin="15dp"
-    android:layout_width="140dp"
+    android:layout_width="160dp"
     android:layout_height="wrap_content">
 
 
@@ -14,6 +15,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_fixed"
                 android:background="#ECE9EE"
                 android:gravity="center"
                 android:text="기안"
@@ -23,24 +25,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
             <TextView
+                android:id="@+id/tv_info_name"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:id="@+id/tv_info_name"
                 android:text="지현우"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:layout_gravity="center"
                 android:id="@+id/tv_info_email"
+                android:layout_gravity="center"
                 android:text="(908dkwmdk)"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/tv_info_dep"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:id="@+id/tv_info_dep"
                 android:text="기술영업부"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -50,12 +52,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"/>
             <TextView
+                android:id="@+id/tv_info_date"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                android:id="@+id/tv_info_date"
                 android:text="21.10.18 13:27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_info_status"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_marginTop="10dp"
+                android:background="#DDD9D9"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/line_btn_sign"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_approved"
+                android:layout_marginRight="5dp"
+                android:text="결제"
+                android:backgroundTint="@color/main_color"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"/>
+            <Button
+                android:id="@+id/btn_denied"
+                android:text="반려"
+                android:backgroundTint="@color/sub_color"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"/>
+            </LinearLayout>
+            <ImageView
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:id="@+id/imgv_stamp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ea_stamp_approved"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
         </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

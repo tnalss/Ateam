@@ -11,173 +11,238 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <TextView
-        android:layout_margin="10dp"
-        android:textAlignment="center"
-        style="@style/main_size"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:text="전자결재"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_marginBottom="10dp"
-        style="@style/sub_size"
-        android:text="안녕하세요."
-        android:textColor="@color/light_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/tv_emp_name"
-        style="@style/main_size"
-        android:textColor="@color/black"
-        android:text="지현우(JI)님"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardv_draft"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="20dp"
-            android:backgroundTint="@color/main_color"
-            android:layout_width="0dp"
-            android:layout_height="110dp">
-            <TextView
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                style="@style/main_size"
-                android:text="기안함"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardv_sign"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="20dp"
-            android:backgroundTint="@color/main_color"
-            android:layout_width="0dp"
-            android:layout_height="110dp">
-            <TextView
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                style="@style/main_size"
-                android:text="결재함"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardv_return"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="20dp"
-            android:backgroundTint="@color/main_color"
-            android:layout_width="0dp"
-            android:layout_height="110dp">
-            <TextView
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                style="@style/main_size"
-                android:text="반려된 문서"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-    <View
-        android:background="#7A7979"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    <TextView
-        android:layout_margin="10dp"
-        android:textColor="@color/black"
-        android:text="자주쓰는 문서바로가기"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardv_vacation"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/main_color"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            style="@style/main_size"
-            android:text="휴가 신청서"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardv_overtime"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/main_color"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            style="@style/main_size"
-            android:text="연장근무 신청서"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardv_business"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/main_color"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            style="@style/main_size"
-            android:text="출장 신청서"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </androidx.cardview.widget.CardView>
-
-    <View
-        android:background="#7A7979"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    <TextView
-        android:layout_margin="10dp"
-        android:textColor="@color/black"
-        android:text="최근 문서 (최대 10건)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        app:tabGravity="start"
-        app:tabTextColor="#787878"
-        app:tabSelectedTextColor="#000"
-        app:tabIndicatorColor="#000"
-        app:tabIndicatorHeight="2dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recv_recent_ea"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="300dp"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--상단 메뉴-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+                <!--회사 로고& 이름-->
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:src="@drawable/onlylogo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        style="@style/main_size"
+                        android:text="JK COMPANY"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                style="@style/main_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="전자결재"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/sub_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="안녕하세요."
+                android:textColor="@color/light_color" />
+
+            <TextView
+                android:id="@+id/tv_emp_name"
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="지현우(JI)님"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardv_draft"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/main_color"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        style="@style/sub_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="기안함"
+                        android:textColor="@color/white" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardv_sign"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/main_color"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        style="@style/sub_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="결재함"
+                        android:textColor="@color/white" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardv_return"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/main_color"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        style="@style/sub_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="반려함"
+                        android:textColor="@color/white" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardv_retry"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/main_color"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        style="@style/sub_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="회수함"
+                        android:textColor="@color/white" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="30dp"
+                android:background="#7A7979" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="자주쓰는 문서바로가기"
+                android:textColor="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardv_vacation"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/main_color"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    style="@style/sub_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="휴가 신청서"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardv_overtime"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/main_color"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    style="@style/sub_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="연장근무 신청서"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardv_business"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/main_color"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    style="@style/sub_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="출장 신청서"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="30dp"
+                android:background="#7A7979" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="최근 문서 (최대 10건)"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                app:tabGravity="start"
+                app:tabIndicatorColor="#000"
+                app:tabIndicatorHeight="2dp"
+                app:tabSelectedTextColor="#000"
+                app:tabTextColor="#787878" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recv_recent_ea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardv_write"
         android:backgroundTint="@color/sub_color"

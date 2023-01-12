@@ -201,8 +201,6 @@
 			<version>1.16</version>
 		</dependency>
 
-
-		<!-- 클라우드 접속용 -->
 		<dependency>
 			<groupId>com.oracle.database.security</groupId>
 			<artifactId>oraclepki</artifactId>
@@ -220,7 +218,6 @@
 			<artifactId>osdt_cert</artifactId>
 			<version>19.7.0.0</version>
 		</dependency>
-
 
 	</dependencies>
 	<build>

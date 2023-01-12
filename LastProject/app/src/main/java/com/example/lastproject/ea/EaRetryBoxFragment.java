@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
@@ -20,24 +21,24 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 
-public class EaSignBoxFragment extends Fragment {
-    RecyclerView recv_sign;
+public class EaRetryBoxFragment extends Fragment {
+    RecyclerView recv_retry;
     ArrayList<EaVO> list;
     MainActivity activity;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_ea_sign_box, container, false);
+        View v = inflater.inflate(R.layout.fragment_ea_retry_box, container, false);
         activity = (MainActivity)getActivity();
-        recv_sign = v.findViewById(R.id.recv_sign);
-        new CommonMethod().setParams("no", Common.loginInfo.getEmp_no()).sendPost("signboxlist.ea", (isResult, data) -> {
+        recv_retry = v.findViewById(R.id.recv_retry);
+
+        new CommonMethod().setParams("no", Common.loginInfo.getEmp_no()).sendPost("retryboxlist.ea", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
             list = gson.fromJson(data,
                     new TypeToken<ArrayList<EaVO>>(){}.getType());
 
-            recv_sign.setAdapter(new EaSignBoxAdapter(inflater,list,activity));
-            recv_sign.setLayoutManager(CommonMethod.getVManager(getContext()));
+            recv_retry.setAdapter(new EaRetryBoxAdapter(inflater,activity,list));
+            recv_retry.setLayoutManager(CommonMethod.getVManager(getContext()));
         });
 
         return v;
