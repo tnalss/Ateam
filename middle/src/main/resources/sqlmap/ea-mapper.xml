@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ea">
 
+
 <!-- 결재 상태 변경 -->
 <update id="status_update">
 update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
@@ -42,6 +43,31 @@ END;
 select * from get_code_table('P')
 </select>
 
+<!-- 결재함 결재하기 -->
+<update id="sign_status">
+update tbl_ea
+set ea_status = #{ea_status}, ea_a_date = current_date 
+where ea_num = #{ea_num} and ea_receiver = #{emp_no}
+</update>
+
+<!-- 회수함 기안 상신 -->
+<update id="retry_draft">
+update tbl_ea set ea_status = 'E0' where ea_num = #{num}
+</update>
+
+<!-- 회수함 기안 삭제 -->
+<delete id="retry_delete">
+delete from tbl_ea where ea_num = #{num} 
+</delete>
+
+<!-- 회수함 리스트 -->
+<select id="retryboxlist" resultType="ea.EaVO">
+select distinct ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
+GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
+from tbl_ea e 
+where emp_no = #{no} and ea_status = 'E4'
+order by ea_date desc
+</select>
 
 <!-- 결재함 리스트 -->
 <select id="signboxlist" resultType="ea.EaVO">
@@ -56,7 +82,7 @@ order by ea_date desc
 <select id="recentlist" resultType="ea.EaVO">
 select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date, GET_CODE_VALUE(ea_read ) ea_read 
 from tbl_ea
-where emp_no = #{emp_no}
+where emp_no = #{emp_no} and ea_status != 'E4'
 group by ea_num, ea_title, ea_status, ea_date, ea_a_date,ea_read 
 order by ea_date desc
 </select>

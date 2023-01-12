@@ -24,7 +24,37 @@ public class EaController {
 	@Autowired
 	@Qualifier("hanul")
 	SqlSession sql;
-
+	
+	//결재 및 반려 작업
+	//회수함에서 상신 업데이트
+	@RequestMapping(value="/sign_status.ea", produces="text/html;charset=utf-8")
+	public void ea_sign_status(String ea_status,String emp_no, String ea_num) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("emp_no", emp_no);
+		map.put("ea_status", ea_status);
+		map.put("ea_num", ea_num);
+		sql.update("ea.sign_status", map);
+		
+	}
+	//회수함에서 상신 업데이트
+	@RequestMapping(value="/retry_draft.ea", produces="text/html;charset=utf-8")
+	public void ea_retry_draft(String num) {
+		sql.update("ea.retry_draft", num);
+	}
+	
+	//회수함에서 회수기안 삭제
+	@RequestMapping(value="/retry_delete.ea", produces="text/html;charset=utf-8")
+	public void ea_retry_delete(String num) {
+		sql.delete("ea.retry_delete", num);
+	}
+	
+	//회수함 리스트
+		@RequestMapping(value="/retryboxlist.ea", produces="text/html;charset=utf-8")
+		public String ea_retrybox_list(String no) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+			List<EaVO> list = sql.selectList("ea.retryboxlist",no);
+			return gson.toJson(list);
+		}
 	
 	//문서 상태(대기,회수,결재완료,반려) 변경
 	@RequestMapping(value="/update_status.ea", produces="text/html;charset=utf-8")
