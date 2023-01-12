@@ -196,7 +196,19 @@
                 android:layout_height="200dp"/>
         </LinearLayout>
     <!--전체 사원의 근태관리 바로가기 만들기!-->
-
+        <TextView
+            android:layout_gravity="center"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/item_radius4"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:layout_toLeftOf="@+id/iv_burger"
+            android:text="전체 사원 근무 현황 조회"
+            android:textStyle="bold"
+            android:textColor="@color/main_color" />
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>

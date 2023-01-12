@@ -1,5 +1,7 @@
 package com.and.middle;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import Attend.AttendVO;
+import al.AlVO;
 
 @RestController
 public class AlController {
@@ -16,12 +19,16 @@ public class AlController {
 	@Qualifier("hanul")
 	SqlSession sql;
 	
+	//로그인한 사원의 휴가및연차 상태목록 조회
+	@RequestMapping(value="/al_list.al" , produces="text/html;charset=utf-8" )
+	public String al_list(String emp_no) {
+		List<AlVO> list = sql.selectList("al.al_list",emp_no);
+		return new Gson().toJson(list).toString();
+	}
+		
 	
-	/*
-	 @RequestMapping(value="/attend_on.at", produces="text/html;charset=utf-8")
-	  public String attend_on(String emp_no) { sql.insert("at.attend_on",emp_no);
-	  AttendVO vo = sql.selectOne("at.emp_today",emp_no); return new
-	  Gson().toJson(vo).toString(); }
-	 */
 	
 }
+
+	
+

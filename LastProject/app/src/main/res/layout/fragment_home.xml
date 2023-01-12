@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeFragment"
-    android:padding="10dp"
     android:orientation="vertical">
 
         <!--상단메뉴바-->
         <RelativeLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
@@ -26,6 +26,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"/>
                 <TextView
+                    android:textStyle="bold"
                     android:layout_gravity="center"
                     style="@style/main_size"
                     android:text="JK COMPANY"
@@ -39,6 +40,7 @@
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/iv_burger"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/ic_alert_c" />
             <ImageView
                 android:layout_marginLeft="5dp"
@@ -52,8 +54,11 @@
 
     <!--상단 사용자 정보-->
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+    <LinearLayout
         android:background="@drawable/item_radius2"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -86,9 +91,8 @@
         <ImageView
             android:layout_gravity="center"
             android:id="@+id/iv_emp_detail"
-
             android:layout_toRightOf="@+id/r1"
-            android:src="@drawable/ic_chevron_right"
+            android:src="@drawable/ic_forward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <RelativeLayout
@@ -125,9 +129,8 @@
                     android:layout_height="30dp"/>
             </FrameLayout>
         </RelativeLayout>
-
     </LinearLayout>
-
+    </LinearLayout>
     <!--일정따서 일정넣던가-->
 <devs.mulham.horizontalcalendar.HorizontalCalendarView
     android:id="@+id/calendarView"

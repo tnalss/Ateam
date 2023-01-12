@@ -91,7 +91,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
         binding.tvAddDepartmentSchedule.setOnClickListener(this);
         binding.tvAddPersonalSchedule.setOnClickListener(this);
 
-        binding.ivBack.setOnClickListener(v -> getActivity().onBackPressed());
+        //binding.ivBack.setOnClickListener(v -> getActivity().onBackPressed());
 
 
         return binding.getRoot();

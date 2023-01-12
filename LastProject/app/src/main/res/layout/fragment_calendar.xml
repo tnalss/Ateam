@@ -6,29 +6,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".calendar.CalendarFragment"
     android:orientation="vertical"
+    android:padding="10dp"
     >
 
+    <!--상단메뉴바-->
     <RelativeLayout
-        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+    <!--회사 로고& 이름-->
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <ImageView
-            android:layout_centerVertical="true"
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:src="@drawable/back" />
-
+            android:src="@drawable/onlylogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
         <TextView
-            style="@style/main_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="일정 관리" />
-
+            style="@style/main_size"
+            android:text="JK COMPANY"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -70,17 +78,17 @@
                 <View
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:background="#595959"
                     android:layout_width="100dp"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/sub_color"/>
                 <TextView
+                    android:textColor="@color/main_color"
                     android:id="@+id/tv_countComp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:text="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
             </LinearLayout>
             <LinearLayout
                 android:layout_margin="10dp"
@@ -96,10 +104,11 @@
                 <View
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:background="#595959"
                     android:layout_width="100dp"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/sub_color"/>
                 <TextView
+                    android:textColor="@color/main_color"
                     android:id="@+id/tv_countDept"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
@@ -122,10 +131,11 @@
                 <View
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:background="#595959"
                     android:layout_width="100dp"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/sub_color"/>
                 <TextView
+                    android:textColor="@color/main_color"
                     android:id="@+id/tv_countPersonal"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
@@ -139,28 +149,38 @@
     <!-- 여기다가 각 일정 개수를 표현 -->
 
     </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_margin="10dp"
                 style="@style/main_size"
-                android:textStyle="bold"
-                android:text="회사 일정"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="회사 일정"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_add_company_schedule"
-                android:textColor="#69B4FF"
-                android:layout_margin="10dp"
                 style="@style/sub_size"
-                android:textStyle="bold"
-                android:text="일정 추가"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:text="일정 추가"
+                android:textColor="@color/blue"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/plus_c" />
         </LinearLayout>
 
 
@@ -206,14 +226,19 @@
 
         <TextView
             android:id="@+id/tv_add_department_schedule"
-            android:textColor="#69B4FF"
-            android:layout_margin="10dp"
-            style="@style/sub_size"
-            android:textStyle="bold"
-            android:text="일정 추가"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:text="일정 추가"
+            android:textColor="@color/blue"
+            android:textStyle="bold"/>
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/plus_c" />
         </LinearLayout>
         <LinearLayout
             android:visibility="gone"
@@ -252,14 +277,20 @@
         android:layout_height="wrap_content"/>
 <TextView
     android:id="@+id/tv_add_personal_schedule"
-    android:textColor="#69B4FF"
-    android:layout_margin="10dp"
-    style="@style/sub_size"
-    android:textStyle="bold"
-    android:text="일정 추가"
-    android:layout_gravity="center"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginRight="5dp"
+    android:text="일정 추가"
+    android:textColor="@color/blue"
+    android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/plus_c" />
         </LinearLayout>
         <LinearLayout
             android:visibility="gone"
