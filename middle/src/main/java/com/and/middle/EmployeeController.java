@@ -45,6 +45,12 @@ public class EmployeeController {
 		return new Gson().toJson(vo).toString();
 	}
 	
+	//내정보에서 정보수정 (비밀번호변경)
+	@RequestMapping(value="/myinfo_update.emp", produces="text/html;charset=utf-8")
+	public void myinfo_update(String emp_vo) {
+		EmployeeVO vo = new Gson().fromJson(emp_vo, EmployeeVO.class);
+		sql.update("emp.myinfo_update", vo);
+	}
 	
 	//회원가입
 	@RequestMapping(value="/insert.emp" , produces="text/html;charset=utf-8")

@@ -131,14 +131,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
-
         /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
-
 
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(binding.getRoot(), R.id.calendarView).range(startDate, endDate)
                 .addEvents(new CalendarEventsPredicate() {
@@ -163,7 +162,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onDateSelected(Calendar date, int position) {
                // SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 //Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
-
 
             }
             @Override
