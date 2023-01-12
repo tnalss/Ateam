@@ -189,6 +189,7 @@ public class AttendFragment extends Fragment {
                                 now.setText(vo.getAtt_state());
                         });
                         Toast.makeText(getActivity(), "출근 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                        selectList(); //1/11 csm 출근후 바로 기록찍히게 처리
                     }
                 })
                 .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -214,7 +215,7 @@ public class AttendFragment extends Fragment {
                             AttendVO vo =new Gson().fromJson(data,AttendVO.class);
                             selectList();
                             now.setText(vo.getAtt_state());
-
+                            selectList();//1/11 csm 퇴근후 바로 기록찍히게 처리
                         });
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
                     }

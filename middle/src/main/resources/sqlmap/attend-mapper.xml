@@ -37,6 +37,19 @@ order by attend_date desc
 
 
 
+<!-- 일주일 출석 조회 1/11 csm -->
+<select id="list_7days" resultType="Attend.AttendVO">
+select a.*,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a inner join tbl_emp e
+on a.emp_no = e.emp_no
+<![CDATA[
+WHERE to_char(attend_date, 'yyyy/mm/dd') <= to_char(current_date, 'yyyy/mm/dd')
+AND to_char(attend_date, 'yyyy/mm/dd') > = to_char(current_date-7, 'yyyy/mm/dd')]]>
+and a.emp_no = #{emp_no}
+order by attend_date desc
+
+</select>
+
 
 
 

@@ -55,6 +55,12 @@ public class AttendController {
 	}
 
 
+	// 일주일 출퇴근 상태조회 
+	@RequestMapping(value="/list_7days.at", produces="text/html;charset=utf-8")
+	public String list_7days(String emp_no) {
+		List<AttendVO> list = sql.selectList("at.list_7days",emp_no);
+		return new Gson().toJson(list).toString();
+	}
 	
 	
 	

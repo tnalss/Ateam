@@ -311,7 +311,7 @@
             <TextView
                 style="@style/main_size"
                 android:layout_margin="10dp"
-                android:text="권한"
+                android:text="구분"
                 android:textAlignment="center"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"/>
@@ -326,6 +326,13 @@
                 android:id="@+id/radio_l1"
                 android:layout_margin="10dp"
                 android:text="관리자"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:visibility="gone"
+                android:id="@+id/radio_out"
+                android:layout_margin="10dp"
+                android:text="퇴사자"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

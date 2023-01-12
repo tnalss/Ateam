@@ -133,7 +133,10 @@
     android:id="@+id/calendarView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:textColorSelected="#000000"/>
+    app:textColorSelected="#000000"
+    app:selectorColor="@color/p_color"
+    android:layout_marginBottom="10dp"
+    />
     <!--메뉴 디자인 필요-->
 
     <!--메뉴 맨 윗줄-->
@@ -146,6 +149,7 @@
         <RelativeLayout
             android:id="@+id/menu1_1"
             android:layout_margin="5dp"
+
             android:background="@drawable/item_radius"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -232,7 +236,6 @@
     </LinearLayout>
     <!--메뉴 두번째줄-->
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

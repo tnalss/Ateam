@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class EaFragment extends Fragment implements View.OnClickListener {
     RecyclerView recv_recent_ea;
     TabLayout tab_layout;
-    CardView cardv_write,cardv_draft,cardv_sign,cardv_return;
+    CardView cardv_write,cardv_draft,cardv_sign,cardv_return, cardv_retry;
     MainActivity activity;
     TextView tv_emp_name;
     ArrayList<EaVO> list;
@@ -44,6 +44,7 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         cardv_draft = v.findViewById(R.id.cardv_draft);
         cardv_sign = v.findViewById(R.id.cardv_sign);
         cardv_return = v.findViewById(R.id.cardv_return);
+        cardv_retry = v.findViewById(R.id.cardv_retry);
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_name.setText(Common.loginInfo.getEmp_name() +"("+ Common.loginInfo.getRank_name() +")"+"님");
         activity = (MainActivity) getActivity();
@@ -52,6 +53,7 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         cardv_draft.setOnClickListener(this);
         cardv_sign.setOnClickListener(this);
         cardv_return.setOnClickListener(this);
+        cardv_retry.setOnClickListener(this);
 
         tab_layout.addTab(tab_layout.newTab().setText("전체"));
         tab_layout.addTab(tab_layout.newTab().setText("결재완료"));
@@ -113,6 +115,8 @@ public class EaFragment extends Fragment implements View.OnClickListener {
                 activity.changeFragment(new EaSignBoxFragment());
         }else if(v.getId() == R.id.cardv_return){
 
+        }else if(v.getId() == R.id.cardv_retry){
+            activity.changeFragment(new EaRetryBoxFragment());
         }
     }
 }

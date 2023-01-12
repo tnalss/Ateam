@@ -19,5 +19,9 @@ from tbl_attend
 where emp_no=#{emp_no} and TO_CHAR(attend_date, 'YYYYMMDD')= #{date}
 </select>
 
+<!-- 비밀번호 발급 후 업데이트 -->
+<update id="tempPW" >
+	UPDATE tbl_emp SET emp_pw = #{emp_pw} WHERE emp_no=${emp_no}
+</update>
 
 </mapper>
