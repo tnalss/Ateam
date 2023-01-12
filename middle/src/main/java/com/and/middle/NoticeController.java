@@ -31,9 +31,10 @@ public class NoticeController {
 
 	// 익명게시판
 	@RequestMapping(value = "/secret.no", produces = "text/html;charset=utf-8")
-	public String secret() {
+	public String secret(String re) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		List<NoticeVO> secret = sql.selectList("no.se_list");
+		List<NoticeVO> secret = sql.selectList("no.se_list");		
+		sql.update("re.reply_count", re);
 		return gson.toJson(secret);
 	}
 
@@ -76,7 +77,8 @@ public class NoticeController {
 	public String secretinfo(String no) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		NoticeVO vo = sql.selectOne("no.no_info", no);
-		sql.update("no.hits", no);
+		sql.update("no.hits", no);	
+		
 		return gson.toJson(vo);
 	}
 
@@ -119,9 +121,17 @@ public class NoticeController {
 	public String reply_update(String re) {
 		ReplyVO temp_vo = new Gson().fromJson(re, ReplyVO.class);
 		int cnt = sql.update("re.reply_update", temp_vo);
-		System.out.println("dd" + re);
 		return new Gson().toJson(cnt).toString();
 	}
+	
+	// 익명게시판 검색
+	@RequestMapping(value="/search.no", produces="text/html;charset=utf-8")	
+	public String search (String search) {
+		List<NoticeVO> list = sql.selectList("no.search",search);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list).toString();
+	}
+	
 	
 	
 	

@@ -93,7 +93,6 @@
             android:backgroundTint="@color/main_color"
             android:text="완료"
             android:visibility="gone"/>
-
     </LinearLayout>
     <View
         android:layout_marginTop="5dp"

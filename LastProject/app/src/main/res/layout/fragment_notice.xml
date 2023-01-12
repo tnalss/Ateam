@@ -53,8 +53,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <EditText
+            android:id="@+id/edt_no_search"
+            android:layout_weight="1"
+            android:hint="  검색"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     <TextView
+        android:id="@+id/tv_no_title"
         android:layout_weight="1"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="10dp"
@@ -64,7 +71,30 @@
        android:gravity="center"
         android:text="익명게시판"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
+
+        <ImageView
+            android:id="@+id/img_no_search"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/tv_no_search"
+            android:textColor="@color/white"
+            android:padding="2dp"
+            android:background="@drawable/item_radius5"
+            android:textSize="18dp"
+            android:text=" 검색"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_no_writing"
@@ -76,8 +106,8 @@
             android:text="글쓰기"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
+
     <View
         android:layout_marginTop="8dp"
         android:background="#979494"

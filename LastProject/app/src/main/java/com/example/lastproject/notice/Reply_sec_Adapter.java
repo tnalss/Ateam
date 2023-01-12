@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -63,6 +66,38 @@ public class Reply_sec_Adapter extends RecyclerView.Adapter<Reply_sec_Adapter.Vi
                         }).show();
             }
         });
+        /* 댓글 수정 버튼*/
+        h.tv_sec_reply_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                h.btn_sec_reply_update.setVisibility(View.VISIBLE);
+                h.edt_sec_reply_update.setVisibility(View.VISIBLE);
+
+                h.edt_sec_reply_update.setText(reply.get(index).getReply_content());
+            }
+        });
+
+        h.btn_sec_reply_update.setOnClickListener(new View.OnClickListener() {
+            ReplyVO vo = new ReplyVO();
+            @Override
+            public void onClick(View v) {
+                vo.setReply_no(reply.get(index).getReply_no());
+                vo.setReply_content(h.edt_sec_reply_update.getText().toString());
+                vo.getReply_no();
+                vo.setReply_content(h.edt_sec_reply_update.getText().toString());
+                new CommonMethod().setParams("re", new Gson().toJson(vo)).sendPost("reply_update.no", (isResult, data) -> {
+                    h.btn_sec_reply_update.setVisibility(View.GONE);
+                    h.edt_sec_reply_update.setVisibility(View.GONE);
+                    Intent intent = new Intent(context, ListInfo_sec_Activity.class);
+                    intent.putExtra("board_no", reply.get(index).getBoard_no());
+                    context.startActivity(intent);
+                    ((Activity)context).onBackPressed();
+                    notifyItemChanged(index);
+
+                });
+            }
+        });
+
     }
     @Override
     public long getItemId(int position) {
@@ -81,12 +116,16 @@ public class Reply_sec_Adapter extends RecyclerView.Adapter<Reply_sec_Adapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_sec_reply_content, tv_sec_reply_date, tv_sec_reply_update, tv_sec_reply_delete;
+        Button btn_sec_reply_update;
+        EditText edt_sec_reply_update;
         public ViewHolder(@NonNull View v) {
             super(v);
             tv_sec_reply_content = v.findViewById(R.id.tv_sec_reply_content);
             tv_sec_reply_date = v.findViewById(R.id.tv_sec_reply_date);
             tv_sec_reply_update = v.findViewById(R.id.tv_sec_reply_update);
             tv_sec_reply_delete = v.findViewById(R.id.tv_sec_reply_delete);
+            btn_sec_reply_update = v.findViewById(R.id.btn_sec_reply_update);
+            edt_sec_reply_update = v.findViewById(R.id.edt_sec_reply_update);
 
         }
     }

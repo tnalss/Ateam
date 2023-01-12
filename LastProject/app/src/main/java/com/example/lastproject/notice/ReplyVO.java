@@ -3,20 +3,8 @@ package com.example.lastproject.notice;
 import java.util.Date;
 
 public class ReplyVO {
-    private int reply_no, board_no, emp_no;
-    private String reply_content;
-    private String reply_status;
-    private String reply_create_date;
-
-    public String getReply_create_date() {
-        return reply_create_date;
-    }
-
-    public void setReply_create_date(String reply_create_date) {
-        this.reply_create_date = reply_create_date;
-    }
-
-
+    private int reply_no, board_no, emp_no, reply_count;
+    private String reply_content, reply_status, reply_create_date;
 
     public int getReply_no() {
         return reply_no;
@@ -42,6 +30,14 @@ public class ReplyVO {
         this.emp_no = emp_no;
     }
 
+    public int getReply_count() {
+        return reply_count;
+    }
+
+    public void setReply_count(int reply_count) {
+        this.reply_count = reply_count;
+    }
+
     public String getReply_content() {
         return reply_content;
     }
@@ -58,5 +54,11 @@ public class ReplyVO {
         this.reply_status = reply_status;
     }
 
+    public String getReply_create_date() {
+        return reply_create_date;
+    }
 
+    public void setReply_create_date(String reply_create_date) {
+        this.reply_create_date = reply_create_date;
+    }
 }

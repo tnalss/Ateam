@@ -36,12 +36,12 @@ public class SecretAdapter extends RecyclerView.Adapter<SecretAdapter.ViewHolder
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
         h.tv_sec_title.setText(secret.get(i).getBoard_title());
         h.tv_sec_date.setText(secret.get(i).getWrite_date());
         h.tv_sec_views.setText(" 조회수 : " + secret.get(i).getBoard_hits());
+        h.tv_sec_reply_cnt.setText("댓글 : " + secret.get(i).getReply_count());
         final int index = i;
         // 익명게시판 내용
          h.li_sec_title.setOnClickListener(new View.OnClickListener() {
@@ -49,9 +49,11 @@ public class SecretAdapter extends RecyclerView.Adapter<SecretAdapter.ViewHolder
            public void onClick(View v) {
                 Intent intent = new Intent(context, ListInfo_sec_Activity.class);
                   intent.putExtra("board_no", secret.get(index).getBoard_no());
+                  intent.putExtra("re_count", secret.get(index).getReply_count());
                 context.startActivity(intent);
             }
          });
+
          // 좋아요
          h.img_sec_heart.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -85,7 +87,7 @@ public class SecretAdapter extends RecyclerView.Adapter<SecretAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_sec_date, tv_sec_title, tv_sec_views;
+        TextView tv_sec_date, tv_sec_title, tv_sec_views, tv_sec_reply_cnt;
         ImageView img_sec_img, img_sec_heart, img_sec_heart2;
         LinearLayout li_sec_title;
         public ViewHolder(@NonNull View v) {
@@ -97,6 +99,7 @@ public class SecretAdapter extends RecyclerView.Adapter<SecretAdapter.ViewHolder
             img_sec_heart = v.findViewById(R.id.img_sec_heart);
             img_sec_heart2 = v.findViewById(R.id.img_sec_heart2);
             tv_sec_views = v.findViewById(R.id.tv_sec_views);
+            tv_sec_reply_cnt = v.findViewById(R.id.tv_sec_reply_cnt);
         }
     }
 }

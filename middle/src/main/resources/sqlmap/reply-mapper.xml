@@ -29,5 +29,11 @@ set reply_content = #{reply_content}
 where reply_no = #{reply_no}
 </update>
 
+<!-- 댓글 수 -->
+<update id="reply_count">
+update tbl_board
+set reply_count = (select count(reply_no) from tbl_reply
+where tbl_board.board_no = tbl_reply.board_no)
+</update>
 
 </mapper>

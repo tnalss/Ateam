@@ -47,7 +47,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     ArrayList<ReplyVO> reply;
 
     int bo = 0;
-    int tmp;
     @Override
     public void onResume() {
         super.onResume();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.conn.CommonMethod;
@@ -87,6 +88,12 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         new CommonMethod().setParams("re", new Gson().toJson(vo)).sendPost("reply_update.no", (isResult, data) -> {
             h.btn_no_reply_update.setVisibility(View.GONE);
             h.edt_no_reply_update.setVisibility(View.GONE);
+            Intent intent = new Intent(context, ListInfo_no_Activity.class);
+            intent.putExtra("board_no", reply.get(index).getBoard_no());
+            context.startActivity(intent);
+            ((Activity)context).onBackPressed();
+            notifyItemChanged(index);
+
         });
             }
         });
