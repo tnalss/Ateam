@@ -161,8 +161,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
+               // SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                //Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
 
 
             }

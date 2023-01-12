@@ -129,7 +129,7 @@
     </LinearLayout>
 
     <!--일정따서 일정넣던가-->
-<devs.mulham.horizontalcalendar.HorizontalCalendarView
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
     android:id="@+id/calendarView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
