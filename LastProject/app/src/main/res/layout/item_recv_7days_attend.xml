@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="110dp"
     android:layout_height="100dp"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,9 +9,9 @@
 
     <LinearLayout
         android:id="@+id/hc_layoutContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
+
         android:layout_marginBottom="5dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -22,8 +22,9 @@
         app:layout_constraintVertical_chainStyle="spread_inside">
 
         <TextView
+            android:textAlignment="center"
             android:id="@+id/hc_text_top"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -45,7 +46,6 @@
             android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             tools:text="Mon" />
-
 
         <TextView
 
