@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
+        Log.d("TAG", "onBindViewHolder: "+i);
         if (temp == 1) {
             if (i == 0) {
                 new CommonMethod().setParams("emp_no", ea_list.get(i).getEmp_no()).sendPost("info.emp", (isResult, data) -> {
@@ -72,15 +74,27 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_name.setText(vo.getEmp_name());
                     h.tv_info_email.setText(vo.getEmail());
                     h.tv_info_dep.setText(vo.getDepartment_name());
-                    if (Common.loginInfo.getEmp_no().equals(vo.getEmp_no())) {
+
+
+
+                    if (Common.loginInfo.getEmp_no().equals(vo.getEmp_no()) && !(ea_list.get(i-1).getEa_r_statuas().equals("결재완료"))){
                         h.line_btn_sign.setVisibility(View.VISIBLE);
-                        h.tv_info_status.setText(ea_list.get(i - 1).getEa_status());
+                        h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
                         h.tv_info_status.setVisibility(View.VISIBLE);
+                        h.tv_info_date.setVisibility((View.GONE));
                     } else {
-                        h.tv_info_status.setText(ea_list.get(i - 1).getEa_status());
-                        h.tv_info_status.setVisibility(View.VISIBLE);
+                        if(ea_list.get(i-1).getEa_r_statuas().equals("결재완료")){
+                           h.imgv_stamp.setVisibility(View.VISIBLE);
+                           h.line_btn_sign.setVisibility(View.GONE);
+                           h.tv_info_date.setText(ea_list.get(i-1).getEa_a_date().toString());
+                        }else{
+                            h.tv_info_date.setVisibility((View.GONE));
+                            h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
+                            h.tv_info_status.setVisibility(View.VISIBLE);
+                        }
+
                     }
-                    h.tv_info_date.setVisibility((View.GONE));
+
 
                     //결재 버튼 클릭시
                    h.btn_approved.setOnClickListener(new View.OnClickListener() {
@@ -90,14 +104,13 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                            my_alert.setMessage("결재하시겠습니까?");
                            my_alert.setPositiveButton("결재하기", (dialog, which) -> {
                                Toast.makeText(context, "결재됨.", Toast.LENGTH_SHORT).show();
-                               new CommonMethod().setParams("ea_status","E7").setParams("emp_no",vo.getEmp_no()).setParams("ea_num", ea_list.get(0).getEa_num()).sendPost("sign_status.ea", (isResult, data) -> {
+                               new CommonMethod().setParams("ea_status","E7").setParams("emp_no",Common.loginInfo.getEmp_no()).setParams("ea_num", ea_list.get(0).getEa_num()).sendPost("sign_status.ea", (isResult, data) -> {
                                    Fragment f = new EaInfoFragment();
                                    Bundle bundle = new Bundle();
                                    bundle.putString("ea_num", ea_list.get(0).getEa_num());
                                    bundle.putInt("no", 1);
                                    f.setArguments(bundle);
                                  activity.changeFragment(f);
-
                                });
                            });
                            my_alert.setNegativeButton("취소",(dialog, which) -> {
@@ -135,7 +148,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_dep.setText(vo.getDepartment_name());
                     h.tv_info_date.setVisibility(View.GONE);
                     h.tv_info_status.setVisibility(View.VISIBLE);
-                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_status());
+                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
                 });
             }
         } else if (temp == 2) {
@@ -156,7 +169,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_dep.setText(vo.getDepartment_name());
                     h.tv_info_date.setVisibility(View.GONE);
                     h.tv_info_status.setVisibility(View.VISIBLE);
-                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_status());
+                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
 
                 });
             }

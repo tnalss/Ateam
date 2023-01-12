@@ -30,6 +30,7 @@ public class EaController {
 	@RequestMapping(value="/sign_status.ea", produces="text/html;charset=utf-8")
 	public void ea_sign_status(String ea_status,String emp_no, String ea_num) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		System.out.println(emp_no);
 		map.put("emp_no", emp_no);
 		map.put("ea_status", ea_status);
 		map.put("ea_num", ea_num);

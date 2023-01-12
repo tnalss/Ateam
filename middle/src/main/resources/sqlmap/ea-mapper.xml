@@ -46,7 +46,7 @@ select * from get_code_table('P')
 <!-- 결재함 결재하기 -->
 <update id="sign_status">
 update tbl_ea
-set ea_status = #{ea_status}, ea_a_date = current_date 
+set ea_r_statuas = #{ea_status}, ea_a_date = current_date 
 where ea_num = #{ea_num} and ea_receiver = #{emp_no}
 </update>
 
@@ -80,10 +80,9 @@ order by ea_date desc
 
 <!-- 최근 작성 기안 리스트 -->
 <select id="recentlist" resultType="ea.EaVO">
-select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date, GET_CODE_VALUE(ea_read ) ea_read 
+select distinct ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, GET_CODE_VALUE(ea_read ) ea_read,ea_r_date 
 from tbl_ea
 where emp_no = #{emp_no} and ea_status != 'E4'
-group by ea_num, ea_title, ea_status, ea_date, ea_a_date,ea_read 
 order by ea_date desc
 </select>
 
