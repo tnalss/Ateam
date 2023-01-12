@@ -42,7 +42,7 @@ public class UtilController {
 		
 	}
 	
-	@RequestMapping("/attendString")
+	@RequestMapping("/attendString.at")
 	public String attendString(String emp_no) {
 		String status="";
 		Date date = new Date();
