@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,9 +112,10 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         btn_signer_search = sign_dialog.findViewById(R.id.btn_search);
         recv_sign_search=  sign_dialog.findViewById(R.id.recv_sign_search);
 
+
+
         //Chip 사용
         chip_sgroup = sign_dialog.findViewById(R.id.chip_group);
-
         btn_signer_search.setOnClickListener(this);
 
         //참조 추가 다이얼
