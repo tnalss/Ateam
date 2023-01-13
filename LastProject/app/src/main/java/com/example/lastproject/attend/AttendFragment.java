@@ -50,7 +50,7 @@ public class AttendFragment extends Fragment {
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
     Button workday;
-    ImageView  iv_emp_profile;
+    ImageView  iv_emp_profile, to_att_act;
     MainActivity activity;
     ArrayList<AttendVO> list;
     AttendVO vo = null;
@@ -107,6 +107,14 @@ public class AttendFragment extends Fragment {
             }
         });
 
+        to_att_act = v.findViewById(R.id.to_att_act);
+        to_att_act.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AttendActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         /*출근 버튼 클릭*/

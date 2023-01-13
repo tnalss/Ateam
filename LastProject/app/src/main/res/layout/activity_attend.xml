@@ -41,7 +41,6 @@
                 android:text="현재 근무 상황"/>
 
 
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,6 +59,20 @@
                 android:layout_marginBottom="10dp"
                 android:text="휴가 및 연차 신청관리" />
 
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/apply"
+                android:backgroundTint="@color/sub_color"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_color"
+                android:text="신청"/>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/sub_color"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -68,6 +81,7 @@
                 android:layout_marginRight="10dp">
                 <!--신청현황1-->
                 <LinearLayout
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -76,8 +90,7 @@
                         style="@style/main_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="승인 완료"
-                        android:textColor="@color/blue" />
+                        android:text="승인 완료"              />
 
                     <TextView
                         style="@style/sub_size"
@@ -99,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="요청 중"
-                        android:textColor="@color/green" />
+                        />
 
                     <TextView
                         style="@style/sub_size"
@@ -111,6 +124,7 @@
                 </LinearLayout>
                 <!--신청현황3-->
                 <LinearLayout
+                    android:layout_marginRight="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -121,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="반려"
-                        android:textColor="@color/red" />
+                        />
 
                     <TextView
                         style="@style/sub_size"
@@ -137,5 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
+
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

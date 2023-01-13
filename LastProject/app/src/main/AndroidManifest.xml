@@ -55,7 +55,21 @@
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-         <activity
+        <activity
+            android:name=".al.AL_Apply_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".attend.Admin_AttendActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".notice.Update_no_Activity"
             android:exported="false">
             <meta-data
@@ -69,7 +83,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".notice.Update_sec_Activity"
             android:exported="false">
@@ -160,12 +173,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
+        </activity> <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

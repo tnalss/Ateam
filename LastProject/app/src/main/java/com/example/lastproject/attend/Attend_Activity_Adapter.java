@@ -10,9 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.R;
+import com.example.lastproject.al.AlVO;
+
+import java.util.ArrayList;
 
 public class Attend_Activity_Adapter extends RecyclerView.Adapter<Attend_Activity_Adapter.ViewHolder> {
     LayoutInflater inflater;
+    ArrayList<AlVO> list;
+
+
 
     public Attend_Activity_Adapter(LayoutInflater inflater) {
         this.inflater = inflater;
@@ -31,11 +37,12 @@ public class Attend_Activity_Adapter extends RecyclerView.Adapter<Attend_Activit
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

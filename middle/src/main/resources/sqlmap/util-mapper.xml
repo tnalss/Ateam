@@ -9,7 +9,7 @@ select attend_date,
 TO_CHAR(attend_on, 'HH24:MI:SS') attend_on,
 TO_CHAR(attend_off, 'HH24:MI:SS') attend_off,att_code
 from tbl_attend
-where emp_no=#{emp_no} and attend_date= #{date}
+where emp_no=#{emp_no} and attend_date = #{date}
 </select>
 
 <!-- 사원 코드만불러오기 -->

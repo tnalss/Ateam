@@ -15,9 +15,9 @@
         <ImageView
             android:layout_centerVertical="true"
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
 
         <TextView
             android:layout_centerVertical="true"
@@ -103,7 +103,7 @@
 
     <Button
         android:layout_margin="10dp"
-        android:backgroundTint="@color/p_color"
+        android:backgroundTint="@color/main_color"
         android:layout_gravity="center"
         android:id="@+id/btn_sche_insert"
         android:text="등록"
