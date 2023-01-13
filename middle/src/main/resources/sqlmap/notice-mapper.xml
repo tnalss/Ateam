@@ -6,7 +6,7 @@
 <select id="list" resultType='notice.NoticeVO'>
 <![CDATA[select *
 from (select * from tbl_board where board_cate = 'O0' order by 1 desc)
-where rownum <=5]]>
+where rownum <=3]]>
 </select>
 
 
@@ -49,6 +49,13 @@ update tbl_board
 set board_title = #{board_title}, board_content = #{board_content}
 where board_no = #{board_no}
 </update>
+
+<!-- 익명게시판 검색 -->
+<select id="search" resultType="notice.NoticeVO">
+select *
+from tbl_board
+where board_title like '%'||#{board_title}||'%' and board_cate = 'O1'
+</select>
 
 
 
