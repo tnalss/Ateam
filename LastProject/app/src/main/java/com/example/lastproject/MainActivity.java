@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity {
             }   else if ( item.getItemId() == R.id.btm_item4 ){
                 changeFragment(new EaFragment());
                 //전자결재
-            }   else if(item.getItemId() == R.id.btm_logout )   {
-                //임시 로그아웃
-                Intent intent2 = new Intent(MainActivity.this, LogoutActivity.class);
-                startActivity(intent2);
-                finish();
             }
             return true;
         });

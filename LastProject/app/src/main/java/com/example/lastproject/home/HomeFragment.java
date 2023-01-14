@@ -25,6 +25,7 @@ import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
 import com.example.lastproject.employee.ManageEmpFragment;
 import com.example.lastproject.login.LoginVO;
+import com.example.lastproject.login.LogoutActivity;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -108,13 +109,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-
-
+        
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
+        binding.tvBurgerName.setText(Common.loginInfo.getEmp_name());
+
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
         if(Common.loginInfo.getProfile_path()!=null){
             Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.ivEmpProfile);
+            Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.cvBurgerProfile);
         }
         // 쿼리 날려서 출퇴근 여부 파악
         // 올때마다 쿼리날리는게 거슬리는데? 방법없나?
@@ -199,6 +201,10 @@ binding.ivBurger.setOnClickListener(this);
 
         binding.ivEmpDetail.setOnClickListener(this);
         binding.flOnOff.setOnClickListener(this);
+        //버거메뉴
+        binding.llMyInfo.setOnClickListener(this);
+        binding.llLogout.setOnClickListener(this);
+
         View v = binding.getRoot();
         return v;
     }
@@ -221,7 +227,7 @@ binding.ivBurger.setOnClickListener(this);
         } else if ( v.getId() == R.id.menu2_3){
             // 전자결재메뉴 눌렀을때 바텀네비게이션 찾아가서 눌러줌
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
-        } else if (v.getId() == R.id.iv_emp_detail){
+        } else if (v.getId() == R.id.iv_emp_detail || v.getId() == R.id.ll_my_info){
             //사원명 옆에 > 눌렀을때
             activity.changeFragment(new MyInfoFragment());
         } else if(v.getId() == R.id.fl_on_off){
@@ -233,6 +239,11 @@ binding.ivBurger.setOnClickListener(this);
            startActivity(orgIntent);
         } else if(v.getId() == R.id.iv_burger){
             binding.draw.openDrawer(Gravity.RIGHT);
+        } else if(v.getId() == R.id.ll_logout){
+            //버거메뉴 로그아웃
+            Intent intent2 = new Intent(activity, LogoutActivity.class);
+            startActivity(intent2);
+            activity.finish();
         }
     }
 

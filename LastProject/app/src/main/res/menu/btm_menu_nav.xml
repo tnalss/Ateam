@@ -5,35 +5,21 @@
         android:id="@+id/btm_item1"
         android:icon="@drawable/ic_home"
         android:enabled="true"
-        android:title="홈"
-        />
-
+        android:title="홈"/>
     <item
         android:id="@+id/btm_item2"
         android:icon="@drawable/ic_cal"
         android:enabled="true"
-        android:title="일정"
-        />
+        android:title="일정"/>
     <item
         android:id="@+id/btm_item3"
         android:icon="@drawable/ic_on"
         android:enabled="true"
-        android:title="출근퇴근"
-        />
+        android:title="출ㆍ퇴근"/>
     <item
         android:id="@+id/btm_item4"
         android:icon="@drawable/ic_sheet"
         android:enabled="true"
         android:title="전자결재"
         app:showAsAction="ifRoom"/>
-
-<!-- 임시로 만듬 -->
-    <item
-        android:id="@+id/btm_logout"
-        android:icon="@drawable/ic_sheet"
-        android:enabled="true"
-        android:title="임시 로그아웃"
-        app:showAsAction="ifRoom"/>
-
-
 </menu>
