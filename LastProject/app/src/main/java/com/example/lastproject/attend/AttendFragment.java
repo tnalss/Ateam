@@ -77,7 +77,7 @@ public class AttendFragment extends Fragment {
         location_tv = v.findViewById(R.id.location_tv);
 
 
-
+//기기시간말고 서버시간을 얻어와야 할까요?
         /*현재시각 표시*/
         current_time = v.findViewById(R.id.current_time);
         current_time.setText(getCurrentTime());

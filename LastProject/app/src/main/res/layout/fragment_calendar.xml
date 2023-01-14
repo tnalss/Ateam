@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".calendar.CalendarFragment"
     android:orientation="vertical"
-    android:padding="10dp"
     >
+    <!--최상위 태그에 패딩 주지마세요.. 계속 꼬입니다.-->
 
     <!--상단메뉴바-->
     <RelativeLayout
