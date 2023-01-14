@@ -33,7 +33,6 @@ public class FormListFragment extends Fragment {
         recv_form = v.findViewById(R.id.recv_form);
         activity = (MainActivity)getActivity();
         new CommonMethod().sendPost("form.ea", (isResult, data) -> {
-
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
             list = gson.fromJson(data,
                     new TypeToken<ArrayList<EaCodeVO>>(){}.getType());
