@@ -69,7 +69,7 @@ public class CodeController {
 	@RequestMapping(value="/deleteTopCode.cd", produces="text/html;charset=utf-8")
 	public void deleteTopCode(String code_category) {
 		//하위코드삭제
-		sql.delete("code.deleteBottomCode",code_category);
+		sql.delete("code.deleteBottomCodes",code_category);
 		//상위코드 삭제
 		sql.delete("code.deleteTopCode",code_category);
 		
@@ -110,6 +110,25 @@ public String newBottomCode(String code_category, String bottom_code, String cod
 
 }
 
+//하위코드 변경
+@RequestMapping(value="/updateBottomCode.cd", produces="text/html;charset=utf-8")
+public void updateBottomCode(String vo) {
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+	CodeVO info = gson.fromJson(vo, CodeVO.class);
+
+	sql.update("code.updateBottomCode",info);
+
+}
+
+//하위코드 삭제
+@RequestMapping(value="/deleteBottomCode.cd", produces="text/html;charset=utf-8")
+public void deleteBottomCode(String vo) {
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+	CodeVO info = gson.fromJson(vo, CodeVO.class);
+
+	sql.delete("code.deleteBottomCode",info);
+
+}
 	
 	
 }

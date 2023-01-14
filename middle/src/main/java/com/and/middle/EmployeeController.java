@@ -32,6 +32,13 @@ public class EmployeeController {
 		return new Gson().toJson(list).toString();
 	}
 	
+	// 사번으로 이름만 검색
+	@RequestMapping(value= "/findNameByNo.emp" , produces="text/html;charset=utf-8")
+	public String findNameByNo(String emp_no) {
+		
+		return sql.selectOne("emp.findNameByNo",emp_no);
+	}
+	
 	
 	
 	@RequestMapping(value= "/fire.emp" , produces="text/html;charset=utf-8")

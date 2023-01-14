@@ -63,7 +63,7 @@ select dept_code from tbl_org where emp_no = #{emp_no}
 	delete tbl_top_code
 	where code_category = #{Code_category}
 </delete>
-<delete id="deleteBottomCode">
+<delete id="deleteBottomCodes">
 	delete tbl_code
 	where code_category = #{Code_category}
 </delete>
@@ -84,5 +84,18 @@ WHERE code_category = #{top_code}
 	insert into tbl_code (code_category,code_num,code_value,create_date,creater)
 	values(#{code_category},#{bottom_code},#{code_value},current_date,#{emp_no})
 </insert>
+
+
+<update id="updateBottomCode">
+UPDATE tbl_code
+SET code_value = #{code_value} , code_value2= #{code_value2,jdbcType=VARCHAR},create_date= current_date, creater = #{emp_no}
+WHERE code_category = #{code_category} and code_num=#{code_num}
+</update>
+
+<delete id="deleteBottomCode">
+delete tbl_code
+where code_category = #{code_category} and code_num=#{code_num}
+</delete>
+
 
 </mapper>

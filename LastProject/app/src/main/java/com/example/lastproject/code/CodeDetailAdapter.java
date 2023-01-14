@@ -49,10 +49,15 @@ public class CodeDetailAdapter extends RecyclerView.Adapter<CodeDetailAdapter.Vi
 
         int i = position;
         holder.ll_each_code.setOnClickListener(v -> {
-            if(list.get(position).getCreater().equals("admin") ||list.get(position).getCreater().equals("pjy")||list.get(position).getCreater().equals("csm")){
-               Toast.makeText(activity, "기본 코드는 변경할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                 return;
-            }
+//            if(list.get(position).getCreater().equals("admin") ||list.get(position).getCreater().equals("pjy")||list.get(position).getCreater().equals("csm")){
+//               Toast.makeText(activity, "기본 코드는 변경할 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                 return;
+//            }
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("vo",list.get(i));
+            Fragment fragment = new CodeInfoFragment();
+            fragment.setArguments(bundle);
+            activity.changeFragment(fragment);
 
 
         });

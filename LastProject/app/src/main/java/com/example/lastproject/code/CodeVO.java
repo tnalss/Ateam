@@ -9,6 +9,15 @@ public class CodeVO implements Serializable {
 	private String code_category, code_name,creater,code_value, code_value2,code_comments;
 	private int code_num;
 	private Date create_date;
+	private String emp_no;
+
+	public String getEmp_no() {
+		return emp_no;
+	}
+
+	public void setEmp_no(String emp_no) {
+		this.emp_no = emp_no;
+	}
 
 	public String getCode_category() {
 		return code_category;

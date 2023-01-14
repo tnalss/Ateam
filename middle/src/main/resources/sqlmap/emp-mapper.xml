@@ -76,6 +76,13 @@ from tbl_emp
 where emp_name=#{emp_name} and email=#{email}
 </select>
 
+<!-- 사번으로 이름만 검색 -->
+<select id="findNameByNo" resultType="String">
+select emp_name
+from tbl_emp
+where emp_no=#{emp_no}
+</select>
+
 
 <!-- org 테이블 신규사원 코드 추가 -->
 <insert id="codeInsert">
