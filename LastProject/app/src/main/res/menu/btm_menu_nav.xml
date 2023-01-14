@@ -22,4 +22,10 @@
         android:enabled="true"
         android:title="전자결재"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/btm_item5"
+        android:icon="@drawable/ic_board"
+        android:enabled="true"
+        android:title="게시판"
+        app:showAsAction="ifRoom"/>
 </menu>

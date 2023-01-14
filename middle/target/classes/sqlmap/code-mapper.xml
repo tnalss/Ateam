@@ -31,4 +31,19 @@ where code_value=#{name}
 <select id="whatDepCode" resultType="String">
 select dept_code from tbl_org where emp_no = #{emp_no}
 </select>
+
+
+<!-- 상위코드 조회 -->
+<select id="topCodeList" resultType="code.CodeVO">
+	select * from tbl_top_code order by 1
+</select>
+
+<!-- 상위코드 조회 -->
+<select id="findBy" resultType="code.CodeVO">
+	select * from tbl_top_code where code_name like '%'|| #{keyword} ||'%' or code_category  like '%'|| #{keyword} ||'%' order by 1
+</select>
+
+
+
+
 </mapper>

@@ -80,8 +80,8 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
             dialog.show();
         } else if (v.getId() == R.id.btn_sche_modify){
 
-            //vo.setSche_title(binding.edtScheTitle.getText().toString());
-            //vo.setSche_content(binding.edtScheContent.getText().toString());
+            vo.setSche_title(binding.edtScheTitle.getText().toString());
+            vo.setSche_content(binding.edtScheContent.getText().toString());
 
             new CommonMethod().setParams("param",new Gson().toJson(vo)).sendPost("modify.sche",(isResult, data) -> {
                 if(isResult){

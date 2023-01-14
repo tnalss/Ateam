@@ -21,6 +21,7 @@ import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.Org_Chart.Org_MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.code.CodeFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
 import com.example.lastproject.employee.ManageEmpFragment;
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void run() {
                 handler.post(Update);
             }
-        }, 300, 2000);
+        }, 300, 2500);
 
         binding.vpSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        
+
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
         binding.tvBurgerName.setText(Common.loginInfo.getEmp_name());
 
@@ -215,7 +216,8 @@ binding.ivBurger.setOnClickListener(this);
             //사원관리
             activity.changeFragment(new ManageEmpFragment());
         } else if ( v.getId() == R.id.menu1_2){
-            //문서관리
+            //코드관리
+            activity.changeFragment(new CodeFragment());
         } else if ( v.getId() == R.id.menu1_3){
             //게시판
            activity.changeFragment(new NoticeFragment());
