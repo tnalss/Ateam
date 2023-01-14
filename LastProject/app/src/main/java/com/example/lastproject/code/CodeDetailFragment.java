@@ -54,7 +54,10 @@ public class CodeDetailFragment extends Fragment {
 
 
         allList(inflater);
-
+//        if(vo.getCreater().equals("admin")){
+//            binding.tvModify.setVisibility(View.GONE);
+//            binding.tvDelete.setVisibility(View.GONE);
+//        }
         binding.tvModify.setOnClickListener(v -> {
             if(vo.getCreater().equals("admin")){
                 Toast.makeText(activity, "기본 상위 코드는 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -96,9 +99,15 @@ public class CodeDetailFragment extends Fragment {
                 Toast.makeText(activity, "기본 상위 코드는 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            new CommonMethod().setParams("code_category",vo.getCode_category()).sendPost("deleteTopCode.cd",(isResult, data) -> {
-                activity.getSupportFragmentManager().popBackStack();
-            });
+
+            new AlertDialog.Builder(getContext()).setTitle("확인").setMessage("하위코드까지 삭제 됩니다.\n정말로 삭제하시겠습니까?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        new CommonMethod().setParams("code_category",vo.getCode_category()).sendPost("deleteTopCode.cd",(isResult, data) -> {
+                            activity.getSupportFragmentManager().popBackStack();
+                        });
+                    }).setNegativeButton(android.R.string.no, (dialog, which) -> {
+                    }).show();
+
         });
 
 

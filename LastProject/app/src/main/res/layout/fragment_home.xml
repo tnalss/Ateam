@@ -13,7 +13,10 @@
     android:orientation="vertical">
         <!--상단메뉴바-->
         <RelativeLayout
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
@@ -37,15 +40,35 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+<TextView
+    android:visibility="gone"
+    android:background="@drawable/item_radius2"
+    android:padding="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_centerVertical="true"
+    android:layout_toLeftOf="@+id/iv_noti"
+    android:id="@+id/tv_unreadDocs"
+    android:text="읽지 않은 문서 n 건"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/iv_noti"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/iv_burger"
                 android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_burger"
                 android:src="@drawable/ic_alert_c" />
+            <ImageView
+                android:id="@+id/iv_red_dot"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="-18dp"
+                android:layout_toRightOf="@id/iv_noti"
+                android:src="@drawable/ic_red_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"/>
             <ImageView
                 android:layout_marginLeft="5dp"
                 android:layout_centerVertical="true"

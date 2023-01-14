@@ -48,7 +48,8 @@ import com.example.lastproject.notice.NoticeFragment;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
     private MainActivity activity;
-    private int cnt=0;
+    private int cnt=0,flag=0;
+    private int unreadDocs=0;
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -145,6 +146,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
+        // 결재해야할 문서가 있으면 알림 띄워주기
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("howManyDocs.cm",(isResult, data) -> {
+            if(isResult){
+                if(!data.equals("0")){
+                    binding.ivRedDot.setVisibility(View.VISIBLE);
+                    unreadDocs=Integer.parseInt(data);
+                    binding.tvUnreadDocs.setText("미결재 문서 : "+unreadDocs+" 건");
+                }
+            }
+        });
+
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -206,6 +218,8 @@ binding.ivBurger.setOnClickListener(this);
         binding.llMyInfo.setOnClickListener(this);
         binding.llLogout.setOnClickListener(this);
 
+        binding.ivNoti.setOnClickListener(this);
+        binding.tvUnreadDocs.setOnClickListener(this);
         View v = binding.getRoot();
         return v;
     }
@@ -246,6 +260,16 @@ binding.ivBurger.setOnClickListener(this);
             Intent intent2 = new Intent(activity, LogoutActivity.class);
             startActivity(intent2);
             activity.finish();
+        } else if(v.getId() == R.id.iv_noti){
+            if(flag==0) {
+                binding.tvUnreadDocs.setVisibility(View.VISIBLE);
+                flag=1;
+            } else{
+                binding.tvUnreadDocs.setVisibility(View.GONE);
+                flag=0;
+            }
+        } else if ( v.getId() == R.id.tv_unreadDocs){
+            activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         }
     }
 

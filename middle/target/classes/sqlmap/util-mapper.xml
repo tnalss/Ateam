@@ -24,4 +24,10 @@ where emp_no=#{emp_no} and attend_date= #{date}
 	UPDATE tbl_emp SET emp_pw = #{emp_pw} WHERE emp_no=${emp_no}
 </update>
 
+
+<!-- 미결재 문서 조회 -->
+<select id="howManyDocs" resultType="String">
+	select count(*) from tbl_ea where ea_receiver = #{emp_no} and ea_r_statuas='E6'
+
+</select>
 </mapper>
