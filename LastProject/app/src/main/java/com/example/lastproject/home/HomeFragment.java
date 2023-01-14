@@ -3,12 +3,16 @@ package com.example.lastproject.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +47,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
     private MainActivity activity;
     private int cnt=0;
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -176,7 +186,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-
+binding.ivBurger.setOnClickListener(this);
 
         binding.menu11.setOnClickListener(this);
         binding.menu12.setOnClickListener(this);
@@ -221,6 +231,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //조직도 눌렀을때 조직도 화면으로
            Intent orgIntent = new Intent(activity, Org_MainActivity.class);
            startActivity(orgIntent);
+        } else if(v.getId() == R.id.iv_burger){
+            binding.draw.openDrawer(Gravity.RIGHT);
         }
     }
 
