@@ -176,6 +176,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/iv_add_company_schedule"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -186,7 +187,6 @@
 
         <LinearLayout
             android:visibility="gone"
-            android:background="@drawable/item_radius2"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_margin="10dp"
@@ -234,6 +234,7 @@
             android:textColor="@color/blue"
             android:textStyle="bold"/>
             <ImageView
+                android:id="@+id/iv_add_department_schedule"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -242,7 +243,6 @@
         </LinearLayout>
         <LinearLayout
             android:visibility="gone"
-            android:background="@drawable/item_radius2"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_margin="10dp"
@@ -286,6 +286,7 @@
     android:textStyle="bold"/>
 
             <ImageView
+                android:id="@+id/iv_add_personal_schedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
