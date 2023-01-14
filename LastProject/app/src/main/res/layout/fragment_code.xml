@@ -26,28 +26,33 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="공통 코드 관리" />
-
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_search"
+            android:src="@drawable/ic_search_c"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+        <EditText
+            android:inputType="text"
+            android:maxLines="1"
+            android:hint="검색어를 입력하세요."
+            android:visibility="gone"
+            android:id="@+id/edt_find"
+            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/search_button"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_search_c"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edt_find"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:id="@+id/iv_find"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_search_c"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_no_result"
@@ -60,8 +65,17 @@
         android:layout_height="300dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/recv_top_code"/>
 
+    <Button
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/p_color"
+        android:id="@+id/btn_new_code"
+        android:layout_gravity="center"
+        android:text="신규 상위 코드 등록"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

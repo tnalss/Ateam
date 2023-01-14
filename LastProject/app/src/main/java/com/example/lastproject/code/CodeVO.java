@@ -1,10 +1,11 @@
 package com.example.lastproject.code;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
 
-public class CodeVO {
+public class CodeVO implements Serializable {
 	private String code_category, code_name,creater,code_value, code_value2,code_comments;
 	private int code_num;
 	private Date create_date;

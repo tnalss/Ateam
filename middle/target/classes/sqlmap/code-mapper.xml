@@ -43,7 +43,26 @@ select dept_code from tbl_org where emp_no = #{emp_no}
 	select * from tbl_top_code where code_name like '%'|| #{keyword} ||'%' or code_category  like '%'|| #{keyword} ||'%' order by 1
 </select>
 
+<!-- 하위 코드 조회 -->
+<select id="findByCate" resultType="code.CodeVO">
+	select * from tbl_code where code_category = #{keyword} order by code_num
+</select>
 
+<!-- 상위코드 있는지 조회 -->
+<select id="findTopByCate" resultType="Integer">
+	select count(*) from tbl_top_code where code_category = #{top_code}
+</select>
+
+<insert id="newTopCode">
+	insert into tbl_top_code (code_category,code_name,create_Date,creater)
+	values(#{top_code},#{code_value},current_date,#{emp_no})
+
+</insert>
+
+<delete id="deleteTopCode">
+	delete tbl_top_code
+	where code_category = #{Code_category}
+</delete>
 
 
 </mapper>
