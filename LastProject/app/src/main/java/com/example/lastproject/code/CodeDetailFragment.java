@@ -124,8 +124,8 @@ public class CodeDetailFragment extends Fragment {
                             String code_value = edt_code_value.getText().toString().trim();
                             Pattern ps = Pattern.compile("^[0-9]*$");
 
-                            if( !ps.matcher(bottom_code).matches()||bottom_code.length()>1){
-                                Toast.makeText(activity, "숫자값만 입력가능합니다.", Toast.LENGTH_SHORT).show();
+                            if( !ps.matcher(bottom_code).matches()||bottom_code.length()>2){
+                                Toast.makeText(activity, "0~99만 입력가능합니다.", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 

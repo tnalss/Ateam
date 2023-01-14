@@ -25,24 +25,28 @@ public class CodeInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentCodeInfoBinding.inflate(inflater,container,false);
-        activity= (MainActivity) getActivity();
-        Bundle bundle= getArguments();
+        binding = FragmentCodeInfoBinding.inflate(inflater, container, false);
+        activity = (MainActivity) getActivity();
+        Bundle bundle = getArguments();
         vo = (CodeVO) bundle.getSerializable("vo");
 
         binding.tvTopCode.setText(vo.getCode_category());
 
-        binding.tvBottomCode.setText(vo.getCode_num()+"");
+        binding.tvBottomCode.setText(vo.getCode_num() + "");
         binding.edtCodeValue.setText(vo.getCode_value());
         binding.edtCodeValue2.setText(vo.getCode_value2());
 
         binding.tvCreateDate.setText(vo.getCreate_date().toString());
 
-        new CommonMethod().setParams("emp_no",vo.getCreater()).sendPost("findNameByNo.emp",(isResult, data) -> {
-            if(isResult){
-                binding.tvCreater.setText(data);
-            }
-        });
+        if (vo.getCreater().equals("admin") || vo.getCreater().equals("pjy") || vo.getCreater().equals("csm")) {
+            binding.tvCreater.setText("기본코드");
+        } else {
+            new CommonMethod().setParams("emp_no", vo.getCreater()).sendPost("findNameByNo.emp", (isResult, data) -> {
+                if (isResult) {
+                    binding.tvCreater.setText(data);
+                }
+            });
+        }
 
         binding.ivBack.setOnClickListener(v -> {activity.onBackPressed();});
         binding.btnDelete.setOnClickListener(v -> {
