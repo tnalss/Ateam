@@ -75,4 +75,14 @@ WHERE code_category = #{top_code}
 </update>
 
 
+<!-- 하위코드 있는지 조회 -->
+<select id="findBottomByNum" resultType="Integer">
+	select count(*) from tbl_code where code_num = #{bottom_code} and code_category=#{code_category}
+</select>
+
+<insert id="newBottomCode">
+	insert into tbl_code (code_category,code_num,code_value,create_date,creater)
+	values(#{code_category},#{bottom_code},#{code_value},current_date,#{emp_no})
+</insert>
+
 </mapper>

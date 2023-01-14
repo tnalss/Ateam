@@ -88,4 +88,28 @@ public class CodeController {
 	}
 	
 	
+	
+	//하위코드 생성
+@RequestMapping(value="/newBottomCode.cd", produces="text/html;charset=utf-8")
+public String newBottomCode(String code_category, String bottom_code, String code_value, String emp_no) {
+	HashMap<String, String> map = new HashMap<>();
+	map.put("code_category", code_category);
+	map.put("bottom_code", bottom_code);
+	map.put("code_value", code_value);
+	map.put("emp_no", emp_no);
+	
+	int temp = sql.selectOne("code.findBottomByNum",map);
+		
+	if(temp != 0 ) {
+		return "false";
+	} else {
+
+		sql.insert("code.newBottomCode",map);
+		return "true";
+	}
+
+}
+
+	
+	
 }

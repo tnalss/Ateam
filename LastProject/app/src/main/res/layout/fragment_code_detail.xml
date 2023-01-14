@@ -70,11 +70,29 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_no_bottom_code"
+        android:visibility="gone"
+        android:gravity="center"
+        style="@style/main_size"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:text="하위 코드가 없습니다."
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_code_detail"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"/>
+    <Button
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/p_color"
+        android:id="@+id/btn_new_code"
+        android:layout_gravity="center"
+        android:text="신규 하위 코드 등록"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 
