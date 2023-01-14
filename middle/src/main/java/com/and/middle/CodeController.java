@@ -68,9 +68,23 @@ public class CodeController {
 	//상위코드 삭제
 	@RequestMapping(value="/deleteTopCode.cd", produces="text/html;charset=utf-8")
 	public void deleteTopCode(String code_category) {
-		
+		//하위코드삭제
+		sql.delete("code.deleteBottomCode",code_category);
+		//상위코드 삭제
 		sql.delete("code.deleteTopCode",code_category);
 		
+	}
+	
+	//상위코드 변경
+	@RequestMapping(value="/updateTopCode.cd", produces="text/html;charset=utf-8")
+	public void updateTopCode(String top_code, String code_value, String emp_no) {
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("top_code", top_code);
+		map.put("code_value", code_value);
+		map.put("emp_no", emp_no);
+		sql.update("code.updateTopCode",map);
+
 	}
 	
 	

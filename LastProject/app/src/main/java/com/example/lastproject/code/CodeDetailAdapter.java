@@ -1,21 +1,28 @@
 package com.example.lastproject.code;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class CodeDetailAdapter extends RecyclerView.Adapter<CodeDetailAdapter.ViewHolder>{
     private LayoutInflater inflater;
@@ -46,7 +53,6 @@ public class CodeDetailAdapter extends RecyclerView.Adapter<CodeDetailAdapter.Vi
                Toast.makeText(activity, "기본 코드는 변경할 수 없습니다.", Toast.LENGTH_SHORT).show();
                  return;
             }
-
 
 
         });

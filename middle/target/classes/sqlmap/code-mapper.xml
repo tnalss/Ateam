@@ -63,6 +63,16 @@ select dept_code from tbl_org where emp_no = #{emp_no}
 	delete tbl_top_code
 	where code_category = #{Code_category}
 </delete>
+<delete id="deleteBottomCode">
+	delete tbl_code
+	where code_category = #{Code_category}
+</delete>
+
+<update id="updateTopCode">
+UPDATE tbl_top_code
+SET code_name = #{code_value} , create_date= current_date, creater = #{emp_no}
+WHERE code_category = #{top_code} 
+</update>
 
 
 </mapper>
