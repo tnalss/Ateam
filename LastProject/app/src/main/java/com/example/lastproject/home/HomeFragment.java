@@ -3,12 +3,16 @@ package com.example.lastproject.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,10 +21,12 @@ import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.Org_Chart.Org_MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.code.CodeFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
 import com.example.lastproject.employee.ManageEmpFragment;
 import com.example.lastproject.login.LoginVO;
+import com.example.lastproject.login.LogoutActivity;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -42,7 +48,14 @@ import com.example.lastproject.notice.NoticeFragment;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentHomeBinding binding;
     private MainActivity activity;
-    private int cnt=0;
+    private int cnt=0,flag=0;
+    private int unreadDocs=0;
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,7 +101,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void run() {
                 handler.post(Update);
             }
-        }, 300, 2000);
+        }, 300, 2500);
 
         binding.vpSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -99,12 +112,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-
-
         binding.tvEmpName.setText(Common.loginInfo.getEmp_name());
+        binding.tvBurgerName.setText(Common.loginInfo.getEmp_name());
+
         binding.tvEmpDepRank.setText(Common.loginInfo.getDepartment_name()+" / "+Common.loginInfo.getRank_name());
         if(Common.loginInfo.getProfile_path()!=null){
             Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.ivEmpProfile);
+            Glide.with(this).load(Common.loginInfo.getProfile_path()).error(R.drawable.error_user_profile).into(binding.cvBurgerProfile);
         }
         // 쿼리 날려서 출퇴근 여부 파악
         // 올때마다 쿼리날리는게 거슬리는데? 방법없나?
@@ -131,13 +145,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
+        // 결재해야할 문서가 있으면 알림 띄워주기
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("howManyDocs.cm",(isResult, data) -> {
+            if(isResult){
+                if(!data.equals("0")){
+                    binding.ivRedDot.setVisibility(View.VISIBLE);
+                    unreadDocs=Integer.parseInt(data);
+                    binding.tvUnreadDocs.setText("미결재 문서 : "+unreadDocs+" 건");
+                }
+            }
+        });
+
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
-
         /* ends after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
+
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(binding.getRoot(), R.id.calendarView).range(startDate, endDate)
                 .addEvents(new CalendarEventsPredicate() {
                     @Override
@@ -159,9 +185,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
-
+               // SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                //Log.d("TAG", "events: "+ sdf.format(date.getTime()) +position);
 
             }
             @Override
@@ -176,7 +201,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-
+binding.ivBurger.setOnClickListener(this);
 
         binding.menu11.setOnClickListener(this);
         binding.menu12.setOnClickListener(this);
@@ -189,6 +214,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         binding.ivEmpDetail.setOnClickListener(this);
         binding.flOnOff.setOnClickListener(this);
+        //버거메뉴
+        binding.llMyInfo.setOnClickListener(this);
+        binding.llLogout.setOnClickListener(this);
+
+        binding.ivNoti.setOnClickListener(this);
+        binding.tvUnreadDocs.setOnClickListener(this);
         View v = binding.getRoot();
         return v;
     }
@@ -199,7 +230,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //사원관리
             activity.changeFragment(new ManageEmpFragment());
         } else if ( v.getId() == R.id.menu1_2){
-            //문서관리
+            //코드관리
+            activity.changeFragment(new CodeFragment());
         } else if ( v.getId() == R.id.menu1_3){
             //게시판
            activity.changeFragment(new NoticeFragment());
@@ -211,10 +243,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if ( v.getId() == R.id.menu2_3){
             // 전자결재메뉴 눌렀을때 바텀네비게이션 찾아가서 눌러줌
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
-        } else if (v.getId() == R.id.iv_emp_detail){
+        } else if (v.getId() == R.id.iv_emp_detail || v.getId() == R.id.ll_my_info){
             //사원명 옆에 > 눌렀을때
-//            Intent detailIntent = new Intent(activity,MyInfoActivity.class);
-//            startActivity(detailIntent);
             activity.changeFragment(new MyInfoFragment());
         } else if(v.getId() == R.id.fl_on_off){
             //상단에 x나 v버튼눌렀을때 출퇴근 화면으로
@@ -223,6 +253,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //조직도 눌렀을때 조직도 화면으로
            Intent orgIntent = new Intent(activity, Org_MainActivity.class);
            startActivity(orgIntent);
+        } else if(v.getId() == R.id.iv_burger){
+            binding.draw.openDrawer(Gravity.RIGHT);
+        } else if(v.getId() == R.id.ll_logout){
+            //버거메뉴 로그아웃
+            Intent intent2 = new Intent(activity, LogoutActivity.class);
+            startActivity(intent2);
+            activity.finish();
+        } else if(v.getId() == R.id.iv_noti){
+            if(flag==0) {
+                binding.tvUnreadDocs.setVisibility(View.VISIBLE);
+                flag=1;
+            } else{
+                binding.tvUnreadDocs.setVisibility(View.GONE);
+                flag=0;
+            }
+        } else if ( v.getId() == R.id.tv_unreadDocs){
+            activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         }
     }
 

@@ -40,7 +40,7 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String ko_day_of_week = "", ko_month = "";
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
         try {
             Date date = sdf.parse(list.get(position).getAttend_date());
             Calendar calendar = Calendar.getInstance();

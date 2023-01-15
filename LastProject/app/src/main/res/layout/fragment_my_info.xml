@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-<TextView
+    <TextView
     android:id="@+id/tv_my_info_update"
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
@@ -193,10 +193,7 @@
 
     </LinearLayout>
 
-    <!-- 내가 올린 문서 -->
 
-
-    <!-- 내가 쓴 글 -->
 
 
 

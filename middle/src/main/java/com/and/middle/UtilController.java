@@ -74,6 +74,10 @@ public class UtilController {
 		sql.update("util.tempPW",info);
 
 	}
-	
+	@RequestMapping(value = "/howManyDocs.cm",produces="text/html;charset=utf-8")
+	public String howManyDocs(String emp_no) {
+						
+		return sql.selectOne("util.howManyDocs",emp_no);
+	}
 
 }

@@ -1,5 +1,7 @@
 package com.example.lastproject.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
@@ -26,7 +29,8 @@ import java.util.ArrayList;
 
 
 public class MyInfoFragment extends Fragment {
-
+    EditText pw;
+    AlertDialog.Builder alert;
     FragmentMyInfoBinding binding;
     MainActivity activity;
 
@@ -80,7 +84,27 @@ public class MyInfoFragment extends Fragment {
 
         // 정보변경 누르면 정보변경으로
         binding.tvMyInfoUpdate.setOnClickListener(v -> {
-            activity.changeFragment(new MyInfoUpdateFragment());
+            alert = new AlertDialog.Builder(getContext());
+            alert.setTitle("비밀번호 확인");
+            alert.setMessage("현재 비밀번호를 입력해주세요.");
+            pw = new EditText(getContext());
+            alert.setView(pw);
+            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(pw.getText().toString().equals(Common.loginInfo.getEmp_pw())){
+                        activity.changeFragment(new MyInfoUpdateFragment());
+                    }
+                }
+            });
+            alert.setNegativeButton("취소",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                }
+            });
+            alert.show();
+
+
         });
 
         // 7일간 본인의 근태 조회

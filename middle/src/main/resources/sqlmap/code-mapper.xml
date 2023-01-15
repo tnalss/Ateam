@@ -31,4 +31,71 @@ where code_value=#{name}
 <select id="whatDepCode" resultType="String">
 select dept_code from tbl_org where emp_no = #{emp_no}
 </select>
+
+
+<!-- 상위코드 조회 -->
+<select id="topCodeList" resultType="code.CodeVO">
+	select * from tbl_top_code order by 1
+</select>
+
+<!-- 상위코드 조회 -->
+<select id="findBy" resultType="code.CodeVO">
+	select * from tbl_top_code where code_name like '%'|| #{keyword} ||'%' or code_category  like '%'|| #{keyword} ||'%' order by 1
+</select>
+
+<!-- 하위 코드 조회 -->
+<select id="findByCate" resultType="code.CodeVO">
+	select * from tbl_code where code_category = #{keyword} order by code_num
+</select>
+
+<!-- 상위코드 있는지 조회 -->
+<select id="findTopByCate" resultType="Integer">
+	select count(*) from tbl_top_code where code_category = #{top_code}
+</select>
+
+<insert id="newTopCode">
+	insert into tbl_top_code (code_category,code_name,create_Date,creater)
+	values(#{top_code},#{code_value},current_date,#{emp_no})
+
+</insert>
+
+<delete id="deleteTopCode">
+	delete tbl_top_code
+	where code_category = #{Code_category}
+</delete>
+<delete id="deleteBottomCodes">
+	delete tbl_code
+	where code_category = #{Code_category}
+</delete>
+
+<update id="updateTopCode">
+UPDATE tbl_top_code
+SET code_name = #{code_value} , create_date= current_date, creater = #{emp_no}
+WHERE code_category = #{top_code} 
+</update>
+
+
+<!-- 하위코드 있는지 조회 -->
+<select id="findBottomByNum" resultType="Integer">
+	select count(*) from tbl_code where code_num = #{bottom_code} and code_category=#{code_category}
+</select>
+
+<insert id="newBottomCode">
+	insert into tbl_code (code_category,code_num,code_value,create_date,creater)
+	values(#{code_category},#{bottom_code},#{code_value},current_date,#{emp_no})
+</insert>
+
+
+<update id="updateBottomCode">
+UPDATE tbl_code
+SET code_value = #{code_value} , code_value2= #{code_value2,jdbcType=VARCHAR},create_date= current_date, creater = #{emp_no}
+WHERE code_category = #{code_category} and code_num=#{code_num}
+</update>
+
+<delete id="deleteBottomCode">
+delete tbl_code
+where code_category = #{code_category} and code_num=#{code_num}
+</delete>
+
+
 </mapper>

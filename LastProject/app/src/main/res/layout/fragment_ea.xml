@@ -82,7 +82,7 @@
                     app:cardCornerRadius="20dp">
 
                     <TextView
-                        style="@style/main_size"
+                        style="@style/sub_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -100,7 +100,7 @@
                     app:cardCornerRadius="20dp">
 
                     <TextView
-                        style="@style/main_size"
+                        style="@style/sub_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -118,7 +118,7 @@
                     app:cardCornerRadius="20dp">
 
                     <TextView
-                        style="@style/main_size"
+                        style="@style/sub_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -136,7 +136,7 @@
                     app:cardCornerRadius="20dp">
 
                     <TextView
-                        style="@style/main_size"
+                        style="@style/sub_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -167,7 +167,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    style="@style/main_size"
+                    style="@style/sub_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -184,7 +184,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    style="@style/main_size"
+                    style="@style/sub_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -201,7 +201,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
-                    style="@style/main_size"
+                    style="@style/sub_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

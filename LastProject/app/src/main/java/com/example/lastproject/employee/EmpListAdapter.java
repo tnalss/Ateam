@@ -61,7 +61,7 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
             public void onClick(View v) {
                 // 각각 사원 클릭했을 시 사원 상세정보화면으로
                 // 오늘의 해당사원 근무상태를 긁어서 detail로 전송
-                new CommonMethod().setParams("emp_no",list.get(i).getEmp_no()).sendPost("attendString",(isResult, data) -> {
+                new CommonMethod().setParams("emp_no",list.get(i).getEmp_no()).sendPost("attendString.at",(isResult, data) -> {
                     if(isResult){
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("vo",list.get(i));
