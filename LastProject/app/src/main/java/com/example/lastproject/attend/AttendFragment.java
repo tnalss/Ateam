@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,11 +31,14 @@ import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.al.AL_Apply_Activity;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.home.HomeFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.NaverMap;
 
 
 import java.io.IOException;
@@ -49,7 +53,7 @@ public class AttendFragment extends Fragment {
     Button on, off;
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
-    Button workday;
+    Button workday, apply;
     ImageView  iv_emp_profile, to_att_act;
     MainActivity activity;
     ArrayList<AttendVO> list;
@@ -75,6 +79,7 @@ public class AttendFragment extends Fragment {
 
         /*현재위치 주소값*/
         location_tv = v.findViewById(R.id.location_tv);
+
 
 
 //기기시간말고 서버시간을 얻어와야 할까요?
@@ -149,6 +154,15 @@ public class AttendFragment extends Fragment {
             }
         });
 
+        /*휴가및 연차 신청*/
+        apply = v.findViewById(R.id.apply);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AL_Apply_Activity.class);
+                startActivity(intent);
+            }
+        });
 
 
         /*리사이클러뷰_로그인한 사원의 전체 출퇴근기록*/
@@ -237,6 +251,7 @@ public class AttendFragment extends Fragment {
         });
 
     }
+
 
 
 }

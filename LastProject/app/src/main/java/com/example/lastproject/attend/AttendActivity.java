@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class AttendActivity extends AppCompatActivity {
     ImageView back;
-    RecyclerView recv_attend_apply;
-    Button apply;
+    RecyclerView recv_attend_apply,  recv_attend_record;
+    ArrayList<AttendVO> list;
     ArrayList<AlVO> al_list;
 
 
@@ -39,12 +39,19 @@ public class AttendActivity extends AppCompatActivity {
         });
         getSupportActionBar().hide();
 
-        /*휴가및 연차 신청*/
-        apply = findViewById(R.id.apply);
-        apply.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AL_Apply_Activity.class);
-            startActivity(intent);
+
+        /*로그인한 사원의 전체 출퇴근 현황    */
+          recv_attend_record = findViewById(R.id.recv_attend_record);
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("list_emp_since.at",(isResult, data) -> {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+            list = gson.fromJson(data,
+                    new TypeToken<ArrayList<AttendVO>>(){}.getType());
+            recv_attend_record.setAdapter(new Attend_Main_Adapter(getLayoutInflater(),list,AttendActivity.this));
+            recv_attend_record.setLayoutManager(CommonMethod.getVManager(AttendActivity.this));
+
         });
+
+
 
 
         /*로그인한 사원의 연차.휴가 신청 현황 */

@@ -40,9 +40,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"   />
     </RelativeLayout>
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -91,7 +89,13 @@
                 android:textSize="20dp" />
         </RelativeLayout>
     </LinearLayout>
-
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
         <LinearLayout
             android:layout_marginBottom="10dp"
             android:background="@drawable/item_radius2"
@@ -166,6 +170,7 @@
                 android:text="퇴근"/>
             </LinearLayout>
         </LinearLayout>
+
     <!--출퇴근 기록-->
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -180,15 +185,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_centerInParent="true"
-                android:id="@+id/tex"
-                style="@style/main_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="출 퇴근 기록"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tex"
+                    style="@style/main_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:text="출 퇴근 기록"
+                    android:textStyle="bold" />
             <ImageView
                 android:id="@+id/to_att_act"
                                 android:scaleType="fitXY"
@@ -205,9 +210,35 @@
                 android:layout_below="@+id/tex"
                 android:id="@+id/recv_attend_record"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
-        </LinearLayout>>
-
+                android:layout_height="150dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/item_radius2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="연차 관리"
+                android:textStyle="bold" />
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/apply"
+            android:backgroundTint="@color/sub_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/main_color"
+            android:text="휴가 및 연차 신청"/>
+        </LinearLayout>
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

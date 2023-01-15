@@ -41,9 +41,12 @@ public class Attend_Activity_Adapter extends RecyclerView.Adapter<Attend_Activit
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
-    h.apply_result.setText(al_list.get(i).getAl_status());
+
+    h.apply_what.setText(al_list.get(i).getAl_code_value());
     h.apply_date.setText(al_list.get(i).getAl_reg_date());
-    h.apply_what.setText(al_list.get(i).getAl_reason());
+    h.apply_result.setText(al_list.get(i).getEa_status());
+
+
 
 
     }
