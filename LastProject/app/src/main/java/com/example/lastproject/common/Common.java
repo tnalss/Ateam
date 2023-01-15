@@ -15,13 +15,17 @@ public class Common {
     public static final int SEARCH_ADDRESS_ACTIVITY = 1003;
     public static final int CAMERA_CODE = 1000;
     public static final int GALLERY_CODE = 1001;
+    public static final int FILE_CODE = 1004;
     //권한체크
     public void checkDangerousPermissions(Activity activity) {
         String[] permissions = {
                 Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_MEDIA_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.MANAGE_DOCUMENTS,
+                Manifest.permission.MANAGE_MEDIA,
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
@@ -35,7 +39,7 @@ public class Common {
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
            // Toast.makeText(activity, "권한 있음", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(activity, "권한 없음", Toast.LENGTH_LONG).show();
+            //Toast.makeText(activity, "권한 없음", Toast.LENGTH_LONG).show();
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permissions[0])) {
                 Toast.makeText(activity, "권한 설명 필요함.", Toast.LENGTH_LONG).show();
@@ -44,7 +48,6 @@ public class Common {
             }
         }
     }
-
 
 
 }
