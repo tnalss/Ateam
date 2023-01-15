@@ -19,6 +19,7 @@ import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
 import com.example.lastproject.employee.ManageEmpFragment;
 import com.example.lastproject.login.LoginVO;
+import com.example.lastproject.login.LogoutActivity;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
         activity = (MainActivity) getActivity();
+        binding.ivBurger.setClipToOutline(true);
         binding.menu11.setClipToOutline(true);
         binding.menu12.setClipToOutline(true);
         binding.menu13.setClipToOutline(true);
@@ -124,6 +126,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
+        binding.ivBurger.setOnClickListener(this);
         binding.menu11.setOnClickListener(this);
         binding.menu12.setOnClickListener(this);
         binding.menu13.setOnClickListener(this);
@@ -138,6 +141,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View v = binding.getRoot();
         return v;
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -169,7 +174,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //조직도 눌렀을때 조직도 화면으로
            Intent orgIntent = new Intent(activity, Org_MainActivity.class);
            startActivity(orgIntent);
+        } else if(v.getId() == R.id.iv_burger) {
+
+
         }
     }
+
 
 }
