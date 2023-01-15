@@ -13,6 +13,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:background="@drawable/item_radius2"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
@@ -21,23 +22,21 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center">
                 <EditText
-                    android:id="@+id/search"
+                    android:id="@+id/text_search"
                     android:textColor="@color/sub_color"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:background="@drawable/item_radius2"
                     style="@style/main_size"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:hint="검색하세요"/>
-
                 <ImageView
                     android:layout_marginLeft="15dp"
                     android:layout_toLeftOf="@+id/iv_burger"
                     android:layout_centerVertical="true"
-                    android:id="@+id/iv_person_search"
-                    android:src="@drawable/ic_search"
+                    android:id="@+id/search"
+                    android:src="@drawable/ic_search_c"
                     android:layout_width="25dp"
                     android:layout_height="25dp"   />
             </LinearLayout>

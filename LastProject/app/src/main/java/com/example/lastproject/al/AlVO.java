@@ -41,6 +41,14 @@ public class AlVO {
         this.att_state = att_state;
     }
 
+    public String getAl_code() {
+        return al_code;
+    }
+
+    public void setAl_code(String al_code) {
+        this.al_code = al_code;
+    }
+
     public String getAl_reason() {
         return al_reason;
     }
@@ -97,9 +105,15 @@ public class AlVO {
         this.al_no = al_no;
     }
 
-    String ea_title, ea_content, attend_date,att_code,att_state,al_reason,
-           ea_date, al_reg_date, holiday_date, al_use_date,emp_no,al_no;
+    private String ea_title, ea_content, attend_date,att_code,att_state,al_code, al_reason,
+    ea_date, al_reg_date, holiday_date, al_use_date,
+   emp_no,al_no,al_status;
 
+    public String getAl_status() {
+        return al_status;
+    }
 
-
+    public void setAl_status(String al_status) {
+        this.al_status = al_status;
+    }
 }

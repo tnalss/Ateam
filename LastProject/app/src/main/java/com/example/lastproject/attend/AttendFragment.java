@@ -155,19 +155,6 @@ public class AttendFragment extends Fragment {
         recv_attend_record = v.findViewById(R.id.recv_attend_record);
         selectList();
 
-
-        /*근무현황조회 클릭시 attend_activity로 화면전환
-        workday = v.findViewById(R.id.workday);
-        workday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AttendActivity.class);
-                startActivity(intent);
-
-            }
-        });
-*/
-
         return v;
     }
 
@@ -223,9 +210,9 @@ public class AttendFragment extends Fragment {
                             AttendVO vo =new Gson().fromJson(data,AttendVO.class);
                             selectList();
                             now.setText(vo.getAtt_state());
-                            selectList();//1/11 csm 퇴근후 바로 기록찍히게 처리
                         });
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
+                        selectList();//1/11 csm 퇴근후 바로 기록찍히게 처리
                     }
                 })
                 .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
