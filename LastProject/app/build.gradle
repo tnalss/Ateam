@@ -116,7 +116,7 @@ dependencies {
     //230111 주영 qr스캐너
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
-    // 23/1/15 csm 엑셀 내보내기 poi api 
+    // 23/1/15 csm 엑셀 내보내기 poi api
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
 

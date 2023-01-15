@@ -223,5 +223,10 @@ public class ManageEmpFragment extends Fragment {
         shareIntent.putExtra(Intent.EXTRA_STREAM,path);
         startActivity(Intent.createChooser(shareIntent,"엑셀 내보내기"));
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 
 }

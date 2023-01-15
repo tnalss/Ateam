@@ -92,4 +92,9 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
 
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 }

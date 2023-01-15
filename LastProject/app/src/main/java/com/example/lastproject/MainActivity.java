@@ -75,5 +75,10 @@ public class MainActivity extends AppCompatActivity {
 //            super.onBackPressed(); // 액티비티 종료
 //        }
 //    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 
 }

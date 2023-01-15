@@ -272,5 +272,10 @@ binding.ivBurger.setOnClickListener(this);
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 
 }
