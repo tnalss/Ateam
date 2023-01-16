@@ -66,7 +66,7 @@ public class Org_MainActivity extends AppCompatActivity {
         mContentPagerAdapter = new ContentsPagerAdapter(this);
         mViewPager.setAdapter(mContentPagerAdapter);
 
-        final List<String> tabElement = Arrays.asList("전체 조직도"," 지점별","부서별 ","직급별");
+        final List<String> tabElement = Arrays.asList("전체 조직도","지점별","부서별 ","직급별");
 
         //tabLyout와 viewPager 연결
         new TabLayoutMediator(mTabLayout, mViewPager, new TabLayoutMediator.TabConfigurationStrategy() {

@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/apply_result"
         style="@style/small_size"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_gravity="right"

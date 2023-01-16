@@ -11,13 +11,20 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.SimpleCode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
 
 import java.util.ArrayList;
 
@@ -28,14 +35,41 @@ public class Org_dept_Fragment extends Fragment {
     ArrayList<OrgVO> list;
     MainActivity activity;
     EditText text_search;
+    NiceSpinner spinner;
+    ArrayList<SimpleCode> dep_list;
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_org_dept_, container, false);
-
+        recyclerview =v.findViewById(R.id.recv_org_dept);
         text_search = v.findViewById(R.id.text_search);
+        spinner = v.findViewById(R.id.spinner);
+
+        new CommonMethod().setParams("top_code","D").sendPost("codeList.cm",(isResult, data) -> {
+            if(isResult){
+                dep_list = new Gson().fromJson(data,new TypeToken<ArrayList<SimpleCode>>(){}.getType());
+                ArrayList<String> d = new ArrayList<>();
+                for (int i = 0 ; i < dep_list.size() ; i++){
+                    d.add(dep_list.get(i).getCode_value());
+                }
+                spinner.attachDataSource(d);
+
+            }
+        });
+
+        spinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
+            @Override
+            public void onItemSelected(NiceSpinner parent, View view, int i, long id) {
+                new CommonMethod().setParams("code",dep_list.get(i).getCode_value()).sendPost("org_dept.org",(isResult, data) -> {
+                                list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>() {
+                                }.getType());
+                               recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(), list, activity));
+                               recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));
+                          });
+            }
+        });
         text_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -44,8 +78,8 @@ public class Org_dept_Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (text_search.length() >=0){
-                    new CommonMethod().setParams("keyword",text_search.getText().toString()).sendPost("org_all_r.org",(isResult, data) -> {
+                if (text_search.length() >0){
+                    new CommonMethod().setParams("code",spinner.getText().toString().trim()).setParams("keyword",text_search.getText().toString()).sendPost("org_dept_n.org",(isResult, data) -> {
                         list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>(){}.getType());
                         recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list,activity));
                         recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));
@@ -59,14 +93,7 @@ public class Org_dept_Fragment extends Fragment {
             }
         });
 
-        recyclerview =v.findViewById(R.id.recv_org_dept);
 
-        /*리사이클러뷰 - 조직도 목록 보여주기*/
-        new CommonMethod().sendPost("org_dept.org",(isResult, data) -> {
-            list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>(){}.getType());
-            recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list,activity));
-            recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));
-        });
 
         return v;
     }

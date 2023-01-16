@@ -27,6 +27,8 @@ import com.example.lastproject.employee.EmployeeVO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.ArrayList;
 
 
@@ -45,6 +47,7 @@ public class Org_all_Fragment extends Fragment {
 
         search = v.findViewById(R.id.search);
         recyclerview =v.findViewById(R.id.recv_org_all);
+
         text_search = v.findViewById(R.id.text_search);
         text_search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -55,7 +58,7 @@ public class Org_all_Fragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (text_search.length() >=0){
-                new CommonMethod().setParams("keyword",text_search.getText().toString()).sendPost("org_all_r.org",(isResult, data) -> {
+                new CommonMethod().setParams("keyword",text_search.getText().toString()).sendPost("org_all.org",(isResult, data) -> {
                     list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>(){}.getType());
                     recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list,activity));
                     recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));

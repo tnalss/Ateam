@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Org_Chart.Org_branch_Fragment">
+    tools:context=".Org_Chart.Org_branch_Fragment"
+    android:padding="10dp">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,21 +18,28 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center">
+                <Spinner
+                    style="@style/small_size"
+                    android:layout_marginLeft="22dp"
+                    android:id="@+id/spinner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"/>
                 <EditText
                     android:id="@+id/text_search"
                     android:textColor="@color/sub_color"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    style="@style/main_size"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    style="@style/sub_size"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
                     android:textStyle="bold"
                     android:hint="검색하세요"/>
                 <ImageView
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="22dp"
                     android:layout_toLeftOf="@+id/iv_burger"
                     android:layout_centerVertical="true"
                     android:id="@+id/search"
@@ -41,10 +49,12 @@
             </LinearLayout>
 
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recv_org_branch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

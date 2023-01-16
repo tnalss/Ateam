@@ -29,10 +29,10 @@ public class ContentsPagerAdapter extends FragmentStateAdapter {
                 Org_branch_Fragment f2 = new Org_branch_Fragment();
                 return f2;
             case 2:
-                Org_rank_Fragment f3 = new Org_rank_Fragment();
+                Org_dept_Fragment f3 = new Org_dept_Fragment();
                 return f3;
             case 3:
-                Org_dept_Fragment f4 = new Org_dept_Fragment();
+                Org_rank_Fragment f4 = new Org_rank_Fragment();
                 return f4;
 
             default:
