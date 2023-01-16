@@ -73,10 +73,12 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
         if (v.getId() == R.id.tv_sche_start){
             DatePickerDialog dialog = new DatePickerDialog(getContext(),
                     listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis());
             dialog.show();
         } else if (v.getId() == R.id. tv_sche_end){
             DatePickerDialog dialog = new DatePickerDialog(getContext(),
                     elistener,cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis());
             dialog.show();
         } else if (v.getId() == R.id.btn_sche_modify){
 
