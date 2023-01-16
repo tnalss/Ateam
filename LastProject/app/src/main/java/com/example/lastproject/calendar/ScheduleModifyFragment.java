@@ -34,7 +34,7 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
         activity= (MainActivity) getActivity();
         vo = (ScheduleVO) bundle.getSerializable("vo");
         binding.edtScheTitle.setText(vo.getSche_title());
-        binding.edtScheContent.setText(vo.getSche_title());
+        binding.edtScheContent.setText(vo.getSche_content());
 
         binding.tvScheStart.setText(vo.getSche_start().substring(0,11));
         binding.tvScheEnd.setText(vo.getSche_end().substring(0,11));
@@ -73,10 +73,12 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
         if (v.getId() == R.id.tv_sche_start){
             DatePickerDialog dialog = new DatePickerDialog(getContext(),
                     listener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis());
             dialog.show();
         } else if (v.getId() == R.id. tv_sche_end){
             DatePickerDialog dialog = new DatePickerDialog(getContext(),
                     elistener,cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis());
             dialog.show();
         } else if (v.getId() == R.id.btn_sche_modify){
 
@@ -91,5 +93,10 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
             });
 
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
     }
 }

@@ -34,7 +34,7 @@ public class NoticeController {
 	public String secret(String re) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		List<NoticeVO> secret = sql.selectList("no.se_list");		
-		sql.update("re.reply_count", re);
+		
 		return gson.toJson(secret);
 	}
 
@@ -135,6 +135,13 @@ public class NoticeController {
 	
 	
 	
+	
+	
+	@RequestMapping(value="/countReply.no", produces="text/html;charset=utf-8")	
+	public String countReply (String board_no) {
+		
+		return sql.selectOne("re.countReply",board_no);
+	}
 	
 	
 	

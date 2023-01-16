@@ -1,5 +1,6 @@
 package com.and.middle;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import Attend.AttendVO;
 import al.AlVO;
 
 @RestController
@@ -28,8 +28,12 @@ public class AlController {
 	
 	//로그인한 사원의 휴가 신청  처리
 	@RequestMapping(value="/al_v_a.al", produces="text/html;charset=utf-8")
-	public String al_v0(String emp_no) {		
-		sql.insert("al.al_v_a",emp_no);			
+	public String al_v0(String emp_no, String al_start_date , String al_end_date) {
+		HashMap<String , String> map = new HashMap<>();
+		map.put("emp_no", emp_no);
+		map.put("al_start_date", al_start_date);
+		map.put("al_end_date", al_end_date);
+		sql.insert("al.al_v_a",map);			
 		return "1";
 		
 	}		

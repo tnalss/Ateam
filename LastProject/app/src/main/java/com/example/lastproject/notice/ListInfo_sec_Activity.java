@@ -126,7 +126,7 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
             notice.getBoard_no();
             bo = notice.getBoard_no();
             tv_sec_info_title.setText("제목 : " + notice.getBoard_title());
-            tv_sec_info_content.setText("내용 : " + notice.getBoard_content());
+            tv_sec_info_content.setText(notice.getBoard_content());
             tv_sec_info_date.setText("작성일 : " + notice.getWrite_date());
             re_sec_plylist();
         });

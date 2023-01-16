@@ -3,6 +3,7 @@ package com.example.lastproject.ea;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ public class EaRecentListAdapter extends RecyclerView.Adapter<EaRecentListAdapte
 
     @Override
     public int getItemCount() {
-        return list.size()>=10 ? 10 : list.size();
+        return  list.size();
     }
 
     @Override
@@ -56,9 +57,11 @@ public class EaRecentListAdapter extends RecyclerView.Adapter<EaRecentListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout line_recent;
         TextView tv_title, tv_name_date, tv_process;
         public ViewHolder(@NonNull View v) {
             super(v);
+            line_recent = v.findViewById(R.id.line_recent);
             tv_title = v.findViewById(R.id.tv_title);
             tv_name_date = v.findViewById(R.id.tv_name_date);
             tv_process = v.findViewById(R.id.tv_process);

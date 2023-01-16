@@ -36,4 +36,8 @@ set reply_count = (select count(reply_no) from tbl_reply
 where tbl_board.board_no = tbl_reply.board_no)
 </update>
 
+<select id="countReply" resultType="String">
+select count(*) from tbl_reply where board_no = #{board_no}
+</select>
+
 </mapper>

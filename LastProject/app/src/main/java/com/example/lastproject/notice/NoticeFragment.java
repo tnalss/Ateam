@@ -135,7 +135,6 @@ public class NoticeFragment extends Fragment {
 
     // 익명게시판
     public void secret(LayoutInflater inflater) {
-        // 익명게시판
         new CommonMethod().sendPost("secret.no", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             secret = gson.fromJson(data,

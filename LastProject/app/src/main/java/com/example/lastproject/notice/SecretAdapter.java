@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
 
 import java.util.ArrayList;
@@ -41,15 +42,22 @@ public class SecretAdapter extends RecyclerView.Adapter<SecretAdapter.ViewHolder
         h.tv_sec_title.setText(secret.get(i).getBoard_title());
         h.tv_sec_date.setText(secret.get(i).getWrite_date());
         h.tv_sec_views.setText(" 조회수 : " + secret.get(i).getBoard_hits());
-        h.tv_sec_reply_cnt.setText("댓글 : " + secret.get(i).getReply_count());
+
         final int index = i;
+
+        // 댓글 수 조회
+        new CommonMethod().setParams("board_no",secret.get(index).getBoard_no()).sendPost("countReply.no",(isResult, data) -> {
+            if(isResult){
+                h.tv_sec_reply_cnt.setText("댓글 : " + data);
+            }
+        });
+
         // 익명게시판 내용
          h.li_sec_title.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                 Intent intent = new Intent(context, ListInfo_sec_Activity.class);
                   intent.putExtra("board_no", secret.get(index).getBoard_no());
-                  intent.putExtra("re_count", secret.get(index).getReply_count());
                 context.startActivity(intent);
             }
          });

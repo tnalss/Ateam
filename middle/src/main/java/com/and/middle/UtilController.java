@@ -29,7 +29,7 @@ public class UtilController {
 	@RequestMapping("/attendOrNot")
 	public String attendOrNot(String emp_no) {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd"); 
 		
 		HashMap<String,String> map = new HashMap<>();
 		map.put("emp_no", emp_no);
@@ -42,7 +42,7 @@ public class UtilController {
 		
 	}
 	
-	@RequestMapping("/attendString")
+	@RequestMapping("/attendString.at")
 	public String attendString(String emp_no) {
 		String status="";
 		Date date = new Date();

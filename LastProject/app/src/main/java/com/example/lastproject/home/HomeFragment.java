@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
@@ -65,6 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Timer timer;
 
         activity = (MainActivity) getActivity();
+
         binding.menu11.setClipToOutline(true);
         binding.menu12.setClipToOutline(true);
         binding.menu13.setClipToOutline(true);
@@ -153,6 +155,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     binding.ivRedDot.setVisibility(View.VISIBLE);
                     unreadDocs=Integer.parseInt(data);
                     binding.tvUnreadDocs.setText("미결재 문서 : "+unreadDocs+" 건");
+                    binding.ivNoti.setOnClickListener(this);
+
                 }
             }
         });
@@ -201,8 +205,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-binding.ivBurger.setOnClickListener(this);
-
+        binding.ivBurger.setOnClickListener(this);
         binding.menu11.setOnClickListener(this);
         binding.menu12.setOnClickListener(this);
         binding.menu13.setOnClickListener(this);
@@ -218,11 +221,12 @@ binding.ivBurger.setOnClickListener(this);
         binding.llMyInfo.setOnClickListener(this);
         binding.llLogout.setOnClickListener(this);
 
-        binding.ivNoti.setOnClickListener(this);
         binding.tvUnreadDocs.setOnClickListener(this);
         View v = binding.getRoot();
         return v;
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -272,5 +276,6 @@ binding.ivBurger.setOnClickListener(this);
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         }
     }
+
 
 }

@@ -109,4 +109,5 @@ public class EmpListAdapter extends RecyclerView.Adapter<EmpListAdapter.ViewHold
     public int getItemViewType(int position) {
         return position;
     }
+
 }

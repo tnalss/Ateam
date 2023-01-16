@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -148,12 +149,14 @@ public class AL_Apply_Activity extends AppCompatActivity {
                         public void onClick(View v) {
                             /*휴가  V0*/
                             new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no())
-                                    .setParams("al_start_date",date_start.getText())
-                                    .setParams("al_end_date",date_end.getText())
+                                    .setParams("al_start_date",date_start.getText().toString())
+                                    .setParams("al_end_date",date_end.getText().toString())
                                     .sendPost("al_v_a.al",((isResult, data) -> {
-
+                                        if(isResult) {
+                                            Log.d("TAG", "onClick: asfdsadf");
+                                            Toast.makeText(AL_Apply_Activity.this, "휴가 신청 완료", Toast.LENGTH_SHORT).show();
+                                        }
                             }));
-                            Toast.makeText(AL_Apply_Activity.this, "휴가 신청 완료", Toast.LENGTH_SHORT).show();
                             selectList();
                         }
                     });

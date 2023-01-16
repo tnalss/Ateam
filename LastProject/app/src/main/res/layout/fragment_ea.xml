@@ -153,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="연장근무 신청서"
+                    android:text="파견 신청서"
                     android:textColor="@color/white" />
             </androidx.cardview.widget.CardView>
 
@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="출장 신청서"
+                    android:text="외근 신청서"
                     android:textColor="@color/white" />
             </androidx.cardview.widget.CardView>
 

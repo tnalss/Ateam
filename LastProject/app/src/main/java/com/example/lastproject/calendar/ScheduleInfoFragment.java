@@ -107,4 +107,9 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
             getActivity().onBackPressed();
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 }
