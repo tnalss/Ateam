@@ -15,7 +15,6 @@ import com.example.lastproject.R;
 public class LogoutActivity extends AppCompatActivity {
     SharedPreferences preferences ;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

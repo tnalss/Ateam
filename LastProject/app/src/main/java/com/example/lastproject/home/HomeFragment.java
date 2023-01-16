@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Timer timer;
 
         activity = (MainActivity) getActivity();
+
         binding.menu11.setClipToOutline(true);
         binding.menu12.setClipToOutline(true);
         binding.menu13.setClipToOutline(true);
@@ -201,8 +202,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-binding.ivBurger.setOnClickListener(this);
-
+        binding.ivBurger.setOnClickListener(this);
         binding.menu11.setOnClickListener(this);
         binding.menu12.setOnClickListener(this);
         binding.menu13.setOnClickListener(this);
@@ -223,6 +223,8 @@ binding.ivBurger.setOnClickListener(this);
         View v = binding.getRoot();
         return v;
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -277,5 +279,6 @@ binding.ivBurger.setOnClickListener(this);
         super.onDestroy();
         binding=null;
     }
+
 
 }
