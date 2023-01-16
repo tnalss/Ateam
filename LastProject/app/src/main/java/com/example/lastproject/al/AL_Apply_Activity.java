@@ -1,44 +1,29 @@
 package com.example.lastproject.al;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.conn.CommonMethod;
-import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.attend.AttendVO;
 import com.example.lastproject.common.Common;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class AL_Apply_Activity extends AppCompatActivity {
         ImageView back;
@@ -48,6 +33,8 @@ public class AL_Apply_Activity extends AppCompatActivity {
         Button apply_al;
         Spinner spinner2;
         DatePickerDialog datePickerDialog;
+        RecyclerView recv_al_apply;
+        ArrayList<AlVO> al_list;
 
 
 
@@ -66,6 +53,7 @@ public class AL_Apply_Activity extends AppCompatActivity {
 
 
         AlVO vo = new AlVO();
+        selectList();
 
         date_start = findViewById(R.id.date_start);
         date_end = findViewById(R.id.date_end);
@@ -74,7 +62,7 @@ public class AL_Apply_Activity extends AppCompatActivity {
         result_end = findViewById(R.id.result_end);
 
         /*날짜(date) 선택하면 datepicker -> result에 값 담기게 */
-        date.setOnClickListener(new View.OnClickListener() {
+        date_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //오늘 날짜(년,월,일) 변수에 담기
@@ -91,13 +79,14 @@ public class AL_Apply_Activity extends AppCompatActivity {
                                 month = month + 1;
                                 String date = year + "/" + month + "/" + day;
                                 result.setText(date);
+                                date_start.setText(date);
                             }
                         }, pYear, pMonth, pDay);
                 datePickerDialog.show();
 
             } //onClick
         });
-        date.set
+
 
         /*날짜2(date_end) 선택하면 datepicker -> result에 값 담기게 */
         date_end.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +105,8 @@ public class AL_Apply_Activity extends AppCompatActivity {
                                 //1월은 0부터 시작하기 때문에 +1을 해준다.
                                 month = month + 1;
                                 String date = year + "/" + month + "/" + day;
-                                result_end.setText(date);
+                                result_end.setText(" ~ "+date);
+                                date_end.setText(date);
                             }
                         }, pYear, pMonth, pDay);
                 datePickerDialog.show();
@@ -124,6 +114,8 @@ public class AL_Apply_Activity extends AppCompatActivity {
         });
 
 
+        /*신청 버튼*/
+        apply_al = findViewById(R.id.apply_al);
 
 
         /*휴가 타입 선택 스피너 */
@@ -144,6 +136,7 @@ public class AL_Apply_Activity extends AppCompatActivity {
                     apply_al.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            /*반차 V1 */
 
                             Toast.makeText(AL_Apply_Activity.this, "반차 신청 완료", Toast.LENGTH_SHORT).show();
                         }
@@ -153,9 +146,15 @@ public class AL_Apply_Activity extends AppCompatActivity {
                     apply_al.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            vo.setAl_code("V0");
-                            /*휴가 신청처리*/
+                            /*휴가  V0*/
+                            new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no())
+                                    .setParams("al_start_date",date_start.getText())
+                                    .setParams("al_end_date",date_end.getText())
+                                    .sendPost("al_v_a.al",((isResult, data) -> {
+
+                            }));
                             Toast.makeText(AL_Apply_Activity.this, "휴가 신청 완료", Toast.LENGTH_SHORT).show();
+                            selectList();
                         }
                     });
                 }
@@ -168,16 +167,21 @@ public class AL_Apply_Activity extends AppCompatActivity {
         });
 
 
-
-
-        /*신청 버튼*/
-        apply_al = findViewById(R.id.apply_al);
-
-
-
+    /*로그인한 사원의 연차.휴가 신청 현황 */
+     recv_al_apply= findViewById(R.id.recv_al_apply);
 
 
     }
 
+    public void selectList(){
+     new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no()).sendPost("al_list.al", (isResult, data) -> {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        al_list = gson.fromJson(data,
+                new TypeToken<ArrayList<AlVO>>() {
+                }.getType());
+        recv_al_apply.setAdapter(new Al_Apply_Adapter(getLayoutInflater(), al_list,AL_Apply_Activity.this));
+        recv_al_apply.setLayoutManager(CommonMethod.getVManager(AL_Apply_Activity.this));
 
+    });
+    }
 }
