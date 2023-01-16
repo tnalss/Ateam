@@ -17,7 +17,7 @@
             android:id="@+id/img_sec_up_close"
             android:layout_margin="13dp"
             android:layout_gravity="center"
-            android:src="@drawable/close"
+            android:src="@drawable/ic_close_c"
             android:layout_width="18dp"
             android:layout_height="18dp"/>
 
@@ -37,7 +37,7 @@
         <TextView
             android:id="@+id/tv_sec_up_ok"
             android:textStyle="bold"
-            android:textColor="#8134FF"
+            android:textColor="@color/main_color"
             android:layout_weight="1"
             android:layout_margin="15dp"
             android:layout_gravity="center"
@@ -62,7 +62,7 @@
         <ImageView
             android:id="@+id/img_sec_up_file"
             android:layout_marginRight="15dp"
-            android:src="@drawable/plus"
+            android:src="@drawable/ic_plus_s"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
 

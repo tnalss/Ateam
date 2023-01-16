@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.R;
+import com.example.lastproject.al.AlVO;
 
 import java.util.ArrayList;
 

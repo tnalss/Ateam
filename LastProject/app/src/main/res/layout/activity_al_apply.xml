@@ -36,60 +36,124 @@
         </LinearLayout>
         <ImageView
             android:layout_centerVertical="true"
-          android:layout_toLeftOf="@+id/home"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:id="@+id/back"
-            android:src="@drawable/ic_back_c"
-            android:layout_width="25dp"
-            android:layout_height="25dp"   />
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/home"
-            android:src="@drawable/ic_home_c"
+            android:src="@drawable/ic_close_c"
             android:layout_width="25dp"
             android:layout_height="25dp"   />
     </RelativeLayout>
-
     <LinearLayout
-
+        android:padding="10dp"
+        android:background="@drawable/item_radius2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             style="@style/main_size"
-            android:text="휴가 및 연차 신청"/>
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="휴가 및 연차 신청" />
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <RadioButton
-                android:layout_weight="1"
-                android:text="휴가"
-                android:id="@+id/rg_btn1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:layout_weight="1"
-                android:text="반차"
-                android:id="@+id/rg_btn2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:layout_weight="1"
-                android:text="연차"
-                android:id="@+id/rg_btn3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-        </RadioGroup>
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_cal_c"/>
+                <TextView
+                    android:id="@+id/date_start"
+                    style="@style/sub_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="날짜 선택"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text=" ~ " />
+            <LinearLayout
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_cal_c"/>
+                <TextView
+                    android:id="@+id/date_end"
+                    style="@style/sub_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="날짜 선택"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginLeft="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:src="@drawable/holiday"/>
+            <Spinner
+                style="@style/small_size"
+                android:id="@+id/spinner"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center"
+            style="@style/sub_size"
+            android:text= " "
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_gravity="center"
+            style="@style/sub_size"
+            android:text=" "
+            android:id="@+id/result_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/apply_al"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main_color"
+            android:text="신청"/>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

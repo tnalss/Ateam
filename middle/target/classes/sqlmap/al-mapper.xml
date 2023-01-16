@@ -10,4 +10,12 @@ where emp_no = #{emp_no}
 </select>
 
 
+
+<!--로그인한 회원의 연차 신청  -->
+<insert id = "al_v0">
+INSERT INTO tbl_al (emp_no,al_reg_date,al_code)
+values(#{emp_no},to_char(current_date,'yyyy/mm/dd'),'V0')
+
+</insert>
+
 </mapper>

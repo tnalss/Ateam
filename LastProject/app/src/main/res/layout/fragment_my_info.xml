@@ -17,7 +17,7 @@
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
 
         <TextView
             style="@style/main_size"
@@ -80,7 +80,7 @@
     android:id="@+id/tv_my_info_update"
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    android:textColor="#69B4FF"
+    android:textColor="@color/blue"
     style="@style/small_size"
     android:layout_gravity="top"
     android:text="정보 변경"

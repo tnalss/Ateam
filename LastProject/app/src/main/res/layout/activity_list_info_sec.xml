@@ -19,7 +19,7 @@
             android:id="@+id/img_sec_info_close"
             android:layout_margin="13dp"
             android:layout_gravity="center"
-            android:src="@drawable/back"
+            android:src="@drawable/ic_back_c"
             android:layout_width="21dp"
             android:layout_height="21dp"/>
 

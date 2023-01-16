@@ -25,6 +25,16 @@ public class AlController {
 		List<AlVO> list = sql.selectList("al.al_list",emp_no);
 		return new Gson().toJson(list).toString();
 	}
+	
+	//로그인한 사원의 휴가 신청  처리
+	@RequestMapping(value="/al_v0.al", produces="text/html;charset=utf-8")
+	public void al_v0(String emp_no) {		
+		sql.insert("al.al_v0",emp_no);			
+		
+	}		
+
+
+		
 		
 	
 	
