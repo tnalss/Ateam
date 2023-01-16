@@ -69,17 +69,22 @@ public class MyInfoUpdateFragment extends Fragment {
                 Toast.makeText(activity, "비밀번호와 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             emp_vo = new EmployeeVO();
             emp_vo.setEmp_no(vo.getEmp_no());
             emp_vo.setEmail(binding.edtEmpEmail.getText().toString());
             emp_vo.setPhone(binding.edtEmpPhone.getText().toString());
             emp_vo.setEmp_pw(binding.edtEmpPw.getText().toString());
+            //비밀번호 바꾸기 싫은경우?
+            if(binding.edtEmpPw.getText().toString().length()<1 && binding.edtEmpConpw.getText().toString().length()<1){
+                emp_vo.setEmp_pw(Common.loginInfo.getEmp_pw());
+            }
 
             new CommonMethod().setParams("emp_vo",new Gson().toJson(emp_vo)).sendPost("myinfo_update.emp",(isResult, data) -> {
                 Common.loginInfo.setEmail(emp_vo.getEmail());
                 Common.loginInfo.setPhone(emp_vo.getPhone());
                 Common.loginInfo.setEmp_pw(emp_vo.getEmp_pw());
-                Intent intent = new Intent(getContext(), LogoutActivity.class);
+
                 activity.changeFragment(new MyInfoFragment());
 
             });
