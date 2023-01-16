@@ -156,12 +156,14 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
             new CommonMethod().setParams("param",vo).sendPostFile("insert.emp",img_path,(isResult, data) -> {
                 if(isResult) {
-                    EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
+                   EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("vo",vo2);
+                    bundle.putSerializable("status",vo.getAtt_code());
                     Fragment fragment = new EmpDetailFragment();
                     fragment.setArguments(bundle);
                     activity.changeFragment(fragment);
+
                 }
             });
         });
@@ -270,5 +272,10 @@ public class EmpInsertFragment extends Fragment implements View.OnClickListener 
 
         startActivityForResult(intent,CAMERA_CODE);
 
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
     }
 }

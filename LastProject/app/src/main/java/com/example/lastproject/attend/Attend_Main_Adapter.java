@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.R;
+import com.example.lastproject.al.AlVO;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,6 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.item_recv_attend_record,parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
-
         return viewHolder;
     }
 
@@ -40,9 +40,23 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
 
-        h.date.setText(list.get(i).getAttend_date());
-        h.on.setText(list.get(i).getAttend_on());
-        h.off.setText(list.get(i).getAttend_off());
+        h.date.setText(list.get(i).getAttend_date().substring(0,10));
+
+
+        if(list.get(i).getAttend_on()!=null) {
+            h.on.setText(list.get(i).getAttend_on().substring(0, 16));
+        } else {
+            h.on.setText("");
+            h.tv_on.setVisibility(View.GONE);
+        }
+
+
+        if(list.get(i).getAttend_off()!=null) {
+            h.off.setText(list.get(i).getAttend_off().substring(0, 16));
+        } else {
+            h.off.setText("");
+            h.tv_off.setVisibility(View.GONE);
+        }
         h.now.setText(list.get(i).getAtt_state());
 
 
@@ -67,7 +81,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
 
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  date, on,off, now;
+        TextView  date, on,off, now,tv_off, tv_on;
 
         public ViewHolder(@NonNull View v) {
             super(v);
@@ -75,6 +89,8 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
+            tv_on = v.findViewById(R.id.tv_on);
+            tv_off=v.findViewById(R.id.tv_off);
 
         }
     }

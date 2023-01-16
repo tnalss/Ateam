@@ -2,11 +2,12 @@ package com.example.lastproject.calendar;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,6 @@ import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentCalendarBinding;
-import com.example.lastproject.databinding.FragmentEmpInsertBinding;
-import com.example.lastproject.employee.EmployeeVO;
-import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -57,7 +55,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("peronalPeriod.sche",(isResult, data) -> {
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("personalPeriod.sche",(isResult, data) -> {
             if(isResult){
                 ArrayList<ScheduleVO>  list = new Gson().fromJson(data,new TypeToken<ArrayList<ScheduleVO>>(){}.getType());
                 binding.recvPersonalSchedule.setAdapter(new ScheduleAdapter(getLayoutInflater(),list,(MainActivity) getActivity()));
@@ -72,7 +70,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCalendarBinding.inflate(inflater,container,false);
         activity = (MainActivity) getActivity();
@@ -81,21 +79,26 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
 
         if( Common.loginInfo.getRank_name().equals("사원")){
             binding.tvAddDepartmentSchedule.setVisibility(View.GONE);
+            binding.ivAddDepartmentSchedule.setVisibility(View.GONE);
         }
         if( Common.loginInfo.getAdmin().equals("L1")){
             binding.tvAddCompanySchedule.setVisibility(View.VISIBLE);
+            binding.ivAddCompanySchedule.setVisibility(View.VISIBLE);
             binding.tvAddDepartmentSchedule.setVisibility(View.VISIBLE);
+            binding.ivAddDepartmentSchedule.setVisibility(View.VISIBLE);
         } else {
             binding.tvAddCompanySchedule.setVisibility(View.GONE);
+            binding.ivAddCompanySchedule.setVisibility(View.GONE);
         }
 
         binding.tvAddCompanySchedule.setOnClickListener(this);
+        binding.ivAddCompanySchedule.setOnClickListener(this);
         binding.tvAddDepartmentSchedule.setOnClickListener(this);
+        binding.ivAddDepartmentSchedule.setOnClickListener(this);
         binding.tvAddPersonalSchedule.setOnClickListener(this);
+        binding.ivAddPersonalSchedule.setOnClickListener(this);
 
-        binding.ivBack.setOnClickListener(v -> {
-            getActivity().onBackPressed();
-        });
+        //binding.ivBack.setOnClickListener(v -> getActivity().onBackPressed());
 
 
         return binding.getRoot();
@@ -105,21 +108,21 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         // 일정추가 글씨 눌렀을때 처리
 
-        if(v.getId() == R.id.tv_add_company_schedule){
+        if(v.getId() == R.id.tv_add_company_schedule || v.getId() == R.id.iv_add_company_schedule){
             Bundle bundle = new Bundle();
             bundle.putString("cate","회사");
             Fragment fragment = new ScheduleInsertFragment();
             fragment.setArguments(bundle);
             activity.changeFragment(fragment);
 
-        } else if (v.getId() ==R.id.tv_add_department_schedule){
+        } else if (v.getId() ==R.id.tv_add_department_schedule ||v.getId() ==R.id.iv_add_department_schedule){
             Bundle bundle = new Bundle();
             bundle.putString("cate","부서");
             Fragment fragment = new ScheduleInsertFragment();
             fragment.setArguments(bundle);
             activity.changeFragment(fragment);
 
-        } else if(v.getId() == R.id.tv_add_personal_schedule){
+        } else if(v.getId() == R.id.tv_add_personal_schedule||v.getId() == R.id.iv_add_personal_schedule){
 
             Bundle bundle = new Bundle();
             bundle.putString("cate","개인");
@@ -130,14 +133,10 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
 
         }
     }
-
-
-//       new CommonMethod().sendPost(param,(isResult, data) -> {
-//            if(isResult){
-//                Bundle bundle = new Bundle();
-//                ArrayList<ScheduleVO>  list = new Gson().fromJson(data,new TypeToken<ArrayList<ScheduleVO>>(){}.getType());
-//
-//            }
-//        });
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
+    }
 
 }

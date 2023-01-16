@@ -27,9 +27,16 @@ public class EmployeeController {
 	private CommonService common;
 	
 	@RequestMapping(value= "/list.emp" , produces="text/html;charset=utf-8")
-	public String attendOrNot() {
+	public String emp_list() {
 		List<EmployeeVO> list = sql.selectList("emp.list");
 		return new Gson().toJson(list).toString();
+	}
+	
+	// 사번으로 이름만 검색
+	@RequestMapping(value= "/findNameByNo.emp" , produces="text/html;charset=utf-8")
+	public String findNameByNo(String emp_no) {
+		
+		return sql.selectOne("emp.findNameByNo",emp_no);
 	}
 	
 	
@@ -45,6 +52,12 @@ public class EmployeeController {
 		return new Gson().toJson(vo).toString();
 	}
 	
+	//내정보에서 정보수정 (비밀번호변경)
+	@RequestMapping(value="/myinfo_update.emp", produces="text/html;charset=utf-8")
+	public void myinfo_update(String emp_vo) {
+		EmployeeVO vo = new Gson().fromJson(emp_vo, EmployeeVO.class);
+		sql.update("emp.myinfo_update", vo);
+	}
 	
 	//회원가입
 	@RequestMapping(value="/insert.emp" , produces="text/html;charset=utf-8")
@@ -126,5 +139,25 @@ public class EmployeeController {
 	public String find_with_keyword(String keyword) {
 		List<EmployeeVO> list = sql.selectList("emp.keyword",keyword);
 		return new Gson().toJson(list).toString();
+	}
+	
+	//아이디 찾기
+	@RequestMapping(value="/findId.emp", produces="text/html;charset=utf-8")
+	public String findId(String vo) {
+		EmployeeVO info = new Gson().fromJson(vo, EmployeeVO.class);
+	
+		return sql.selectOne("lo.findId",info);
+	}
+	
+	//패스워드찾기
+	@RequestMapping(value="/findPw.emp", produces="text/html;charset=utf-8")
+	public void findPw(String vo) {
+		EmployeeVO info = new Gson().fromJson(vo, EmployeeVO.class);
+		String pw = common.rand6num();
+		info.setEmp_pw(pw);
+		
+		
+		common.sendPassword(info);
+		sql.update("lo.findPw",info);
 	}
 }

@@ -18,7 +18,7 @@
             android:id="@+id/back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
     </RelativeLayout>
     <!--지도를 붙여용-->
     <FrameLayout

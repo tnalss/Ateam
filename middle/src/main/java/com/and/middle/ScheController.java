@@ -45,7 +45,7 @@ public class ScheController {
 		List<ScheduleVO> list = sql.selectList("sche.deptPeriod",dept_code);
 		return new Gson().toJson(list).toString();
 	}
-	@RequestMapping(value="/peronalPeriod.sche", produces="text/html;charset=utf-8")
+	@RequestMapping(value="/personalPeriod.sche", produces="text/html;charset=utf-8")
 	public String personal_sche_list_period(String emp_no) {
 		
 		//해당쿼리문 날리기.

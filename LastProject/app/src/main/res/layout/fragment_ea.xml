@@ -6,50 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ea.EaFragment"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--상단메뉴바-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--회사 로고& 이름-->
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_burger"
+            android:src="@drawable/ic_menu_c"
+            android:layout_width="25dp"
+            android:layout_height="25dp"   />
+    </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
+            android:layout_marginTop="45dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <!--상단 메뉴-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-                <!--회사 로고& 이름-->
-                <LinearLayout
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:src="@drawable/onlylogo"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
-                    <TextView
-                        android:layout_gravity="center"
-                        style="@style/main_size"
-                        android:text="JK COMPANY"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </RelativeLayout>
-            <TextView
-                style="@style/main_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="전자결재"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
             <TextView
                 style="@style/sub_size"
                 android:layout_width="wrap_content"

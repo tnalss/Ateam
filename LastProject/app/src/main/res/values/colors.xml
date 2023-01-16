@@ -13,8 +13,8 @@
 
 
     <!--주영 사용 컬러 코드-->
-    <color name="blue">#3A54E6</color>
-    <color name="green">#59B15D</color>
-    <color name="red">#E63D3D</color>
+    <color name="blue">#69B4FF</color>
+    <color name="green">#69FF70</color>
+    <color name="red">#FF5050</color>
     <color name="grey">#363636</color>
 </resources>

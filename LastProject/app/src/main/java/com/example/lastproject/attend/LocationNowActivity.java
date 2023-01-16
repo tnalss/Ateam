@@ -89,7 +89,6 @@ public class LocationNowActivity extends AppCompatActivity  implements OnMapRead
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-        Log.d(TAG, "onCreate: ");
     }
 
 

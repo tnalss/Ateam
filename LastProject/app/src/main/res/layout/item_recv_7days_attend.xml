@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeWidth="1dp"
+    app:strokeColor="#DDD9D9"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    android:layout_width="110dp"
+    android:layout_height="110dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/hc_layoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginBottom="5dp"
+
+        android:orientation="vertical"
+>
+
+        <TextView
+            android:padding="3dp"
+            android:background="#FF0C0C"
+            android:textAlignment="center"
+            android:id="@+id/hc_text_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Jan" />
+
+        <TextView
+            android:id="@+id/hc_text_middle"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textStyle="bold"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/hc_text_bottom"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            tools:text="Mon" />
+
+        <TextView
+
+            android:id="@+id/tv_att_state"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/hc_selector"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#f00f0f"
+        />
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

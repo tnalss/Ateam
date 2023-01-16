@@ -6,10 +6,18 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <!--미디어 권한 3개 csm 23/1/15-->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.MANAGE_MEDIA"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
+
+
 
     <uses-feature
         android:name="android.hardware.camera2"
@@ -46,17 +54,25 @@
     </queries>
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_jk_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_jk_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-         <activity
+        <activity
+            android:name=".al.AL_Apply_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".notice.Update_no_Activity"
             android:exported="false">
             <meta-data
@@ -65,13 +81,6 @@
         </activity>
         <activity
             android:name=".Org_Chart.Org_MainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".home.MyInfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -167,12 +176,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
+        </activity> <!-- 2023 . 01 . 06  JHW : SoftInputMode EditText 키보드 Layout 밀리는 현상 해결 위해서   android:WindowSoftInputMode = "adjustPan" -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

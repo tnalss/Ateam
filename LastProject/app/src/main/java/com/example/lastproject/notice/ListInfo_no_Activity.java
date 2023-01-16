@@ -2,16 +2,21 @@ package com.example.lastproject.notice;
 
 import static java.security.AccessController.getContext;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +27,14 @@ import com.example.conn.ApiClient;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
+import com.example.lastproject.databinding.ActivityMainBinding;
 import com.example.lastproject.login.LoginVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListInfo_no_Activity extends AppCompatActivity {
     String TAG = "로그";
@@ -39,15 +46,11 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
 
-
     int bo = 0;
-
     @Override
     public void onResume() {
         super.onResume();
         update();
-
-
     }
 
     @Override
@@ -55,6 +58,7 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_info_no);
         getSupportActionBar().hide();
+
 
         img_no_info_close = findViewById(R.id.img_no_info_close);
         tv_no_info_title = findViewById(R.id.tv_no_info_title);
@@ -96,7 +100,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
         tv_no_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 bnt_no_reply.setVisibility(View.VISIBLE);
                 edt_no_reply.setVisibility(View.VISIBLE);
             }
@@ -109,14 +112,17 @@ public class ListInfo_no_Activity extends AppCompatActivity {
                 re.setBoard_no(bo);
                 re.setReply_content(edt_no_reply.getText().toString());
                 re.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
-        new CommonMethod().setParams("re", new Gson().toJson( re )).sendPost("re_insert.no", (isResult, data) -> {
-            replylist();
-        });
+                new CommonMethod().setParams("re", new Gson().toJson(re)).sendPost("re_insert.no", (isResult, data) -> {
+                    bnt_no_reply.setVisibility(View.GONE);
+                    edt_no_reply.setVisibility(View.GONE);
+                    edt_no_reply.setText("");
+                    replylist();
+                });
             }
         });
 
 
-        /* 취소 / 뒤로가기 */
+                /* 취소 / 뒤로가기 */
         img_no_info_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +134,6 @@ public class ListInfo_no_Activity extends AppCompatActivity {
     // 공지사항 상세내용
     public void update() {
         new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("info.no", (isResult, data) -> {
-
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data, NoticeVO.class);
             bo = notice.getBoard_no();
@@ -136,11 +141,9 @@ public class ListInfo_no_Activity extends AppCompatActivity {
             tv_no_info_title.setText("제목 : " + notice.getBoard_title());
             tv_no_info_content.setText("내용 : " + notice.getBoard_content());
             tv_no_info_date.setText("작성일 : " + notice.getWrite_date());
-
-        replylist();
+            replylist();
 
         });
-
     }
     public void replylist() {
         // 댓글 목록

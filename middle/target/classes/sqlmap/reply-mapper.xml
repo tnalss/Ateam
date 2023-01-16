@@ -4,10 +4,6 @@
 
 <!-- 댓글 전체목록 --> 
 <select id="reply_list" resultType="notice.ReplyVO">
-<!-- select *
-from tbl_reply
-where board_no = #{board_no}
- -->
 select *
 from (select * from tbl_reply
 where board_no = #{board_no}
@@ -18,7 +14,30 @@ order by 1 desc)
 <insert id="reply_no_insert">
 insert into tbl_reply( BOARD_NO, EMP_NO, REPLY_CONTENT)
 values( #{board_no}, #{emp_no}, #{reply_content})
-
 </insert>
+
+<!-- 공지사항 / 익명게시판 글삭제 -->
+<delete id="reply_delete">
+delete from tbl_reply
+where reply_no = #{reply_no}
+</delete>
+
+<!-- 댓글 수정 -->
+<update id="reply_update">
+update tbl_reply
+set reply_content = #{reply_content}
+where reply_no = #{reply_no}
+</update>
+
+<!-- 댓글 수 -->
+<update id="reply_count">
+update tbl_board
+set reply_count = (select count(reply_no) from tbl_reply
+where tbl_board.board_no = tbl_reply.board_no)
+</update>
+
+<select id="countReply" resultType="String">
+select count(*) from tbl_reply where board_no = #{board_no}
+</select>
 
 </mapper>

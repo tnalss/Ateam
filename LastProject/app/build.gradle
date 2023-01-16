@@ -74,9 +74,6 @@ dependencies {
     //이미지 넣는 glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
-    //동그란 이미지 circle image view 23/1/2 csm
-    implementation group: 'de.hdodenhof', name: 'circleimageview', version: '3.1.0'
-
     // ViewPager2 23/1/2 csm
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
@@ -120,5 +117,14 @@ dependencies {
     //파이어베이스 리얼타임데이터베이스
     implementation  'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+    //230110 주영 tablayout..?
+    implementation 'com.google.android.material:material:1.2.0'
+
+    //230111 주영 qr스캐너
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
+    // 23/1/15 csm 엑셀 내보내기 poi api
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
 
 }

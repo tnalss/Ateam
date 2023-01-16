@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.common.Common;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -24,8 +26,9 @@ import java.util.ArrayList;
 public class ListInfo_sec_Activity extends AppCompatActivity {
     String TAG = "로그";
     ImageView img_sec_info_close;
-    TextView tv_sec_info_title, tv_sec_info_content, tv_sec_info_date;
-    Button btn_sec_delete, btn_sec_update;
+    TextView tv_sec_info_title, tv_sec_info_content, tv_sec_info_date, tv_sec_reply;
+    Button btn_sec_delete, btn_sec_update, btn_sec_reply;
+    EditText edt_sec_reply;
     RecyclerView recv_sec_noticeInfo;
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
@@ -35,7 +38,6 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         update();
-
     }
 
     @Override
@@ -48,6 +50,10 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         tv_sec_info_title = findViewById(R.id.tv_sec_info_title);
         tv_sec_info_content = findViewById(R.id.tv_sec_info_content);
         tv_sec_info_date = findViewById(R.id.tv_sec_info_date);
+        tv_sec_info_date = findViewById(R.id.tv_sec_info_date);
+        tv_sec_reply = findViewById(R.id.tv_sec_reply);
+        edt_sec_reply = findViewById(R.id.edt_sec_reply);
+        btn_sec_reply = findViewById(R.id.btn_sec_reply);
         btn_sec_update = findViewById(R.id.btn_sec_update);
         btn_sec_delete = findViewById(R.id.btn_sec_delete);
         recv_sec_noticeInfo = findViewById(R.id.recv_sec_noticeInfo);
@@ -69,11 +75,38 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         btn_sec_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(ListInfo_sec_Activity.this, Update_sec_Activity.class);
-                    intent.putExtra("notice", notice);
-                    startActivity(intent);
+                Intent intent = new Intent(ListInfo_sec_Activity.this, Update_sec_Activity.class);
+                intent.putExtra("notice", notice);
+                startActivity(intent);
             }
         });
+
+        /* 댓글작성 클릭 */
+        tv_sec_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btn_sec_reply.setVisibility(View.VISIBLE);
+                edt_sec_reply.setVisibility(View.VISIBLE);
+            }
+        });
+        /* 댓글 작성 */
+        btn_sec_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReplyVO re = new ReplyVO();
+                re.setBoard_no(bo);
+                re.setReply_content(edt_sec_reply.getText().toString());
+                re.setEmp_no(Integer.parseInt(Common.loginInfo.getEmp_no()));
+                new CommonMethod().setParams("re", new Gson().toJson(re)).sendPost("re_insert.no", (isResult, data) -> {
+                    btn_sec_reply.setVisibility(View.GONE);
+                    edt_sec_reply.setVisibility(View.GONE);
+                    edt_sec_reply.setText("");
+                    re_sec_plylist();
+                });
+            }
+        });
+
         /* 취소 / 뒤로가기 */
         img_sec_info_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,26 +116,32 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         });
 
     }
-public void update() {
+
+    // 익명게시판 상세내용
+    public void update() {
         new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             notice = gson.fromJson(data, NoticeVO.class);
             notice.getWrite_date();
             notice.getBoard_no();
             bo = notice.getBoard_no();
-            tv_sec_info_title.setText("제목 : " +notice.getBoard_title());
-            tv_sec_info_content.setText("내용 : " +notice.getBoard_content());
-            tv_sec_info_date.setText("작성일 : " +notice.getWrite_date());
+            tv_sec_info_title.setText("제목 : " + notice.getBoard_title());
+            tv_sec_info_content.setText(notice.getBoard_content());
+            tv_sec_info_date.setText("작성일 : " + notice.getWrite_date());
+            re_sec_plylist();
+        });
+    }
 
-            new CommonMethod().setParams("board_no", bo).sendPost("sec_reply.no", (isResult1, data1) -> {
-                Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                reply = gson1.fromJson(data1,
-                        new TypeToken<ArrayList<ReplyVO>>() {
-                        }.getType());
-                recv_sec_noticeInfo.setAdapter(new Reply_sec_Adapter(getLayoutInflater(), reply, ListInfo_sec_Activity.this));
-                recv_sec_noticeInfo.setLayoutManager(CommonMethod.getVManager(ListInfo_sec_Activity.this));
+    public void re_sec_plylist() {
+        // 댓글 목록
+        new CommonMethod().setParams("board_no", bo).sendPost("sec_reply.no", (isResult1, data1) -> {
+            Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            reply = gson1.fromJson(data1,
+                    new TypeToken<ArrayList<ReplyVO>>() {
+                    }.getType());
+            recv_sec_noticeInfo.setAdapter(new Reply_sec_Adapter(getLayoutInflater(), reply, ListInfo_sec_Activity.this));
+            recv_sec_noticeInfo.setLayoutManager(CommonMethod.getVManager(ListInfo_sec_Activity.this));
 
-            });
         });
     }
 }

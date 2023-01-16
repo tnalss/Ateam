@@ -20,21 +20,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:layout_weight="1"
             android:id="@+id/tv_sec_reply_content"
+            android:textSize="16dp"
+            android:layout_weight="1"
             android:layout_margin="6dp"
             android:text="댓글내용"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/tv_sec_reply_date"
-            android:gravity="right"
-            android:layout_gravity="center"
-            android:layout_margin="6dp"
-            android:text="2023/01/09"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_sec_reply_date"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_margin="6dp"
+                android:text="2023/01/09"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <!-- 수정 / 삭제 -->
+            <TextView
+                android:id="@+id/tv_sec_reply_update"
+                android:layout_marginLeft="6dp"
+                android:layout_below="@id/tv_sec_reply_date"
+                android:padding="2dp"
+                android:textColor="@color/white"
+                android:background="@drawable/item_radius5"
+                android:layout_marginBottom="3dp"
+                android:layout_marginRight="8dp"
+                android:text="수정"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_sec_reply_delete"
+                android:layout_toRightOf="@id/tv_sec_reply_update"
+                android:layout_below="@id/tv_sec_reply_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/item_radius6"
+                android:padding="2dp"
+                android:text="삭제"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edt_sec_reply_update"
+            android:layout_weight="1"
+            android:hint="수정"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/btn_sec_reply_update"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/main_color"
+            android:text="완료"
+            android:visibility="gone"/>
     </LinearLayout>
     <View
         android:background="#B1B0B0"

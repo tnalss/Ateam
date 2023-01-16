@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,6 +54,19 @@ public class CommonMethod {
         return rtn;
     }
 
+    public String getRealDocsPath(Uri uri, Context context){
+        String rtn = null; // 리턴용
+        String[] proj = {OpenableColumns.DISPLAY_NAME};
+        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+        if(cursor.moveToFirst()){
+            int column_index = cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME);
+            rtn = cursor.getString(column_index);
+        }
+        cursor.close();
+
+        return rtn;
+    }
+
     //카메라로 찍은 사진을 우리가 만든 임시파일로 가져오기 위한 처리
     public File createFile(Context context){
         String fileName = "LastProject" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -71,6 +85,7 @@ public class CommonMethod {
 
         return rtnFile;
     }
+
 
 
     public CommonMethod setParams(String key, Object value){
