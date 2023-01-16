@@ -41,9 +41,10 @@ on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
+where c2.code_value = #{code}
 order by c2.code_value, e.emp_name,c.code_num
 </select>
-<!-- 지점별 이름 -->
+
 <select id ="org_branch_n" resultType="Org.OrgVO">
 select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
 from tbl_emp e left join tbl_org o
@@ -53,175 +54,7 @@ on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
-where e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!--지점별_광주  -->
-<select id ="org_branch_1" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%광%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!-- 광주지점 내 사원 검색 -->
-<select id ="org_branch_1n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%광%'
-and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!--지점별_대구  -->
-<select id ="org_branch_2" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%구%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!-- 대구지점 내 사원 검색 -->
-<select id ="org_branch_2n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%구%'
-and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!--지점별_대전  -->
-<select id ="org_branch_3" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%전%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<select id ="org_branch_3n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%전%'
-and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!--지점별_뷰산  -->
-<select id ="org_branch_4" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%부%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-<select id ="org_branch_4n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%부%'
-and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-
-<!--지점별_서울  -->
-<select id ="org_branch_5" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%울%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-<select id ="org_branch_5n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%울%'
-and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<!--지점별_지점미지정  -->
-<select id ="org_branch_6" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%정%'
-order by c2.code_value, e.emp_name,c.code_num
-</select>
-
-<select id ="org_branch_6n" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where c2.code_value like '%정%'
+where c2.code_value = #{code}
 and e.emp_name like '%'||#{keyword}||'%' 
 order by c2.code_value, e.emp_name,c.code_num
 </select>
@@ -230,20 +63,6 @@ order by c2.code_value, e.emp_name,c.code_num
 
 
 
-<!--지점별 검색 -->
-<select id ="org_branch_r" resultType="Org.OrgVO">
-select e.profile_path,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num
-where e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
-
-</select>
 
 <!--부서별 -->
 <select id = "org_dept"  resultType="Org.OrgVO">

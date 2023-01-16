@@ -21,7 +21,7 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center">
-                <Spinner
+                <org.angmarch.views.NiceSpinner
                     style="@style/small_size"
                     android:layout_marginLeft="22dp"
                     android:id="@+id/spinner"

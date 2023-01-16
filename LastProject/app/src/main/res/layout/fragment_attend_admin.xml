@@ -197,6 +197,7 @@
         </LinearLayout>
     <!--전체 사원의 근태관리 바로가기 만들기!-->
         <TextView
+            android:id="@+id/view_all"
             android:layout_gravity="center"
             style="@style/small_size"
             android:layout_width="wrap_content"
