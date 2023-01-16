@@ -34,7 +34,7 @@ public class ScheduleModifyFragment extends Fragment implements View.OnClickList
         activity= (MainActivity) getActivity();
         vo = (ScheduleVO) bundle.getSerializable("vo");
         binding.edtScheTitle.setText(vo.getSche_title());
-        binding.edtScheContent.setText(vo.getSche_title());
+        binding.edtScheContent.setText(vo.getSche_content());
 
         binding.tvScheStart.setText(vo.getSche_start().substring(0,11));
         binding.tvScheEnd.setText(vo.getSche_end().substring(0,11));
