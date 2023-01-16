@@ -27,9 +27,10 @@ public class AlController {
 	}
 	
 	//로그인한 사원의 휴가 신청  처리
-	@RequestMapping(value="/al_v0.al", produces="text/html;charset=utf-8")
-	public void al_v0(String emp_no) {		
-		sql.insert("al.al_v0",emp_no);			
+	@RequestMapping(value="/al_v_a.al", produces="text/html;charset=utf-8")
+	public String al_v0(String emp_no) {		
+		sql.insert("al.al_v_a",emp_no);			
+		return "1";
 		
 	}		
 

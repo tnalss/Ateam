@@ -73,13 +73,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".attend.Admin_AttendActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".notice.Update_no_Activity"
             android:exported="false">
             <meta-data

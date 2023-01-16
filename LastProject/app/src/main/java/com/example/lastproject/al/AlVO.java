@@ -1,6 +1,26 @@
 package com.example.lastproject.al;
 
 public class AlVO {
+
+    private String al_no;
+    private String emp_no;
+    private String al_reg_date;
+    private String al_code;
+    private String al_date;
+    private String al_code_value;
+    private String al_start_date;
+    private String al_end_date;
+
+    public String getEa_status() {
+        return ea_status;
+    }
+
+    public void setEa_status(String ea_status) {
+        this.ea_status = ea_status;
+    }
+
+    private String ea_status;
+
     public String getAl_no() {
         return al_no;
     }
@@ -41,12 +61,6 @@ public class AlVO {
         this.al_date = al_date;
     }
 
-    private String al_no;
-    private String emp_no;
-    private String al_reg_date;
-    private String al_code;
-    private String al_date;
-
     public String getAl_code_value() {
         return al_code_value;
     }
@@ -55,14 +69,19 @@ public class AlVO {
         this.al_code_value = al_code_value;
     }
 
-    private String al_code_value;
-    private String ea_status;
-
-    public String getEa_status() {
-        return ea_status;
+    public String getAl_start_date() {
+        return al_start_date;
     }
 
-    public void setEa_status(String ea_status) {
-        this.ea_status = ea_status;
+    public void setAl_start_date(String al_start_date) {
+        this.al_start_date = al_start_date;
+    }
+
+    public String getAl_end_date() {
+        return al_end_date;
+    }
+
+    public void setAl_end_date(String al_end_date) {
+        this.al_end_date = al_end_date;
     }
 }
