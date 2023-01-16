@@ -78,7 +78,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"/>
                 <EditText
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:layout_margin="10dp"
                     android:id="@+id/edt_emp_pw"
@@ -99,7 +99,7 @@
                     android:layout_width="87dp"
                     android:layout_height="wrap_content"/>
                 <EditText
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:layout_margin="10dp"
                     android:id="@+id/edt_emp_conpw"
