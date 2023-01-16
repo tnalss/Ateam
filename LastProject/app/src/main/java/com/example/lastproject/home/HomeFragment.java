@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
@@ -154,6 +155,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     binding.ivRedDot.setVisibility(View.VISIBLE);
                     unreadDocs=Integer.parseInt(data);
                     binding.tvUnreadDocs.setText("미결재 문서 : "+unreadDocs+" 건");
+                    binding.ivNoti.setOnClickListener(this);
+
                 }
             }
         });
@@ -218,7 +221,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.llMyInfo.setOnClickListener(this);
         binding.llLogout.setOnClickListener(this);
 
-        binding.ivNoti.setOnClickListener(this);
         binding.tvUnreadDocs.setOnClickListener(this);
         View v = binding.getRoot();
         return v;
@@ -273,11 +275,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if ( v.getId() == R.id.tv_unreadDocs){
             activity.btm_nav.setSelectedItemId(R.id.btm_item4);
         }
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding=null;
     }
 
 
