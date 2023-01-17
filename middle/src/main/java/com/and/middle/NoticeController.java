@@ -131,12 +131,7 @@ public class NoticeController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(list).toString();
 	}
-	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value="/countReply.no", produces="text/html;charset=utf-8")	
 	public String countReply (String board_no) {
 		

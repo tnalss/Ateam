@@ -47,8 +47,6 @@ public class Insert_secActivity extends AppCompatActivity {
         });
 
 
-
-
         // 취소
         img_no_close.setOnClickListener(new View.OnClickListener() {
             @Override
