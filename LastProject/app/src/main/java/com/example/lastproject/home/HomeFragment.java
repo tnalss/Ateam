@@ -133,13 +133,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Common.loginInfo.setAtt_code(vo.getAtt_code());
                         Common.loginInfo.setAttend_date(vo.getAttend_date());
                         Common.loginInfo.setAttend_on(vo.getAttend_on());
-
+                    if(Common.loginInfo.getAttend_on()!=null){
                         binding.tvOntime.setText("출근 : "+Common.loginInfo.getAttend_on()+" ");
                         binding.ivOnWork.setVisibility(View.VISIBLE);
-                        if(vo.getAtt_code().equals("W1")){
-                        Common.loginInfo.setAttend_off(vo.getAttend_off());
-                        binding.tvOntime.setText("퇴근 : "+Common.loginInfo.getAttend_off()+" ");
-
+                        if(vo.getAtt_code().equals("W1")) {
+                            Common.loginInfo.setAttend_off(vo.getAttend_off());
+                            binding.tvOntime.setText("퇴근 : " + Common.loginInfo.getAttend_off() + " ");
+                        }
                         }
                     //}
                 } else {

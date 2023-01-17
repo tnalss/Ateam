@@ -65,7 +65,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/sub_color"/>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/item_radius2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_margin="5dp"
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="근무 현황조회 "/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/datepicker"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_cal_c"/>
+                <TextView
+                    android:id="@+id/d"
+                    style="@style/sub_size"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="날짜 선택"/>
+                </LinearLayout>
+            <org.angmarch.views.NiceSpinner
+                android:layout_marginLeft="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/sub_color"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recv_attend_admin"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+        </LinearLayout>
 
 
 
