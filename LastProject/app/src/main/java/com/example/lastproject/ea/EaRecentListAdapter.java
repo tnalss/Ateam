@@ -1,5 +1,6 @@
 package com.example.lastproject.ea;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.MainActivity;
@@ -39,6 +41,18 @@ public class EaRecentListAdapter extends RecyclerView.Adapter<EaRecentListAdapte
         h.tv_title.setText(list.get(i).getEa_title());
         h.tv_name_date.setText(Common.loginInfo.getEmp_name()+" | " + list.get(i).getEa_date());
         h.tv_process.setText(list.get(i).getEa_status());
+        int cnt = i;
+        h.line_recent.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("ea_num", list.get(cnt).getEa_num());
+            if(list.get(cnt).getEa_status().equals("회수")){
+                bundle.putInt("no",2);
+            }
+
+                Fragment f = new EaInfoFragment();
+                f.setArguments(bundle);
+                activity.changeFragment(f);
+        });
     }
 
     @Override

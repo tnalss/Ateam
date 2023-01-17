@@ -3,14 +3,19 @@ package com.example.lastproject.ea;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +32,7 @@ import android.widget.Toast;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.al.AlVO;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.employee.EmployeeVO;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,6 +60,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     ArrayList<EaVO> send_list;
     EaVO send_vo;
     EaCodeVO vo;
+    AlVO alvo;
     ChipGroup chip_sgroup, chip_rgroup;
     Chip chip;
     EditText edt_sign_search, edt_refer_search, edt_ea_title, edt_ea_content;
@@ -63,10 +71,14 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     ArrayList<String> value_list;
     ArrayList<EmployeeVO> emp_list,signer_list;
     ArrayAdapter<String> arrayAdapter;
-    TextView tv_main,tv_form,tv_dep_title,tv_sign_check,tv_refer_check;
+    TextView tv_main,tv_form,tv_dep_title,tv_sign_check,tv_refer_check, tv_start_date, tv_end_date, tv_type;
+    LinearLayout line_vacation;
     RecyclerView recv_sign_search, recv_refer_search,recv_sign_add,recv_refer_add;
     Spinner spinner_department;
     AlertDialog.Builder my_alert;
+    ArrayList<String> path_list;
+    ArrayList<String> name_list;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +86,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         View v = inflater.inflate(R.layout.fragment_write_ea, container, false);
         my_alert = new AlertDialog.Builder(getContext());
         activity = (MainActivity) getActivity();
+        line_vacation = v.findViewById(R.id.line_vacation);
         recv_sign_add = v.findViewById(R.id.recv_sign_add);
         recv_refer_add = v.findViewById(R.id.recv_refer_add);
         tv_main = v.findViewById(R.id.tv_main);
@@ -81,6 +94,9 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         tv_sign_check = v.findViewById(R.id.tv_sign_check);
         tv_dep_title = v.findViewById(R.id.tv_dep_title);
         tv_refer_check = v.findViewById(R.id.tv_refer_check);
+        tv_start_date = v.findViewById(R.id.tv_start_date);
+        tv_end_date = v.findViewById(R.id.tv_end_date);
+        tv_type = v.findViewById(R.id.tv_type);
         edt_ea_title = v.findViewById(R.id.edt_ea_title);
         edt_ea_content = v.findViewById(R.id.edt_ea_content);
         btn_sign_add = v.findViewById(R.id.btn_sign_add);
@@ -89,10 +105,19 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         btn_add = v.findViewById(R.id.btn_add);
         radioGroup = v.findViewById((R.id.radioGroup));
 
+        btn_add.setOnClickListener(this);
+
+
         vo = (EaCodeVO) getArguments().getSerializable("form");
         tv_main.setText(vo.getCode_value());
         tv_form.setText(vo.getCode_value());
-
+        if(getArguments().getSerializable("al") != null){
+            alvo = (AlVO) getArguments().getSerializable("al");
+            line_vacation.setVisibility(View.VISIBLE);
+            tv_start_date.setText(alvo.getAl_start_date());
+            tv_end_date.setText(alvo.getAl_end_date());
+            tv_type.setText(alvo.getAl_code_value());
+        }
 
 
 
@@ -274,22 +299,65 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
             send_list = new ArrayList<>();
            if(signer_list !=null) {
                for (int i = 0; i < signer_list.size(); i++) {
-                   send_vo = new EaVO();
-                   send_vo.setEmp_no(Common.loginInfo.getEmp_no());
-                   send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
-                   send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
-                   send_vo.setEa_content(edt_ea_content.getText().toString());
-                   send_list.add(send_vo);
+                   if(path_list.size() == 0){
+                       send_vo = new EaVO();
+                       send_vo.setEmp_no(Common.loginInfo.getEmp_no());
+                       send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
+                       send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
+                       send_vo.setEa_content(edt_ea_content.getText().toString());
+                       send_list.add(send_vo);
+                   }else{
+                       send_vo = new EaVO();
+                       send_vo.setEmp_no(Common.loginInfo.getEmp_no());
+                       send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
+                       send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
+                       send_vo.setEa_content(edt_ea_content.getText().toString());
+                       send_list.add(send_vo);
+                   }
+
+
                }
 
                Log.d("로그", "onClick: "+ send_list.size());
                    //OK 버튼 눌렀을 때
                    my_alert.setPositiveButton("상신하기", (dialog, which) -> {
                        Toast.makeText(getContext(), "상신완료", Toast.LENGTH_SHORT).show();
-                       new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
-                           Log.d("로그", "onClick: " + data);
-                           activity.changeFragment(new EaFragment());
-                       });
+                       if(path_list == null){
+                           new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
+                               if(alvo !=null){
+                                   new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
+                                           .setParams("al_start_date",alvo.getAl_start_date())
+                                           .setParams("al_end_date",alvo.getAl_end_date())
+                                           .setParams("al_code",alvo.getAl_code())
+                                           .sendPost("al_v_a.al",((isResult1, data1) -> {
+                                               if(isResult1) {
+                                                   activity.changeFragment(new EaFragment());
+                                               }}));
+                               }else{
+                                   activity.changeFragment(new EaFragment());
+                               }
+
+
+                           });
+                       }else{
+                           //첨부파일 있는 결재
+                           new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPostFiles("insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
+                               Toast.makeText(activity, "상신 완료", Toast.LENGTH_SHORT).show();
+                               if(alvo !=null){
+                                   new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
+                                           .setParams("al_start_date",alvo.getAl_start_date())
+                                           .setParams("al_end_date",alvo.getAl_end_date())
+                                           .setParams("al_code",alvo.getAl_code())
+                                           .sendPost("al_v_a.al",((isResult1, data1) -> {
+                                               if(isResult1) {
+                                                   activity.changeFragment(new EaFragment());
+                                               }}));
+                               }else{
+                                   activity.changeFragment(new EaFragment());
+                               }
+                           });
+                       }
+
                    });
                my_alert.setNegativeButton("취소하기",(dialog, which) -> {
                    Toast.makeText(getContext(), "취소 되었습니다.", Toast.LENGTH_SHORT).show();
@@ -299,8 +367,11 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                Toast.makeText(activity, "결재자를 추가해주세요.", Toast.LENGTH_SHORT).show();
            }
            
-        //파이어베이스 storage 에서 파일 불러오기
+
         }else if(v.getId() == R.id.btn_add) {
+            new Common().checkDangerousPermissions(getActivity());
+            fileMethod();
+
         }
     }
     //chip 만들기
@@ -343,6 +414,15 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                 chip_rgroup.removeView(v);
             }
         });
+    }
+
+
+    public  void fileMethod(){
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(Intent.createChooser(intent, "파일 선택"), Common.FILE_CODE);
+        // onActivityResult GALLERY_CODE <- 코드가 나오면 캘러리 액티비티 종료시점을 알수있음.
     }
 
 }

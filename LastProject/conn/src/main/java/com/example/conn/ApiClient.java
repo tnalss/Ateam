@@ -1,6 +1,7 @@
 package com.example.conn;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
@@ -14,6 +15,7 @@ public class ApiClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())// FileConver
                 .build();
         return retrofit;
     }

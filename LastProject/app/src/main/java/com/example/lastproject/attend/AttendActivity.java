@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.example.conn.CommonMethod;
 import com.example.lastproject.R;
-import com.example.lastproject.al.AL_Apply_Activity;
 import com.example.lastproject.al.AlVO;
 import com.example.lastproject.common.Common;
 import com.google.gson.Gson;

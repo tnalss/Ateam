@@ -64,7 +64,11 @@ public class EaInfoFragment extends Fragment implements View.OnClickListener {
             binding.tvInfoContent.setText(list.get(0).getEa_content());
             binding.recvEaInfoLine.setAdapter(new EaInfoAdapter(inflater,list,getContext(),getArguments().getInt("no"),activity));
             binding.recvEaInfoLine.setLayoutManager(CommonMethod.getHManager(getContext()));
+
         });
+
+
+
         return binding.getRoot();
     }
 
