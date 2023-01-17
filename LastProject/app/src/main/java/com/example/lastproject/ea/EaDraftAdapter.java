@@ -47,11 +47,6 @@ public class EaDraftAdapter extends RecyclerView.Adapter<EaDraftAdapter.ViewHold
             }else{
                 h.tv_sign_date.setText(list.get(i).getEa_a_date().toString());
             }
-            if(list.get(i).getEa_read().equals("true")){
-                h.tv_read.setText("읽음");
-            }else {
-                h.tv_read.setText("읽지않음");
-            }
             h.line_draft.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 Fragment f = new EaInfoFragment();
@@ -82,7 +77,7 @@ public class EaDraftAdapter extends RecyclerView.Adapter<EaDraftAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout line_draft;
-        TextView tv_status, tv_title, tv_date, tv_sign_date, tv_read;
+        TextView tv_status, tv_title, tv_date, tv_sign_date;
         public ViewHolder(@NonNull View v) {
             super(v);
             line_draft = v.findViewById(R.id.line_draft);
@@ -90,7 +85,6 @@ public class EaDraftAdapter extends RecyclerView.Adapter<EaDraftAdapter.ViewHold
             tv_title = v.findViewById(R.id.tv_title);
             tv_date = v.findViewById(R.id.tv_date);
             tv_sign_date = v.findViewById(R.id.tv_sign_date);
-            tv_read = v.findViewById(R.id.tv_read);
 
         }
     }
