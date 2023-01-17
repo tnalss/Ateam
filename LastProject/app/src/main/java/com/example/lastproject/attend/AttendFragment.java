@@ -150,6 +150,7 @@ public class AttendFragment extends Fragment {
                 }else {
                     showDialog_off();
                 }
+                off.setEnabled(false);
                 selectList();
             }
         });
