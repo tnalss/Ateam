@@ -66,7 +66,6 @@ public class AttendFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_attend, container, false);
 
 
-
         /*현재위치*/
         location_now = v.findViewById(R.id.location_now);
         location_now.setOnClickListener(new View.OnClickListener() {

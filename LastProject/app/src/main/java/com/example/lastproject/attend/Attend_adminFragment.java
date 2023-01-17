@@ -64,6 +64,7 @@ public class Attend_adminFragment extends Fragment {
         });
 
         datepicker = v.findViewById(R.id.datepicker);
+        d = v.findViewById(R.id.d);
         datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +85,6 @@ public class Attend_adminFragment extends Fragment {
                             }
                         }, pYear, pMonth, pDay);
                 datePickerDialog.show();
-
 
             } //onClick
 
