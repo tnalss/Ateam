@@ -31,7 +31,7 @@ import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.al.AL_Apply_Activity;
+import com.example.lastproject.al.AL_Apply_Fragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.home.HomeFragment;
 import com.google.gson.Gson;
@@ -64,7 +64,7 @@ public class AttendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_attend, container, false);
-
+        activity = (MainActivity)getActivity();
 
         /*현재위치*/
         location_now = v.findViewById(R.id.location_now);
@@ -159,8 +159,7 @@ public class AttendFragment extends Fragment {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AL_Apply_Activity.class);
-                startActivity(intent);
+                activity.changeFragment(new AL_Apply_Fragment());
             }
         });
 

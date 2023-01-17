@@ -38,7 +38,6 @@ public class EaSignBoxAdapter extends RecyclerView.Adapter<EaSignBoxAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
-        h.tv_read.setVisibility(View.GONE);
         if(list.get(i).getEa_status().equals("회수")){
             h.line_draft.setVisibility(View.GONE);
         }else{
@@ -75,7 +74,7 @@ public class EaSignBoxAdapter extends RecyclerView.Adapter<EaSignBoxAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout line_draft;
-        TextView tv_status, tv_title, tv_date, tv_sign_date, tv_read;
+        TextView tv_status, tv_title, tv_date, tv_sign_date;
         public ViewHolder(@NonNull View v) {
             super(v);
             line_draft = v.findViewById(R.id.line_draft);
@@ -83,7 +82,6 @@ public class EaSignBoxAdapter extends RecyclerView.Adapter<EaSignBoxAdapter.View
             tv_title = v.findViewById(R.id.tv_title);
             tv_date = v.findViewById(R.id.tv_date);
             tv_sign_date = v.findViewById(R.id.tv_sign_date);
-            tv_read = v.findViewById(R.id.tv_read);
         }
     }
 }

@@ -15,14 +15,13 @@ import java.util.ArrayList;
 
 public class Al_Apply_Adapter extends RecyclerView.Adapter<Al_Apply_Adapter.ViewHolder> {
 
-    public Al_Apply_Adapter(LayoutInflater inflater, ArrayList<AlVO> al_list,  AL_Apply_Activity al_apply_activity) {
+    public Al_Apply_Adapter(LayoutInflater inflater, ArrayList<AlVO> al_list) {
         this.inflater = inflater;
         this.al_list = al_list;
     }
 
     LayoutInflater inflater;
     ArrayList<AlVO> al_list;
-    AL_Apply_Activity al_apply_activity;
 
 
 

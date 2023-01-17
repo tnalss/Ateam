@@ -53,6 +53,7 @@
                 android:layout_height="2dp"/>
 
             <TextView
+                android:textAlignment="center"
                 android:id="@+id/tv_info_date"
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"

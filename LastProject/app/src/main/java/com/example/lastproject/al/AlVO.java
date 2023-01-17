@@ -1,6 +1,8 @@
 package com.example.lastproject.al;
 
-public class AlVO {
+import java.io.Serializable;
+
+public class AlVO implements Serializable {
 
     private String al_no;
     private String emp_no;

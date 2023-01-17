@@ -4,8 +4,24 @@ import java.sql.Date;
 
 
 public class EaVO {
-	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no, emp_name;
+	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no, emp_name, ea_file_name, ea_file_path;
 	private Date ea_date, ea_cdate, ea_u_date, ea_r_date, ea_a_date;
+
+	public String getEa_file_name() {
+		return ea_file_name;
+	}
+
+	public void setEa_file_name(String ea_file_name) {
+		this.ea_file_name = ea_file_name;
+	}
+
+	public String getEa_file_path() {
+		return ea_file_path;
+	}
+
+	public void setEa_file_path(String ea_file_path) {
+		this.ea_file_path = ea_file_path;
+	}
 
 	public String getEmp_name() {
 		return emp_name;

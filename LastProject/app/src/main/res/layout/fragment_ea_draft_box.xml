@@ -42,12 +42,11 @@
         android:layout_height="match_parent">
     <TextView
         android:textAlignment="center"
-        android:layout_weight="2"
         android:text="상태"
         android:background="#eee"
         android:textColor="#9C9999"
         android:textStyle="bold"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"/>
         <TextView
             android:textAlignment="center"
@@ -55,7 +54,7 @@
             android:background="#eee"
             android:textColor="#9C9999"
             android:textStyle="bold"
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"/>
         <TextView
             android:textAlignment="center"
@@ -73,15 +72,6 @@
             android:textColor="#9C9999"
             android:textStyle="bold"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:textAlignment="center"
-            android:layout_weight="1"
-            android:text="읽음"
-            android:background="#eee"
-            android:textColor="#9C9999"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
