@@ -54,7 +54,7 @@ public class AttendFragment extends Fragment {
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
     Button workday, apply;
-    ImageView  iv_emp_profile, to_att_act;
+    ImageView  iv_emp_profile, to_att_act,qr;
     MainActivity activity;
     ArrayList<AttendVO> list;
     AttendVO vo = null;
