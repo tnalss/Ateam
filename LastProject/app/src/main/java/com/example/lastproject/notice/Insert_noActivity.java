@@ -87,7 +87,7 @@ public class Insert_noActivity extends AppCompatActivity {
 
                 } else {
                     //첨부파일 있는 게시글
-                    
+
                 }
 
                 
