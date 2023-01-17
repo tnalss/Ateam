@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
@@ -12,7 +11,7 @@
         <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
           <div class="carousel-container">
             <div class="carousel-content animate__animated animate__fadeInUp">
-              <h2>Welcome to <span>JK Company</span></h2>
+              <h2><span>JK Company</span></h2>
               <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
               <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
             </div>
@@ -244,8 +243,8 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Our <strong>Clients</strong></h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2><strong>협력사</strong></h2>
+          <p><strong>'팀워크의 좋은 점은 항상 지원해줄 사람들이 있다는 것이다.'</strong>  -Margaret Carty</p><p>JKCompany의 도움이 되어주셔서 항상 감사합니다.</p><p>앞으로도 잘 부탁드립니다.</p>
         </div>
 
         <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">

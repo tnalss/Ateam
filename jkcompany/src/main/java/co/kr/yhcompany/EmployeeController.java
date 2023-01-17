@@ -3,7 +3,9 @@ package co.kr.yhcompany;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,18 @@ public class EmployeeController {
 	
 	//조회하고 출력하는 예제
 	@RequestMapping(value= "/list.emp" , produces="text/html;charset=utf-8")
-	public String emp_list(Model model) {
+	public String emp_list(HttpSession session, Model model) {
+		
+		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
+		session.setAttribute("cate", "emp" );
+		
 		List<EmployeeVO> list = sql.selectList("emp.list");
+		
+		//조회해온 값을 모델로 list라는 곳에 담았습니다.
 		model.addAttribute("list", list);
+		
+		
+		//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
 	}
 	
@@ -42,6 +53,9 @@ public class EmployeeController {
 	public String notile(Model model) {
 		List<EmployeeVO> list = sql.selectList("emp.list");
 		model.addAttribute("list", list);
+		
+		//default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+		//리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
 		return "default/employee/list";
 	}
 	

@@ -40,10 +40,10 @@
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <h4>JK Company 구독</h4>
+            <p>JK Company의 각종 소식을 받아 보실 수 있습니다!</p><p>지금 구독하시고 최신 소식을 받아보세요!</p>
             <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
+              <input type="email" name="email"><input type="submit" value="구독">
             </form>
           </div>
 

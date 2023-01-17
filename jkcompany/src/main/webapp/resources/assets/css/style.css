@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Noto Sans kr", sans-serif;
   color: #4d4643;
 }
 
@@ -29,7 +29,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Muli", sans-serif;
+  font-family: "Noto Sans kr", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -188,6 +188,7 @@ h6 {
   white-space: nowrap;
   text-transform: uppercase;
   transition: 0.3s;
+  font-size : 16px;
 }
 
 .navbar a i,
@@ -436,7 +437,7 @@ h6 {
   color: #fff;
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
-  border-top: 5px solid #f03c02;
+  border-top: 5px solid #764F82;
 }
 
 #hero .carousel-content h2 {
@@ -460,11 +461,11 @@ h6 {
   color: #fff;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
-  border: 2px solid #f03c02;
+  border: 2px solid #764F82;
 }
 
 #hero .btn-get-started:hover {
-  background: #f03c02;
+  background: #764F82;
   color: #fff;
   text-decoration: none;
 }
@@ -2113,7 +2114,7 @@ section {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #fd6f41;
+  color: #764F82;
   font-size: 18px;
   line-height: 1;
 }
@@ -2141,7 +2142,7 @@ section {
 }
 
 #footer .footer-newsletter {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 #footer .footer-newsletter h4 {
