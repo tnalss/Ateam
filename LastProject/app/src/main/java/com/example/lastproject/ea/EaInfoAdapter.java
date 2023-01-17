@@ -70,7 +70,6 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_date.setText(ea_list.get(i).getEa_date().toString());
                 });
             } else {
-
                 new CommonMethod().setParams("emp_no", ea_list.get(i - 1).getEa_receiver()).sendPost("info.emp", (isResult, data) -> {
                     vo = new Gson().fromJson(data, EmployeeVO.class);
                     h.tv_fixed.setText("결재");
@@ -79,22 +78,29 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_dep.setText(vo.getDepartment_name());
 
 
-                    if (Common.loginInfo.getEmp_no().equals(vo.getEmp_no()) && !(ea_list.get(i - 1).getEa_r_statuas().equals("결재완료"))) {
+                    if (Common.loginInfo.getEmp_no().equals(vo.getEmp_no()) && (ea_list.get(i - 1).getEa_r_statuas().equals("미결재"))) {
                         h.line_btn_sign.setVisibility(View.VISIBLE);
                         h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
                         h.tv_info_status.setVisibility(View.VISIBLE);
                         h.tv_info_date.setVisibility((View.GONE));
-                    } else {
+                    }else {
+
+
                         if (ea_list.get(i - 1).getEa_r_statuas().equals("결재완료")) {
                             h.imgv_stamp.setVisibility(View.VISIBLE);
                             h.line_btn_sign.setVisibility(View.GONE);
                             h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
-                        } else {
+                        }else if(ea_list.get(i - 1).getEa_r_statuas().equals("반려")){
+                            h.imgv_stamp.setImageResource(R.drawable.ea_stamp_denied);
+                            h.imgv_stamp.setVisibility(View.VISIBLE);
+                            h.line_btn_sign.setVisibility(View.GONE);
+                            h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
+
+                        }else {
                             h.tv_info_date.setVisibility((View.GONE));
                             h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
                             h.tv_info_status.setVisibility(View.VISIBLE);
                         }
-
                     }
 
 
@@ -152,7 +158,22 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.btn_denied.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            my_alert.setTitle("알림");
+                            my_alert.setMessage("반려하시겠습니까?");
+                            my_alert.setPositiveButton("반려하기", (dialog, which) -> {
+                                new CommonMethod().setParams("ea_status", "E2").setParams("emp_no", Common.loginInfo.getEmp_no()).setParams("ea_num", ea_list.get(0).getEa_num()).sendPost("sign_status.ea", (isResult, data) -> {
+                                    Fragment f = new EaInfoFragment();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("ea_num", ea_list.get(0).getEa_num());
+                                    bundle.putInt("no", 1);
+                                    f.setArguments(bundle);
+                                    activity.changeFragment(f);
+                                });
+                            });
+                            my_alert.setNegativeButton("취소", (dialog, which) -> {
+                                Toast.makeText(context, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
+                            });
+                            my_alert.show();
                         }
                     });
 
@@ -176,7 +197,16 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_dep.setText(vo.getDepartment_name());
                     h.tv_info_date.setVisibility(View.GONE);
                     h.tv_info_status.setVisibility(View.VISIBLE);
-                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
+
+                    if (ea_list.get(i - 1).getEa_r_statuas().equals("결재완료")) {
+                        h.imgv_stamp.setVisibility(View.VISIBLE);
+                        h.tv_info_date.setVisibility(View.VISIBLE);
+                        h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
+                    } else {
+                        h.tv_info_date.setVisibility((View.GONE));
+                        h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
+                        h.tv_info_status.setVisibility(View.VISIBLE);
+                    }
                 });
             }
         } else if (temp == 2) {

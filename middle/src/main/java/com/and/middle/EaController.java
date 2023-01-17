@@ -31,8 +31,17 @@ public class EaController {
 	SqlSession sql;
 	@Autowired @Qualifier("common") CommonService common;
 	
+	
+	//기안서 목록 불러오기
+		@RequestMapping(value = "/ea_file_select", produces = "text/html;charset=utf-8")
+		public String ea_file_select(String ea_num) {
+			
+			List<EaFileVO> list = sql.selectList("ea.file_select",ea_num);
+
+			return new Gson().toJson(list);
+		}
+	
 	//결재 및 반려 작업
-	//회수함에서 상신 업데이트
 	@RequestMapping(value="/sign_status.ea", produces="text/html;charset=utf-8")
 	public void ea_sign_status(String ea_status,String emp_no, String ea_num) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -95,7 +104,7 @@ public class EaController {
 		sql.insert("ea.insert",list);
 	}
 	//전자결재(첨부파일)포함 상신하기
-		@RequestMapping(value="/insert.fi", produces="text/html;charset=utf-8")
+		@RequestMapping(value="/ea_insert.fi", produces="text/html;charset=utf-8")
 		public void ea_insert_file(String param, HttpServletRequest req) {
 			
 			ArrayList<EaVO> list = new Gson().fromJson(param, new TypeToken<List<EaVO>>() {}.getType());

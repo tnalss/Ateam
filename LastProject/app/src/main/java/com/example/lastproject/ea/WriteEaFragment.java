@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,11 +82,13 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     ArrayAdapter<String> arrayAdapter;
     TextView tv_main,tv_form,tv_dep_title,tv_sign_check,tv_refer_check, tv_start_date, tv_end_date, tv_type;
     LinearLayout line_vacation;
-    RecyclerView recv_sign_search, recv_refer_search,recv_sign_add,recv_refer_add;
+    RecyclerView recv_sign_search, recv_refer_search,recv_sign_add,recv_refer_add, recv_ea_file;
     Spinner spinner_department;
     AlertDialog.Builder my_alert;
     ArrayList<String> path_list;
     ArrayList<String> name_list;
+    EaFileAdapter file_adapter;
+    String dep;
 
 
     @Override
@@ -100,6 +103,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         line_vacation = v.findViewById(R.id.line_vacation);
         recv_sign_add = v.findViewById(R.id.recv_sign_add);
         recv_refer_add = v.findViewById(R.id.recv_refer_add);
+        recv_ea_file = v.findViewById(R.id.recv_ea_file);
         tv_main = v.findViewById(R.id.tv_main);
         tv_form = v.findViewById(R.id.tv_form);
         tv_sign_check = v.findViewById(R.id.tv_sign_check);
@@ -187,6 +191,21 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                     new TypeToken<ArrayList<EaCodeVO>>(){}.getType());
             SpinnerSetting(list);
         });
+
+        //부서 선택 값 담기
+        spinner_department.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dep = spinner_department.getSelectedItem().toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btn_apply.setOnClickListener(this);
 
         return v;
@@ -315,6 +334,9 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                        send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
                        send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
                        send_vo.setEa_content(edt_ea_content.getText().toString());
+                       if(dep !=null){
+                            send_vo.setEa_pop(dep);
+                       }
                        send_list.add(send_vo);
                    }
 
@@ -341,7 +363,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                        }else{
                            //첨부파일 있는 결재
                            new CommonMethod().setParams("param", send_list)
-                                   .sendPostFiles("insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
+                                   .sendPostFiles("ea_insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
                                Toast.makeText(activity, "상신 완료", Toast.LENGTH_SHORT).show();
                                if(alvo !=null){
                                    new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
@@ -540,11 +562,11 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         if(requestCode == Common.FILE_CODE && resultCode == RESULT_OK){
 
             allMethod(data, Common.FILE_CODE);
-//            //어댑터
-//            file_adapter = new BoardFileAdapter(getLayoutInflater(), file_list, this);
-//            b.recvFiles.setAdapter(file_adapter);
-//            b.recvFiles.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-//            file_adapter.notifyDataSetChanged();
+            //어댑터
+            file_adapter = new EaFileAdapter(getLayoutInflater(), file_list,0,activity);
+            recv_ea_file.setAdapter(file_adapter);
+            recv_ea_file.setLayoutManager(CommonMethod.getVManager(getContext()));
+            file_adapter.notifyDataSetChanged();
 
         }else if(requestCode == Common.GALLERY_CODE && resultCode == RESULT_OK){
 
@@ -557,4 +579,5 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
 //            adapter.notifyDataSetChanged();
         }
     }
+
 }
