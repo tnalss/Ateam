@@ -23,7 +23,6 @@ public class Insert_secActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_sec);
         getSupportActionBar().hide();
-        //ApiClient.setBASEURL("http://192.168.0.28/middle/");
         img_no_close = findViewById(R.id.img_no_close);
         img_no_file = findViewById(R.id.img_no_file);
         edt_no_title = findViewById(R.id.edt_no_title);
