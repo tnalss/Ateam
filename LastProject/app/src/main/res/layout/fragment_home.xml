@@ -80,6 +80,14 @@
         </RelativeLayout>
 
     <!--상단 사용자 정보-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -480,7 +488,13 @@
             android:textColor="@color/white"
             android:textSize="18dp" />
     </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>
+
+
+
+
     <!--버거메뉴 드로어-->
     <LinearLayout
         android:id="@+id/drawer_menu"
