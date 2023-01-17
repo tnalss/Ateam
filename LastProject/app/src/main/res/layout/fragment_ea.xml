@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ea.EaFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <!--상단메뉴바-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--회사 로고& 이름-->
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_burger"
+            android:src="@drawable/ic_menu_c"
+            android:layout_width="25dp"
+            android:layout_height="25dp"   />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -207,7 +244,6 @@
                 android:layout_height="300dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardv_write"
         android:backgroundTint="@color/sub_color"
@@ -224,5 +260,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"/>
     </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
-</FrameLayout>
+</LinearLayout>

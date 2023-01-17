@@ -16,8 +16,10 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -53,6 +55,18 @@ public class CommonMethod {
 
         return rtn;
     }
+    public String getRealPath(Uri uri, Context context,int type){//select 쿼리를 날렸다고 생각.
+        String rtn = null; //리턴용
+            //파일
+            String[] proj = {OpenableColumns.DISPLAY_NAME};
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+            if(cursor.moveToFirst()){
+                int column_index = cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME);
+                rtn = cursor.getString(column_index);
+            }
+            cursor.close();
+            return rtn;
+        }
 
     public String getRealDocsPath(Uri uri, Context context){
         String rtn = null; // 리턴용
@@ -66,6 +80,7 @@ public class CommonMethod {
 
         return rtn;
     }
+
 
     //카메라로 찍은 사진을 우리가 만든 임시파일로 가져오기 위한 처리
     public File createFile(Context context){
@@ -174,6 +189,46 @@ public class CommonMethod {
             }
         });
     }
+
+    public void sendPostFiles(String url, ArrayList<String> filepath, ArrayList<String> name_list, int type, CallbackResult callback) {
+        List<MultipartBody.Part> list  = new ArrayList<>();
+        for (int i = 0; i < filepath.size(); i++) {
+            list.add( pathToPartFile(filepath.get(i), name_list.get(i), type));
+        }
+        ApiInterface apiInterface = new ApiClient().getApiClient().create(ApiInterface.class);
+        Call<String> apiTest = apiInterface.connFilesPost(url, stringToRequest(), list);
+
+        apiTest.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                callback.result(true, response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callback.result(false, "");
+                t.printStackTrace(); // 어떤 오류인지 로그에 찍히게 처리
+            }
+        });
+
+    }
+
+    public MultipartBody.Part pathToPartFile(String filepath, String filename, int type){
+        String ss = filename.substring(filename.indexOf(".") , filename.length());
+        if( filepath != null ){
+            RequestBody fileBody = null;
+            if(type==1000){
+                fileBody = RequestBody.create(MediaType.parse("image/jpeg"), new File(filepath));
+            }else if(type==1004){
+                fileBody = RequestBody.create(MediaType.parse("application/"+filename.substring(filename.indexOf(".")+1 , filename.length())), new File(filepath));
+            }
+            MultipartBody.Part filePart
+                    = MultipartBody.Part.createFormData("file", filename, fileBody);
+            return filePart;
+        }
+        return null;
+    }
+
 
 //setLayoutMananger 사용할때 안에 값
 

@@ -28,11 +28,12 @@ public class AlController {
 	
 	//로그인한 사원의 휴가 신청  처리
 	@RequestMapping(value="/al_v_a.al", produces="text/html;charset=utf-8")
-	public String al_v0(String emp_no, String al_start_date , String al_end_date) {
+	public String al_v0(String emp_no, String al_start_date , String al_end_date, String al_code) {
 		HashMap<String , String> map = new HashMap<>();
 		map.put("emp_no", emp_no);
 		map.put("al_start_date", al_start_date);
 		map.put("al_end_date", al_end_date);
+		map.put("al_code", al_code);
 		sql.insert("al.al_v_a",map);			
 		return "1";
 		

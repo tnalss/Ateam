@@ -71,9 +71,11 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         tab_layout.addTab(tab_layout.newTab().setText("결재전"));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("please");
 
-        myRef.setValue("Hello, World!");
+        myRef.setValue("What the Fuck");
+
+
 
         new CommonMethod().setParams("no",Common.loginInfo.getEmp_no()).sendPost("recent_all_list.ea", (isResult, data) -> {
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();

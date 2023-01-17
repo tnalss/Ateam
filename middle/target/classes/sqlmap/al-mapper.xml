@@ -13,8 +13,8 @@ where emp_no = #{emp_no}
 
 <!--로그인한 회원의 연차 신청  -->
 <insert id = "al_v_a">
-INSERT INTO tbl_al (emp_no,al_reg_date,al_code ,al_start_date,al_end_date)
-values(#{emp_no},to_char(current_date,'yyyy/mm/dd'),'V0',#{al_start_date},#{al_end_date})
+INSERT INTO tbl_al (emp_no,al_code ,al_start_date,al_end_date)
+values(#{emp_no},#{al_code},#{al_start_date},#{al_end_date})
 
 </insert>
 
