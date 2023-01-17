@@ -170,3 +170,5 @@ fabric.properties
 .metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/middle/META-INF/maven/com.and/middle/pom.xml
 .metadata/.plugins/org.eclipse.wst.server.core/tmp0/conf/web.xml
 .metadata/.plugins/org.eclipse.wst.server.core/tmp0/conf/web.xml
+
+middle/target/m2e-wtp/

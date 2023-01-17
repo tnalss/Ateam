@@ -11,7 +11,97 @@
         android:src="@drawable/logo"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
+    <!--ID찾기-->
     <TextView
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:text="ID 찾기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- 이름 -->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="이   름 : "
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_id_name"
+            android:hint="이름"
+            android:textColor="#000"
+            android:backgroundTint="#6A6A6A"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+    <!-- 이메일 -->
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="이메일 : "
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edt_id_email"
+            android:hint="sim2022@naver.com"
+            android:backgroundTint="#6A6A6A"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- 버튼 -->
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_id_ok"
+            android:backgroundTint="@color/main_color"
+            android:layout_marginRight="5dp"
+            android:text="확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_id_cancel"
+            android:backgroundTint="@color/grey"
+            android:layout_marginLeft="5dp"
+            android:text="취소"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/main_size"
+        android:id="@+id/tv_found_id"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <!--비밀번호 찾기-->
+    <TextView
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:textSize="20dp"
         android:textColor="#000"
@@ -24,20 +114,21 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content">
         <TextView
-            android:text="이름 : "
+            android:text="이   름 : "
             android:textSize="18dp"
             android:textColor="#000"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/edt_pwf_name"
             android:hint="이름"
             android:textColor="#000"
             android:backgroundTint="#6A6A6A"
-            android:layout_width="220dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -45,20 +136,21 @@
     <LinearLayout
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content">
         <TextView
-            android:text="사번 : "
+            android:text="사   번 : "
             android:textSize="18dp"
             android:textColor="#000"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/edt_pwf_no"
             android:hint="사번"
             android:textColor="#000"
             android:backgroundTint="#6A6A6A"
-            android:layout_width="220dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -66,20 +158,21 @@
     <LinearLayout
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content">
         <TextView
             android:text="이메일 : "
             android:textSize="18dp"
             android:textColor="#000"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/edt_pwf_email"
             android:hint="sim2022@naver.com"
             android:backgroundTint="#6A6A6A"
             android:textColor="#000"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 

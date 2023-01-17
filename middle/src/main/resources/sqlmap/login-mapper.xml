@@ -14,4 +14,18 @@ on o.dept_code  = c3.code_category||c3.code_num
 where e.emp_no = #{emp_no} and e.emp_pw = #{emp_pw}
 </select>
 
+<!-- 이름과 이메일로 아이디 찾기 -->
+<select id="findId" resultType="String">
+select emp_no
+from tbl_emp
+where emp_name= #{emp_name} and email=#{email}
+</select>
+
+<!-- 사번, 이름과 이메일로 임시비밀번호 발급받기  -->
+<update id="findPw">
+update tbl_emp
+set emp_pw=#{emp_pw}
+where emp_name=#{emp_name} and email=#{email} and emp_no=#{emp_no}
+</update>
+
 </mapper>

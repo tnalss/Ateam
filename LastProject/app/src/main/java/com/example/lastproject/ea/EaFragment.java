@@ -19,6 +19,8 @@ import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -29,10 +31,11 @@ import java.util.ArrayList;
 public class EaFragment extends Fragment implements View.OnClickListener {
     RecyclerView recv_recent_ea;
     TabLayout tab_layout;
-    CardView cardv_write,cardv_draft,cardv_sign,cardv_return;
+    CardView cardv_write,cardv_draft,cardv_sign,cardv_return, cardv_retry, cardv_vacation, cardv_overtime, cardv_business;
     MainActivity activity;
     TextView tv_emp_name;
     ArrayList<EaVO> list;
+    EaCodeVO vo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +47,10 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         cardv_draft = v.findViewById(R.id.cardv_draft);
         cardv_sign = v.findViewById(R.id.cardv_sign);
         cardv_return = v.findViewById(R.id.cardv_return);
+        cardv_retry = v.findViewById(R.id.cardv_retry);
+        cardv_vacation = v.findViewById(R.id.cardv_vacation);
+        cardv_overtime = v.findViewById(R.id.cardv_overtime);
+        cardv_business = v.findViewById(R.id.cardv_business);
         tv_emp_name = v.findViewById(R.id.tv_emp_name);
         tv_emp_name.setText(Common.loginInfo.getEmp_name() +"("+ Common.loginInfo.getRank_name() +")"+"님");
         activity = (MainActivity) getActivity();
@@ -52,12 +59,21 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         cardv_draft.setOnClickListener(this);
         cardv_sign.setOnClickListener(this);
         cardv_return.setOnClickListener(this);
+        cardv_retry.setOnClickListener(this);
+        cardv_vacation.setOnClickListener(this);
+        cardv_overtime.setOnClickListener(this);
+        cardv_business.setOnClickListener(this);
 
-        tab_layout.addTab(tab_layout.newTab().setText("전체"));
+        tab_layout.addTab(tab_layout.newTab().setText("기안함"));
+        tab_layout.addTab(tab_layout.newTab().setText("결재함"));
+        tab_layout.addTab(tab_layout.newTab().setText("회수함"));
         tab_layout.addTab(tab_layout.newTab().setText("결재완료"));
         tab_layout.addTab(tab_layout.newTab().setText("결재전"));
-        tab_layout.addTab(tab_layout.newTab().setText("휴가"));
-        tab_layout.addTab(tab_layout.newTab().setText("연장근무"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
 
         new CommonMethod().setParams("no",Common.loginInfo.getEmp_no()).sendPost("recent_all_list.ea", (isResult, data) -> {
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
@@ -73,7 +89,7 @@ public class EaFragment extends Fragment implements View.OnClickListener {
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 if (position == 0){
-                    new CommonMethod().setParams("no",Common.loginInfo.getEmp_no()).sendPost("recent_all_list.ea", (isResult, data) -> {
+                    new CommonMethod().setParams("no", Common.loginInfo.getEmp_no()).sendPost("recent_all_list.ea", (isResult, data) -> {
                         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
                         list = gson.fromJson(data,
                                 new TypeToken<ArrayList<EaVO>>(){}.getType());
@@ -82,9 +98,29 @@ public class EaFragment extends Fragment implements View.OnClickListener {
                         recv_recent_ea.setLayoutManager(CommonMethod.getVManager(getContext()));
                     });
                 }else if(position == 1){
+                    new CommonMethod().setParams("no", Common.loginInfo.getEmp_no()).sendPost("signboxlist.ea", (isResult, data) -> {
+                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+                        list = gson.fromJson(data,
+                                new TypeToken<ArrayList<EaVO>>(){}.getType());
 
+                        recv_recent_ea.setAdapter(new EaRecentListAdapter(inflater,list,activity));
+                        recv_recent_ea.setLayoutManager(CommonMethod.getVManager(getContext()));
+                    });
                 }else if(position == 2){
-
+                    new CommonMethod().setParams("no", Common.loginInfo.getEmp_no()).sendPost("retryboxlist.ea", (isResult, data) -> {
+                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+                        list = gson.fromJson(data,
+                                new TypeToken<ArrayList<EaVO>>(){}.getType());
+                     for(int i=0;i<list.size();i++){
+                         if(i>0){
+                            if(list.get(i).getEa_num().equals(list.get(i-1).getEa_num())){
+                                list.remove(i);
+                            }
+                         }
+                     }
+                        recv_recent_ea.setAdapter(new EaRecentListAdapter(inflater,list,activity));
+                        recv_recent_ea.setLayoutManager(CommonMethod.getVManager(getContext()));
+                    });
                 }else if(position == 3){
 
                 }
@@ -113,6 +149,32 @@ public class EaFragment extends Fragment implements View.OnClickListener {
                 activity.changeFragment(new EaSignBoxFragment());
         }else if(v.getId() == R.id.cardv_return){
 
+        }else if(v.getId() == R.id.cardv_retry){
+            activity.changeFragment(new EaRetryBoxFragment());
+        }else if(v.getId() == R.id.cardv_vacation){
+            Bundle bundle = new Bundle();
+            Fragment f = new WriteEaFragment();
+            vo = new EaCodeVO();
+            vo.setCode_value("휴가신청서");
+            bundle.putSerializable("form", vo);
+            f.setArguments(bundle);
+            activity.changeFragment(f);
+        }else if(v.getId() == R.id.cardv_overtime){
+            Bundle bundle = new Bundle();
+            Fragment f = new WriteEaFragment();
+            vo = new EaCodeVO();
+            vo.setCode_value("파견신청서");
+            bundle.putSerializable("form", vo);
+            f.setArguments(bundle);
+            activity.changeFragment(f);
+        }else if(v.getId() == R.id.cardv_business){
+            Bundle bundle = new Bundle();
+            Fragment f = new WriteEaFragment();
+            vo = new EaCodeVO();
+            vo.setCode_value("외근신청서");
+            bundle.putSerializable("form", vo);
+            f.setArguments(bundle);
+            activity.changeFragment(f);
         }
     }
 }

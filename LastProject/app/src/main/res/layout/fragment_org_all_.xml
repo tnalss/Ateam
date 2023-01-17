@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Org_Chart.Org_all_Fragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@drawable/item_radius2"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/text_search"
+                android:textColor="@color/sub_color"
+                android:gravity="center"
+                android:layout_gravity="center"
+                style="@style/sub_size"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:hint="검색하세요"/>
+            <ImageView
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/iv_burger"
+                android:layout_centerVertical="true"
+                android:id="@+id/search"
+                android:src="@drawable/ic_search_c"
+                android:layout_width="25dp"
+                android:layout_height="25dp"   />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_org_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

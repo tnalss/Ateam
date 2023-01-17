@@ -68,6 +68,17 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
             binding.btnDelete.setVisibility(View.VISIBLE);
         }
 
+
+        if(vo.getSche_status().equals("L1")){
+
+            binding.btnDone.setText("완료 처리");
+        } else {
+
+            binding.btnDone.setText("진행 처리");
+        }
+
+
+
         return binding.getRoot();
     }
 
@@ -79,12 +90,14 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
                     if(isResult){
                     vo.setSche_status("L1");
                         Toast.makeText(getContext(), "진행중으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                        binding.btnDone.setText("완료 처리");
                     }
                 });
             } else {
                 new CommonMethod().setParams("sche_no",vo.getSche_no()).setParams("status","L0").sendPost("statusDone.sche",(isResult, data) -> {
                     vo.setSche_status("L0");
                         Toast.makeText(getContext(), "완료 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                    binding.btnDone.setText("진행 처리");
                 });
         }
 
@@ -106,5 +119,10 @@ public class ScheduleInfoFragment extends Fragment implements View.OnClickListen
         } else if ( v.getId() == R.id.iv_back){
             getActivity().onBackPressed();
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding=null;
     }
 }

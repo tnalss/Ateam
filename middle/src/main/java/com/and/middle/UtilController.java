@@ -13,20 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import common.CommonService;
 import common.SimpleCode;
+import employee.EmployeeVO;
 import login.LoginVO;
 
 @RestController
 public class UtilController {
 	@Autowired @Qualifier("hanul")
 	SqlSession sql;
-	
+	@Autowired
+	private CommonService common;
 	//이 메소드는 근태부분과 합쳐야합니다.
 	//출퇴근 여부를 판단하여 출근시 출근시간을 알려주는 곳 입니다.
 	@RequestMapping("/attendOrNot")
 	public String attendOrNot(String emp_no) {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd"); 
 		
 		HashMap<String,String> map = new HashMap<>();
 		map.put("emp_no", emp_no);
@@ -39,7 +42,7 @@ public class UtilController {
 		
 	}
 	
-	@RequestMapping("/attendString")
+	@RequestMapping("/attendString.at")
 	public String attendString(String emp_no) {
 		String status="";
 		Date date = new Date();
@@ -59,4 +62,22 @@ public class UtilController {
 		return new Gson().toJson(list).toString();
 	}
 	
+	@RequestMapping(value="/tempPW.cm", produces="text/html;charset=utf-8")
+	public void send_temp_pw(String vo) {
+		EmployeeVO info = new Gson().fromJson(vo, EmployeeVO.class);
+		String pw = common.rand6num();
+		info.setEmp_pw(pw);
+		
+		common.sendPassword(info);
+		
+		
+		sql.update("util.tempPW",info);
+
+	}
+	@RequestMapping(value = "/howManyDocs.cm",produces="text/html;charset=utf-8")
+	public String howManyDocs(String emp_no) {
+						
+		return sql.selectOne("util.howManyDocs",emp_no);
+	}
+
 }

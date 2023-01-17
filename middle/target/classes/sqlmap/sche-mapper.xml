@@ -17,7 +17,7 @@ order by SCHE_NO
 <![CDATA[
 select *
 from tbl_sche
-where SCHE_type = 'C1' and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+where SCHE_type = 'C1' and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 order by SCHE_NO
 ]]>
 </select>
@@ -27,7 +27,7 @@ order by SCHE_NO
 <![CDATA[
 select *
 from tbl_sche
-where SCHE_type = #{dept_code} and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+where SCHE_type = #{dept_code} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 order by SCHE_NO
 ]]>
 </select>
@@ -37,7 +37,7 @@ order by SCHE_NO
 <![CDATA[
 select *
 from tbl_sche
-where SCHE_type = #{emp_no} and TO_CHAR(SYSDATE, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+where SCHE_type = #{emp_no} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 order by SCHE_NO
 ]]>
 </select>
@@ -45,7 +45,7 @@ order by SCHE_NO
 
 <insert id="dept_insert">
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
-values(#{emp_no}, (select code_category||code_num code from tbl_code where code_value=' #{department_name}')  , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+values(#{emp_no}, (select code_category||code_num code from tbl_code where code_value=#{department_name})  , #{sche_title},#{sche_content},#{sche_start},#{sche_end},'L1')
 </insert>
 
 <insert id="company_insert">

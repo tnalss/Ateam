@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="al">
+
+<!--로그인한 사원의 휴가. 연차 신청 목록 조회   -->
+<select id = "al_list" resultType="al.AlVO">
+select *
+from tbl_al
+where emp_no = #{emp_no}
+</select>
+
+
+
+<!--로그인한 회원의 연차 신청  -->
+<insert id = "al_v_a">
+INSERT INTO tbl_al (emp_no,al_reg_date,al_code ,al_start_date,al_end_date)
+values(#{emp_no},to_char(current_date,'yyyy/mm/dd'),'V0',#{al_start_date},#{al_end_date})
+
+</insert>
+
+</mapper>

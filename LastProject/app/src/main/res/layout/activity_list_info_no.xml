@@ -20,7 +20,7 @@
             android:layout_height="21dp"
             android:layout_gravity="center"
             android:layout_margin="13dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
 
         <TextView
             android:layout_width="match_parent"

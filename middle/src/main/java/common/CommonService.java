@@ -8,8 +8,11 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import employee.EmployeeVO;
 
 @Service("common")
 public class CommonService {
@@ -58,6 +61,45 @@ public class CommonService {
 		return String.valueOf(result);
 	}
 		
+//임시 비밀번호 이메일 전송처리
+	public boolean sendPassword(EmployeeVO vo) {
+		boolean send =true;
+		HtmlEmail mail =  new HtmlEmail();
+		mail.setCharset("utf-8");
+		
 	
+		mail.setHostName("smtp.office365.com"); // 이메일 서버 지정
+		mail.setAuthentication("hanul_jk@outlook.com", "1qlalfqjsgh1!");  // 관리자 이메일주소 ,비번
+		mail.setStartTLSEnabled(true);
+		mail.setSmtpPort(587);
+		
+		try {
+			mail.setFrom("hanul_jk@outlook.com","관리자"); // 전송자 이메일 주소와 전송자 이름
+			mail.addTo(vo.getEmail(),vo.getEmp_name());
+			mail.setSubject("임시비밀번호입니다.");
+			
+			StringBuffer msg = new StringBuffer();
+			msg.append("<html>");
+			msg.append("<body>");
+			msg.append("<h3>[").append(vo.getEmp_name()).append("] 님의 임시 비밀번호</h3>");
+			msg.append("<div>임시비밀번호가 발급되었습니다.</div>");
+			msg.append("<div>사번 : ").append(vo.getEmp_no()).append("</div>");
+			
+			msg.append("<div>아래 임시 비밀번호로 로그인 하신 뒤 비밀번호를 변경하세요</div>");
+			msg.append("<div><strong>").append(vo.getEmp_pw().toString()).append("</strong></div>");
+			msg.append("</body>");
+			msg.append("</html>");
+			mail.setHtmlMsg(msg.toString());
+			
+			
+			mail.send();
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			send=false;
+		}
+		
+		return send;
+	}
 
 }

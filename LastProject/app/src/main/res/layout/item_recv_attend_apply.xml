@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/apply_result"
         style="@style/small_size"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_gravity="right"
@@ -28,47 +28,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/employee_who"
+            android:id="@+id/apply_what"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="김아무개"
+            android:text="반차"
             style="@style/main_size"/>
         <LinearLayout
-            android:layout_below="@+id/apply_who"
+            android:layout_below="@+id/apply_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <TextView
-                android:id="@+id/apply_what"
-                style="@style/sub_size"
+                android:id="@+id/apply_d_text"
+                style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="반차"/>
+                android:text="신청날짜 "/>
             <TextView
                 android:id="@+id/apply_date"
                 style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2023.01.02(월)"/>
+
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/check"
-        android:layout_marginRight="3dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/state"
+        android:layout_toLeftOf="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/check_circle"
+        android:src="@drawable/ic_plus"
         />
     <TextView
-        style="@style/small_size"
-        android:id="@+id/state"
+        android:textSize="9dp"
+        android:id="@+id/detail"
         android:layout_marginRight="5dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:text="승인"/>
+        android:text="자세히보기"/>
 </RelativeLayout>

@@ -1,22 +1,32 @@
-package com.example.lastproject.attend;
+package com.example.lastproject.al;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lastproject.R;
+import com.example.lastproject.attend.AttendActivity;
 
-public class Attend_Activity_Adapter extends RecyclerView.Adapter<Attend_Activity_Adapter.ViewHolder> {
-    LayoutInflater inflater;
+import java.util.ArrayList;
 
-    public Attend_Activity_Adapter(LayoutInflater inflater) {
+public class Al_Apply_Adapter extends RecyclerView.Adapter<Al_Apply_Adapter.ViewHolder> {
+
+    public Al_Apply_Adapter(LayoutInflater inflater, ArrayList<AlVO> al_list,  AL_Apply_Activity al_apply_activity) {
         this.inflater = inflater;
+        this.al_list = al_list;
     }
+
+    LayoutInflater inflater;
+    ArrayList<AlVO> al_list;
+    AL_Apply_Activity al_apply_activity;
+
+
+
+
 
     @NonNull
     @Override
@@ -31,25 +41,29 @@ public class Attend_Activity_Adapter extends RecyclerView.Adapter<Attend_Activit
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
+    h.apply_what.setText(al_list.get(i).getAl_code_value());
+    h.apply_date.setText(al_list.get(i).getAl_reg_date().substring(0,10));
+    h.apply_result.setText(al_list.get(i).getEa_status());
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return al_list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-       TextView apply_result, apply_who,   apply_what, apply_date , state;
-       ImageView check;
+       TextView apply_result,   apply_what, apply_date ;
+
 
         public ViewHolder(@NonNull View v) {
             super(v);
             apply_result = v.findViewById(R.id.apply_result);
-            apply_who = v.findViewById(R.id.apply_who);
             apply_what = v.findViewById(R.id.apply_what);
             apply_date = v.findViewById(R.id.apply_date);
-            state = v.findViewById(R.id.state);
-            check = v.findViewById(R.id.check);
+
         }
     }
 }

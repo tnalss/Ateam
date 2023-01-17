@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".attend.AttendFragment"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <!--상단메뉴바-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <!--회사 로고& 이름-->
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+        <TextView
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/item_radius4"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:layout_toLeftOf="@+id/iv_burger"
+            android:text="관리자 모드"
+            android:textStyle="bold"
+            android:textColor="@color/main_color" />
+            <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_burger"
+            android:src="@drawable/ic_menu_c"
+            android:layout_width="25dp"
+            android:layout_height="25dp"   />
+    </RelativeLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+       <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:id="@+id/location_now"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/location"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/location" />
+            <TextView
+                android:id="@+id/location_tv"
+                style="@style/small_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/location"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/location"
+                android:text="현재 위치 확인"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/current_time"
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="현재시각"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+       </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/item_radius2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="JK COMPANY"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/emp_dep_rank"
+                android:padding="5dp"
+                style="@style/sub_size"
+                android:text="부서명/ 직급"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/emp_name"
+                    android:padding="5dp"
+                    style="@style/sub_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김 아무개" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_emp_profile"
+                android:padding="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/user_profile"/>
+            <TextView
+                android:id="@+id/emp_name_1"
+                android:layout_marginTop="5dp"
+                style="@style/small_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김아무개님 안녕하세요"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/on"
+                android:backgroundTint="@color/main_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="출근"/>
+            <Button
+                android:id="@+id/off"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@color/sub_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="퇴근"/>
+            </LinearLayout>
+        </LinearLayout>
+    <!--출퇴근 기록-->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/item_radius2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                style="@style/main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="출 퇴근 기록"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recv_attend_record"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+        </LinearLayout>
+    <!--전체 사원의 근태관리 바로가기 만들기!-->
+        <TextView
+            android:id="@+id/view_all"
+            android:layout_gravity="center"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/item_radius4"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:layout_toLeftOf="@+id/iv_burger"
+            android:text="전체 사원 근무 현황 조회"
+            android:textStyle="bold"
+            android:textColor="@color/main_color" />
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

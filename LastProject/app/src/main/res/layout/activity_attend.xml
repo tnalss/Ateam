@@ -10,17 +10,44 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
     <!--상단메뉴바-->
     <RelativeLayout
-        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
+
+        <!--회사 로고& 이름-->
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@drawable/onlylogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="@style/main_size"
+                android:text="JK COMPANY"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:id="@+id/back"
+            android:src="@drawable/ic_back_c"
             android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/back" />
+            android:layout_height="25dp"   />
+
     </RelativeLayout>
 
         <LinearLayout
@@ -39,121 +66,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="현재 근무 상황"/>
-
-            <!--달력-->
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/calendarview_monthly"
-                app:mcv_calendarMode="month"
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:mcv_firstDayOfWeek="monday"   />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/item_radius2"
-            android:orientation="vertical"
-            android:padding="5dp">
-
-            <TextView
-                style="@style/main_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="근태신청관리" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="근태 신청 현황"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-                <!--신청현황1-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/main_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="승인 완료"
-                        android:textColor="@color/blue" />
-
-                    <TextView
-                        style="@style/sub_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="1"
-                        android:textColor="@color/blue" />
-                </LinearLayout>
-                <!--신청현황2-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/main_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="요청 중"
-                        android:textColor="@color/green" />
-
-                    <TextView
-                        style="@style/sub_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="1"
-                        android:textColor="@color/green" />
-                </LinearLayout>
-                <!--신청현황3-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/main_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="반려"
-                        android:textColor="@color/red" />
-
-                    <TextView
-                        style="@style/sub_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="1"
-                        android:textColor="@color/red" />
-                </LinearLayout>
-            </RelativeLayout>
-
+                android:layout_height="1dp"
+                android:background="@color/sub_color"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recv_attend_apply"
+                android:id="@+id/recv_attend_record"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="200dp"/>
         </LinearLayout>
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

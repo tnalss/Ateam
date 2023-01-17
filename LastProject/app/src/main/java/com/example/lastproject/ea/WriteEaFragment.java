@@ -1,15 +1,16 @@
 package com.example.lastproject.ea;
 
-import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +28,24 @@ import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.employee.EmployeeVO;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 
 public class WriteEaFragment extends Fragment implements View.OnClickListener  {
@@ -47,7 +57,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     Chip chip;
     EditText edt_sign_search, edt_refer_search, edt_ea_title, edt_ea_content;
     RadioGroup radioGroup;
-    Button btn_sign_add, btn_refer_add,btn_apply,btn_signer_search,btn_refer_search;
+    Button btn_sign_add, btn_refer_add,btn_apply,btn_signer_search,btn_refer_search,btn_add;
     BottomSheetDialog sign_dialog, refer_dialog;
     ArrayList<EaCodeVO> list;
     ArrayList<String> value_list;
@@ -76,11 +86,15 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         btn_sign_add = v.findViewById(R.id.btn_sign_add);
         btn_refer_add = v.findViewById(R.id.btn_refer_add);
         btn_apply = v.findViewById(R.id.btn_apply);
+        btn_add = v.findViewById(R.id.btn_add);
         radioGroup = v.findViewById((R.id.radioGroup));
 
         vo = (EaCodeVO) getArguments().getSerializable("form");
         tv_main.setText(vo.getCode_value());
         tv_form.setText(vo.getCode_value());
+
+
+
 
         //라디오 버튼 클릭 이벤트
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -110,9 +124,10 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         btn_signer_search = sign_dialog.findViewById(R.id.btn_search);
         recv_sign_search=  sign_dialog.findViewById(R.id.recv_sign_search);
 
+
+
         //Chip 사용
         chip_sgroup = sign_dialog.findViewById(R.id.chip_group);
-
         btn_signer_search.setOnClickListener(this);
 
         //참조 추가 다이얼
@@ -284,7 +299,8 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                Toast.makeText(activity, "결재자를 추가해주세요.", Toast.LENGTH_SHORT).show();
            }
            
-
+        //파이어베이스 storage 에서 파일 불러오기
+        }else if(v.getId() == R.id.btn_add) {
         }
     }
     //chip 만들기

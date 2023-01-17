@@ -15,9 +15,9 @@
         <ImageView
             android:layout_centerVertical="true"
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back_c" />
 
         <TextView
             android:layout_centerVertical="true"
@@ -94,10 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <EditText
+        android:gravity="top"
         android:id="@+id/edt_sche_content"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="100dp"/>
 
 
     <Button
