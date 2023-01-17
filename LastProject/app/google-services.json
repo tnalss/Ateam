@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1094589975405",
+    "firebase_url": "https://fir-ateam-default-rtdb.firebaseio.com",
     "project_id": "fir-ateam",
     "storage_bucket": "fir-ateam.appspot.com"
   },
