@@ -3,11 +3,13 @@ package com.example.conn;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +18,10 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -85,7 +89,6 @@ public class CommonMethod {
 
         return rtnFile;
     }
-
 
 
     public CommonMethod setParams(String key, Object value){
@@ -174,6 +177,33 @@ public class CommonMethod {
             }
         });
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String getRealPath(Uri uri, Context context, int type){
+        String rtn = null; //리턴용
+        //이미지
+        if(type == 1000){
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null);
+            if(cursor.moveToFirst()){
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                rtn = cursor.getString(column_index);
+            }
+            cursor.close();
+        }else if(type == 1001){
+            //파일
+            String[] proj = {OpenableColumns.DISPLAY_NAME};
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+            if(cursor.moveToFirst()){
+                int column_index = cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME);
+                rtn = cursor.getString(column_index);
+            }
+        }
+
+        return rtn;
+    }
+
 
 //setLayoutMananger 사용할때 안에 값
 
