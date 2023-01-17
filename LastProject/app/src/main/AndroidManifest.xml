@@ -5,20 +5,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <!--미디어 권한 3개 csm 23/1/15-->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" /> <!-- 미디어 권한 3개 csm 23/1/15 -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+    <uses-permission
+        android:name="android.permission.MANAGE_DOCUMENTS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.MANAGE_MEDIA"
+    <uses-permission
+        android:name="android.permission.MANAGE_MEDIA"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 주영. 지도 사용을 위한 권한 설정 -->
-
-
-
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" /> <!-- API30이상에서는 queries사용해서 권한부여를 한번 더 해야함. -->
@@ -54,17 +52,19 @@
     </queries>
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_jk_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_jk_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+      
         <activity
             android:name=".al.AL_Apply_Activity"
             android:exported="false">

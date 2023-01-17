@@ -32,14 +32,19 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <ImageView
+            android:id="@+id/qr"
             android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:id="@+id/iv_burger"
-            android:src="@drawable/ic_menu_c"
-            android:layout_width="25dp"
-            android:layout_height="25dp"   />
+            android:src="@drawable/qr_scan"
+            android:layout_width="35dp"
+            android:layout_height="35dp"   />
     </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,13 +94,7 @@
                 android:textSize="20dp" />
         </RelativeLayout>
     </LinearLayout>
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
         <LinearLayout
             android:layout_marginBottom="10dp"
             android:background="@drawable/item_radius2"
@@ -110,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="YH COMPANY"/>
+                android:text="JK COMPANY"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,6 +238,5 @@
             android:text="휴가 및 연차 신청"/>
         </LinearLayout>
         </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

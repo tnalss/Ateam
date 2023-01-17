@@ -22,6 +22,7 @@ import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.Org_Chart.Org_MainActivity;
 import com.example.lastproject.R;
+import com.example.lastproject.attend.Attend_adminFragment;
 import com.example.lastproject.code.CodeFragment;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.databinding.FragmentHomeBinding;
@@ -240,7 +241,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //게시판
            activity.changeFragment(new NoticeFragment());
         } else if ( v.getId() == R.id.menu2_1){
-            //지점관리
+            //근태관리 눌렀을때 --23.01.16 주영 추가
+            activity.changeFragment(new Attend_adminFragment());
         } else if ( v.getId() == R.id.menu2_2){
             // 일정관리 눌렀을때 바텀네비게이션 찾아가서 눌러줌
             activity.btm_nav.setSelectedItemId(R.id.btm_item2);

@@ -54,7 +54,7 @@ public class AttendFragment extends Fragment {
     RecyclerView recv_attend_record;
     TextView current_time,emp_name,emp_name_1,emp_dep_rank,location_tv,now;
     Button workday, apply;
-    ImageView  iv_emp_profile, to_att_act;
+    ImageView  iv_emp_profile, to_att_act,qr;
     MainActivity activity;
     ArrayList<AttendVO> list;
     AttendVO vo = null;
@@ -65,7 +65,6 @@ public class AttendFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_attend, container, false);
         activity = (MainActivity)getActivity();
-
 
         /*현재위치*/
         location_now = v.findViewById(R.id.location_now);
@@ -150,6 +149,7 @@ public class AttendFragment extends Fragment {
                 }else {
                     showDialog_off();
                 }
+                off.setEnabled(false);
                 selectList();
             }
         });
