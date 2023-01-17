@@ -3,11 +3,13 @@ package com.example.conn;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,7 +57,7 @@ public class CommonMethod {
 
         return rtn;
     }
-    public String getRealPath(Uri uri, Context context,int type){//select 쿼리를 날렸다고 생각.
+    public static String getRealPath(Uri uri, Context context, int type){//select 쿼리를 날렸다고 생각.
         String rtn = null; //리턴용
             //파일
             String[] proj = {OpenableColumns.DISPLAY_NAME};
@@ -100,7 +102,6 @@ public class CommonMethod {
 
         return rtnFile;
     }
-
 
 
     public CommonMethod setParams(String key, Object value){
@@ -217,7 +218,7 @@ public class CommonMethod {
         String ss = filename.substring(filename.indexOf(".") , filename.length());
         if( filepath != null ){
             RequestBody fileBody = null;
-            if(type==1000){
+            if(type==1001){
                 fileBody = RequestBody.create(MediaType.parse("image/jpeg"), new File(filepath));
             }else if(type==1004){
                 fileBody = RequestBody.create(MediaType.parse("application/"+filename.substring(filename.indexOf(".")+1 , filename.length())), new File(filepath));

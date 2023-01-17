@@ -8,7 +8,18 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.conn.ApiClient;
+import com.example.conn.ApiInterface;
 import com.example.lastproject.login.LoginVO;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 
 public class Common {
     public static LoginVO loginInfo;
@@ -48,7 +59,5 @@ public class Common {
             }
         }
     }
-
-
 
 }
