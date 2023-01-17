@@ -219,7 +219,7 @@ public class CommonMethod {
             RequestBody fileBody = null;
             if(type==1000){
                 fileBody = RequestBody.create(MediaType.parse("image/jpeg"), new File(filepath));
-            }else if(type==1001){
+            }else if(type==1004){
                 fileBody = RequestBody.create(MediaType.parse("application/"+filename.substring(filename.indexOf(".")+1 , filename.length())), new File(filepath));
             }
             MultipartBody.Part filePart
