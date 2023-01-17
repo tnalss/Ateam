@@ -24,8 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.conn.CommonMethod;
 import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
-import com.example.lastproject.al.AL_Apply_Activity;
-import com.example.lastproject.common.Common;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
