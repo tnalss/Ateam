@@ -36,6 +36,8 @@ import com.example.lastproject.common.Common;
 import com.example.lastproject.ea.FormListFragment;
 import com.google.gson.Gson;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -60,7 +62,12 @@ public class Insert_noActivity extends AppCompatActivity {
         edt_sec_title = findViewById(R.id.edt_sec_title);
         edt_sec_content = findViewById(R.id.edt_sec_content);
 
-
+        img_sec_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                galleryMethod();
+            }
+        });
 
 
         tv_sec_ok.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +94,15 @@ public class Insert_noActivity extends AppCompatActivity {
 
                 } else {
                     //첨부파일 있는 게시글
-
+                    new CommonMethod().setParams("vo", vo).sendPostFiles("insert.fi", path_list, name_list, Common.FILE_CODE, (isResult, data) -> {
+                        if(isResult){
+                            Toast.makeText(Insert_noActivity.this, "글 등록 완료", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else {
+                            Log.d("로그", "실패: ");
+                        }
+                    });
                 }
-
-                
 
 
             }
@@ -128,7 +140,6 @@ public class Insert_noActivity extends AppCompatActivity {
     //내보낼 파일 정보 담기
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void allMethod(Intent data, int type){
-//        Log.d(TAG, "data 확인 : " + data.getClipData().getItemAt(0).getUri());
 
         name_list = new ArrayList<>();
         path_list = new ArrayList<>();  //==> String (path)

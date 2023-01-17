@@ -60,7 +60,7 @@ public class NoticeController {
 			System.out.println(file.getOriginalFilename());
 			System.out.println(file.getName());
 			filevo.setFile_name(file.getOriginalFilename());
-			imgPath = new CommonService().fileUpload("and", file, req);
+			imgPath = new CommonService().fileUpload("no", file, req);
 			filevo.setPath(imgPath);
 			list.add(filevo);
 		}
@@ -73,7 +73,7 @@ public class NoticeController {
 		return cnt + "";
 	}
 	
-	// 익명게시판 글쓰기 (+ 첨부파일)
+	// 익명게시판 글쓰기
 		@RequestMapping(value = "/insert.no", produces = "text/html;charset=utf-8")
 		public String insert(String vo) {
 			NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);	
