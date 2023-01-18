@@ -30,9 +30,8 @@
   <!-- 실질적으로 내용이 들어가는 부분 -->
       	<h3 class="text-center">사원목록</h3>
       		<div id='list-top'>
-      		<ul class="">
-      			<li><a class='btn-fill' href='new.hr'>신규사원등록</a></li>
-      		</ul>
+		<button type="button" class="btn btn-primary"
+				 onclick="location='new.emp'">신규 사원 등록</button>
       		</div>
       		
       		<table class='mx-auto'>
@@ -43,17 +42,17 @@
       			<col>
       			<col width='120px'>
       		</colgroup>
-      		<tr><th>사번</th>
+      		<tr class='text-center'><th >사번</th>
       			<th>사원명</th>
+      			<th>지점</th>
       			<th>부서</th>
-      			<th>업무</th>
-      			<th>입사일자</th>
+      			<th>직위</th>
       		</tr>
       		<c:forEach items='${list}' var='vo'>
-      		<tr><td>${vo.emp_no }</td>
-      			<td><a href='info.hr?id=${vo.emp_no}'>${vo.emp_name }</a></td>
-      			<td>${vo.department_name}</td>
+      		<tr  class='text-center'><td class='text-center'>${vo.emp_no }</td>
+      			<td><a href='info.emp?id=${vo.emp_no}'>${vo.emp_name }</a></td>
       			<td>${vo.branch_name }</td>
+      			<td>${vo.department_name}</td>
       			<td>${vo.rank_name }</td>
       		</tr>
       		</c:forEach>
