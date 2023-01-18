@@ -1,21 +1,26 @@
 package com.and.middle;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import common.CommonService;
 import ea.EaCodeVO;
+import ea.EaFileVO;
 import ea.EaVO;
 import employee.EmployeeVO;
 
@@ -24,6 +29,7 @@ public class EaController {
 	@Autowired
 	@Qualifier("hanul")
 	SqlSession sql;
+	@Autowired @Qualifier("common") CommonService common;
 	
 	//결재 및 반려 작업
 	//회수함에서 상신 업데이트
@@ -83,11 +89,37 @@ public class EaController {
 	//전자결재 상신하기
 	@RequestMapping(value="/insert.ea", produces="text/html;charset=utf-8")
 	public void ea_insert(String send_list) {
-		System.out.println(new Date().getTime());
+		
 		List<EaVO> list = new Gson().fromJson(send_list, new TypeToken<List<EaVO>>() {}.getType());
 	
 		sql.insert("ea.insert",list);
 	}
+	//전자결재(첨부파일)포함 상신하기
+		@RequestMapping(value="/insert.fi", produces="text/html;charset=utf-8")
+		public void ea_insert_file(String param, HttpServletRequest req) {
+			
+			ArrayList<EaVO> list = new Gson().fromJson(param, new TypeToken<List<EaVO>>() {}.getType());
+			ArrayList<EaFileVO> flist = new ArrayList<EaFileVO>();
+			
+			MultipartRequest mReq = (MultipartRequest) req;
+			List<MultipartFile> fileList = mReq.getFiles("file");
+			String imgPath = null;
+			
+			for(int i=0; i< fileList.size();i++) {
+				EaFileVO f_vo = new EaFileVO();
+				MultipartFile file=  fileList.get(i); // getFiles 또는 getFileMap활용.
+				System.out.println(file.getOriginalFilename());
+				System.out.println(file.getName());
+				f_vo.setFile_name(file.getOriginalFilename());
+				imgPath = common.fileUpload("and", file, req);
+				f_vo.setFile_path(imgPath);
+				flist.add(f_vo); 
+			}
+		
+			sql.insert("ea.insert",list);
+			sql.insert("ea.file_insert",flist);
+			
+		}
 	
 	//기안서 목록 불러오기
 	@RequestMapping(value = "/form.ea", produces = "text/html;charset=utf-8")

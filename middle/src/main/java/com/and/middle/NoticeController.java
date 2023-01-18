@@ -46,7 +46,7 @@ public class NoticeController {
 	}
 
 	// 익명게시판 글쓰기 (+ 첨부파일)
-	@RequestMapping(value = "/insert.fi", produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/secinsert.no", produces = "text/html;charset=utf-8")
 	public String insert(String vo, HttpServletRequest req) {
 		NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);
 		MultipartRequest mReq = (MultipartRequest) req;

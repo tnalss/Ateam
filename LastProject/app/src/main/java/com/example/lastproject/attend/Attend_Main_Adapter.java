@@ -16,15 +16,18 @@ import java.util.ArrayList;
 
 
 public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapter.ViewHolder> {
-    LayoutInflater inflater;
-    ArrayList<AttendVO> list;
-    Context context;
-
-    public Attend_Main_Adapter(LayoutInflater inflater, ArrayList<AttendVO> list, Context context) {
+    public Attend_Main_Adapter(LayoutInflater inflater, ArrayList<AttendVO> list,Context context) {
         this.inflater = inflater;
         this.list = list;
+
         this.context = context;
     }
+
+    LayoutInflater inflater;
+    ArrayList<AttendVO> list;
+
+    Context context;
+
 
 
 

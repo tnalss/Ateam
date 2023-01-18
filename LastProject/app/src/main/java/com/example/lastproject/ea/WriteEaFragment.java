@@ -1,20 +1,27 @@
 package com.example.lastproject.ea;
 
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +68,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     EaVO send_vo;
     EaCodeVO vo;
     AlVO alvo;
+    ArrayList<EaFileVO> file_list;
     ChipGroup chip_sgroup, chip_rgroup;
     Chip chip;
     EditText edt_sign_search, edt_refer_search, edt_ea_title, edt_ea_content;
@@ -84,6 +92,9 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_write_ea, container, false);
+
+
+
         my_alert = new AlertDialog.Builder(getContext());
         activity = (MainActivity) getActivity();
         line_vacation = v.findViewById(R.id.line_vacation);
@@ -299,14 +310,6 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
             send_list = new ArrayList<>();
            if(signer_list !=null) {
                for (int i = 0; i < signer_list.size(); i++) {
-                   if(path_list.size() == 0){
-                       send_vo = new EaVO();
-                       send_vo.setEmp_no(Common.loginInfo.getEmp_no());
-                       send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
-                       send_vo.setEa_title("[" + vo.getCode_value() + "]" + edt_ea_title.getText().toString());
-                       send_vo.setEa_content(edt_ea_content.getText().toString());
-                       send_list.add(send_vo);
-                   }else{
                        send_vo = new EaVO();
                        send_vo.setEmp_no(Common.loginInfo.getEmp_no());
                        send_vo.setEa_receiver(signer_list.get(i).getEmp_no());
@@ -315,14 +318,10 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                        send_list.add(send_vo);
                    }
 
-
-               }
-
-               Log.d("로그", "onClick: "+ send_list.size());
                    //OK 버튼 눌렀을 때
                    my_alert.setPositiveButton("상신하기", (dialog, which) -> {
                        Toast.makeText(getContext(), "상신완료", Toast.LENGTH_SHORT).show();
-                       if(path_list == null){
+                       if(file_list == null){
                            new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPost("insert.ea", (isResult, data) -> {
                                if(alvo !=null){
                                    new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
@@ -341,7 +340,8 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                            });
                        }else{
                            //첨부파일 있는 결재
-                           new CommonMethod().setParams("send_list", new Gson().toJson(send_list)).sendPostFiles("insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
+                           new CommonMethod().setParams("param", send_list)
+                                   .sendPostFiles("insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
                                Toast.makeText(activity, "상신 완료", Toast.LENGTH_SHORT).show();
                                if(alvo !=null){
                                    new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
@@ -369,7 +369,6 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
            
 
         }else if(v.getId() == R.id.btn_add) {
-            new Common().checkDangerousPermissions(getActivity());
             fileMethod();
 
         }
@@ -425,4 +424,137 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         // onActivityResult GALLERY_CODE <- 코드가 나오면 캘러리 액티비티 종료시점을 알수있음.
     }
 
+    //갤러리 선택시 실행 메소드
+    public void galleryMethod(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        //2023-01-11 사진 선택을 여러개 할수있게
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(Intent.createChooser(intent, "사진 선택"), Common.GALLERY_CODE);
+    }
+
+
+    //내보낼 파일 정보 담기
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void allMethod(Intent data, int type){
+//        Log.d(TAG, "data 확인 : " + data.getClipData().getItemAt(0).getUri());
+
+        name_list = new ArrayList<>();
+        path_list = new ArrayList<>();  //==> String (path)
+        file_list = new ArrayList<>();   // ==> EAFileVO
+        String realPath = null;
+        if( data.getClipData() == null ){
+            //한개 선택시 바로 mData 로 접근
+            EaFileVO vo = new EaFileVO();
+            if(type==Common.FILE_CODE){
+                //파일처리
+                realPath = getFilePath(data.getData());
+                String name = getFileNameToUri(data.getData());
+                name_list.add( name );
+                vo.setFile_name( name );
+            }
+            path_list.add( realPath );
+            vo.setFile_path( realPath );
+            file_list.add(vo);
+            Log.d("로그", "allMethod: "+file_list.get(0).file_name);
+        }else{
+            //여러개 선택시 clipData 있음
+            for (int i = 0; i < data.getClipData().getItemCount(); i++){
+                EaFileVO vo = new EaFileVO();
+                if(type==Common.GALLERY_CODE){
+                    //사진처리
+                    String name = getImageNameToUri(data.getClipData().getItemAt(i).getUri());
+                    name_list.add( name );
+                    vo.setFile_name( name );
+                    realPath = new CommonMethod().getRealPath(data.getClipData().getItemAt(i).getUri(), getContext(), type);
+                }else if(type==Common.FILE_CODE){
+                    //파일처리
+                    realPath = getFilePath(data.getClipData().getItemAt(i).getUri());
+                    String name = getFileNameToUri(data.getClipData().getItemAt(i).getUri());
+                    name_list.add( name );
+                    vo.setFile_name( name );
+                }
+                path_list.add( realPath );
+                vo.setFile_path( realPath );
+
+                file_list.add(vo);
+
+            }
+            Log.d("로그", "allMethod: "+file_list.get(0).file_name);
+            Log.d("로그", "allMethod: "+file_list.get(1).file_name);
+        }
+    }
+
+    //파일 경로 찾기
+    public String getFilePath(Uri uri){
+        final String docId = DocumentsContract.getDocumentId(uri);
+        final String[] split = docId.split(":");
+        final String type= split[0];
+        final String[] tempSplit = split[1].split("/");
+        String path = null;
+        if ("primary".equalsIgnoreCase(type)) {
+            path = Environment.getExternalStorageDirectory() + "/" + (split.length > 1 ? split[1] : ""); //split[1];
+        } else if ("home".equalsIgnoreCase(type)) {
+            path = Environment.getExternalStorageDirectory() + "/Download/" + (split.length > 1 ? split[1] : ""); //split[1];
+        }else if ("raw".equalsIgnoreCase(type)) {
+            path = Environment.getExternalStorageDirectory() +"/" + tempSplit[4]+ "/" + tempSplit[5];// (split.length > 1 ? split[1] : ""); //split[1];
+        }
+        return path;
+    }
+
+    // 선택된 파일 이름 가져오기
+    public String getFileNameToUri(Uri data){
+        Cursor returnCursor = activity.getContentResolver().query(data, null, null, null, null);
+        int nameIndex = returnCursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME);
+        returnCursor.moveToFirst();
+        String fileName = returnCursor.getString(nameIndex);
+        return fileName;
+    }
+
+    // 선택된 이미지 파일명 가져오기
+    public String getImageNameToUri(Uri data) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = activity.managedQuery(data, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        String imgPath = cursor.getString(column_index);
+        String imgName = imgPath.substring(imgPath.lastIndexOf("/")+1);
+
+        return imgName;
+    }
+    //어떤 인텐트로 startActivityForResult 를 실행하든 그 결과는 무조건 ↓
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        new Common().checkDangerousPermissions(getActivity());
+//        Intent intent = new Intent();
+//        intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+//        intent.setData(uri);
+//        startActivity(intent);
+
+        if(requestCode == Common.FILE_CODE && resultCode == RESULT_OK){
+
+            allMethod(data, Common.FILE_CODE);
+//            //어댑터
+//            file_adapter = new BoardFileAdapter(getLayoutInflater(), file_list, this);
+//            b.recvFiles.setAdapter(file_adapter);
+//            b.recvFiles.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+//            file_adapter.notifyDataSetChanged();
+
+        }else if(requestCode == Common.GALLERY_CODE && resultCode == RESULT_OK){
+
+            allMethod(data, Common.GALLERY_CODE);
+
+//            //어댑터
+//            adapter = new NewBoardAdapter(getLayoutInflater(), file_list, this);
+//            b.recvImgs.setAdapter(adapter);
+//            b.recvImgs.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+//            adapter.notifyDataSetChanged();
+        }
+    }
 }

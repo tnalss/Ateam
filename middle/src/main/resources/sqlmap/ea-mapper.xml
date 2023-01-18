@@ -37,6 +37,27 @@ COMMIT;
 END;
 
 </insert>
+<!-- 전자결재(파일첨부 상신하기 -->
+<insert id="file_insert">
+DECLARE 
+v_EA_NUM NUMBER :=0;
+
+BEGIN
+SELECT LAST_NUMBER-1  INTO   v_EA_NUM
+FROM user_sequences
+where sequence_name='SEQ_EA_NUM';
+
+
+<foreach collection='list' item='f' open="INSERT ALL" close="select * from dual;"  separator=" ">
+
+into tbl_ea_file (ea_num, file_path, file_name)
+values (v_EA_NUM, #{f.file_path}, #{f.file_name})
+
+</foreach>
+COMMIT;
+END;
+
+</insert>
 
 <!-- 문서 양식명 불러오기 -->
 <select id="formlist" resultType='ea.EaCodeVO'>
