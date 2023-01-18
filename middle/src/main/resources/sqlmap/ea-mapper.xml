@@ -3,6 +3,11 @@
 <mapper namespace="ea">
 
 
+<!-- 전자결재 파일첨부 불러오기 -->
+<select id="file_select" resultType="ea.EaFileVO">
+select * from tbl_ea_file where ea_num = #{ea_num}
+</select>
+
 <!-- 결재 상태 변경 -->
 <update id="status_update">
 update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
@@ -12,7 +17,7 @@ update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
 <select id="info" resultType="ea.EaVO">
 select m.emp_name emp_name, e.emp_no, e.ea_num, e.ea_receiver,
 e.ea_title, e.ea_content, GET_CODE_VALUE(e.ea_status) ea_status, e.ea_date, e.ea_cdate, GET_CODE_VALUE(o.dept_code) ea_dummy,
-e.ea_u_date, ea_a_date, ea_r_date,GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, GET_CODE_VALUE(ea_pop) ea_pop,
+e.ea_u_date, ea_a_date, ea_r_date,GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, e.ea_pop,
 GET_CODE_VALUE(ea_read) ea_read, ea_file_name, ea_file_path
 from tbl_ea e left join tbl_emp m on e.emp_no = m.emp_no
 left join tbl_org o on e.emp_no = o.emp_no
@@ -28,8 +33,8 @@ BEGIN
 v_EA_NUM := seq_ea_num.nextval;
 <foreach collection='list' item='l' open="INSERT ALL" close="select * from dual;"  separator=" ">
 
-into tbl_ea (ea_num,ea_receiver, emp_no, ea_title, ea_content)
-values (v_EA_NUM,#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content})
+into tbl_ea (ea_num,ea_receiver, emp_no, ea_title, ea_content, ea_pop)
+values (v_EA_NUM,#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content}, #{l.ea_pop,jdbcType=VARCHAR})
 
 
 </foreach>

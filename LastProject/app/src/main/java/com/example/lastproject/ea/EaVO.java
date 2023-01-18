@@ -1,9 +1,10 @@
 package com.example.lastproject.ea;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
-public class EaVO {
+public class EaVO implements Serializable {
 	private String ea_title, ea_content, ea_status, ea_r_statuas, ea_pop, ea_read, ea_dummy,ea_num, ea_receiver, emp_no, emp_name, ea_file_name, ea_file_path;
 	private Date ea_date, ea_cdate, ea_u_date, ea_r_date, ea_a_date;
 
