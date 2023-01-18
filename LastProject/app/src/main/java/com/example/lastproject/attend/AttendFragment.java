@@ -120,6 +120,15 @@ public class AttendFragment extends Fragment {
             }
         });
 
+        /*큐알스캔
+        qr = v.findViewById(R.id.qr);
+        qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ScanActivity.class);
+                startActivity(intent);
+            }
+        });*/
 
         /*출근 버튼 클릭*/
 

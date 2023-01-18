@@ -64,14 +64,28 @@
         android:theme="@style/Theme.LastProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-      
+
+        <!--230117주영추가-->
         <activity
-            android:name=".al.AL_Apply_Activity"
+            android:name=".attend.ScanActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <!--230117주영추가-->
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
+
+
+       <!-- 230117 주영 이거 오류떠서 주석처리했슴다<activity
+            android:name=".al.AL_Apply_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>-->
         <activity
             android:name=".notice.Update_no_Activity"
             android:exported="false">
