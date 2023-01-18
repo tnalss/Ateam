@@ -3,6 +3,7 @@ package com.example.lastproject.notice;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListInfo_sec_Activity extends AppCompatActivity {
     String TAG = "로그";
@@ -29,9 +31,12 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
     TextView tv_sec_info_title, tv_sec_info_content, tv_sec_info_date, tv_sec_reply;
     Button btn_sec_delete, btn_sec_update, btn_sec_reply;
     EditText edt_sec_reply;
-    RecyclerView recv_sec_noticeInfo;
+    RecyclerView recv_sec_noticeInfo, recv_no_info_file;
     NoticeVO notice;
     ArrayList<ReplyVO> reply;
+    List<NoticeFileVO> filevo;
+    noInfoAdapter adapter;
+    ArrayList<String> path_list;
     int bo = 0;
 
     @Override
@@ -57,6 +62,8 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
         btn_sec_update = findViewById(R.id.btn_sec_update);
         btn_sec_delete = findViewById(R.id.btn_sec_delete);
         recv_sec_noticeInfo = findViewById(R.id.recv_sec_noticeInfo);
+        recv_no_info_file = findViewById(R.id.recv_no_info_file);
+        new Common().checkDangerousPermissions(this);
 
         /* 익명게시판 글삭제 */
         btn_sec_delete.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +78,7 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
                         }).show();
             }
         });
+
         /* 익명게시판 글수정 이동 */
         btn_sec_update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,17 +127,36 @@ public class ListInfo_sec_Activity extends AppCompatActivity {
 
     // 익명게시판 상세내용
     public void update() {
-        new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            notice = gson.fromJson(data, NoticeVO.class);
-            notice.getWrite_date();
-            notice.getBoard_no();
-            bo = notice.getBoard_no();
-            tv_sec_info_title.setText("제목 : " + notice.getBoard_title());
-            tv_sec_info_content.setText(notice.getBoard_content());
-            tv_sec_info_date.setText("작성일 : " + notice.getWrite_date());
-            re_sec_plylist();
-        });
+
+                new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("secinfo.no", (isResult, data) -> {
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                notice = gson.fromJson(data, NoticeVO.class);
+                notice.getWrite_date();
+                notice.getBoard_no();
+                bo = notice.getBoard_no();
+                tv_sec_info_title.setText("제목 : " + notice.getBoard_title());
+                tv_sec_info_content.setText(notice.getBoard_content());
+                tv_sec_info_date.setText("작성일 : " + notice.getWrite_date());
+                re_sec_plylist();
+            });
+
+            new CommonMethod().setParams("no", getIntent().getIntExtra("board_no", 0)).sendPost("imageFile.no", (isResult, data) -> {
+                if (isResult){
+                   if(data!=null) {
+
+                       ArrayList<NoticeFileVO> list = new Gson().fromJson(data, new TypeToken<ArrayList<NoticeFileVO>>() {}.getType());
+                       if(list ==null)
+                           return;
+                       adapter = new noInfoAdapter(getLayoutInflater(), list, this);
+                       recv_no_info_file.setAdapter(adapter);
+                       recv_no_info_file.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
+
+                   }
+                }
+
+            });
+
     }
 
     public void re_sec_plylist() {

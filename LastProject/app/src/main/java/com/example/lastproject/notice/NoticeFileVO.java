@@ -2,8 +2,8 @@ package com.example.lastproject.notice;
 
 
 public class NoticeFileVO {
-	private String file_name, path;
-	private int boardfile_code, board_code;
+	private String file_name, file_path;
+	private int file_no, board_no;
 
 	public String getFile_name() {
 		return file_name;
@@ -13,27 +13,27 @@ public class NoticeFileVO {
 		this.file_name = file_name;
 	}
 
-	public String getPath() {
-		return path;
+	public String getFile_path() {
+		return file_path;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
 	}
 
-	public int getBoardfile_code() {
-		return boardfile_code;
+	public int getFile_no() {
+		return file_no;
 	}
 
-	public void setBoardfile_code(int boardfile_code) {
-		this.boardfile_code = boardfile_code;
+	public void setFile_no(int file_no) {
+		this.file_no = file_no;
 	}
 
-	public int getBoard_code() {
-		return board_code;
+	public int getBoard_no() {
+		return board_no;
 	}
 
-	public void setBoard_code(int board_code) {
-		this.board_code = board_code;
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
 	}
 }

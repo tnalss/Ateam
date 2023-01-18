@@ -66,6 +66,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"/>
 
+<androidx.recyclerview.widget.RecyclerView
+    android:padding="3dp"
+    android:id="@+id/recv_no_file"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
     </LinearLayout>
     <View
