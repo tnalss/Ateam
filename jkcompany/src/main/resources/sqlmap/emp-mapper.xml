@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="emp">
 
-<update id="myinfo_update">
-update tbl_emp set emp_pw = #{emp_pw}, phone = #{phone}, email= #{email} where emp_no = #{emp_no}
-</update>
 
+
+<!-- 전체회원 조회 -->
 <select id="list" resultType="employee.EmployeeVO">
 select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
 from tbl_emp e left join tbl_org o
@@ -17,6 +16,39 @@ on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num 
 order by e.emp_no
 </select>
+
+<!-- 특정 사원 사번으로 조회 -->
+<select id="info" resultType="employee.EmployeeVO">
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o
+on e.emp_no = o.emp_no
+left join tbl_code c
+on o.rank_code = c.code_category||c.code_num
+left join tbl_code c2
+on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
+on o.dept_code  = c3.code_category||c3.code_num 
+WHERE e.emp_no=#{id}
+</select>
+
+<!-- 코드별 목록조회 -->
+<select id="codeList" resultType="common.SimpleCode">
+
+select code_category||code_num code, code_value
+from tbl_code
+where code_category=#{cod}
+order by 2 asc
+</select>
+
+
+
+
+
+
+
+<update id="myinfo_update">
+update tbl_emp set emp_pw = #{emp_pw}, phone = #{phone}, email= #{email} where emp_no = #{emp_no}
+</update>
+
 <!-- 검색기능 -->
 <select id="keyword" resultType="employee.EmployeeVO">
 select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
@@ -40,18 +72,6 @@ order by e.emp_no
 	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth ,address,salary, profile_path)
 	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth},#{address},#{salary},#{profile_path,jdbcType=VARCHAR})
 </insert>
-
-<select id="info" resultType="employee.EmployeeVO">
-select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
-from tbl_emp e left join tbl_org o
-on e.emp_no = o.emp_no
-left join tbl_code c
-on o.rank_code = c.code_category||c.code_num
-left join tbl_code c2
-on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
-on o.dept_code  = c3.code_category||c3.code_num 
-WHERE e.emp_no=#{emp_no}
-</select>
 
 <select id="emp.adminCode">
 select admin from tbl_emp
