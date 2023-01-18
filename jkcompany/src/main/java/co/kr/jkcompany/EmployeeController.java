@@ -1,4 +1,4 @@
-package co.kr.yhcompany;
+package co.kr.jkcompany;
 
 import java.util.HashMap;
 import java.util.List;
