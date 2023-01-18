@@ -71,8 +71,8 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
             holder.off.setText("");
             holder.tv_off.setVisibility(View.GONE);
         }
-        holder.now.setText(list.get(position).getAtt_state());
 
+        holder.now.setText(list.get(position).getAtt_state());
 
 
     }

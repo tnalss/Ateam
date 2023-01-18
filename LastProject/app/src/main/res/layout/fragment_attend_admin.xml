@@ -53,26 +53,18 @@
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
   <!--스크롤뷰 내 리니어시작 -->
-
-        <!--전체 사원의 근태 조회 -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/sub_color"/>
         <LinearLayout
-            android:layout_margin="10dp"
-            android:padding="5dp"
+
             android:layout_marginBottom="10dp"
-            android:background="@drawable/item_radius2"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
@@ -105,11 +97,25 @@
                     android:layout_height="wrap_content"
                     android:text="날짜 선택"/>
                 </LinearLayout>
+                <!--지점별-->
             <org.angmarch.views.NiceSpinner
-                android:layout_marginLeft="200dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/s1"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
+                <!--부서별-->
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/s2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+                <!--직급별-->
+            <org.angmarch.views.NiceSpinner
+                    android:id="@+id/s3"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
+
+            <!--근무시간 순 정렬 스피너 추가하기-->
             <View
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -120,12 +126,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recv_attend_admin"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
-
-
-
-
         <!--스크롤뷰내 리니어 닫기-->
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
