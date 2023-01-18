@@ -124,6 +124,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/now"
         style="@style/small_size"

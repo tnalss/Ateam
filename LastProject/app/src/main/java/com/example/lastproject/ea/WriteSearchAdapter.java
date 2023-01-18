@@ -50,13 +50,20 @@ public class WriteSearchAdapter extends RecyclerView.Adapter<WriteSearchAdapter.
         h.line_write_search.setOnClickListener(v -> {
             if(flag==1){
                 fragment.signmakeChip(list.get(i).getEmp_name());
-                h.line_write_search.setVisibility(View.GONE);
+                deleteItem(i);
             }else if (flag==2){
                 fragment.refermakeChip(list.get(i).getEmp_name());
-                h.line_write_search.setVisibility(View.GONE);
+                deleteItem(i);
             }
         });
     }
+
+    public void deleteItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, list.size());
+    }
+
 
     @Override
     public int getItemCount() {

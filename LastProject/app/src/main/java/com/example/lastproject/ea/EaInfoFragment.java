@@ -28,6 +28,7 @@ public class EaInfoFragment extends Fragment implements View.OnClickListener {
     HashMap<String, Object> map;
     String ea_num;
     ArrayList<EaVO> list;
+    ArrayList<EaFileVO> file_list;
     FragmentEaInfoBinding binding;
     MainActivity activity;
     AlertDialog.Builder my_alert;
@@ -60,12 +61,24 @@ public class EaInfoFragment extends Fragment implements View.OnClickListener {
             binding.tvInfoEaTitle.setText(list.get(0).getEa_title());
             binding.tvInfoEaNo.setText(list.get(0).getEa_num());
             binding.tvInfoEmp.setText(list.get(0).getEmp_name());
+            if(list.get(0).getEa_pop() != null){
+                binding.tvInfoEaOpen.setText("부서공개"+"("+list.get(0).getEa_pop()+")");
+            }
             binding.tvInfoEaDep.setText(list.get(0).getEa_dummy());
             binding.tvInfoContent.setText(list.get(0).getEa_content());
             binding.recvEaInfoLine.setAdapter(new EaInfoAdapter(inflater,list,getContext(),getArguments().getInt("no"),activity));
             binding.recvEaInfoLine.setLayoutManager(CommonMethod.getHManager(getContext()));
 
+            new CommonMethod().setParams("ea_num",ea_num).sendPost("ea_file_select",(isResult1, data1) -> {
+                file_list = new Gson().fromJson(data1,
+                        new TypeToken<ArrayList<EaFileVO>>(){}.getType());
+                if (file_list != null){
+                    binding.recvEaFile.setAdapter(new EaFileAdapter(inflater,file_list,1,getContext()));
+                    binding.recvEaFile.setLayoutManager(CommonMethod.getVManager(getContext()));
+                }
+            });
         });
+
 
 
 

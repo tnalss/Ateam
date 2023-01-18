@@ -1,6 +1,5 @@
 package com.and.middle;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,7 +13,6 @@ import com.google.gson.GsonBuilder;
 
 import Attend.AttendAdminVO;
 import Attend.AttendVO;
-import employee.EmployeeVO;
 
 
 @RestController
@@ -82,14 +80,15 @@ public class AttendController {
 		return gson.toJson(list).toString() ;
 	}
 
-	//어쩌구 이름을 가진 사원의  해당 날짜의 근무시간 조회
-	@RequestMapping(value="/work_date_name.at", produces="text/html;charset=utf-8")
-	public String work_date_name(String keyword, String date) {
-		HashMap<String,String> map = new HashMap<>();
-		map.put("keyword", keyword);
-		map.put("date", date);			
-		List<AttendAdminVO> list = sql.selectList("at.work_date_name",map);
-		return new Gson().toJson(list).toString(); 
+	
+	
+	//다합쳐서 조회 
+	@RequestMapping(value="/worktime_all.at", produces="text/html;charset=utf-8")
+	public String worktime_all(String param) {
+		AttendAdminVO vo = new Gson().fromJson(param, AttendAdminVO.class);
+		List<AttendAdminVO>list = sql.selectList("at.worktime_all",vo);
+		return new Gson().toJson(list).toString();
+		
 	}
 	
 	
