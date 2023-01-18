@@ -1,16 +1,23 @@
 package com.and.middle;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import common.CommonService;
+import notice.NoticeFileVO;
 import notice.NoticeVO;
 import notice.ReplyVO;
 
@@ -38,14 +45,41 @@ public class NoticeController {
 		return gson.toJson(secret);
 	}
 
-	// 익명게시판 글쓰기
-	@RequestMapping(value = "/insert.no", produces = "text/html;charset=utf-8")
-	public String insert(String vo) {
-		System.out.println(vo);
+	// 익명게시판 글쓰기 (+ 첨부파일)
+	@RequestMapping(value = "/secinsert.no", produces = "text/html;charset=utf-8")
+	public String insert(String vo, HttpServletRequest req) {
 		NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);
+		MultipartRequest mReq = (MultipartRequest) req;
+		List<MultipartFile> fileList = mReq.getFiles("file");
+		String imgPath = null;
+		ArrayList<NoticeFileVO> list = new ArrayList<>();
+		
+		for(int i = 0; i < fileList.size(); i++) {
+			NoticeFileVO filevo = new NoticeFileVO();
+			MultipartFile file = fileList.get(i);
+			System.out.println(file.getOriginalFilename());
+			System.out.println(file.getName());
+			filevo.setFile_name(file.getOriginalFilename());
+			imgPath = new CommonService().fileUpload("no", file, req);
+			filevo.setPath(imgPath);
+			list.add(filevo);
+		}
+		
+		temp_vo.setFileList(list);		
 		int cnt = sql.insert("no.se_insert", temp_vo);
-		return new Gson().toJson(cnt).toString();
+		if(list.size() > 0) {
+			sql.insert("no.file_insert", temp_vo);
+		}
+		return cnt + "";
 	}
+	
+	// 익명게시판 글쓰기
+		@RequestMapping(value = "/insert.no", produces = "text/html;charset=utf-8")
+		public String insert(String vo) {
+			NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);	
+			int cnt = sql.insert("no.se_insert", temp_vo);
+			return new Gson().toJson(cnt).toString();
+		}
 
 	// 공지사항 글쓰기
 	@RequestMapping(value = "/noinsert.no", produces = "text/html;charset=utf-8")
@@ -131,12 +165,7 @@ public class NoticeController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(list).toString();
 	}
-	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value="/countReply.no", produces="text/html;charset=utf-8")	
 	public String countReply (String board_no) {
 		
@@ -144,12 +173,7 @@ public class NoticeController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+		
 }

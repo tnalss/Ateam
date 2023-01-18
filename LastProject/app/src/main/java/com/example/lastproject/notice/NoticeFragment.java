@@ -36,7 +36,7 @@ public class NoticeFragment extends Fragment {
     ArrayList<NoticeVO> notice;
     ArrayList<NoticeVO> secret;
     ArrayList<ReplyVO> reply;
-    TextView tv_no_writing, tv_sec_writing, tv_no_title, tv_no_search, tv_no_result;
+    TextView tv_no_writing, tv_sec_writing, tv_no_title, tv_no_search;
     EditText edt_no_search;
     ImageView img_no_search;
 
