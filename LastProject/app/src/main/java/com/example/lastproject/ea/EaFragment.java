@@ -19,8 +19,7 @@ import com.example.lastproject.MainActivity;
 import com.example.lastproject.R;
 import com.example.lastproject.common.Common;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -70,10 +69,10 @@ public class EaFragment extends Fragment implements View.OnClickListener {
         tab_layout.addTab(tab_layout.newTab().setText("결재완료"));
         tab_layout.addTab(tab_layout.newTab().setText("결재전"));
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("please");
-
-        myRef.setValue("What the Fuck");
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("please");
+//
+//        myRef.setValue("What the Fuck");
 
 
 
