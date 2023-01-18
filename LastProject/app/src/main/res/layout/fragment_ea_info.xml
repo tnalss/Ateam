@@ -147,15 +147,16 @@
                 android:background="#DDD9D9"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"/>
+
             <TextView
                 android:id="@+id/tv_info_ea_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
                 android:text="전체공개"
-                android:textSize="13dp"
                 android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="13dp" />
         </LinearLayout>
         <View
             android:background="#DDD9D9"

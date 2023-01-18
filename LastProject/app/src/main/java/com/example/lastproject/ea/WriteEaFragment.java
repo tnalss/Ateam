@@ -6,6 +6,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,10 +98,20 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_write_ea, container, false);
 
+        activity = (MainActivity) getActivity();
+
+        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)) {
+            Log.d("TAG", "onActivityResult: ");
+        }else{
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
+        }
 
 
         my_alert = new AlertDialog.Builder(getContext());
-        activity = (MainActivity) getActivity();
         line_vacation = v.findViewById(R.id.line_vacation);
         recv_sign_add = v.findViewById(R.id.recv_sign_add);
         recv_refer_add = v.findViewById(R.id.recv_refer_add);
@@ -364,19 +376,22 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                            //첨부파일 있는 결재
                            new CommonMethod().setParams("param", send_list)
                                    .sendPostFiles("ea_insert.fi",path_list,name_list,Common.FILE_CODE, (isResult, data) -> {
-                               Toast.makeText(activity, "상신 완료", Toast.LENGTH_SHORT).show();
-                               if(alvo !=null){
-                                   new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
-                                           .setParams("al_start_date",alvo.getAl_start_date())
-                                           .setParams("al_end_date",alvo.getAl_end_date())
-                                           .setParams("al_code",alvo.getAl_code())
-                                           .sendPost("al_v_a.al",((isResult1, data1) -> {
-                                               if(isResult1) {
-                                                   activity.changeFragment(new EaFragment());
-                                               }}));
-                               }else{
-                                   activity.changeFragment(new EaFragment());
-                               }
+                                       if(isResult) {
+                                           Toast.makeText(activity, "상신 완료", Toast.LENGTH_SHORT).show();
+                                           if (alvo != null) {
+                                               new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no())
+                                                       .setParams("al_start_date", alvo.getAl_start_date())
+                                                       .setParams("al_end_date", alvo.getAl_end_date())
+                                                       .setParams("al_code", alvo.getAl_code())
+                                                       .sendPost("al_v_a.al", ((isResult1, data1) -> {
+                                                           if (isResult1) {
+                                                               activity.changeFragment(new EaFragment());
+                                                           }
+                                                       }));
+                                           } else {
+                                               activity.changeFragment(new EaFragment());
+                                           }
+                                       }
                            });
                        }
 
@@ -509,17 +524,21 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
 
     //파일 경로 찾기
     public String getFilePath(Uri uri){
+        String path = null;
+        try{
         final String docId = DocumentsContract.getDocumentId(uri);
         final String[] split = docId.split(":");
         final String type= split[0];
         final String[] tempSplit = split[1].split("/");
-        String path = null;
+
         if ("primary".equalsIgnoreCase(type)) {
             path = Environment.getExternalStorageDirectory() + "/" + (split.length > 1 ? split[1] : ""); //split[1];
-        } else if ("home".equalsIgnoreCase(type)) {
-            path = Environment.getExternalStorageDirectory() + "/Download/" + (split.length > 1 ? split[1] : ""); //split[1];
-        }else if ("raw".equalsIgnoreCase(type)) {
+        } else   {
             path = Environment.getExternalStorageDirectory() +"/" + tempSplit[4]+ "/" + tempSplit[5];// (split.length > 1 ? split[1] : ""); //split[1];
+        }
+
+        }catch (Exception e){
+            Toast.makeText(activity, "파일이 깨져 업로드 선택 할 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
         return path;
     }
@@ -553,11 +572,11 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         super.onActivityResult(requestCode, resultCode, data);
 
         new Common().checkDangerousPermissions(getActivity());
-//        Intent intent = new Intent();
-//        intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-//        intent.setData(uri);
-//        startActivity(intent);
+
+    //    permissionCheck = ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+
+
+
 
         if(requestCode == Common.FILE_CODE && resultCode == RESULT_OK){
 
