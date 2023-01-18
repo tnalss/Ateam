@@ -595,3 +595,17 @@ tbl_emp 길이 조정
 ALTER TABLE TBL_EMP  
 MODIFY (SALARY NUMBER(30, 2) );
 
+
+
+-- 파일번호 시퀀스
+create sequence seq_file_no start with 1 increment by 1 nocache;
+
+-- 파일 번호 트리거
+create or replace trigger trg_file_no
+    before insert on tbl_file
+    for each row
+begin
+    select seq_file_no.nextval into :new.file_no from dual;
+end;
+/
+

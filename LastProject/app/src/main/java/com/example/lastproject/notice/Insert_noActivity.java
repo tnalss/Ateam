@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -45,9 +47,12 @@ public class Insert_noActivity extends AppCompatActivity {
     ImageView img_sec_close, img_sec_file;
     EditText  edt_sec_title, edt_sec_content;
     TextView tv_sec_ok;
+    RecyclerView recv_no_file;
     ArrayList<String> path_list;
     ArrayList<String> name_list;
     ArrayList<NoticeFileVO> file_list;
+    NoticeFileAdapter file_adapter = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class Insert_noActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_no);
         getSupportActionBar().hide();
 
-
+        recv_no_file = findViewById(R.id.recv_no_file);
         img_sec_close = findViewById(R.id.img_sec_close);
         img_sec_file = findViewById(R.id.img_sec_file);
         tv_sec_ok = findViewById(R.id.tv_sec_ok);
@@ -70,6 +75,7 @@ public class Insert_noActivity extends AppCompatActivity {
         });
 
 
+        new Common().checkDangerousPermissions(this);
         tv_sec_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +92,7 @@ public class Insert_noActivity extends AppCompatActivity {
                         Toast.makeText(Insert_noActivity.this, "글 등록 완료", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                    Log.d("로그", "실패: ");
+                    Log.d("로그", "실패1: ");
 
                     }
 
@@ -94,12 +100,12 @@ public class Insert_noActivity extends AppCompatActivity {
 
                 } else {
                     //첨부파일 있는 게시글
-                    new CommonMethod().setParams("vo", vo).sendPostFiles("insert.fi", path_list, name_list, Common.FILE_CODE, (isResult, data) -> {
+                    new CommonMethod().setParams("param", vo).sendPostFiles("secinsert.no", path_list, name_list, Common.GALLERY_CODE, (isResult, data) -> {
                         if(isResult){
                             Toast.makeText(Insert_noActivity.this, "글 등록 완료", Toast.LENGTH_SHORT).show();
                             finish();
                         }else {
-                            Log.d("로그", "실패: ");
+                            Log.d("로그", "실패2: " + data);
                         }
                     });
                 }
@@ -118,6 +124,7 @@ public class Insert_noActivity extends AppCompatActivity {
 
     }
 
+
     //갤러리 선택시 실행 메소드
     public void galleryMethod(){
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -132,15 +139,35 @@ public class Insert_noActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");
 //        intent.putExtra(Intent.)
-
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(Intent.createChooser(intent, "파일 선택"), Common.FILE_CODE);
+    }
+
+    //어떤 인텐트로 startActivityForResult 를 실행하든 그 결과는 무조건 ↓
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == Common.GALLERY_CODE && resultCode == RESULT_OK){
+
+            allMethod(data, Common.GALLERY_CODE);
+
+            //어댑터
+            file_adapter = new NoticeFileAdapter(getLayoutInflater(), file_list,this);
+            recv_no_file.setAdapter(file_adapter);
+            recv_no_file.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+            file_adapter.notifyDataSetChanged();
+
+        }else {
+
+
+        }
     }
 
     //내보낼 파일 정보 담기
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void allMethod(Intent data, int type){
-
         name_list = new ArrayList<>();
         path_list = new ArrayList<>();  //==> String (path)
         file_list = new ArrayList<>();   // ==> BoardFileVO
@@ -156,7 +183,7 @@ public class Insert_noActivity extends AppCompatActivity {
                 vo.setFile_name( name );
             }
             path_list.add( realPath );
-            vo.setPath( realPath );
+            vo.setFile_path( realPath );
             file_list.add(vo);
         }else{
             //여러개 선택시 clipData 있음
@@ -176,7 +203,7 @@ public class Insert_noActivity extends AppCompatActivity {
                     vo.setFile_name( name );
                 }
                 path_list.add( realPath );
-                vo.setPath( realPath );
+                vo.setFile_path( realPath );
 
                 file_list.add(vo);
             }

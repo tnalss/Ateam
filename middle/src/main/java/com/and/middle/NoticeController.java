@@ -47,8 +47,8 @@ public class NoticeController {
 
 	// 익명게시판 글쓰기 (+ 첨부파일)
 	@RequestMapping(value = "/secinsert.no", produces = "text/html;charset=utf-8")
-	public String insert(String vo, HttpServletRequest req) {
-		NoticeVO temp_vo = new Gson().fromJson(vo, NoticeVO.class);
+	public String insert(String param, HttpServletRequest req) {
+		NoticeVO temp_vo = new Gson().fromJson(param, NoticeVO.class);
 		MultipartRequest mReq = (MultipartRequest) req;
 		List<MultipartFile> fileList = mReq.getFiles("file");
 		String imgPath = null;
@@ -61,7 +61,7 @@ public class NoticeController {
 			System.out.println(file.getName());
 			filevo.setFile_name(file.getOriginalFilename());
 			imgPath = new CommonService().fileUpload("no", file, req);
-			filevo.setPath(imgPath);
+			filevo.setFile_path(imgPath);
 			list.add(filevo);
 		}
 		
@@ -69,6 +69,7 @@ public class NoticeController {
 		int cnt = sql.insert("no.se_insert", temp_vo);
 		if(list.size() > 0) {
 			sql.insert("no.file_insert", temp_vo);
+			System.out.println("여기옴?"+cnt);
 		}
 		return cnt + "";
 	}
@@ -174,6 +175,17 @@ public class NoticeController {
 	
 	
 
+	
+@RequestMapping(value="/imageFile.no", produces="text/html;charset=utf-8")	
+public String imageFile (String no) {
+	 
+	List<NoticeFileVO> list = sql.selectList("no.imageFile",no);
+	if(list.size()!=0) {
+		return new Gson().toJson(list);
+	}
+	
+	return null;
+}
 
 		
 }

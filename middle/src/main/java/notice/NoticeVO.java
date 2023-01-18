@@ -13,9 +13,7 @@ public class NoticeVO {
     private Date write_date;
     private List<NoticeFileVO> fileList;
     
-    public void setFileList(List<NoticeFileVO> fileList) {
-        this.fileList = fileList;
-    }
+
     
 
 }

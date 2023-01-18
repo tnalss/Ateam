@@ -36,6 +36,7 @@ public class Insert_secActivity extends AppCompatActivity {
         edt_no_content = findViewById(R.id.edt_no_content);
         tv_no_ok = findViewById(R.id.tv_no_ok);
 
+
         tv_no_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

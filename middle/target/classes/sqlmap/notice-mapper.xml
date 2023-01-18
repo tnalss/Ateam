@@ -24,12 +24,22 @@ values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
 </insert>
 
 <!-- 첨부파일 insert -->
-	<insert id="file_insert">
-	<foreach item="item" collection="fileList"
-        open="insert all " separator=" " close="select * from dual">
-          into tbl_file(file_no, file_name, file_path)
-		  values( #{file_no}, #{item.file_name}, #{item.file_path} )
-   	</foreach>
+	<insert id="file_insert">   	   	
+   	DECLARE 
+v_board_no NUMBER :=0;
+
+BEGIN
+SELECT LAST_NUMBER-1  INTO   v_board_no
+FROM user_sequences
+where sequence_name='SEQ_BOARD_NO';
+<foreach item="item" collection="fileList"
+     open="insert all " separator=" " close="select * from dual">
+     into tbl_file(board_no, file_name, file_path)
+	 values( v_board_no, #{item.file_name}, #{item.file_path} )
+</foreach>
+   	
+COMMIT;
+END;
 	</insert>
 
 <!-- 공지사항 / 익명게시판 내용 -->
@@ -65,6 +75,12 @@ where board_no = #{board_no}
 select *
 from tbl_board
 where board_title like '%'||#{board_title}||'%' and board_cate = 'O1'
+</select>
+
+
+<select id="imageFile" resultType="notice.NoticeFileVO">
+select * from tbl_file where board_no = #{no}
+
 </select>
 
 

@@ -59,14 +59,25 @@ public class CommonMethod {
     }
     public static String getRealPath(Uri uri, Context context, int type){//select 쿼리를 날렸다고 생각.
         String rtn = null; //리턴용
+        if(type == 1001) {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = context.getContentResolver().query(uri, proj, null, null);
+            if (cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                rtn = cursor.getString(column_index);
+            }
+            cursor.close();
+        } else {
+
             //파일
             String[] proj = {OpenableColumns.DISPLAY_NAME};
             Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
-            if(cursor.moveToFirst()){
+            if (cursor.moveToFirst()) {
                 int column_index = cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME);
                 rtn = cursor.getString(column_index);
             }
             cursor.close();
+        }
             return rtn;
         }
 

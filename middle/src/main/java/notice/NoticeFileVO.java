@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class NoticeFileVO {
-	private String file_name, path;
-	private int boardfile_code, board_code;
+	private String file_name, file_path;
+	private int file_no, board_no;
 }
