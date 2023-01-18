@@ -39,8 +39,20 @@ where code_category=#{cod}
 order by 2 asc
 </select>
 
+<!-- 사원정보 수정 -->
+<update id="update">
+UPDATE tbl_emp
+SET emp_name = #{emp_name}, gender = #{gender },phone= #{ phone},email= #{ email},birth= to_char(#{birth},'yyyy-MM-dd'),address= #{address,jdbcType=VARCHAR}
+,admin= #{admin}, profile_path=#{profile_path,jdbcType=VARCHAR}
+WHERE emp_no= #{emp_no}
+</update>
 
-
+<!-- 사원부서 수정 -->
+<update id="updateOrg">
+UPDATE tbl_org
+SET rank_code =#{rank_name}, branch_code=#{branch_name}, dept_code=#{department_name}
+WHERE emp_no= #{emp_no}
+</update>
 
 
 
@@ -110,12 +122,6 @@ INSERT INTO tbl_org (emp_no,rank_code,branch_code,dept_code)
 VALUES (#{emp_no},#{rank_code},#{branch_code},#{dept_code})
 </insert>
 
-<update id="update">
-UPDATE tbl_emp
-SET emp_name = #{emp_name}, gender = #{gender },phone= #{ phone},email= #{ email},birth= TO_DATE(#{birth},'YYYY/MM/DD'),address= #{address},
-salary= #{salary },admin= #{admin}, profile_path=#{profile_path,jdbcType=VARCHAR}
-WHERE emp_no= #{emp_no}
-</update>
 
 <update id="orgUpdate">
 UPDATE tbl_org

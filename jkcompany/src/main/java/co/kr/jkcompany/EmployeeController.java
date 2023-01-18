@@ -1,10 +1,7 @@
-package co.kr.yhcompany;
+package co.kr.jkcompany;
 
-import java.util.HashMap;
 import java.util.List;
 
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,10 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.google.gson.Gson;
 
 import common.CommonService;
 import employee.EmployeeVO;
@@ -82,7 +75,12 @@ public class EmployeeController {
 	
 	// 정보 수정 확인 버튼
 	
-	
+	@RequestMapping("/update.emp")
+	public String employee_update(EmployeeVO vo) {
+		sql.update("emp.update",vo);
+		sql.update("emp.updateOrg",vo);
+		return "redirect:info.emp?id="+vo.getEmp_no();
+	}
 	
 	
 	

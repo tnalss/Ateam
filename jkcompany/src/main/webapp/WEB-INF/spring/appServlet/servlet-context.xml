@@ -51,7 +51,7 @@
 	
 	
 	
-	<context:component-scan base-package="co.kr.yhcompany" />
+	<context:component-scan base-package="co.kr.jkcompany" />
 	
 	
 	
