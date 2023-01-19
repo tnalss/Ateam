@@ -13,10 +13,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>메뉴이름</h2>
+          <h2>일정관리</h2>
           <ol>
             <li><a href="<c:url value='/'/>">홈</a></li>
-            <li>메뉴이름</li>
+            <li>일정관리</li>
           </ol>
         </div>
 

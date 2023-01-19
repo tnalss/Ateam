@@ -1,7 +1,5 @@
 package co.kr.jkcompany;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,7 +25,9 @@ public class ScheduleController {
 		
 		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "sche" );
-		
+
 		return "schedule/list";
 	}
+	
+	
 }

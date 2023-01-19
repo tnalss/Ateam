@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="code">
 
+
+
+<!-- 상위코드목록조회 -->
+<select id="topCodeList" resultType="code.CodeVO">
+	select * from tbl_top_code order by 1
+</select>
+
+
 <!-- 전체코드목록 조회 -->
 <select id="simpleList" resultType='common.SimpleCode'>
 select code_category||code_num code, code_value
@@ -9,7 +17,14 @@ from tbl_code
 order by code_category asc ,code_num asc
 </select>
 
+<!-- 하위코드목록조회 -->
+<select id="bottomCodeList" resultType='code.CodeVO'>
 
+select *
+from tbl_code
+where code_category = #{code}
+order by code_num asc
+</select>
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>
 select * from get_code_table (#{cate}) 
@@ -36,9 +51,7 @@ select dept_code from tbl_org where emp_no = #{emp_no}
 
 
 상위코드 조회
-<select id="topCodeList" resultType="code.CodeVO">
-	select * from tbl_top_code order by 1
-</select>
+
 
 상위코드 조회
 <select id="findBy" resultType="code.CodeVO">
