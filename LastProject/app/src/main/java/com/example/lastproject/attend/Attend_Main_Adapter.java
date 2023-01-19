@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,7 +61,11 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
             h.off.setText("");
             h.tv_off.setVisibility(View.GONE);
         }
-        h.now.setText(list.get(i).getAtt_state());
+
+
+            h.now.setText(list.get(i).getAtt_state());
+
+
 
 
     }
@@ -85,6 +90,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
         TextView  date, on,off, now,tv_off, tv_on;
+        ImageView check;
 
         public ViewHolder(@NonNull View v) {
             super(v);
@@ -92,6 +98,7 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
+            check = v.findViewById(R.id.check);
             tv_on = v.findViewById(R.id.tv_on);
             tv_off=v.findViewById(R.id.tv_off);
 

@@ -63,6 +63,7 @@
         </LinearLayout>
     </LinearLayout>
     <ImageView
+        android:id="@+id/check"
         android:layout_marginRight="3dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/now"
@@ -79,7 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="정상 근무"/>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

@@ -41,6 +41,8 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 
 
+import org.apache.poi.util.StringUtil;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,6 +162,7 @@ public class AttendFragment extends Fragment {
                 }
                 off.setEnabled(false);
                 selectList();
+                getnow();
             }
         });
 
@@ -202,8 +205,9 @@ public class AttendFragment extends Fragment {
                     /*출근처리*/
                         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_on.at",(isResult, data) -> {
                               AttendVO vo =new Gson().fromJson(data,AttendVO.class);
-                                selectList();
+                            selectList();
                                 now.setText(vo.getAtt_state());
+
                         });
                         Toast.makeText(getActivity(), "출근 처리되었습니다.", Toast.LENGTH_SHORT).show();
                         selectList(); //1/11 csm 출근후 바로 기록찍히게 처리
@@ -231,6 +235,7 @@ public class AttendFragment extends Fragment {
                         new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_off.at",(isResult, data) -> {
                             AttendVO vo =new Gson().fromJson(data,AttendVO.class);
                             selectList();
+
                             now.setText(vo.getAtt_state());
                         });
                         Toast.makeText(getActivity(), "퇴근 처리되었습니다", Toast.LENGTH_SHORT).show();
@@ -260,6 +265,13 @@ public class AttendFragment extends Fragment {
 
     }
 
-
+    public  void getnow(){
+        new CommonMethod().setParams("emp_no",Common.loginInfo.getEmp_no()).sendPost("attend_today.at",(isResult, data) -> {
+            vo =new Gson().fromJson(data,AttendVO.class);
+            if(vo != null && vo.getAtt_state() != null){
+                now.setText(vo.getAtt_state());
+            }
+        });
+    }
 
 }
