@@ -60,7 +60,7 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
         if(list.get(position).getAttend_on()!=null) {
             holder.on.setText("출근"+list.get(position).getAttend_on().substring(11, 16));
         } else {
-            holder.on.setText("");
+            holder.on.setText("기록 조회 불가");
             holder.tv_on.setVisibility(View.GONE);
         }
 
@@ -68,12 +68,17 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
         if(list.get(position).getAttend_off()!=null) {
             holder.off.setText("퇴근"+list.get(position).getAttend_off().substring(11, 16));
         } else {
-            holder.off.setText("");
+            holder.off.setText("기록 조회 불가");
             holder.tv_off.setVisibility(View.GONE);
         }
 
-        holder.now.setText(list.get(position).getAtt_state());
-
+        
+        if(  list.get(position).getWork_time()!=null){
+            holder.now.setText(list.get(position).getWork_time()+"시간");
+        }else{
+            holder.now.setText("정상 근로 시간 미해당");
+        }
+       
 
     }
 

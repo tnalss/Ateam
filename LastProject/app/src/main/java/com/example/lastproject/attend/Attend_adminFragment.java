@@ -53,6 +53,7 @@ public class Attend_adminFragment extends Fragment {
     TextView d;
     ArrayList<SimpleCode> branch_list,dep_list,rank_list;
     AttendAdminVO vo = new AttendAdminVO();
+    ImageView back;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class Attend_adminFragment extends Fragment {
 
         /*리사이클러뷰 - 사원 전체의 출퇴근 기록 */
         recv_attend_admin = v.findViewById(R.id.recv_attend_admin);
-        new CommonMethod().sendPost("all.at",(isResult, data) -> {
+        new CommonMethod().sendPost("worktime_day.at",(isResult, data) -> {
             list = new Gson().fromJson(data, new TypeToken<ArrayList<AttendAdminVO>>(){}.getType());
             recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(),list,getContext(),activity));
             recv_attend_admin.setLayoutManager(CommonMethod.getVManager(getContext()));
@@ -86,7 +87,7 @@ public class Attend_adminFragment extends Fragment {
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 //1월은 0부터 시작하기 때문에 +1을 해준다.
                                 month = month + 1;
-                                String date = year + "/" + month + "/" + day;
+                                String date = year + "년" + month + "월" + day;
                                 d.setText(date);
                                 vo.setAttend_date(date);
                                 selectlist();

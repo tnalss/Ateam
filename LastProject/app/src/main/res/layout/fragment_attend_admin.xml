@@ -30,26 +30,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"/>
             </LinearLayout>
-        <TextView
-            style="@style/small_size"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:background="@drawable/item_radius4"
-            android:gravity="center"
-            android:layout_centerVertical="true"
-            android:padding="2dp"
-            android:layout_toLeftOf="@+id/iv_burger"
-            android:text="관리자 모드"
-            android:textStyle="bold"
-            android:textColor="@color/main_color" />
-            <ImageView
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/iv_burger"
-            android:src="@drawable/ic_menu_c"
-            android:layout_width="25dp"
-            android:layout_height="25dp"   />
+
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -100,21 +81,20 @@
                 <!--지점별-->
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
-                android:padding="5dp"
                 android:id="@+id/s1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
                 <!--부서별-->
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
-                android:padding="5dp"
+
                 android:id="@+id/s2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
                 <!--직급별-->
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
-                android:padding="5dp"
+
                     android:id="@+id/s3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"/>

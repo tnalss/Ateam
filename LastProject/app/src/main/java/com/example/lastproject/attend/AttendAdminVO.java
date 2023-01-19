@@ -12,6 +12,10 @@ public class AttendAdminVO {
     private String branch_name;
 
 
+
+    private String work_time;
+
+
     public String getRank_code() {
         return rank_code;
     }
@@ -30,7 +34,7 @@ public class AttendAdminVO {
         this.work_time = work_time;
     }
 
-    private String work_time;
+
 
 
 

@@ -16,7 +16,7 @@ VALUES (to_char(current_date,'yyyy/mm/dd'),#{emp_no},to_char(current_date,'yyyy/
 select a.attend_date, a.emp_no, a.attend_on, a.attend_off,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend  a
 where a.emp_no =#{emp_no}
-and attend_date =  to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no} 
+and attend_date =  to_char(current_date, 'yyyy/mm/dd') 
 order by a.attend_date
 </select>
 
@@ -111,6 +111,6 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num 
 left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num 
-order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
+order by a.attend_date desc ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 </select>
 </mapper>
