@@ -1,5 +1,6 @@
 package co.kr.jkcompany;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.CommonService;
+import employee.EmployeePageVO;
 import employee.EmployeeVO;
 
 @Controller
@@ -24,24 +26,31 @@ public class EmployeeController {
 
 	// 조회하고 출력하는 예제
 	@RequestMapping(value = "/list.emp", produces = "text/html;charset=utf-8")
-	public String emp_list(HttpSession session, Model model) {
+	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {
 
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "emp");
-
-		List<EmployeeVO> list = sql.selectList("emp.list");
-		int countAll = sql.selectOne("emp.countAll");
 		int countRetired = sql.selectOne("emp.countRetired");
 
-		// 조회해온 값을 모델로 list라는 곳에 담았습니다.
-		model.addAttribute("list", list);
 
-		model.addAttribute("countAll", countAll);
 		model.addAttribute("countRetired", countRetired);
-
+		model.addAttribute("page", emp_list(page) );
+		
 		// 리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
 	}
+	
+	
+	// 페이지 처리
+	public EmployeePageVO emp_list(EmployeePageVO page) {
+		page.setTotalList( sql.selectOne("emp.total", page) ); 
+		page.setList( sql.selectList("emp.plist", page) );
+		return page;
+	}
+	
+	
+	
+	
 
 	// 매퍼없이 갈때 예제
 	@RequestMapping(value = "/notile", produces = "text/html;charset=utf-8")

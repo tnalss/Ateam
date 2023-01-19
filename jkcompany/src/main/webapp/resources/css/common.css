@@ -43,3 +43,26 @@ html {
 .w-px900 { width:900px }
 .w-px1000 { width:1000px }
 .w-px1200 { width:1200px }
+
+.page-list {
+	display: flex; justify-content: center; line-height: 38px; margin: 10px auto;
+}
+.page-list a, .page-list span {
+	width: 38px; height: 38px; margin: 1px;
+	border: 1px solid transparent;
+}
+.page-list span {
+	border: 1px solid #3367d6; color: #3367d6
+}
+.page-list a:hover {
+	background-color: rgba(51, 103, 214, 0.1); color: #3367d6
+}
+
+a.btn-fill {
+	background-color: #3367d6;
+	color: #fff;
+}
+a.btn-empty {
+	background-color: #fff;
+	color: #3367d6;
+}

@@ -1,5 +1,9 @@
 package common;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class PageVO {
 
 	//검색관련 필드
