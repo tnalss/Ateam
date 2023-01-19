@@ -1,5 +1,6 @@
 package co.kr.jkcompany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,9 +32,14 @@ public class EmployeeController {
 		session.setAttribute("cate", "emp" );
 		
 		List<EmployeeVO> list = sql.selectList("emp.list");
-		
+		int countAll = sql.selectOne("emp.countAll");
+		int countRetired = sql.selectOne("emp.countRetired");
+
 		//조회해온 값을 모델로 list라는 곳에 담았습니다.
 		model.addAttribute("list", list);
+		
+		model.addAttribute("countAll",countAll);
+		model.addAttribute("countRetired",countRetired);
 		
 		
 		//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.

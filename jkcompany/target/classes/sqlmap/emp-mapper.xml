@@ -54,6 +54,19 @@ SET rank_code =#{rank_name}, branch_code=#{branch_name}, dept_code=#{department_
 WHERE emp_no= #{emp_no}
 </update>
 
+<!-- 전체사원 수 조회 -->
+<select id="countAll" resultType="Integer">
+select count(*) from tbl_emp
+</select>
+
+<!-- 퇴사사원 조회 -->
+<select id="countRetired" resultType="Integer">
+select count(*) from tbl_emp where admin= 'X0'
+</select>
+
+
+
+
 
 
 
