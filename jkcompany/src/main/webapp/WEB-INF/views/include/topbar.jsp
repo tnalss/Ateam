@@ -43,7 +43,7 @@
 						<li><a href="myholiday">휴가 관리</a></li>
 					</ul>
 				</li>
-				<li><a href="pricing.html">전자결재</a></li>
+				<li><a href="main.ea">전자결재</a></li>
 				<li><a href="portfolio.html">익명 게시판</a></li>
 			
 				<li class="dropdown"><a href="#"><span>관리자</span>
@@ -51,8 +51,8 @@
 					<ul>
 						<li><a href="list.emp">사원관리</a></li>
 						<li><a href="admin_attend.at">근태관리</a></li>  <!-- 관리자모드 근태관리로 연결 -->
-						<li><a href="testimonials.html">일정관리</a></li>
-						<li><a href="testimonials.html">코드관리</a></li>
+						<li><a href="list.sche">일정관리</a></li>
+						<li><a href="list.code">코드관리</a></li>
 					</ul>
 				</li>
 				

@@ -424,7 +424,7 @@
                 android:padding="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_calendermenu"
+                android:src="@drawable/ic_employee"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
         </RelativeLayout>
@@ -444,14 +444,14 @@
                 android:padding="10dp"
                 style="@style/main_size"
                 android:textColor="@color/white"
-                android:text="뭘까용"
+                android:text="출퇴근"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:padding="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_eamenu"
+                android:src="@drawable/ic_drafts"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
         </RelativeLayout>
