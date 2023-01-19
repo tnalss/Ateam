@@ -36,14 +36,21 @@
 				<li><a class="active" href="<c:url value='/'/>">홈</a></li>
 				<li><a href="about">회사소개</a></li>
 				<li><a href="list.no">공지사항</a></li>
+				<li class="dropdown"><a href="#"><span>근태관리</span><!-- 이름만 근태관리임! -->
+				<i class="bi bi-chevron-down"></i></a>
+					<ul>
+						<li><a href="myattend">나의 출·퇴근기록</a></li>
+						<li><a href="myholiday">휴가 관리</a></li>
+					</ul>
+				</li>
 				<li><a href="pricing.html">전자결재</a></li>
 				<li><a href="portfolio.html">익명 게시판</a></li>
-				<li><a href="portfolio.html">출퇴근</a></li>
+			
 				<li class="dropdown"><a href="#"><span>관리자</span>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
 						<li><a href="list.emp">사원관리</a></li>
-						<li><a href="testimonials.html">근태관리</a></li>
+						<li><a href="admin_attend.at">근태관리</a></li>  <!-- 관리자모드 근태관리로 연결 -->
 						<li><a href="testimonials.html">일정관리</a></li>
 						<li><a href="testimonials.html">코드관리</a></li>
 					</ul>

@@ -1,4 +1,4 @@
-package co.kr.yhcompany;
+package co.kr.jkcompany;
 
 
 import javax.servlet.http.HttpSession;
@@ -26,4 +26,6 @@ public class HomeController {
 		session.removeAttribute("category");
 		return "about";
 	}
+	
+
 }
