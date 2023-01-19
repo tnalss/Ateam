@@ -69,9 +69,6 @@ select count(*) from tbl_emp where admin= 'X0'
 	UPDATE tbl_emp SET ADMIN='X0',end_Date =to_char(current_date,'yyyy-MM-dd') WHERE emp_no=${emp_no}
 </update>
 
-
-
-
 <update id="myinfo_update">
 update tbl_emp set emp_pw = #{emp_pw}, phone = #{phone}, email= #{email} where emp_no = #{emp_no}
 </update>
