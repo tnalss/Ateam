@@ -1,7 +1,5 @@
 package Attend;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
