@@ -26,4 +26,6 @@ public class HomeController {
 		session.removeAttribute("category");
 		return "about";
 	}
+	
+
 }
