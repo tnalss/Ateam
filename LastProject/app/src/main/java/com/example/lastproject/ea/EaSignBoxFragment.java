@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class EaSignBoxFragment extends Fragment {
     RecyclerView recv_sign;
     ArrayList<EaVO> list;
     MainActivity activity;
+    EaSignBoxAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +38,8 @@ public class EaSignBoxFragment extends Fragment {
             list = gson.fromJson(data,
                     new TypeToken<ArrayList<EaVO>>(){}.getType());
 
-            recv_sign.setAdapter(new EaSignBoxAdapter(inflater,list,activity));
+            adapter = new EaSignBoxAdapter(inflater,list,activity);
+            recv_sign.setAdapter(adapter);
             recv_sign.setLayoutManager(CommonMethod.getVManager(getContext()));
         });
 

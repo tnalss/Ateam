@@ -38,9 +38,7 @@ public class EaSignBoxAdapter extends RecyclerView.Adapter<EaSignBoxAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
-        if(list.get(i).getEa_status().equals("회수")){
-            h.line_draft.setVisibility(View.GONE);
-        }else{
+
             h.tv_status.setText(list.get(i).getEa_r_statuas());
             h.tv_title.setText(list.get(i).getEa_title());
             h.tv_date.setText(list.get(i).getEmp_name());
@@ -55,7 +53,7 @@ public class EaSignBoxAdapter extends RecyclerView.Adapter<EaSignBoxAdapter.View
             });
         }
 
-    }
+
 
     @Override
     public int getItemCount() {
