@@ -26,13 +26,13 @@
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<section id="" class="container">
+	<section id="blog" class="container blog">
 		<!-- 섹션의 id와 class는 알아서 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
 
 
-		<div class="row mx-0">
-			<div class="col-sm-5 p-md-0">
+		<div class="row mx-0" >
+			<div class="col-sm-5 p-md-0" data-aos="fade-up">
 				<div class="card">
 					<div class="card-body">
 						<span style="color: black; margin-right: 100px;"><b>총
@@ -44,7 +44,7 @@
 
 			</div>
 			<div
-				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex" data-aos="fade-left">
 				<button type="button" class="btn btn-primary"
 					onclick="location='new.emp'">신규 사원 등록</button>
 			</div>
