@@ -13,7 +13,7 @@
 		<div class="container">
 
 			<div class="d-flex justify-content-between align-items-center">
-				<h2>메뉴이름</h2>
+				<h2>상세정보</h2>
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
 					<li>관리자</li>
@@ -25,71 +25,15 @@
 		</div>
 	</section>
 	<!-- End Breadcrumbs -->
-	<%-- 
-	<!-- ======= Section ======= -->
-	<section id="" class="container">
-		<!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
-		<!-- 실질적으로 내용이 들어가는 부분 -->
-
-		<h2 class="text-center">${vo.emp_name}님의 상세 정보</h2>
-		<table class="table">
-			<tbody>
-				<tr>
-					<th scope="col" class="text-center">사번</th>
-					<td>${vo.emp_no}</td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">이름</th>
-					<td>${vo.emp_name}</td>
-				</tr>
-
-				<tr>
-					<th scope="col" class="text-center">이메일</th>
-					<td>${vo.email}</td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">전화번호</th>
-					<td>${vo.phone}</td>
-				</tr>
-
-				<tr>
-					<th scope="col" class="text-center">고용일</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">급여</th>
-					<td>${vo.salary}</td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">지점</th>
-					<td>${vo.branch_name}</td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">부서명</th>
-					<td>${vo.department_name}</td>
-				</tr>
-				<tr>
-					<th scope="col" class="text-center">직위</th>
-					<td>${vo.rank_name}</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-		<button type="button" class="btn btn-secondary"
-			onclick="history.go(-1)">이전으로</button>
-		<button type="button" class="btn btn-primary"
-			onclick="location='modify.emp?id=${vo.emp_no}'">수정</button>
-		<button type="button" class="btn btn-danger hr-delete">삭제</button>
-	</section> --%>
-	<!-- End Section -->
 
 	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-
+				<div class="card-header">
+					<h3 class="card-title text-center" style="font-weight: bold;">상세정보</h3>
+				</div>
 						<div class="card-body">
 							<div class="card-title mb-4">
 								<div class="d-flex justify-content-start"
@@ -106,8 +50,7 @@
 											style="font-size: 1.5rem; font-weight: bold">
 											<a href="javascript:void(0);">${vo.emp_name }</a>
 										</h2>
-										<h6 class="d-block">${vo.branch_name }</h6>
-										<h6 class="d-block">${vo.department_name }</h6>
+										<h6 class="d-block">${vo.branch_name } ${vo.department_name }</h6>
 										<h6 class="d-block">${vo.rank_name }</h6>
 									</div>
 									<div class="ml-auto">
@@ -178,47 +121,16 @@
 												</div>
 											</div>
 											<hr />
-											<%--
-<div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">지점</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                               <fmt:formatDate value="${vo.hire_date}"
-							pattern="yyyy-MM-dd" />
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">부서</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                               <fmt:formatDate value="${vo.hire_date}"
-							pattern="yyyy-MM-dd" />
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">직위</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                               <fmt:formatDate value="${vo.hire_date}"
-							pattern="yyyy-MM-dd" />
-                                            </div>
-                                        </div>
-                                        <hr /> --%>
+
 										</div>
 										<div class="row">
-										<div class="col-6"></div>
+											<div class="col-6"></div>
 											<div class="col-6">
 												<div class="mr-0">
 													<button type="button" class="btn btn-secondary"
 														onclick="history.go(-1)">이전으로</button>
 													<button type="button" class="btn btn-primary"
 														onclick="location='modify.emp?id=${vo.emp_no}'">수정</button>
-													<button type="button" class="btn btn-danger hr-delete">삭제</button>
 												</div>
 											</div>
 										</div>

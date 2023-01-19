@@ -64,8 +64,10 @@ select count(*) from tbl_emp
 select count(*) from tbl_emp where admin= 'X0'
 </select>
 
-
-
+<!-- 퇴사 -->
+<update id="fire" >
+	UPDATE tbl_emp SET ADMIN='X0',end_Date =to_char(current_date,'yyyy-MM-dd') WHERE emp_no=${emp_no}
+</update>
 
 
 
@@ -89,9 +91,7 @@ order by e.emp_no
 </select>
 
 
-<update id="fire" >
-	UPDATE tbl_emp SET ADMIN='X0',end_Date =to_char(current_date,'yyyy-MM-dd') WHERE emp_no=${emp_no}
-</update>
+
 
 <insert id="insert" >
 	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth ,address,salary, profile_path)

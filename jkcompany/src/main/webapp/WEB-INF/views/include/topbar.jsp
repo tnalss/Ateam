@@ -44,8 +44,8 @@
 					<ul>
 						<li><a href="list.emp">사원관리</a></li>
 						<li><a href="testimonials.html">근태관리</a></li>
-						<li><a href="testimonials.html">일정관리</a></li>
-						<li><a href="testimonials.html">코드관리</a></li>
+						<li><a href="list.sche">일정관리</a></li>
+						<li><a href="list.code">코드관리</a></li>
 					</ul>
 				</li>
 				

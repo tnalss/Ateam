@@ -1,6 +1,5 @@
 package co.kr.jkcompany;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -88,6 +87,13 @@ public class EmployeeController {
 		return "redirect:info.emp?id="+vo.getEmp_no();
 	}
 	
+	// 퇴사버튼
+	
+	@RequestMapping("/fire.emp")
+	public String employee_fire(int id) {
+		sql.update("emp.fire",id);
+		return "redirect:info.emp?id="+id;
+	}
 	
 	
 	

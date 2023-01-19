@@ -81,9 +81,7 @@
 										<td>${vo.rank_name }</td>
 										<td>${vo.email }</td>
 										<td>${vo.hire_date }</td>
-										<td><c:if test="${ vo.admin eq 'X0' }">
-						                                                	퇴사
-						                                                </c:if></td>
+										<td style="color:#f03c02;"><c:if test="${ vo.admin eq 'X0' }">퇴사 </c:if></td>
 
 									</tr>
 								</c:forEach>
