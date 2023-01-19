@@ -36,7 +36,7 @@
 				<li><a class="active" href="<c:url value='/'/>">홈</a></li>
 				<li><a href="about">회사소개</a></li>
 				<li><a href="list.no">공지사항</a></li>
-				<li><a href="pricing.html">전자결재</a></li>
+				<li><a href="main.ea">전자결재</a></li>
 				<li><a href="portfolio.html">익명 게시판</a></li>
 				<li><a href="portfolio.html">출퇴근</a></li>
 				<li class="dropdown"><a href="#"><span>관리자</span>

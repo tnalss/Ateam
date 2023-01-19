@@ -42,9 +42,6 @@ order by 2 asc
 
 
 
-
-
-
 <update id="myinfo_update">
 update tbl_emp set emp_pw = #{emp_pw}, phone = #{phone}, email= #{email} where emp_no = #{emp_no}
 </update>
