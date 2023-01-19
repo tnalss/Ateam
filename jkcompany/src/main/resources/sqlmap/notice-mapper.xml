@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="no">
+
+<!-- 공지사항 목록 -->
+<select id="list" resultType='notice.NoticeVO'>
+select o.*, e.emp_name
+from tbl_board o
+left join tbl_emp e
+on o.emp_no = e.emp_no
+where board_cate = 'O0'
+</select>
+
+
+<!-- 익명게시판 목록 -->
+<select id="se_list" resultType='notice.NoticeVO'>
+select *
+from tbl_board
+where board_cate = 'O1' 
+order by 1 desc
+</select> 
+<!-- 글쓰기 -->
+<insert id="se_insert">
+insert into tbl_board (board_title, board_content, board_cate, emp_no)
+values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
+</insert>
+
+<!-- 첨부파일 insert -->
+	<insert id="file_insert">   	   	
+   	DECLARE 
+v_board_no NUMBER :=0;
+
+BEGIN
+SELECT LAST_NUMBER-1  INTO   v_board_no
+FROM user_sequences
+where sequence_name='SEQ_BOARD_NO';
+<foreach item="item" collection="fileList"
+     open="insert all " separator=" " close="select * from dual">
+     into tbl_file(board_no, file_name, file_path)
+	 values( v_board_no, #{item.file_name}, #{item.file_path} )
+</foreach>
+   	
+COMMIT;
+END;
+	</insert>
+
+<!-- 공지사항 / 익명게시판 내용 -->
+<select id="no_info" resultType="notice.NoticeVO">
+select o.*, e.emp_name
+from tbl_board o
+left join tbl_emp e 
+on o.emp_no = e.emp_no
+where o.board_no = #{o.board_no}
+</select>
+<!-- 공지사항 / 익명게시판 글삭제 -->
+<delete id="delete">
+delete from tbl_board 
+where board_no = #{board_no}
+</delete>
+
+<!-- 조회수 -->
+<update id="hits">
+update tbl_board
+set board_hits = board_hits + 1
+where board_no = #{board_no}
+</update>
+
+<!-- 게시글 수정 -->
+<update id="update">
+update tbl_board
+set board_title = #{board_title}, board_content = #{board_content}
+where board_no = #{board_no}
+</update>
+
+<!-- 익명게시판 검색 -->
+<select id="search" resultType="notice.NoticeVO">
+select *
+from tbl_board
+where board_title like '%'||#{board_title}||'%' and board_cate = 'O1'
+</select>
+
+
+<select id="imageFile" resultType="notice.NoticeFileVO">
+select * from tbl_file where board_no = #{no}
+
+</select>
+
+
+
+</mapper>
