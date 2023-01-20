@@ -34,23 +34,23 @@
               <div class="row">
                 <div class="col-md-6 icon-box" data-aos="fade-up">
                   <i class="bx bx-receipt"></i>
-                  <h4>Corporis voluptates sit</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <h4>html5와 CSS3</h4>
+                  <p>저희 담임 선생님이신 선영훈 선생님께 배운 html5와 css3</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Ullamco laboris nisi</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>Database</h4>
+                  <p>오진경선생님이 제작하신 교재로 선영훈 선생님께 Database와 PL/SQL을 배웠습니다.</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                   <i class="bx bx-images"></i>
-                  <h4>Labore consequatur</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <h4>Spring FrameWork and JSP/Servelt</h4>
+                  <p>오진경선생님께 JSP/Servelet 과 Spring FrameWork를 배웠습니다.</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
                   <i class="bx bx-shield"></i>
-                  <h4>Beatae veritatis</h4>
-                  <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                  <h4>Android</h4>
+                  <p>그동안 배운 기술과 김영문 선생님의 가르침을 통하여 Android 앱을 개발했습니다.</p>
                 </div>
               </div>
             </div><!-- End .content-->
@@ -66,7 +66,7 @@
 
         <div class="section-title" data-aos="fade-up">
           <h2>Our <strong>Team</strong></h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>세명의 동갑내기들과 한명의 아저씨로 구성된 저희 팀은 소통과 혁신으로 새로운 기술을 연마하고 갈고 닦고 있습니다. <br>지금은 실력이 부족할 수 있습니다.<br>하지만 오늘보다 더 나은 내일을 향해 꾸준히 나아가겠습니다.</p>
         </div>
 
         <div class="row">
@@ -219,8 +219,8 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Our <strong>Clients</strong></h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2><strong>협력사</strong></h2>
+          <p><strong>'팀워크의 좋은 점은 항상 지원해줄 사람들이 있다는 것이다.'</strong>  -Margaret Carty</p><p>JKCompany의 도움이 되어주셔서 항상 감사합니다.</p><p>앞으로도 잘 부탁드립니다.</p>
         </div>
 
         <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">

@@ -1,10 +1,7 @@
 package co.kr.jkcompany;
 
-import java.util.HashMap;
 import java.util.List;
 
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,95 +10,105 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.google.gson.Gson;
 
 import common.CommonService;
+import employee.EmployeePageVO;
 import employee.EmployeeVO;
-
 
 @Controller
 public class EmployeeController {
-	@Autowired @Qualifier("hanul")
+	@Autowired
+	@Qualifier("hanul")
 	SqlSession sql;
 	@Autowired
 	private CommonService common;
-	
-	
-	//조회하고 출력하는 예제
-	@RequestMapping(value= "/list.emp" , produces="text/html;charset=utf-8")
-	public String emp_list(HttpSession session, Model model) {
+
+	// 조회하고 출력하는 예제
+	@RequestMapping(value = "/list.emp", produces = "text/html;charset=utf-8")
+	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {
+
+		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
+		session.setAttribute("cate", "emp");
+		int countRetired = sql.selectOne("emp.countRetired");
+
+
+		model.addAttribute("countRetired", countRetired);
+		model.addAttribute("page", emp_list(page) );
 		
-		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("cate", "emp" );
-		
-		List<EmployeeVO> list = sql.selectList("emp.list");
-		
-		//조회해온 값을 모델로 list라는 곳에 담았습니다.
-		model.addAttribute("list", list);
-		
-		
-		//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
+		// 리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
 	}
 	
 	
+	// 페이지 처리
+	public EmployeePageVO emp_list(EmployeePageVO page) {
+		page.setTotalList( sql.selectOne("emp.total", page) ); 
+		page.setList( sql.selectList("emp.plist", page) );
+		return page;
+	}
+	
+	
+	
+	
+
 	// 매퍼없이 갈때 예제
-	@RequestMapping(value= "/notile" , produces="text/html;charset=utf-8")
+	@RequestMapping(value = "/notile", produces = "text/html;charset=utf-8")
 	public String notile(Model model) {
 		List<EmployeeVO> list = sql.selectList("emp.list");
 		model.addAttribute("list", list);
-		
-		//default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
-		//리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
+
+		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
 		return "default/employee/list";
 	}
-	
+
 	// 사번으로 사원 정보조회
-	@RequestMapping(value= "/info.emp" , produces="text/html;charset=utf-8")
+	@RequestMapping(value = "/info.emp", produces = "text/html;charset=utf-8")
 	public String emp_info(String id, Model model) {
-		EmployeeVO vo = sql.selectOne("emp.info",id);
+		EmployeeVO vo = sql.selectOne("emp.info", id);
 		model.addAttribute("vo", vo);
 		return "employee/info";
 	}
-	
+
 	// 정보 수정 창으로 이동
 	@RequestMapping("/modify.emp")
 	public String employee_modify(int id, Model model) {
-		EmployeeVO vo = sql.selectOne("emp.info",id);
-		model.addAttribute("vo",vo);
-		
-		model.addAttribute("branches",sql.selectList("emp.codeList",'B'));
-		model.addAttribute("departments",sql.selectList("emp.codeList",'D'));
-		model.addAttribute("ranks",sql.selectList("emp.codeList",'R'));
+		EmployeeVO vo = sql.selectOne("emp.info", id);
+		model.addAttribute("vo", vo);
+
+		model.addAttribute("branches", sql.selectList("emp.codeList", 'B'));
+		model.addAttribute("departments", sql.selectList("emp.codeList", 'D'));
+		model.addAttribute("ranks", sql.selectList("emp.codeList", 'R'));
 
 		return "employee/modify";
 	}
-	
+
 	// 정보 수정 확인 버튼
-	
-	
-	
-	
-	
-	
+
+	@RequestMapping("/update.emp")
+	public String employee_update(EmployeeVO vo) {
+		sql.update("emp.update", vo);
+		sql.update("emp.updateOrg", vo);
+		return "redirect:info.emp?id=" + vo.getEmp_no();
+	}
+
+	// 퇴사버튼
+
+	@RequestMapping("/fire.emp")
+	public String employee_fire(int id) {
+		sql.update("emp.fire", id);
+		return "redirect:info.emp?id=" + id;
+	}
+
+
+
+	// 신규사원등록
+
 //	
 //	
-//	// 사번으로 이름만 검색
-//	@RequestMapping(value= "/findNameByNo.emp" , produces="text/html;charset=utf-8")
-//	public String findNameByNo(String emp_no) {
-//		
-//		return sql.selectOne("emp.findNameByNo",emp_no);
-//	}
 //	
 //	
 //	
-//	@RequestMapping(value= "/fire.emp" , produces="text/html;charset=utf-8")
-//	public void fire_emp(String emp_no) {
-//		sql.update("emp.fire",emp_no);
-//	}
 //	
 //
 //	//내정보에서 정보수정 (비밀번호변경)

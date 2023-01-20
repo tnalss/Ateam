@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ea">
+
+
+<!-- 전자결재 파일첨부 불러오기 -->
+<select id="file_select" resultType="ea.EaFileVO">
+select * from tbl_ea_file where ea_num = #{ea_num}
+</select>
+
+<!-- 결재 상태 변경 -->
+<update id="status_update">
+update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
+</update>
+
+<!-- 결재 상세정보 불러오기 -->
+<select id="info" resultType="ea.EaVO">
+select m.emp_name emp_name, e.emp_no, e.ea_num, e.ea_receiver,
+e.ea_title, e.ea_content, GET_CODE_VALUE(e.ea_status) ea_status, e.ea_date, e.ea_cdate, GET_CODE_VALUE(o.dept_code) ea_dummy,
+e.ea_u_date, ea_a_date, ea_r_date,GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, e.ea_pop,
+GET_CODE_VALUE(ea_read) ea_read, ea_file_name, ea_file_path
+from tbl_ea e left join tbl_emp m on e.emp_no = m.emp_no
+left join tbl_org o on e.emp_no = o.emp_no
+where ea_num = #{ea_num}
+</select>
+
+<!-- 전자결재 상신하기 -->
+<insert id="insert">
+DECLARE 
+v_EA_NUM NUMBER :=0;
+
+BEGIN
+v_EA_NUM := seq_ea_num.nextval;
+<foreach collection='list' item='l' open="INSERT ALL" close="select * from dual;"  separator=" ">
+
+into tbl_ea (ea_num,ea_receiver, emp_no, ea_title, ea_content, ea_pop)
+values (v_EA_NUM,#{l.ea_receiver},#{l.emp_no}, #{l.ea_title}, #{l.ea_content}, #{l.ea_pop,jdbcType=VARCHAR})
+
+
+</foreach>
+COMMIT;
+END;
+
+</insert>
+<!-- 전자결재(파일첨부 상신하기 -->
+<insert id="file_insert">
+DECLARE 
+v_EA_NUM NUMBER :=0;
+
+BEGIN
+SELECT LAST_NUMBER-1  INTO   v_EA_NUM
+FROM user_sequences
+where sequence_name='SEQ_EA_NUM';
+
+
+<foreach collection='list' item='f' open="INSERT ALL" close="select * from dual;"  separator=" ">
+
+into tbl_ea_file (ea_num, file_path, file_name)
+values (v_EA_NUM, #{f.file_path}, #{f.file_name})
+
+</foreach>
+COMMIT;
+END;
+
+</insert>
+
+<!-- 문서 양식명 불러오기 -->
+<select id="formlist" resultType='ea.EaCodeVO'>
+select * from get_code_table('P')
+</select>
+
+<!-- 결재함 결재하기 -->
+<update id="sign_status">
+update tbl_ea
+set ea_r_statuas = #{ea_status}, ea_a_date = current_date 
+where ea_num = #{ea_num} and ea_receiver = #{emp_no}
+</update>
+
+<!-- 회수함 기안 상신 -->
+<update id="retry_draft">
+update tbl_ea set ea_status = 'E0' where ea_num = #{num}
+</update>
+
+<!-- 회수함 기안 삭제 -->
+<delete id="retry_delete">
+delete from tbl_ea where ea_num = #{num} 
+</delete>
+
+<!-- 회수함 리스트 -->
+<select id="retryboxlist" resultType="ea.EaVO">
+select distinct ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
+GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
+from tbl_ea e 
+where emp_no = #{no} and ea_status = 'E4'
+order by ea_date desc
+</select>
+
+<!-- 결재함 리스트 -->
+<select id="signboxlist" resultType="ea.EaVO">
+select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
+GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
+from tbl_ea e
+where ea_receiver = #{no} and e.ea_r_statuas != 'E4'
+order by ea_date desc
+</select>
+
+<!-- 최근 작성 기안 리스트 -->
+<select id="recentlist" resultType="ea.EaVO">
+select distinct ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, GET_CODE_VALUE(ea_read ) ea_read,ea_r_date 
+from tbl_ea
+where emp_no = #{emp_no} and ea_status != 'E4'
+order by ea_date desc
+</select>
+
+<!-- 결재자 이름으로 검색 -->
+<select id="name_search" resultType="employee.EmployeeVO">
+select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
+= c.code_category||c.code_num left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
+left join tbl_code c3 on o.dept_code = c3.code_category||c3.code_num 
+where emp_name like '%'||#{name}||'%'  
+order by e.emp_no
+</select>
+
+<!-- 결재자 이름 선택 후 화면 리스트 -->
+<select id="signer" resultType="employee.EmployeeVO">
+select e.emp_no,e.emp_name,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
+from tbl_emp e left join tbl_org o on e.emp_no = o.emp_no left join tbl_code c on o.rank_code 
+= c.code_category||c.code_num left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
+left join tbl_code c3 on o.dept_code = c3.code_category||c3.code_num 
+where emp_name in
+<foreach collection='name' index='i' item='n' open='(' close=')' separator=','>
+#{n}
+</foreach>
+</select>
+
+<!-- 마지막 결재자가 결재 완료  -->
+<update id="allSignComplete">
+update tbl_ea
+set ea_status = 'E7'
+where ea_num = #{ea_num}
+</update>
+<!-- 몇명이 결재 완료? -->
+<select id = "howManySigned" resultType="Integer">
+select count(*) from tbl_Ea
+where ea_num = #{ea_num} and ea_r_statuas='E7'
+</select>
+
+</mapper>

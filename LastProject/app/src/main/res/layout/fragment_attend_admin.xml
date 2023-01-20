@@ -99,16 +99,22 @@
                 </LinearLayout>
                 <!--지점별-->
             <org.angmarch.views.NiceSpinner
+                style="@style/small_size"
+                android:padding="5dp"
                 android:id="@+id/s1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
                 <!--부서별-->
             <org.angmarch.views.NiceSpinner
+                style="@style/small_size"
+                android:padding="5dp"
                 android:id="@+id/s2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
                 <!--직급별-->
             <org.angmarch.views.NiceSpinner
+                style="@style/small_size"
+                android:padding="5dp"
                     android:id="@+id/s3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"/>

@@ -45,16 +45,11 @@ import com.example.lastproject.R;
 import com.example.lastproject.al.AlVO;
 import com.example.lastproject.common.Common;
 import com.example.lastproject.employee.EmployeeVO;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -158,6 +153,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                 }else{
                     tv_dep_title.setVisibility(View.GONE);
                     spinner_department.setVisibility(View.GONE);
+                    dep = "";
                 }
             }
         });

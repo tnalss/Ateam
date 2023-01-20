@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 
   <main id="main">
