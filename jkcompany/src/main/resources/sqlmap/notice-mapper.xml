@@ -11,14 +11,27 @@ on o.emp_no = e.emp_no
 where board_cate = 'O0'
 </select>
 
-
-<!-- 목록조회 번호 및 시작 과 끝 -->
-<select id="plist" resultType="notice.NoticeVO">
-
+<select id="total" resultType="integer">
+	SELECT count(*) FROM tbl_board where board_cate = 'O0'
 </select>
 
 
-<!-- 페이징 관련 매퍼 끝 -->
+<!-- 목록조회 번호 및 시작 과 끝 -->
+<select id="plist" resultType="notice.NoticeVO">
+SELECT * FROM 
+		(SELECT a.*,rownum AS rnum FROM (
+		SELECT board_no
+		     , board_title , EMP_NO
+		     , BOARD_HITS
+		     , to_char(WRITE_DATE,'YYYY-MM-DD')
+		FROM tbl_board
+		WHERE board_cate ='O0'
+		ORDER BY board_no desc
+		) a  )b
+		WHERE rnum between #{beginList} and #{endList}
+</select>
+
+
 
 <!-- 글쓰기 -->
 <insert id="se_insert">
