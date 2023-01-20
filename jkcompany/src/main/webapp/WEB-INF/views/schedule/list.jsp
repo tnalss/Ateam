@@ -39,6 +39,8 @@
 		<!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
 
+
+
 		
 				<div id='calendar'></div>
 
@@ -64,13 +66,16 @@ document.addEventListener('DOMContentLoaded', function() {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: ''
       },
-      initialDate: '2021-04-12', // 초기 로딩 날짜.
+      
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
       // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
+      
+      
+      
       select: function(arg) {
     	  console.log(arg);
 
@@ -103,8 +108,42 @@ document.addEventListener('DOMContentLoaded', function() {
     	  // ajax 처리로 데이터를 로딩 시킨다.
     	  $.ajax({
     		 type:"get",
-    		 url:"${path}/calendar.do?method=data",
-    		dataType:"json"  
+    		 url:"${pageContext.request.contextPath}/calendars",
+    		dataType:"json"  ,
+			success: 
+                function(result) {
+					console.log(result);
+                    var events = [];
+                   
+                    if(result!=null){
+                        
+                            $.each(result, function(index, element) {
+                            var enddate=element.enddate;
+                             if(enddate==null){
+                                 enddate=element.startdate;
+                             }
+                             
+                             var startdate=element.startdate;
+                             var enddate=enddate;
+                             var realmname = element.realmname;
+                             
+                             
+                                 events.push({
+                                        title: element.title,
+                                        start: element.start,
+                                        end: element.end,
+                                        url: "${pageContext.request.contextPath }/detail.do?seq="+element.seq,
+                                        color:"#6937a1"                                                   
+                                     }); //.push()
+                            
+                             
+                        }); //.each()
+                        
+                        console.log(events);
+                        
+                    }//if end                           
+                    successCallback(events);                               
+                }//success: function end        
     	  });
       }
       

@@ -1,0 +1,35 @@
+,
+    			success: 
+                    function(result) {
+
+                        var events = [];
+                       
+                        if(result!=null){
+                            
+                                $.each(result, function(index, element) {
+                                var enddate=element.enddate;
+                                 if(enddate==null){
+                                     enddate=element.startdate;
+                                 }
+                                 
+                                 var startdate=moment(element.startdate).format('YYYY-MM-DD');
+                                 var enddate=moment(enddate).format('YYYY-MM-DD');
+                                 var realmname = element.realmname;
+                                 
+                                 
+                                     events.push({
+                                            title: element.title,
+                                            start: startdate,
+                                            end: enddate,
+                                            url: "${pageContext.request.contextPath }/detail.do?seq="+element.seq,
+                                            color:"#6937a1"                                                   
+                                         }); //.push()
+                                
+                                 
+                            }); //.each()
+                            
+                            console.log(events);
+                            
+                        }//if end                           
+                        successCallback(events);                               
+                    }//success: function end     
