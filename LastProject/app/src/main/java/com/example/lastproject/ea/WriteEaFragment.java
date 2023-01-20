@@ -153,6 +153,7 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
                 }else{
                     tv_dep_title.setVisibility(View.GONE);
                     spinner_department.setVisibility(View.GONE);
+                    dep = "";
                 }
             }
         });
