@@ -45,7 +45,7 @@ END;
 	</insert>
 
 <!-- 공지사항 / 익명게시판 내용 -->
-<select id="no_info" resultType="notice.NoticeVO">
+<select id="info" resultType="notice.NoticeVO">
 select o.*, e.emp_name
 from tbl_board o
 left join tbl_emp e 

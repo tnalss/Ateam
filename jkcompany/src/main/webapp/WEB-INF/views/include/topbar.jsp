@@ -49,7 +49,7 @@
 					</ul>
 				</li>
 				
-				<li class="dropdown"><a href="#"><span>또치님</span>
+				<li class="dropdown"><a href="login"><span>로그인</span>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
 						<li><a href="myInfo">나의정보</a></li>
