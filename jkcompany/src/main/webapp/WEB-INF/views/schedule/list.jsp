@@ -38,12 +38,26 @@
 	<section id="" class="container">
 		<!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
+<div class="row">
 
 
+<div class="col-lg-3">
+<p>박문수 님으 ㅣ일정 </p>
+
+</div>
+
+<div class="col-lg-9">
+<div class="card">
+				<div id='calendar'></div>
+</div>
+
+</div>
+
+
+
+</div>
 
 		
-				<div id='calendar'></div>
-
 
 
 
@@ -68,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: ''
       },
-      
+      locale : "ko",
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
