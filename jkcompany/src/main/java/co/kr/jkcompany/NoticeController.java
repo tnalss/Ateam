@@ -22,7 +22,7 @@ public class NoticeController {
 	@Autowired
 	private CommonService common;
 	
-	//조회하고 출력하는 예제
+		//조회하고 출력하는 예제
 		@RequestMapping(value= "/list.no" , produces="text/html;charset=utf-8")
 		public String notice_list(HttpSession session, Model model) {
 			//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
