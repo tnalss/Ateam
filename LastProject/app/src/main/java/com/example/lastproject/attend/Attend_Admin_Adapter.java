@@ -98,7 +98,7 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
-            status = v.findViewById(R.id.status);
+            //status = v.findViewById(R.id.status);
 
 
 
