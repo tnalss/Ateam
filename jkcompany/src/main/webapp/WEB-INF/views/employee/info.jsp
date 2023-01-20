@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 
 
@@ -109,6 +110,13 @@
 													<label style="font-weight: bold;">이메일</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.email }</div>
+											</div>
+											<hr />
+											<div class="row">
+												<div class="col-sm-3 col-md-2 col-5">
+													<label style="font-weight: bold;">주소</label>
+												</div>
+												<div class="col-md-8 col-6">${fn:replace(vo.address, '/', '')}</div>
 											</div>
 											<hr />
 											<div class="row">

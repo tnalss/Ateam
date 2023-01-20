@@ -142,6 +142,24 @@ select {
 												<hr />
 												<div class="row">
 													<div class="col-sm-3 col-md-2 col-5">
+														<label style="font-weight: bold;">주소</label>
+													</div>
+													<div class="col-md-8 col-6">
+														<input type="text" id="post" name="address1" value="${vo.address}" readonly="readonly" />
+													</div>
+												</div>
+												<div class="row">
+												<div class="col-sm-3 col-md-2 col-5">
+														
+													</div>
+													<div class="col-md-8 col-6">
+														<input type="text" name="address2" value="${vo.address}" />
+														<input type="hidden" name="address" />
+													</div>
+												</div>
+												<hr />
+												<div class="row">
+													<div class="col-sm-3 col-md-2 col-5">
 														<label style="font-weight: bold;">고용일</label>
 													</div>
 													<div class="col-md-8 col-6">
@@ -247,16 +265,43 @@ select {
 			</div>
 		</div>
 	</section>
+	<!-- 다음 주소찾기  -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 	<script>
+	
+	
 		$('.update').click(function() {
 
-			if (emptyCheck())
+			if (emptyCheck()){
+				var addFound = $('[name = address1]').val();
+				var addTyped = $('[name=address2]').val();
+				$('[name=address]').val(addFound + '/' +addTyped);
+				
 				$('#update').submit();
+				
+			}
 		});
 		$('.deleteEmp').click(function() {
 			if (confirm('[${vo.emp_name}] 님을 퇴사시키시겠습니까?')) {
 				location = 'fire.emp?id=${vo.emp_no}';
 			}
+		});
+		
+		
+		$('#post').click(function(){
+			//우편번호 찾기 다음 api로 우편번호와 기본주소를 조회해온다
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+		            console.log(data);
+		            $('[name=post]').val(data.zonecode);
+		            var address =  data.userSelectedType=='R' ? data.roadAddress :data.jibunAddress
+		 			if(data.buildingName !='' )address += ' ('+data.buildingName+')';
+					$('[name=address1]').eq(0).val(address);
+		    }
+		    }).open();	
 		});
 	</script>
 

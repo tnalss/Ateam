@@ -11,9 +11,16 @@
 <!-- fullcalendar 언어 CDN -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<style>
+.has-shadow {
+   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px
+      rgba(0, 0, 0, 0.05);
+   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px
+      rgba(0, 0, 0, 0.05);
+  
+}
 
-<!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+</style>
 <main id="main">
 
 	<!-- ======= Breadcrumbs ======= -->
@@ -43,10 +50,10 @@
 
 
 			<div class="col-lg-4 card p-0 has-shadow">
-				<div class="card-header">박문수 님의 일정관리</div>
-				<div class="row card m-3 p-2">
+				<div class="card-header"><h4>박문수 님의 일정관리</h4></div>
+				<div class="row card m-3 p-2 mt-5">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
-				<li>회사일정</li>
+				<li>회사 일정</li>
 				<li> <span class="text-primary m-0">1</span> 건</li>
 				</ul>
 				</div>
@@ -135,7 +142,7 @@
 										console.log("#등록된 일정 클릭#");
 										console.log(arg.event);
 
-										if (confirm('Are you sure you want to delete this event?')) {
+										if (confirm('일정을 삭제하시겠습니까?')) {
 											arg.event.remove()
 										}
 									},
@@ -175,7 +182,7 @@
 																							title : element.title,
 																							start : element.start,
 																							end : element.end,
-																							url : "${pageContext.request.contextPath }/detail.do?seq="
+																							url : "${pageContext.request.contextPath }/detail.sche?seq="
 																									+ element.seq,
 																							color : "#6937a1"
 																						}); //.push()

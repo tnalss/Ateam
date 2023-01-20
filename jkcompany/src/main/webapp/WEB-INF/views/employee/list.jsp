@@ -39,7 +39,7 @@
 		<div class="row mx-0">
 			<div class="col-sm-5 p-md-0" data-aos="fade-up">
 				<div class="card">
-					<div class="card-body">
+					<div class="card-body p-3 ">
 						<span style="color: black; margin-right: 100px;"><b>총
 								사원 수</b></span> <span style="color: black; margin-right: 50px;"><b>${ page.totalList-countRetired }</b>명(재직)</span>
 						<span style="color: black;"> 퇴사자: <span> ${ countRetired }</span>명
@@ -60,7 +60,7 @@
 
 		<!-- 검색 -->
 		<form method='post' action='list.emp' id="list">
-			<div id='list-top mt-3' >
+			<div id='list-top' class=" mt-3" >
 
 				<select class='w-px100' name='search'>
 					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
