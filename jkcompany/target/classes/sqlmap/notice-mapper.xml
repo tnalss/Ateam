@@ -12,13 +12,14 @@ where board_cate = 'O0'
 </select>
 
 
-<!-- 익명게시판 목록 -->
-<select id="se_list" resultType='notice.NoticeVO'>
-select *
-from tbl_board
-where board_cate = 'O1' 
-order by 1 desc
-</select> 
+<!-- 목록조회 번호 및 시작 과 끝 -->
+<select id="plist" resultType="notice.NoticeVO">
+
+</select>
+
+
+<!-- 페이징 관련 매퍼 끝 -->
+
 <!-- 글쓰기 -->
 <insert id="se_insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)
