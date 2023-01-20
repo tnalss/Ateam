@@ -62,7 +62,9 @@ public class Attend_Main_Adapter extends RecyclerView.Adapter<Attend_Main_Adapte
             h.tv_off.setVisibility(View.GONE);
         }
 
-
+        if(list.get(i).getAtt_state() == null){
+            h.check.setVisibility(View.GONE);
+        }
             h.now.setText(list.get(i).getAtt_state());
 
 

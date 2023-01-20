@@ -87,13 +87,14 @@ public class Attend_adminFragment extends Fragment {
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 //1월은 0부터 시작하기 때문에 +1을 해준다.
                                 month = month + 1;
-                                String date = year + "년" + month + "월" + day;
+                                String date = year + "/" + month + "/" + day;
                                 d.setText(date);
                                 vo.setAttend_date(date);
                                 selectlist();
                             }
                         }, pYear, pMonth, pDay);
                 datePickerDialog.show();
+                selectlist();
 
             } //onClick
 
