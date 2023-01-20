@@ -72,7 +72,6 @@
                 <TextView
                     android:id="@+id/d"
                     style="@style/sub_size"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,21 +81,21 @@
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
                 android:id="@+id/s1"
-                android:layout_width="100dp"
+                android:layout_width="112dp"
                 android:layout_height="wrap_content"/>
                 <!--부서별-->
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
-
                 android:id="@+id/s2"
-                android:layout_width="100dp"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"/>
                 <!--직급별-->
             <org.angmarch.views.NiceSpinner
                 style="@style/small_size"
-
+                android:layout_margin="-15dp"
                     android:id="@+id/s3"
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
+                android:layout_marginRight="30dp"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
