@@ -3,18 +3,21 @@
 <mapper namespace="at">
 
 <!--로그인한 사원의 출근처리 -->
-<update id = "attend_on">
-update tbl_attend
-set attend_on =current_date ,att_code = 'W0'  
-where emp_no =#{emp_no} and attend_date = to_char(current_Date,  'yyyy/mm/dd' )
-</update>
+<insert id = "attend_on">
+INSERT INTO tbl_attend (attend_date,emp_no,attend_on,att_code)
+VALUES (to_char(current_date,'yyyy/mm/dd'),#{emp_no},to_char(current_date,'yyyy/mm/dd HH24:MI'),'W0')
+</insert>
+
+
 
 
 <!--로그인한 사원의 오늘 출근 상태 조회 (지각이면 지각으로 나오게...) -->
 <select id = "emp_today" resultType="Attend.AttendVO">
-select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
-from tbl_attend a
-where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  #{emp_no}   
+select a.attend_date, a.emp_no, a.attend_on, a.attend_off,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend  a
+where a.emp_no =#{emp_no}
+and attend_date =  to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no} 
+order by a.attend_date
 </select>
 
 
@@ -22,7 +25,7 @@ where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  #{emp_no
 <update id ="attend_off">
 UPDATE tbl_attend
 SET attend_off = to_char(current_date,'yyyy/mm/dd HH24:MI') , att_code='W1'
-where attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no}  
+<![CDATA[where attend_date <= to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no}  ]]>
 </update>
 
 
@@ -31,7 +34,7 @@ where attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no}
 select a.*,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a inner join tbl_emp e
 on a.emp_no = e.emp_no
-<![CDATA[WHERE a.attend_date <= to_char(current_date, 'yyyy/mm/dd') ]]>
+<![CDATA[WHERE a.attend_date < to_char(current_date, 'yyyy/mm/dd') ]]>
 and a.emp_no = #{emp_no}
 order by attend_date desc
 </select>

@@ -19,5 +19,7 @@
         <item name="android:height">30dp</item>
     </style>
 
-
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main_color</item>
+    </style>
 </resources>
