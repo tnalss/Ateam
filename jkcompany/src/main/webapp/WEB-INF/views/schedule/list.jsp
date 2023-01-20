@@ -38,26 +38,46 @@
 	<section id="" class="container">
 		<!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
-<div class="row">
+
+		<div class="row">
 
 
-<div class="col-lg-3">
-<p>박문수 님으 ㅣ일정 </p>
+			<div class="col-lg-4 card p-0 has-shadow">
+				<div class="card-header">박문수 님의 일정관리</div>
+				<div class="row card m-3 p-2">
+				<ul class='d-flex mb-0 justify-content-around align-items-center'>
+				<li>회사일정</li>
+				<li> <span class="text-primary m-0">1</span> 건</li>
+				</ul>
+				</div>
+				<div class="row card m-3 p-2">
+				<ul class='d-flex mb-0 justify-content-around align-items-center'>
+				<li>경영지원부 일정</li>
+				<li> <span class="text-primary m-0">1</span> 건</li>
+				</ul>
+				</div>
+				<div class="row card m-3 p-2">
+				<ul class='d-flex mb-0 justify-content-around align-items-center'>
+				<li>개인 일정</li>
+				<li> <span class="text-primary m-0">1</span> 건</li>
+				</ul>
+				</div>
+				
+				
+			</div>
+			
+			<div class="col-lg-8">
+				<div class="card">
+					<div id='calendar'></div>
+				</div>
 
-</div>
-
-<div class="col-lg-9">
-<div class="card">
-				<div id='calendar'></div>
-</div>
-
-</div>
+			</div>
 
 
 
-</div>
+		</div>
 
-		
+
 
 
 
@@ -72,99 +92,107 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-	// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
-	
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: ''
-      },
-      locale : "ko",
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      selectMirror: true,
-      // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
-      
-      
-      
-      select: function(arg) {
-    	  console.log(arg);
+	document
+			.addEventListener(
+					'DOMContentLoaded',
+					function() {
+						var calendarEl = document.getElementById('calendar');
+						// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
 
-        var title = prompt('입력할 일정:');
-    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay,
-            backgroundColor:"yellow",
-            textColor:"blue"
-          })
-        }
-        calendar.unselect()
-      },
-      eventClick: function(arg) {
-    	  // 있는 일정 클릭시,
-    	  console.log("#등록된 일정 클릭#");
-    	  console.log(arg.event);
-    	  
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
-      },
-      editable: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: function(info, successCallback, failureCallback){
-    	  // ajax 처리로 데이터를 로딩 시킨다.
-    	  $.ajax({
-    		 type:"get",
-    		 url:"${pageContext.request.contextPath}/calendars",
-    		dataType:"json"  ,
-			success: 
-                function(result) {
-					console.log(result);
-                    var events = [];
-                   
-                    if(result!=null){
-                        
-                            $.each(result, function(index, element) {
-                            var enddate=element.enddate;
-                             if(enddate==null){
-                                 enddate=element.startdate;
-                             }
-                             
-                             var startdate=element.startdate;
-                             var enddate=enddate;
-                             var realmname = element.realmname;
-                             
-                             
-                                 events.push({
-                                        title: element.title,
-                                        start: element.start,
-                                        end: element.end,
-                                        url: "${pageContext.request.contextPath }/detail.do?seq="+element.seq,
-                                        color:"#6937a1"                                                   
-                                     }); //.push()
-                            
-                             
-                        }); //.each()
-                        
-                        console.log(events);
-                        
-                    }//if end                           
-                    successCallback(events);                               
-                }//success: function end        
-    	  });
-      }
-      
-  });
+						var calendar = new FullCalendar.Calendar(
+								calendarEl,
+								{
+									headerToolbar : {
+										left : 'prev,next',
+										center : 'title',
+										right : 'today'
+									},
+									locale : "ko",
+									navLinks : true, // can click day/week names to navigate views
+									selectable : true,
+									selectMirror : true,
+									// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 
-    calendar.render();
-  });
+									select : function(arg) {
+										console.log(arg);
 
+										var title = prompt('입력할 일정:');
+										// title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+										if (title) {
+											calendar.addEvent({
+												title : title,
+												start : arg.start,
+												end : arg.end,
+												allDay : arg.allDay,
+												backgroundColor : "yellow",
+												textColor : "blue"
+											})
+										}
+										calendar.unselect()
+									},
+									eventClick : function(arg) {
+										// 있는 일정 클릭시,
+										console.log("#등록된 일정 클릭#");
+										console.log(arg.event);
+
+										if (confirm('Are you sure you want to delete this event?')) {
+											arg.event.remove()
+										}
+									},
+									editable : true,
+									dayMaxEvents : true, // allow "more" link when too many events
+									events : function(info, successCallback,
+											failureCallback) {
+										// ajax 처리로 데이터를 로딩 시킨다.
+										$
+												.ajax({
+													type : "get",
+													url : "${pageContext.request.contextPath}/calendars",
+													dataType : "json",
+													success : function(result) {
+														console.log(result);
+														var events = [];
+
+														if (result != null) {
+
+															$
+																	.each(
+																			result,
+																			function(
+																					index,
+																					element) {
+																				var enddate = element.enddate;
+																				if (enddate == null) {
+																					enddate = element.startdate;
+																				}
+
+																				var startdate = element.startdate;
+																				var enddate = enddate;
+																				var realmname = element.realmname;
+
+																				events
+																						.push({
+																							title : element.title,
+																							start : element.start,
+																							end : element.end,
+																							url : "${pageContext.request.contextPath }/detail.do?seq="
+																									+ element.seq,
+																							color : "#6937a1"
+																						}); //.push()
+
+																			}); //.each()
+
+															console.log(events);
+
+														}//if end                           
+														successCallback(events);
+													}//success: function end        
+												});
+									}
+
+								});
+
+						calendar.render();
+					});
 </script>
 

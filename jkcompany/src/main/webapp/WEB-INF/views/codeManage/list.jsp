@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-12 card">
+			<div class="col-12 card p-0">
 				<div class="card-header">
 					<h3 class="card-title text-center" style="font-weight: bold;">상위 코드 목록</h3>
 				</div>

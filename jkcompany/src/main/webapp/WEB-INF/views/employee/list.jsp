@@ -60,7 +60,7 @@
 
 		<!-- 검색 -->
 		<form method='post' action='list.emp' id="list">
-			<div id='list-top mt-3' class='w-px1200'>
+			<div id='list-top mt-3' >
 
 				<select class='w-px100' name='search'>
 					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>

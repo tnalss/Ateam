@@ -58,12 +58,12 @@ public class ScheduleController {
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
        String date = sdf.format(dates);
         event.put("start", date);
-        event.put("title", "test");
+        event.put("title", "부서회식");
         event.put("end",date);
         eventList.add(event);
         event = new HashMap<String, Object>();
         event.put("start",date);
-        event.put("title", "test2");
+        event.put("title", "납품일");
         event.put("end",date);
         eventList.add(event);
         return eventList;
