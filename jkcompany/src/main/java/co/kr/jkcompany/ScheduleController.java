@@ -1,7 +1,6 @@
 package co.kr.jkcompany;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import common.CommonService;
+import employee.EmployeeVO;
 
 
 @Controller
@@ -37,6 +37,12 @@ public class ScheduleController {
 		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "sche" );
 
+		
+		EmployeeVO info = common.tempLogin("3");
+		
+		//임시로그인
+		session.setAttribute("loginInfo", info);
+		
 		sql.selectList("sche.compPeriod");
 		return "schedule/list";
 	}
@@ -44,7 +50,7 @@ public class ScheduleController {
 	
 	@ResponseBody
 	@RequestMapping(value= "/calendars" , produces="text/html;charset=utf-8")
-	public String calendars(HttpSession session, Model model) {
+	public String calendars(HttpSession session, Model model,String id) {
 		
 		//sql.selectList("sche.compPeriod");
 		return new Gson().toJson(getEventList());

@@ -23,6 +23,7 @@ public class EmployeeController {
 	@Autowired
 	private CommonService common;
 
+	
 	// 조회하고 출력하는 예제
 	@RequestMapping(value = "/list.emp", produces = "text/html;charset=utf-8")
 	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {

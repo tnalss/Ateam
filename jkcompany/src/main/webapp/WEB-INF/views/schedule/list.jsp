@@ -50,7 +50,7 @@
 
 
 			<div class="col-lg-4 card p-0 has-shadow">
-				<div class="card-header"><h4>박문수 님의 일정관리</h4></div>
+				<div class="card-header"><h4>${loginInfo.emp_name} 님의 일정관리</h4></div>
 				<div class="row card m-3 p-2 mt-5">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
 				<li>회사 일정</li>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="row card m-3 p-2">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
-				<li>경영지원부 일정</li>
+				<li>${loginInfo.department_name} 일정</li>
 				<li> <span class="text-primary m-0">1</span> 건</li>
 				</ul>
 				</div>
@@ -154,7 +154,7 @@
 										$
 												.ajax({
 													type : "get",
-													url : "${pageContext.request.contextPath}/calendars",
+													url : "${pageContext.request.contextPath}/calendars?id="+${loginInfo.emp_no},
 													dataType : "json",
 													success : function(result) {
 														console.log(result);

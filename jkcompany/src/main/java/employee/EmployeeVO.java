@@ -15,4 +15,7 @@ public class EmployeeVO {
 	private Date attend_date, attend_on, attend_off;
 	private String att_code;
 	private String profile_path;
+	
+
+	
 }
