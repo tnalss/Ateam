@@ -54,7 +54,7 @@ select {
 
 										</div>
 										<div class="userData align-self-center">
-											<h2 class="d-block"
+											<h2 title="성명란" class="d-block chk"
 												style="font-size: 1.5rem; font-weight: bold">
 												${vo.emp_name }</h2>
 										<h6 class="d-block">${vo.branch_name } ${vo.department_name }</h6>
@@ -124,11 +124,11 @@ select {
 												<hr />
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 chk">
 														<label style="font-weight: bold;">전화번호</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" name="phone" value="${vo.phone}" />
+														<input type="text" title="전화번호란" name="phone" value="${vo.phone}" />
 													</div>
 												</div>
 												<hr />
