@@ -54,7 +54,7 @@ select {
 
 										</div>
 										<div class="userData align-self-center">
-											<h2 title="성명란" class="d-block chk"
+											<h2 class="d-block"
 												style="font-size: 1.5rem; font-weight: bold">
 												${vo.emp_name }</h2>
 										<h6 class="d-block">${vo.branch_name } ${vo.department_name }</h6>
@@ -97,7 +97,7 @@ select {
 														<label style="font-weight: bold;">성명</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" name="emp_name" value="${vo.emp_name}" />
+														<input type="text" class="chk" title="성명란" name="emp_name" value="${vo.emp_name}" />
 													</div>
 												</div>
 												<hr />
@@ -124,11 +124,11 @@ select {
 												<hr />
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5 chk">
+													<div class="col-sm-3 col-md-2 col-5">
 														<label style="font-weight: bold;">전화번호</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" title="전화번호란" name="phone" value="${vo.phone}" />
+														<input type="text" class="chk" title="전화번호란" name="phone" value="${vo.phone}" />
 													</div>
 												</div>
 												<hr />
@@ -137,7 +137,7 @@ select {
 														<label style="font-weight: bold;">이메일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" name="email" value="${vo.email}" />
+														<input type="text"  class="chk" title="이메일란" name="email" value="${vo.email}" />
 													</div>
 												</div>
 												<hr />
@@ -146,7 +146,7 @@ select {
 														<label style="font-weight: bold;">주소</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" id="post" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
+														<input type="text" id="post" class="chk" title="주소검색란" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
 														
 													</div>
 												</div>
@@ -155,7 +155,7 @@ select {
 														
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
+														<input type="text" class="chk" title="상세주소 입력란"  name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
 														<input type="hidden" name="address" />
 													</div>
 												</div>
@@ -276,7 +276,7 @@ select {
 		$('.update').click(function() {
 
 			if (emptyCheck()){
-				var addFound = $('[name = address1]').val();
+				var addFound = $('[name=address1]').val();
 				var addTyped = $('[name=address2]').val();
 				$('[name=address]').val(addFound + '/' +addTyped);
 				
