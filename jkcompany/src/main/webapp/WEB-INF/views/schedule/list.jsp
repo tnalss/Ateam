@@ -84,59 +84,40 @@
 
 		</div>
 
-
-
-
-
-
 	</section>
 	<!-- End Section -->
-
-
 
 </main>
 <!-- End #main -->
 
-
 <script>
-	document
-			.addEventListener(
-					'DOMContentLoaded',
-					function() {
-						var calendarEl = document.getElementById('calendar');
-						// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
+	document.addEventListener('DOMContentLoaded',function() {
+		var calendarEl = document.getElementById('calendar');
+		// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
+		var calendar = new FullCalendar.Calendar(calendarEl,{
+				headerToolbar : {
+					left : 'prev,next',
+					center : 'title',
+					right : 'today'},
+				locale : "ko",
+				navLinks : false, // can click day/week names to navigate views
+				selectable : true,
+				selectMirror : true,
+				// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 
-						var calendar = new FullCalendar.Calendar(
-								calendarEl,
-								{
-									headerToolbar : {
-										left : 'prev,next',
-										center : 'title',
-										right : 'today'
-									},
-									locale : "ko",
-									navLinks : true, // can click day/week names to navigate views
-									selectable : true,
-									selectMirror : true,
-									// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
-
-									select : function(arg) {
-										console.log(arg);
-
-										var title = prompt('입력할 일정:');
-										// title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
-										if (title) {
-											calendar.addEvent({
-												title : title,
-												start : arg.start,
-												end : arg.end,
-												allDay : arg.allDay,
-												backgroundColor : "yellow",
-												textColor : "blue"
-											})
-										}
-										calendar.unselect()
-									},
+				select : function(arg) {
+					console.log(arg);
+					var title = prompt('입력할 일정:');// title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+						if (title) {
+							calendar.addEvent({
+							title : title,
+							start : arg.start,
+							end : arg.end,
+							allDay : arg.allDay,
+							backgroundColor : "yellow",
+							textColor : "blue"})
+							}
+							calendar.unselect()},
 									eventClick : function(arg) {
 										// 있는 일정 클릭시,
 										console.log("#등록된 일정 클릭#");
@@ -151,53 +132,36 @@
 									events : function(info, successCallback,
 											failureCallback) {
 										// ajax 처리로 데이터를 로딩 시킨다.
-										$
-												.ajax({
-													type : "get",
-													url : "${pageContext.request.contextPath}/calendars?id="+${loginInfo.emp_no},
-													dataType : "json",
-													success : function(result) {
-														console.log(result);
-														var events = [];
+										$.ajax({
+											type : "get",
+											url : "${pageContext.request.contextPath}/calendars?id="+${loginInfo.emp_no},
+											dataType : "json",
+											success : function(result) {
+												console.log(result);
+												var events = [];
+												if (result != null) {$.each(result,function(index,element) {
+													var enddate = element.enddate;
+													if (enddate == null) {enddate = element.startdate;}
 
-														if (result != null) {
+													var startdate = element.startdate;
+													var enddate = enddate;
 
-															$
-																	.each(
-																			result,
-																			function(
-																					index,
-																					element) {
-																				var enddate = element.enddate;
-																				if (enddate == null) {
-																					enddate = element.startdate;
-																				}
+													events.push({
+														title : element.title,
+														start : element.start,
+														end : element.end,
+														url : "${pageContext.request.contextPath }/detail.sche?seq="+ element.seq,
+														color : element.color}); //.push()
+													}); //.each()
 
-																				var startdate = element.startdate;
-																				var enddate = enddate;
-
-																				events
-																						.push({
-																							title : element.title,
-																							start : element.start,
-																							end : element.end,
-																							url : "${pageContext.request.contextPath }/detail.sche?seq="
-																									+ element.seq,
-																							color : element.color
-																						}); //.push()
-
-																			}); //.each()
-
-															console.log(events);
-
-														}//if end                           
+													console.log(events);
+													}//if end                           
 														successCallback(events);
 													}//success: function end        
 												});
 									}
 
 								});
-
 						calendar.render();
 					});
 </script>
