@@ -116,7 +116,7 @@
 												<div class="col-sm-3 col-md-2 col-5">
 													<label style="font-weight: bold;">주소</label>
 												</div>
-												<div class="col-md-8 col-6">${fn:replace(vo.address, '/', '')}</div>
+												<div class="col-md-8 col-6">${fn:replace(vo.address, '/', ' ')}</div>
 											</div>
 											<hr />
 											<div class="row">

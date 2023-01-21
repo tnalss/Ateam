@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <head>
 <style>
@@ -145,7 +146,8 @@ select {
 														<label style="font-weight: bold;">주소</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" id="post" name="address1" value="${vo.address}" readonly="readonly" />
+														<input type="text" id="post" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
+														
 													</div>
 												</div>
 												<div class="row">
@@ -153,7 +155,7 @@ select {
 														
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" name="address2" value="${vo.address}" />
+														<input type="text" name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
 														<input type="hidden" name="address" />
 													</div>
 												</div>
