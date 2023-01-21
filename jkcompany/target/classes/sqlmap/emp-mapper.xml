@@ -153,12 +153,12 @@ order by e.emp_no
 	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth},#{address},#{salary},#{profile_path,jdbcType=VARCHAR})
 </insert>
 
-<select id="emp.adminCode">
+<select id="adminCode">
 select admin from tbl_emp
 where emp_no=#{no}
 </select>
 
-<select id="emp.search_emp" resultType="employee.EmployeeVO">
+<select id="search_emp" resultType="employee.EmployeeVO">
 select e.*,c.code_value rank_name,c2.code_value branch_name ,c3.code_value department_name
 from tbl_emp e left join tbl_org o
 on e.emp_no = o.emp_no
