@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 
 import common.CommonService;
 import employee.EmployeeVO;
+import schedule.ScheduleVO;
 
 
 @Controller
@@ -53,25 +54,40 @@ public class ScheduleController {
 	public String calendars(HttpSession session, Model model,String id) {
 		
 		//sql.selectList("sche.compPeriod");
-		return new Gson().toJson(getEventList());
+		return new Gson().toJson(getEventList(id));
 	}
 	
 
-	public List<Map<String, Object>> getEventList() {
-        Map<String, Object> event = new HashMap<String, Object>();
+	public List<Map<String, Object>> getEventList(String id) {
+		List<ScheduleVO> company = sql.selectList("sche.compPeriod");
+		List<ScheduleVO> department = sql.selectList("sche.deptbyId",id);		
+		List<ScheduleVO> personal = sql.selectList("sche.personalbyId",id);		
         List<Map<String, Object>> eventList = new ArrayList<Map<String, Object>>();
-        Date dates = new Date();
-       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-       String date = sdf.format(dates);
-        event.put("start", date);
-        event.put("title", "부서회식");
-        event.put("end",date);
-        eventList.add(event);
-        event = new HashMap<String, Object>();
-        event.put("start",date);
-        event.put("title", "납품일");
-        event.put("end",date);
-        eventList.add(event);
+        
+        for (ScheduleVO each : company) {
+        	Map<String, Object> event = new HashMap<String, Object>();
+        	event.put("start", each.getSche_start());
+            event.put("title", each.getSche_title());
+            event.put("end",each.getSche_end());
+            event.put("color","#00FF00");
+            eventList.add(event);
+		}
+        for (ScheduleVO each : department) {
+        	Map<String, Object> event = new HashMap<String, Object>();
+        	event.put("start", each.getSche_start());
+            event.put("title", each.getSche_title());
+            event.put("end",each.getSche_end());
+            event.put("color","#FF0000");
+            eventList.add(event);
+		}
+        for (ScheduleVO each : personal) {
+        	Map<String, Object> event = new HashMap<String, Object>();
+        	event.put("start", each.getSche_start());
+            event.put("title", each.getSche_title());
+            event.put("end",each.getSche_end());
+            event.put("color","#0000FF");
+            eventList.add(event);
+		}
         return eventList;
     }
 }

@@ -175,7 +175,6 @@
 
 																				var startdate = element.startdate;
 																				var enddate = enddate;
-																				var realmname = element.realmname;
 
 																				events
 																						.push({
@@ -184,7 +183,7 @@
 																							end : element.end,
 																							url : "${pageContext.request.contextPath }/detail.sche?seq="
 																									+ element.seq,
-																							color : "#6937a1"
+																							color : element.color
 																						}); //.push()
 
 																			}); //.each()
