@@ -68,7 +68,8 @@ select {
 <div class="row">
 <div class="col-12 mb-4">
     <div class="form-group">
-        <input type="file" id="imageUpload">
+        <input type="file" name="file" id="imageUpload">
+        
     </div>
 </div>
 </div>
