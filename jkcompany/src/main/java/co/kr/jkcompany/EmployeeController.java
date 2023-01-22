@@ -2,6 +2,7 @@ package co.kr.jkcompany;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import common.CommonService;
 import employee.EmployeePageVO;
@@ -87,7 +89,11 @@ public class EmployeeController {
 	// 정보 수정 확인 버튼
 
 	@RequestMapping("/update.emp")
-	public String employee_update(EmployeeVO vo) {
+	public String employee_update(EmployeeVO vo, MultipartFile file , HttpServletRequest request) {
+		if(file!=null) {
+			String path = common.fileUpload("profile",file,request);
+			vo.setProfile_path(path);
+		}	
 		sql.update("emp.update", vo);
 		sql.update("emp.updateOrg", vo);
 		return "redirect:info.emp?id=" + vo.getEmp_no();
@@ -100,7 +106,6 @@ public class EmployeeController {
 		sql.update("emp.fire", id);
 		return "redirect:info.emp?id=" + id;
 	}
-
 
 
 	// 신규사원등록

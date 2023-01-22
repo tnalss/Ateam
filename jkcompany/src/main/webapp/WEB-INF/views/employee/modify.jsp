@@ -10,6 +10,8 @@ select {
 	width: 200px;
 }
 </style>
+<!-- cdn for file style -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js" integrity="sha512-HfRdzrvve5p31VKjxBhIaDhBqreRXt4SX3i3Iv7bhuoeJY47gJtFTRWKUpjk8RUkLtKZUhf87ONcKONAROhvIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <main id="main">
@@ -41,7 +43,7 @@ select {
 						<div class="card-header">
 							<h3 class="card-title text-center" style="font-weight: bold;">정보수정</h3>
 						</div>
-						<form action="update.emp" method="post" id="update">
+						<form action="update.emp" method="post" id="update" enctype='multipart/form-data'>
 							<div class="card-body">
 								<div class="card-title mb-4">
 									<div class="d-flex justify-content-start"
@@ -60,13 +62,16 @@ select {
 										<h6 class="d-block">${vo.branch_name } ${vo.department_name }</h6>
 										<h6 class="d-block">${vo.rank_name }</h6>
 										</div>
-										<div class="ml-auto">
-											<input type="button" class="btn btn-primary d-none"
-												id="btnDiscard" value="Discard Changes" />
-										</div>
+										
 									</div>
 								</div>
-
+<div class="row">
+<div class="col-12 mb-4">
+    <div class="form-group">
+        <input type="file" id="imageUpload">
+    </div>
+</div>
+</div>
 								<div class="row">
 									<div class="col-12">
 										<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
@@ -82,7 +87,7 @@ select {
 
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">사번</label>
 
 													</div>
@@ -93,60 +98,61 @@ select {
 												<hr />
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5  text-center">
 														<label style="font-weight: bold;">성명</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk" title="성명란" name="emp_name" value="${vo.emp_name}" />
+														<input type="text" class="chk form-control" title="성명란" name="emp_name" value="${vo.emp_name}" />
 													</div>
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">생년월일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="date" name="birth" value="${vo.birth}" />
+														<input type="date" class= "form-control" name="birth" value="${vo.birth}" />
 													</div>
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">성별</label>
 													</div>
 													<div class="col-md-8 col-6">
+													<label>
 														<input type='radio' value='남' name='gender'
-															<c:if test='${ vo.gender eq "남" }'>checked</c:if>>남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<input type='radio' value='여' name='gender'
-															${vo.gender eq '여' ? 'checked' : ''}>여
+															<c:if test='${ vo.gender eq "남" }'>checked</c:if>>&nbsp;&nbsp;남&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;
+													<label>	<input type='radio' value='여' name='gender'
+															${vo.gender eq '여' ? 'checked' : ''}>&nbsp;&nbsp;여</label>
 													</div>
 												</div>
 												<hr />
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">전화번호</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk" title="전화번호란" name="phone" value="${vo.phone}" />
+														<input type="text" class="chk form-control" title="전화번호란" name="phone" value="${vo.phone}" />
 													</div>
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">이메일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text"  class="chk" title="이메일란" name="email" value="${vo.email}" />
+														<input type="text"  class="chk form-control" title="이메일란" name="email" value="${vo.email}" />
 													</div>
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">주소</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" id="post" class="chk" title="주소검색란" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
+														<input type="text" id="post" class="chk form-control" title="주소검색란" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
 														
 													</div>
 												</div>
@@ -155,24 +161,24 @@ select {
 														
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk" title="상세주소 입력란"  name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
+														<input type="text" class="chk form-control" title="상세주소 입력란"  name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
 														<input type="hidden" name="address" />
 													</div>
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">고용일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="date" name="hire_date"
+														<input type="date" name="hire_date" class="form-control"
 															value="${vo.hire_date}" />
 													</div>
 												</div>
 												<hr />
 
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">지점</label>
 													</div>
 													<div class="col-md-8 col-6">
@@ -187,7 +193,7 @@ select {
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">부서</label>
 													</div>
 													<div class="col-md-8 col-6">
@@ -202,7 +208,7 @@ select {
 												</div>
 												<hr />
 												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5">
+													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">직위</label>
 													</div>
 													<div class="col-md-8 col-6">
@@ -219,7 +225,7 @@ select {
 
 												<c:if test="${vo.admin ne 'X0'}">
 													<div class="row">
-														<div class="col-sm-3 col-md-2 col-5">
+														<div class="col-sm-3 col-md-2 col-5 text-center">
 															<label style="font-weight: bold;">관리자</label>
 
 														</div>
@@ -235,7 +241,7 @@ select {
 												<c:if test="${vo.admin eq 'X0'}">
 													<input type="hidden" name="admin" value="X0" />
 													<div class="row">
-														<div class="col-sm-3 col-md-2 col-5">
+														<div class="col-sm-3 col-md-2 col-5 text-center">
 															<label style="font-weight: bold;">상태</label>
 														</div>
 														<div class="col-md-8 col-6">퇴사자</div>
@@ -271,7 +277,10 @@ select {
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script>
-	
+	$('#imageUpload').filestyle({
+		buttonName : 'btn-info',
+        buttonText : '사진 선택'
+	});
 	
 		$('.update').click(function() {
 
@@ -305,6 +314,19 @@ select {
 		    }
 		    }).open();	
 		});
+		
+		
+		/* 이미지 판단 메소드 */
+		function isImage( filename ){
+			//파일의 확장자로 이미지파일인지 판단 : abc.png, abc.JPG
+			var ext = filename.substring( filename.lastIndexOf('.')+1 ).toLowerCase();
+			var imgs = [ 'png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp' ];
+			if( imgs.indexOf( ext )==-1 ) return false;
+			else return true;
+		}
+		
+		
+		
 	</script>
 
 

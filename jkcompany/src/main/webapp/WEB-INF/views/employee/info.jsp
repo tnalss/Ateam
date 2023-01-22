@@ -76,7 +76,7 @@
 
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">사번</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.emp_no }</div>
@@ -84,14 +84,14 @@
 											<hr />
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">성명</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.emp_name }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">성별</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.gender }</div>
@@ -99,28 +99,28 @@
 											<hr />
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">전화번호</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.phone }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">이메일</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.email }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">주소</label>
 												</div>
 												<div class="col-md-8 col-6">${fn:replace(vo.address, '/', ' ')}</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">고용일</label>
 												</div>
 												<div class="col-md-8 col-6">

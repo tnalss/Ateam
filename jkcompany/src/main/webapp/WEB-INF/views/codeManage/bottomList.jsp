@@ -30,7 +30,16 @@
 	<section id="" class="container">
 		<!-- 섹션의 id와 class는 알아서 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
+<div class="row">
+<div class="col-12 card p-0">
+<div class="card-header">
+<h3 class="card-title text-center" style="font-weight: bold;">상위 코드 상세</h3>
+</div>
+<div class="card-body">
 
+</div>
+</div>
+</div>
 
 		<div class="row mx-0">
 			<div class="col-sm-5 p-md-0">
@@ -44,7 +53,7 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-12 card">
+			<div class="col-12 card p-0">
 				<div class="card-header">
 					<h3 class="card-title text-center" style="font-weight: bold;">하위 코드 목록</h3>
 				</div>

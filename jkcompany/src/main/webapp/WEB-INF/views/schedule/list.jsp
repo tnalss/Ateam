@@ -51,19 +51,19 @@
 
 			<div class="col-lg-4 card p-0 has-shadow">
 				<div class="card-header"><h4>${loginInfo.emp_name} 님의 일정관리</h4></div>
-				<div class="row card m-3 p-2 mt-5">
+				<div class="row card m-3 p-2 mt-5" data-aos="fade-right" data-aos-delay="0">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
 				<li>회사 일정</li>
 				<li> <span class="text-primary m-0">1</span> 건</li>
 				</ul>
 				</div>
-				<div class="row card m-3 p-2">
+				<div class="row card m-3 p-2"  data-aos="fade-right" data-aos-delay="500">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
 				<li>${loginInfo.department_name} 일정</li>
 				<li> <span class="text-primary m-0">1</span> 건</li>
 				</ul>
 				</div>
-				<div class="row card m-3 p-2">
+				<div class="row card m-3 p-2" data-aos="fade-right" data-aos-delay="1000">
 				<ul class='d-flex mb-0 justify-content-around align-items-center'>
 				<li>개인 일정</li>
 				<li> <span class="text-primary m-0">1</span> 건</li>
