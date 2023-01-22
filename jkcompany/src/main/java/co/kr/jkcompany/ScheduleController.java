@@ -43,6 +43,9 @@ public class ScheduleController {
 		//임시로그인
 		session.setAttribute("loginInfo", info);
 		
+		model.addAttribute("countCompany",sql.selectOne("sche.countCompPeriod"));
+		model.addAttribute("countDept",sql.selectOne("sche.countDeptPeriod",info.getEmp_no()));
+		model.addAttribute("countPersonal",sql.selectOne("sche.countPeriodPersional",info.getEmp_no()));
 		sql.selectList("sche.compPeriod");
 		return "schedule/list";
 	}
@@ -51,8 +54,6 @@ public class ScheduleController {
 	@ResponseBody
 	@RequestMapping(value= "/calendars" , produces="text/html;charset=utf-8")
 	public String calendars(HttpSession session, Model model,String id) {
-		
-		//sql.selectList("sche.compPeriod");
 		return new Gson().toJson(getEventList(id));
 	}
 	
