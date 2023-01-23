@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import common.CommonService;
+import employee.EmployeeVO;
 import login.LoginVO;
 import schedule.ScheduleVO;
 
@@ -32,16 +33,12 @@ public class ScheduleController {
 
 	@RequestMapping(value= "/list.sche" , produces="text/html;charset=utf-8")
 	public String emp_list(HttpSession session, Model model) {
-		
+		LoginVO info = null;
 		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "sche" );
 
-		
-		LoginVO info = (LoginVO) session.getAttribute("loginInfo");
-		
-		//임시로그인
-		session.setAttribute("loginInfo", info);
-		
+		info = (LoginVO) session.getAttribute("loginInfo");
+
 		model.addAttribute("countCompany",sql.selectOne("sche.countCompPeriod"));
 		model.addAttribute("countDept",sql.selectOne("sche.countDeptPeriod",info.getEmp_no()));
 		model.addAttribute("countPersonal",sql.selectOne("sche.countPeriodPersional",info.getEmp_no()));

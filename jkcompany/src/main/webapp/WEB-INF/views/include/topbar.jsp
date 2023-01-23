@@ -45,7 +45,7 @@
 				</li>
 				<li><a href="main.ea">전자결재</a></li>
 				<li><a href="list.bo">익명 게시판</a></li>
-			
+			<c:if test="${loginInfo.admin eq 'L1' }">
 				<li class="dropdown"><a href="#"><span>관리자</span>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
@@ -55,6 +55,7 @@
 						<li><a href="list.code">코드관리</a></li>
 					</ul>
 				</li>
+				</c:if>
 				<!-- 로그인하지 않은 경우 -->
 				<c:if test="${empty loginInfo}">
 				<li class="dropdown"><a href="login"><span>로그인</span>
