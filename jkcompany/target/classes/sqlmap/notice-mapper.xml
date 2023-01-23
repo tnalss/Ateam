@@ -11,14 +11,26 @@ on o.emp_no = e.emp_no
 where board_cate = 'O0'
 </select>
 
+<select id="total" resultType="integer">
+	SELECT count(*) FROM tbl_board where board_cate = 'O0'
+</select>
 
-<!-- 익명게시판 목록 -->
-<select id="se_list" resultType='notice.NoticeVO'>
-select *
-from tbl_board
-where board_cate = 'O1' 
-order by 1 desc
-</select> 
+
+<!-- 목록조회 번호 및 시작 과 끝 -->
+<select id="plist" resultType="notice.NoticeVO">
+SELECT * FROM 
+		(SELECT a.*,rownum AS rnum FROM (
+		SELECT board_no
+		     , board_title , EMP_NO
+		     , BOARD_HITS
+		     , to_char(WRITE_DATE,'YYYY-MM-DD')
+		FROM tbl_board
+		WHERE board_cate ='O0'
+		ORDER BY board_no desc
+		) a  )b
+		WHERE rnum between #{beginList} and #{endList}
+</select>
+
 <!-- 글쓰기 -->
 <insert id="se_insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)

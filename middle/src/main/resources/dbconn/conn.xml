@@ -11,7 +11,7 @@
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url"
-			value="jdbc:log4jdbc:oracle:thin:@fq8js0ikjyiung9a_high?TNS_ADMIN=D:/Wallet202" />
+			value="jdbc:log4jdbc:oracle:thin:@fq8js0ikjyiung9a_high?TNS_ADMIN=/Users/parkcj/Documents/Ateam/Wallet202" />
 		<property name="username" value="ATEAM" />
 		<property name="password" value="Hanul1QWER!@#$" />
 	</bean>
