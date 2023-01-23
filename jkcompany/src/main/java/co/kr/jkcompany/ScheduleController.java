@@ -1,7 +1,6 @@
 package co.kr.jkcompany;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import common.CommonService;
-import employee.EmployeeVO;
+import login.LoginVO;
 import schedule.ScheduleVO;
 
 
@@ -38,7 +37,7 @@ public class ScheduleController {
 		session.setAttribute("cate", "sche" );
 
 		
-		EmployeeVO info = common.tempLogin("3");
+		LoginVO info = (LoginVO) session.getAttribute("loginInfo");
 		
 		//임시로그인
 		session.setAttribute("loginInfo", info);

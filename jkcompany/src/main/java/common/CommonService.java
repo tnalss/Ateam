@@ -13,17 +13,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import employee.EmployeeVO;
+import login.LoginVO;
 
 @Service("common")
 public class CommonService {
 	@Autowired
 	@Qualifier("hanul")
 	SqlSession sql;
-	//임시 로그인을 위해
 	//임시로그인을 위한 정보조회
 	
 	public EmployeeVO tempLogin(String id) {
