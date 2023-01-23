@@ -54,7 +54,9 @@
 			<button type="button" class="btn btn-primary"
 				onclick="location='new.no'">글 작성</button>
 		</div>
-
+		<form method='post' action='list.no' id="list">
+		<input type='hidden' name='curPage' value='1'>
+		</form>
 		<div class="row mt-3">
 			<div class="col-12 card p-0">
 				<div class="card-header">
@@ -79,7 +81,7 @@
 			</tr>
 			<c:forEach items='${page.list}' var='vo'>
 				<tr class='text-center'>
-					<td class='text-center'>${vo.board_no }</td>
+					<td class='text-center'>${vo.rnum }</td>
 					<td class='no_title'><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
 					<td>${vo.emp_name}</td> 
 					<td><fmt:formatDate pattern="yyyy/MM/dd"

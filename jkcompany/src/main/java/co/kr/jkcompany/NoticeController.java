@@ -43,7 +43,6 @@ public class NoticeController {
 			// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 			session.setAttribute("notice", "no");
 			model.addAttribute("page", notice_list(page) );
-			
 			return "notice/list";
 		}
 		
