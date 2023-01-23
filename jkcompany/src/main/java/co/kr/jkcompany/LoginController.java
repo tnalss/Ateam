@@ -18,7 +18,16 @@ import login.LoginVO;
 @Controller
 public class LoginController {
 	@Autowired private SqlSession sql;
-	//로그인처리 요청
+		// 로그아웃	
+		@RequestMapping("/logout")
+		public String logout(HttpSession session) {
+			//비지니스로직: 세션에 있는 로그인정보를 삭제한다
+			session.removeAttribute("loginInfo");
+			//응답화면연결
+			return "redirect:/";
+		}
+	
+		//로그인처리 요청
 		@ResponseBody @RequestMapping("/jklogin")
 		public boolean loginIn(String id, String pw, HttpSession session) {
 			HashMap<String, String> map = new HashMap<String, String>();	

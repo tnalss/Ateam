@@ -55,17 +55,30 @@
 						<li><a href="list.code">코드관리</a></li>
 					</ul>
 				</li>
-				
+				<!-- 로그인하지 않은 경우 -->
+				<c:if test="${empty loginInfo}">
 				<li class="dropdown"><a href="login"><span>로그인</span>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
-						<li><a href="myInfo">나의정보</a></li>
+						<li><a href="myInfo">패스워드 찾기</a></li>
+						<li><a href="logout">회원가입</a></li>
+					</ul>
+				</li>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+				</c:if>
+				<!-- 로그인한 경우 -->
+				<c:if test="${not empty loginInfo}">
+				<li class="dropdown"><a href="#"><strong>${loginInfo.emp_name}</strong>
+				<i class="bi bi-chevron-down"></i></a>
+					<ul>
+						<li><a href="#">패스워드 변경</a></li>
 						<li><a href="logout">로그아웃</a></li>
 					</ul>
 				</li>
-
+				<i class="bi bi-list mobile-nav-toggle"></i>
+				</c:if>
 			</ul>
-			<i class="bi bi-list mobile-nav-toggle"></i>
+			
 		</nav>
 		<!-- .navbar -->
 
