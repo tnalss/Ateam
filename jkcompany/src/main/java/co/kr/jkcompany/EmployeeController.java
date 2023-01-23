@@ -1,5 +1,7 @@
 package co.kr.jkcompany;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,9 +69,10 @@ public class EmployeeController {
 
 	// 사번으로 사원 정보조회
 	@RequestMapping(value = "/info.emp", produces = "text/html;charset=utf-8")
-	public String emp_info(String id, Model model) {
+	public String emp_info(String id, Model model, EmployeePageVO page) {
 		EmployeeVO vo = sql.selectOne("emp.info", id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("page",page);
 		return "employee/info";
 	}
 
@@ -89,22 +92,28 @@ public class EmployeeController {
 	// 정보 수정 확인 버튼
 
 	@RequestMapping("/update.emp")
-	public String employee_update(EmployeeVO vo, MultipartFile file , HttpServletRequest request) {
+	public String employee_update(EmployeeVO vo, MultipartFile file , HttpServletRequest request,EmployeePageVO page) throws UnsupportedEncodingException {
 		if(file!=null) {
+			if(file.getSize()!=0) {
 			String path = common.fileUpload("profile",file,request);
 			vo.setProfile_path(path);
+			}
 		}	
 		sql.update("emp.update", vo);
 		sql.update("emp.updateOrg", vo);
-		return "redirect:info.emp?id=" + vo.getEmp_no();
+		return "redirect:info.emp?id=" + vo.getEmp_no()+"&curPage="
+		+page.getCurPage()+"&search="+page.getSearch()+"&keyword="+
+		URLEncoder.encode(page.getKeyword(),"utf-8");
 	}
 
 	// 퇴사버튼
 
 	@RequestMapping("/fire.emp")
-	public String employee_fire(int id) {
+	public String employee_fire(int id,EmployeePageVO page) throws UnsupportedEncodingException {
 		sql.update("emp.fire", id);
-		return "redirect:info.emp?id=" + id;
+		return "redirect:info.emp?id=" + id+"&curPage="
+		+page.getCurPage()+"&search="+page.getSearch()+"&keyword="+
+		URLEncoder.encode(page.getKeyword(),"utf-8");
 	}
 
 

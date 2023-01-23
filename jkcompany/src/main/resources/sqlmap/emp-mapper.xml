@@ -101,7 +101,10 @@ order by 2 asc
 <update id="update">
 UPDATE tbl_emp
 SET emp_name = #{emp_name}, gender = #{gender },phone= #{ phone},email= #{ email},birth= to_char(#{birth},'yyyy-MM-dd'),address= #{address,jdbcType=VARCHAR}
-,admin= #{admin}, profile_path=#{profile_path,jdbcType=VARCHAR}
+,admin= #{admin}
+<if test='profile_path != null'>
+, profile_path=#{profile_path,jdbcType=VARCHAR}
+</if>
 WHERE emp_no= #{emp_no}
 </update>
 
