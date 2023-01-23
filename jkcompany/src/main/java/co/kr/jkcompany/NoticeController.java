@@ -59,6 +59,7 @@ public class NoticeController {
 		@RequestMapping(value= "/info.no" , produces="text/html;charset=utf-8")
 		public String emp_info(String id, Model model) {
 			NoticeVO vo = sql.selectOne("no.info",id);
+			sql.update("no.hits", id);
 			model.addAttribute("vo", vo);
 			return "notice/info";
 		}

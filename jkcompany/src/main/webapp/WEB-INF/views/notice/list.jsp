@@ -55,7 +55,7 @@
 				onclick="location='new.no'">글 작성</button>
 		</div>
 		<form method='post' action='list.no' id="list">
-		<input type='hidden' name='curPage' value='1'>
+		<input type='hidden' name='curPage' value='1'> 
 		</form>
 		<div class="row mt-3">
 			<div class="col-12 card p-0">
@@ -72,7 +72,7 @@
 				<col width='120px'>
 				<col width='120px'>
 			</colgroup>
-			<tr class='text-center'>
+			<tr class='text-center'> 
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
