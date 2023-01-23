@@ -31,14 +31,18 @@ public class EmployeeController {
 	// 조회하고 출력하는 예제
 	@RequestMapping(value = "/list.emp", produces = "text/html;charset=utf-8")
 	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {
-
+		int count =0;
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "emp");
-		int countRetired = sql.selectOne("emp.countRetired");
 
-
-		model.addAttribute("countRetired", countRetired);
 		model.addAttribute("page", emp_list(page) );
+		for (EmployeeVO each : page.list) {
+			if(each.getAdmin().equals("X0")) {
+				count++;
+			}
+		}
+		
+		model.addAttribute("countRetired",count );
 		
 		// 리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
@@ -51,7 +55,7 @@ public class EmployeeController {
 		page.setList( sql.selectList("emp.plist", page) );
 		return page;
 	}
-	
+
 	
 	
 	
