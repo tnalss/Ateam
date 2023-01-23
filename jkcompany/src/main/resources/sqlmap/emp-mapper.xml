@@ -135,7 +135,11 @@ select count(*) from(
 WHERE no BETWEEN #{beginList} and #{endList} and e.admin= 'X0'
 
 </select>
+<select id="allCountRetired" resultType="Integer">
+select count(*) from tbl_emp
+WHERE admin= 'X0'
 
+</select>
 <!-- 퇴사 -->
 <update id="fire" >
 	UPDATE tbl_emp SET ADMIN='X0',end_Date = to_char(current_date,'yyyy-MM-dd') WHERE emp_no=${emp_no}

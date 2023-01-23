@@ -34,15 +34,17 @@ public class EmployeeController {
 		int count =0;
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "emp");
-
-		model.addAttribute("page", emp_list(page) );
-		for (EmployeeVO each : page.list) {
+		EmployeePageVO vo = emp_list(page);
+		model.addAttribute("page", vo );
+		for (EmployeeVO each : vo.list) {
 			if(each.getAdmin().equals("X0")) {
 				count++;
 			}
 		}
-		
-		model.addAttribute("countRetired",count );
+		if(!page.getKeyword().equals("") && !page.getSearch().equals(""))
+			model.addAttribute("countRetired",count );
+		else
+			model.addAttribute("countRetired",sql.selectOne("emp.allCountRetired"));
 		
 		// 리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
