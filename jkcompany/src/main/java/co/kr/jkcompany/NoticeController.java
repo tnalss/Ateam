@@ -1,7 +1,9 @@
 package co.kr.jkcompany;
 
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,17 +38,25 @@ public class NoticeController {
 //			return "notice/list";
 //		}
 	
-	// 조회하고 출력하는 예제
+	// 공지글 삭제
+	@RequestMapping("/delete.no")
+	public String delete( int id, NoticePageVO page, HttpSession session) { 
+		
+		sql.delete("no.delete", id);
+		
+		return "redirect:list.no";
+	}
+	
+		// 조회하고 출력하는 예제
 		@RequestMapping(value = "/list.no", produces = "text/html;charset=utf-8")
 		public String notice_list(HttpSession session, Model model,NoticePageVO page) {
-
 			// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 			session.setAttribute("notice", "no");
 			model.addAttribute("page", notice_list(page) );
 			return "notice/list";
 		}
 		
-		
+
 		// 페이지 처리
 		public NoticePageVO notice_list(NoticePageVO page) {
 			page.setTotalList( sql.selectOne("no.total", page) ); 
@@ -57,7 +67,7 @@ public class NoticeController {
 		
 		// 제목으로 상세내용
 		@RequestMapping(value= "/info.no" , produces="text/html;charset=utf-8")
-		public String emp_info(String id, Model model) {
+		public String notice_info(String id, Model model) {
 			NoticeVO vo = sql.selectOne("no.info",id);
 			sql.update("no.hits", id);
 			model.addAttribute("vo", vo);

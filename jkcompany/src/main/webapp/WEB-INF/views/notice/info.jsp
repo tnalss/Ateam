@@ -16,10 +16,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>상세내</h2>
+          <h2>상세내용</h2>
           <ol>
             <li><a href="<c:url value='/'/>">홈</a></li>
-            <li>메뉴이름</li>
+            <li>공지사항</li>
           </ol>
         </div>
 
@@ -30,7 +30,7 @@
     <!-- ======= Section ======= -->
     <section id="" class="container">
      <h3>공지글안내</h3>
-<table class='w-px1200'>
+<table class='table table-hover'>
 <tr><th class='w-px140'>제목</th>
 	<td colspan='5'>${vo.board_title}</td>
 </tr>
@@ -51,13 +51,13 @@
 	<button type="button" class="btn btn-primary"
 				onclick="location='list.no'">공지목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->
-	<c:if test='${loginInfo.emp_no eq vo.emp_name}'>
-	<a class='btn-fill' href='modify.no?id=${vo.board_no}&${params}'>정보수정</a>
-	<a class='btn-fill btn-delete'>정보삭제</a>
+	<c:if test='${loginInfo.emp_name eq vo.emp_name}'>
+	<a class='btn btn-primary' href='modify.no?id=${vo.board_no}&${params}'>정보수정</a>
+	<a class='btn btn-danger btn-delete'>정보삭제</a>
 	</c:if>
 	<!-- 로그인한 경우 답글쓰기 가능 -->
 	<c:if test='${ ! empty loginInfo }'>
-	<a class='btn-fill' href='reply.no?id=${vo.board_no}&${params}'>답글쓰기</a>
+	<a class='btn btn-primary' href='reply.no?id=${vo.board_no}&${params}'>답글쓰기</a>
 	</c:if>
 </div>
 
@@ -69,7 +69,8 @@
 
 $('.btn-delete').on('click', function(){
 	if( confirm('정말 삭제?') ){
-		location = 'delete.no?id=${vo.board_no}&${params}';
+		location = 'delete.no?id=${vo.board_no}';
+		consol.log('여기옴?')
 	}
 });
 </script>
