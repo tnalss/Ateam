@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                   <i class="bx bx-images"></i>
-                  <h4>Spring FrameWork and JSP/Servelt</h4>
+                  <h4>Spring FrameWork and JSP/Servlet</h4>
                   <p>오진경선생님께 JSP/Servelet 과 Spring FrameWork를 배웠습니다.</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
