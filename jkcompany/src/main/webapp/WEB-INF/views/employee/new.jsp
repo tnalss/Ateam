@@ -22,12 +22,12 @@ select {
 		<div class="container">
 
 			<div class="d-flex justify-content-between align-items-center">
-				<h2>정보수정</h2>
+				<h2>사원등록</h2>
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
 					<li>관리자</li>
 					<li>사원관리</li>
-					<li>정보수정</li>
+					<li>사원등록</li>
 				</ol>
 			</div>
 
@@ -41,9 +41,9 @@ select {
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title text-center" style="font-weight: bold;">정보수정</h3>
+							<h3 class="card-title text-center" style="font-weight: bold;">사원등록</h3>
 						</div>
-						<form action="update.emp" method="post" id="update" enctype='multipart/form-data'>
+						<form action="insert.emp" method="post" id="insert" enctype='multipart/form-data'>
 							<div class="card-body">
 								<div class="card-title mb-4">
 									<div class="d-flex justify-content-start"
@@ -87,23 +87,14 @@ select {
 												role="tabpanel" aria-labelledby="basicInfo-tab">
 
 
-												<div class="row">
-													<div class="col-sm-3 col-md-2 col-5 text-center">
-														<label style="font-weight: bold;">사번</label>
-
-													</div>
-													<div class="col-md-8 col-6">${vo.emp_no }
-														<input type="hidden" name="emp_no" value="${vo.emp_no}" />
-													</div>
-												</div>
-												<hr />
+											
 
 												<div class="row">
 													<div class="col-sm-3 col-md-2 col-5  text-center">
 														<label style="font-weight: bold;">성명</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk form-control" title="성명란" name="emp_name" value="${vo.emp_name}" />
+														<input type="text" class="chk form-control" title="성명란" name="emp_name" />
 													</div>
 												</div>
 												<hr />
@@ -112,7 +103,7 @@ select {
 														<label style="font-weight: bold;">생년월일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="date" class= "form-control" name="birth" value="${vo.birth}" />
+														<input type="date" class= "form-control" name="birth"/>
 													</div>
 												</div>
 												<hr />
@@ -122,10 +113,9 @@ select {
 													</div>
 													<div class="col-md-8 col-6">
 													<label>
-														<input type='radio' value='남' name='gender'
-															<c:if test='${ vo.gender eq "남" }'>checked</c:if>>&nbsp;&nbsp;남&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;
+														<input type='radio' value='남' name='gender' checked>&nbsp;&nbsp;남&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;
 													<label>	<input type='radio' value='여' name='gender'
-															${vo.gender eq '여' ? 'checked' : ''}>&nbsp;&nbsp;여</label>
+															>&nbsp;&nbsp;여</label>
 													</div>
 												</div>
 												<hr />
@@ -135,7 +125,7 @@ select {
 														<label style="font-weight: bold;">전화번호</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk form-control" title="전화번호란" name="phone" value="${vo.phone}" />
+														<input type="text" class="chk form-control" title="전화번호란" name="phone"  />
 													</div>
 												</div>
 												<hr />
@@ -144,7 +134,7 @@ select {
 														<label style="font-weight: bold;">이메일</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text"  class="chk form-control" title="이메일란" name="email" value="${vo.email}" />
+														<input type="text"  class="chk form-control" title="이메일란" name="email" />
 													</div>
 												</div>
 												<hr />
@@ -153,7 +143,7 @@ select {
 														<label style="font-weight: bold;">주소</label>
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" id="post" class="chk form-control" title="주소검색란" name="address1" value="${fn:substring(vo.address,0,fn:indexOf(vo.address, '/')) }" readonly="readonly" />
+														<input type="text" id="post" class="chk form-control" title="주소검색란" name="address1" readonly="readonly" />
 														
 													</div>
 												</div>
@@ -162,7 +152,7 @@ select {
 														
 													</div>
 													<div class="col-md-8 col-6">
-														<input type="text" class="chk form-control" title="상세주소 입력란"  name="address2" value="${fn:substring(vo.address,fn:indexOf(vo.address, '/')+1, fn:length(vo.address) ) }" />
+														<input type="text" class="chk form-control" title="상세주소 입력란"  name="address2" />
 														<input type="hidden" name="address" />
 													</div>
 												</div>
@@ -186,7 +176,7 @@ select {
 														<select name="branch_name" id="">
 															<c:forEach var="b" items="${branches}">
 																<option value="${b.code}"
-																	${vo.branch_name eq b.code_value ? ' selected':''}>
+																	${b.code eq 'B99' ? ' selected':''}>
 																	${b.code_value}</option>
 															</c:forEach>
 														</select>
@@ -201,7 +191,7 @@ select {
 														<select name="department_name" id="">
 															<c:forEach var="d" items="${departments}">
 																<option value="${d.code}"
-																	${vo.department_name eq d.code_value ? ' selected':''}>
+																	${d.code eq 'D99' ? ' selected':''}>
 																	${d.code_value}</option>
 															</c:forEach>
 														</select>
@@ -216,7 +206,7 @@ select {
 														<select name="rank_name" id="">
 															<c:forEach var="r" items="${ranks}">
 																<option value="${r.code}"
-																	${vo.rank_name eq r.code_value ? ' selected':''}>
+																	${r.code eq 'R99' ? ' selected':''}>
 																	${r.code_value}</option>
 															</c:forEach>
 														</select>
@@ -224,32 +214,20 @@ select {
 												</div>
 												<hr />
 
-												<c:if test="${vo.admin ne 'X0'}">
+												
 													<div class="row">
 														<div class="col-sm-3 col-md-2 col-5 text-center">
 															<label style="font-weight: bold;">관리자</label>
 
 														</div>
 														<div class="col-md-8 col-6">
-															<input type='radio' value='L0' name='admin'
-																<c:if test='${     vo.admin     eq "L0"  }'>checked</c:if>>일반&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type='radio' value='L0' name='admin' checked>일반&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															<input type='radio' value='L1' name='admin'
 																${vo.admin eq 'L1' ? 'checked' : ''}>관리자
 														</div>
 													</div>
 													<hr />
-												</c:if>
-												<c:if test="${vo.admin eq 'X0'}">
-													<input type="hidden" name="admin" value="X0" />
-													<div class="row">
-														<div class="col-sm-3 col-md-2 col-5 text-center">
-															<label style="font-weight: bold;">상태</label>
-														</div>
-														<div class="col-md-8 col-6">퇴사자</div>
-													</div>
-													<hr />
-												</c:if>
-
+											
 											</div>
 											<div class="row">
 												<div class="col-6"></div>
@@ -257,8 +235,8 @@ select {
 													<div class="mr-0">
 														<button type="button" class="btn btn-secondary" onclick="history.go(-1)"
 															>취소</button>
-														<button type="button" class="btn btn-primary update">확인</button>
-														<button type="button" class="btn btn-danger deleteEmp">퇴사</button>
+														<button type="button" class="btn btn-primary insert">확인</button>
+													
 													</div>
 												</div>
 											</div>
@@ -288,22 +266,18 @@ select {
         buttonText : '사진 선택'
 	});
 	
-		$('.update').click(function() {
+		$('.insert').click(function() {
 			
 			if (emptyCheck()&&fn_emailChk($('[name=email]').val())){
 				var addFound = $('[name=address1]').val();
 				var addTyped = $('[name=address2]').val();
 				$('[name=address]').val(addFound + '/' +addTyped);
 				
-				$('#update').submit();
+				$('#insert').submit();
 				
 			}
 		});
-		$('.deleteEmp').click(function() {
-			if (confirm('[${vo.emp_name}] 님을 퇴사시키시겠습니까?')) {
-				location = 'fire.emp?id=${vo.emp_no}';
-			}
-		});
+	
 		
 		
 		$('#post').click(function(){

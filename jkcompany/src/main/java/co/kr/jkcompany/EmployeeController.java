@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import code.CodeVO;
 import common.CommonService;
 import employee.EmployeePageVO;
 import employee.EmployeeVO;
@@ -122,9 +123,32 @@ public class EmployeeController {
 		URLEncoder.encode(page.getKeyword(),"utf-8");
 	}
 
+	//신규사원 등록버튼
+	@RequestMapping("/new.emp")
+	public String employee_new(Model model) {
+
+		model.addAttribute("branches", sql.selectList("emp.codeList", 'B'));
+		model.addAttribute("departments", sql.selectList("emp.codeList", 'D'));
+		model.addAttribute("ranks", sql.selectList("emp.codeList", 'R'));
+
+		
+		return "employee/new";
+	}
+
 
 	// 신규사원등록
-
+	@RequestMapping("/insert.emp")
+	public String employee_insert(EmployeeVO vo, MultipartFile file ,HttpServletRequest request,CodeVO code) {
+		if(file!=null) {
+			if(file.getSize()!=0) {
+			String path = common.fileUpload("profile",file,request);
+			vo.setProfile_path(path);
+			}
+		}	
+		sql.insert("emp.insert", vo);
+		sql.insert("emp.codeInsert", code);
+		return "redirect:info.emp?id=" + vo.getEmp_no();
+	}
 //	
 //	
 //	
