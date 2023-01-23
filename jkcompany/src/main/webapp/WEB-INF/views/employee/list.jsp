@@ -112,7 +112,7 @@
 								<c:forEach var="vo" items="${ page.list }">
 									<tr>
 										<td class='text-center'>${vo.emp_no }</td>
-										<td><a href='info.emp?id=${vo.emp_no}'>${vo.emp_name }</a></td>
+										<td><a href='info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>${vo.emp_name }</a></td>
 										<td>${vo.branch_name }</td>
 										<td>${vo.department_name}</td>
 										<td>${vo.rank_name }</td>

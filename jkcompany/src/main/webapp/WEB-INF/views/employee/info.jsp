@@ -135,10 +135,11 @@
 											<div class="col-6"></div>
 											<div class="col-6">
 												<div class="mr-0">
+														<c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}' />
 													<button type="button" class="btn btn-secondary"
-														onclick="history.go(-1)">이전으로</button>
+														onclick="location='list.emp?${params}'">사원목록</button>
 													<button type="button" class="btn btn-primary"
-														onclick="location='modify.emp?id=${vo.emp_no}'">수정</button>
+														onclick="location='modify.emp?id=${vo.emp_no}&${params}'">수정</button>
 												</div>
 											</div>
 										</div>

@@ -255,8 +255,8 @@ select {
 												<div class="col-6"></div>
 												<div class="col-6">
 													<div class="mr-0">
-														<button type="button" class="btn btn-secondary"
-															onclick="history.go(-1)">이전으로</button>
+														<button type="button" class="btn btn-secondary cancel"
+															>취소</button>
 														<button type="button" class="btn btn-primary update">확인</button>
 														<button type="button" class="btn btn-danger deleteEmp">퇴사</button>
 													</div>
@@ -268,6 +268,10 @@ select {
 
 
 							</div>
+								
+		<input type="hidden" name="curPage" value="${page.curPage}" />
+		<input type="hidden" name="search" value="${page.search}" />
+		<input type="hidden" name="keyword" value="${page.keyword}"/>
 						</form>
 					</div>
 				</div>
@@ -278,6 +282,13 @@ select {
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script>
+	$('.cancel').click(function() {
+		$('#update').empty();
+		
+		location='info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'
+				
+	});
+	
 	$('#imageUpload').filestyle({
 		buttonName : 'btn-info',
         buttonText : '사진 선택'
