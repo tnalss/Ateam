@@ -77,11 +77,11 @@
 				<th>날짜</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items='${list}' var='vo'>
+			<c:forEach items='${page.list}' var='vo'>
 				<tr class='text-center'>
 					<td class='text-center'>${vo.board_no }</td>
-					<td class='no_title'><a href='info.notice?id=${vo.emp_no}'>${vo.board_title }</a></td>
-					<td>${vo.emp_name}</td>
+					<td class='no_title'><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
+					<td>${vo.emp_name}</td> 
 					<td><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${vo.write_date }" /></td>
 							<td>${vo.board_hits}</td>

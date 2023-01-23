@@ -4,6 +4,7 @@
 
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
   <link href="css/loginStyle.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" ></script> 
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -37,12 +38,12 @@
 					<div class="login-wrap p-4 p-md-5">
 		      
 		      	
-						<form action="#" class="login-form">
+						<form action="" class="login-form">
 		      		<div class="form-group">
-		      			<input type="text" class="form-control rounded-left" placeholder="ID" required>
+		      			<input type="text" class="form-control rounded-left" id="id" placeholder="ID" required>
 		      		</div>
 	            <div class="form-group d-flex">
-	              <input type="password" class="form-control rounded-left" placeholder="Password" required>
+	              <input type="password" class="form-control rounded-left" id="pw" placeholder="Password" required>
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
@@ -56,21 +57,41 @@
 								</div>
 	            </div>
 	            <div class="form-group">
-	            	<button type="submit" class="btn btn-primary rounded submit p-3 px-5">로그인</button>
+	            	<a class="login btn btn-primary rounded submit p-3 px-5">로그인</a>
 	            </div>
 	          </form>
 	        </div>
+	        
 				</div>
 			</div>
 		</div>
 	</section>
 
-     
-     <!-- 
-     <script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-    -->
+ <script>
+ $('.login').click(function(){
+		login();
+	});
+ function login(){
+	 console.log( '여기' )
+	if( emptyCheck() ){
+		console.log( '저기' )
+		$.ajax({
+			url: 'jklogin',
+			data: { id:$('#id').val(), pw:$('#pw').val() },
+			dataType : "json", 
+			success: function( response ){
+				console.log( response )
+				if( response ){
+					location = '<c:url value="/"/>';
+				}else{
+					alert('아이디나 비밀번호가 일치하지 않습니다');
+				}
+			},error: function(req,text){
+				alert(text+':'+req.status);
+			}
+		});
+	}
+}
+</script>
 
   </main><!-- End #main -->

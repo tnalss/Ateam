@@ -4,7 +4,9 @@
 <%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+<style>
+#comment-list span { float: right; }
+</style>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -27,37 +29,49 @@
     <!-- ======= Section ======= -->
     <section id="" class="container">
       <h3 class="text-center">공지</h3>
-      		<div id='list-top'>
-		<button type="button" class="btn btn-primary"
-				 onclick="location='new.no'">공지 글 작성</button>
-      		</div>
       		
-      		<table class='mx-auto'>
-      		<colgroup>
-      			<col width='80px'>
-      			<col width='200px'>
-      			<col width="250px">
-      			<col width='120px'>
-      			<col width='120px'>
-      		</colgroup>
-      		<tr class='text-center'><th >번호</th>
-      			<th>제목</th>
-      			<th>내용</th>
-      			<th>작성자</th>
-      			<th>날짜</th>
+      		
+      		<table class='w-px1200'>
+<colgroup>
+	<col width='140px'>
+	<col>
+	<col width='160px'>
+	<col width='160px'>
+	<col width='100px'>
+	<col width='100px'>
+</colgroup>
+      		<tr>
+      		<th>제목</th>
+      		<td colspan='5'>${vo.title }</td>
       		</tr>
-      		<c:forEach items='${info}' var='vo'>
+      		<tr><th>작성자</th>
+	<td>${vo.emp_name}</td>
+	<th>작성일자</th>
+	<td>${vo.write_date}</td>
+	<th>조회수</th>
+	<td>${vo.readcnt}</td>
+</tr>
+<tr><th>내용</th>
+	<td>${vo.content }</td>
+</tr>
+<c:forEach items='${info}' var='vo'>
       		<tr  class='text-center'><td class='text-center'>${vo.board_no }</td>
-      			<td><a href='info.notice?id=${vo.emp_no}'>${vo.board_title }</a></td>
+      			<td><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
       			<td>${vo.board_content }</td>
       			<td>${vo.emp_name}</td>
       			<td><fmt:formatDate pattern = "yyyy/MM/dd" value="${vo.write_date }"/></td>
       		</tr>
+      		
       		</c:forEach>
       		</table>
       
-      
-      
+      <button type="button" class="btn btn-primary"
+		onclick="location='modify.notice?id=${vo.board_no}'">수정</button>
+  
+
+		<button type="button" class="btn btn-primary"
+				 onclick="history.go(-1)">취소</button>
+
       
     </section><!-- End Section -->
 

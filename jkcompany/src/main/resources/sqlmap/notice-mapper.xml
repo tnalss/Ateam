@@ -31,8 +31,6 @@ SELECT * FROM
 		WHERE rnum between #{beginList} and #{endList}
 </select>
 
-
-
 <!-- 글쓰기 -->
 <insert id="se_insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)

@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_login_pwfind = findViewById(R.id.tv_login_pwfind);
         chec_id = findViewById(R.id.chec_id);
         chec_gogo = findViewById(R.id.chec_gogo);
-        ApiClient.setBASEURL("http://192.168.0.05/middle/");
+        ApiClient.setBASEURL("http://192.168.0.7/middle/");
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
