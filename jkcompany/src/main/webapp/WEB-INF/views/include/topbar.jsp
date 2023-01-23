@@ -71,7 +71,7 @@
 				<li class="dropdown"><a href="#"><strong>${loginInfo.emp_name}</strong>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
-						<li><a href="#">패스워드 찾기</a></li>
+						<li><a href="#">패스워드 변경</a></li>
 						<li><a href="logout">로그아웃</a></li>
 					</ul>
 				</li>
