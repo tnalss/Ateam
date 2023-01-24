@@ -146,7 +146,7 @@ public class EmployeeController {
 			}
 		}	
 		sql.insert("emp.insert", vo);
-		sql.insert("emp.codeInsert", code);
+		//sql.insert("emp.codeInsert", code);
 		return "redirect:info.emp?id=" + vo.getEmp_no();
 	}
 //	
