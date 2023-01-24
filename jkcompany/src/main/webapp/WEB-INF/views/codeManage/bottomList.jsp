@@ -114,14 +114,16 @@
 							<tbody>
 							
 								<c:forEach var="vo" items="${ list }">
-									<tr>
+									<tr style="vertical-align: middle;">
 										<td class='text-center'>${vo.code_category }</td>
 										<td class='text-center'>${vo.code_num }</td>
 										<td><a href='bottomCodeInfo.code?code=${vo.code_num}'>${vo.code_value }</a></td>
 										<td><a href='bottomCodeInfo.code?code=${vo.code_num}'>${vo.code_value2 }</a></td>
 										<td>${vo.create_date}</td>
-										<td>${vo.creater}</td>
-										<td></td>
+										<td>${vo.emp_name eq null ? vo.creater : vo.emp_name }</td>
+										<td>
+										<c:if test="${vo.creater != 'admin'}"><i class='bi bi-x' onclick="deleteBottom('${vo.code_category }','${vo.code_num}')"></i></c:if>
+										</td>
 									</tr>
 								</c:forEach>
 						<c:if test="${empty list}"><tr style="height:150px; vertical-align:middle"><td colspan="7">하위 코드가 없습니다.</td></tr></c:if>
@@ -231,6 +233,12 @@ $('.deleteTop').click(function() {
 			});
 		}	
 	});
+	
+	function deleteBottom(code_category,code_num){
+		if (confirm('정말로 삭제하시겠습니까?')) {
+			location = 'deleteBottom.code?code_category='+code_category+'&code_num='+code_num;
+		}
+	}
 
 </script>
 

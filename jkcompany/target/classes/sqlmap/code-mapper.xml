@@ -23,8 +23,9 @@ order by code_category asc ,code_num asc
 <!-- 하위코드목록조회 -->
 <select id="bottomCodeList" resultType='code.CodeVO'>
 
-select *
-from tbl_code
+select c.*, e.emp_name
+from tbl_code c left join tbl_emp e
+on c.creater = to_char(e.emp_no)
 where code_category = #{code}
 order by code_num asc
 </select>
@@ -78,6 +79,13 @@ where code_category=#{code_category} and code_num=#{code_num}
 	insert into tbl_code (code_category, code_num, CREATE_DATE, creater, code_value, code_value2)
 	values(#{code_category}, #{code_num}, current_date, #{creater}, #{code_value}, #{code_value2,jdbcType=VARCHAR})
 </insert>
+
+<!-- 특정하위 코드 삭제  -->
+
+<delete id="deleteBottomOne">
+	delete tbl_code
+	where code_category = #{code_category} and code_num=#{code_num}
+</delete>
 
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>

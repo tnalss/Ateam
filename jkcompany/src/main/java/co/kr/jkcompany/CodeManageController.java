@@ -1,5 +1,6 @@
 package co.kr.jkcompany;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -90,6 +91,17 @@ public class CodeManageController {
 		sql.insert("code.insertBottom",vo);
 		
 		return true;
+	}
+
+	//하위 코드 삭제
+	@RequestMapping(value= "/deleteBottom.code" , produces="text/html;charset=utf-8")
+	public String deleteBottom(String code_category, String code_num) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("code_category", code_category);
+		map.put("code_num", code_num);
+		sql.delete("code.deleteBottomOne",map);
+
+		return "redirect:bottomCodeList.code?code="+code_category;
 	}
 	
 }

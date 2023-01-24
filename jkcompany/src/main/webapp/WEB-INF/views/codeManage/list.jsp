@@ -34,17 +34,6 @@ color: red;
 		<!-- 실질적으로 내용이 들어가는 부분 -->
 
 
-		<div class="row mx-0">
-			<div class="col-sm-5 p-md-0">
-
-
-			</div>
-			<div
-				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-				<button type="button" class="btn btn-primary"
-					onclick="location='new.code'">신규 상위코드 등록</button>
-			</div>
-		</div>
 		<div class="row mt-3">
 			<div class="col-12 card p-0">
 				<div class="card-header">
@@ -65,7 +54,7 @@ color: red;
 							</thead>
 							<tbody>
 								<c:forEach var="vo" items="${ list }">
-									<tr>
+									<tr style="vertical-align: middle;">
 										<td class='text-center'>${vo.code_category }</td>
 										<td><a href='bottomCodeList.code?code=${vo.code_category}'>${vo.code_name}</a></td>
 										<td>${vo.create_date}</td>
@@ -76,7 +65,7 @@ color: red;
 										</td>
 									</tr>
 								</c:forEach>
-								<tr>
+								<tr style="vertical-align: middle;">
 								<td><input type="text" class="form-control chk" title="상위코드란" name="code_category"/></td>
 								<td><input type="text" class="form-control chk" title="상위코드값란" name="code_name"/></td>
 								<td class="today"></td>
