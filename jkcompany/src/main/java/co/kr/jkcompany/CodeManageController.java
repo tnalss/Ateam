@@ -62,6 +62,8 @@ public class CodeManageController {
 		int test = sql.update("code.updateTop",vo);
 		return test==1 ? true : false;
 	}
+	
+	
 	// 상위 코드 추가
 	//코드 전체 조회
 	@ResponseBody
@@ -72,6 +74,20 @@ public class CodeManageController {
 			return false;
 		}
 		sql.insert("code.insertTop",vo);
+		
+		return true;
+	}
+	
+	
+	//하위코드 추가
+	@ResponseBody
+	@RequestMapping("/addBottom.code")
+	public boolean addBottom(CodeVO vo) {
+		int test = sql.selectOne("code.hasBottom",vo);
+		if(test==1) {
+			return false;
+		}
+		sql.insert("code.insertBottom",vo);
 		
 		return true;
 	}

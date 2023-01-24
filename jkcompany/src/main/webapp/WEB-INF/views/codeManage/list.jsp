@@ -79,7 +79,7 @@ color: red;
 								<tr>
 								<td><input type="text" class="form-control chk" title="상위코드란" name="code_category"/></td>
 								<td><input type="text" class="form-control chk" title="상위코드값란" name="code_name"/></td>
-								<td></td>
+								<td class="today"></td>
 								<td>${loginInfo.emp_name}</td>
 								<td><i class="bi bi-plus-circle addTop"></i></td>
 							
@@ -103,13 +103,24 @@ color: red;
 <script>
 function deleteTop(code_category){
 	if (confirm('하위코드까지 모두 삭제됩니다.\n계속 하시겠습니까?')) {
-		//console.log(code_category);
 		location = 'deleteTop.code?id='+code_category;
 	}
 }
 
 $('.addTop').click(function(){
+
 	if (emptyCheck()){
+		const regex = /^[a-z|A-Z]+$/;
+		let str= $('[name=code_category]').val();
+		console.log(regex.test(str));
+		if(str.length>1){
+			alert('길이초과');
+			return;
+		}
+		if(!regex.test(str)){
+			alert('A-Z만 입력할 수 있습니다.');
+			return;
+		}
 		$.ajax({
 			url : 'addTop.code',
 			dataType:'json',
@@ -132,6 +143,17 @@ $('.addTop').click(function(){
 		});
 	}	
 });
+
+
+function getTodayType() {
+	  var date = new Date();
+	  return date.getFullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0"+date.getDate()).slice(-2);
+	}
+	
+	//console.log(typeof(getTodayType()));
+	$('.today').text(getTodayType());
+
+
 </script>
 
 
