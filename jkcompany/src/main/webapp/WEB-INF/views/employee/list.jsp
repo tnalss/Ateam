@@ -8,7 +8,9 @@
 	text-align: center;
 	column-gap: 1rem;
 }
-
+.grayscale {
+    filter: grayscale(100%);
+}
 .w-px150 {
 	width: 150px;
 }
@@ -141,7 +143,7 @@ flex:0 0 auto;
 							<tbody>
 								<c:if test='${empty page.list}'>
 									<tr>
-										<td colspan='8'>검색결과가 없습니다.</td>
+										<td colspan='12'>검색결과가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach var="vo" items="${ page.list }">
@@ -171,15 +173,21 @@ flex:0 0 auto;
 </c:if>
 <%-- 그리드인경우 --%>
 <c:if test='${page.viewType eq "card" }'>
+
     <section id="team" class="team section-bg">
       <div class="container">
         <div class="row">
 <!--  -->
+<c:if test='${empty page.list}'>
+									
+										<div class="col-12 text-center">검색결과가 없습니다.</div>
+									
+								</c:if>
 <c:forEach var="vo" items="${ page.list }">
           <div class="col-lg-2 col-md-6 d-flex p-3">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <img src="${vo.profile_path ne null ? 'vo.profile_path':'assets/img/user_profile.png'}" class="img-fluid p-2 profile" alt="">
+                <img src="${vo.profile_path ne null ? 'vo.profile_path':'assets/img/user_profile.png'}" class="img-fluid p-2 profile ${vo.admin eq 'X0'? ' grayscale':' ' }" alt="">
                 <div class="social">
                   <a href="tel:${vo.phone}"><i class="bi bi-phone-fill"></i></a>
                   <a href="mailto:${vo.email}"><i class="bi bi-envelope-at-fill"></i></a>
