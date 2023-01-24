@@ -167,8 +167,8 @@ order by e.emp_no
 
 
 <insert id="insert" >
-	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth ,address,salary, profile_path)
-	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth},#{address},#{salary},#{profile_path,jdbcType=VARCHAR})
+	INSERT INTO tbl_emp ( emp_name, emp_pw, gender, phone, email, birth ,address, profile_path,admin)
+	VALUES (#{emp_name},#{emp_pw},#{gender},#{phone},#{email},#{birth},#{address},#{profile_path,jdbcType=VARCHAR},#{admin})
 </insert>
 
 <select id="adminCode">

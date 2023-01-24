@@ -99,6 +99,27 @@ select {
 												</div>
 												<hr />
 												<div class="row">
+													<div class="col-sm-3 col-md-2 col-5  text-center">
+														<label style="font-weight: bold;">비밀번호</label>
+													</div>
+													<div class="col-md-5 col-6">
+														<input type="password" class="chk form-control is-valid" title="비밀번호란" id="passwords" name="emp_pw"/>
+														
+													</div>
+													<div class="col-md-4 valid-feedback"></div>
+												</div>
+												<hr />
+												<div class="row">
+													<div class="col-sm-3 col-md-2 col-5  text-center">
+														<label style="font-weight: bold;">비밀번호 확인</label>
+													</div>
+													<div class="col-md-5 col-6">
+														<input type="password" class="chk form-control is-invalid" title="비밀번호 확인란" id="inputInvalid" />
+													</div>
+														<div class="col-md-4 invalid-feedback">비밀번호가 일치하지 않습니다.</div>
+												</div>
+												<hr />
+												<div class="row">
 													<div class="col-sm-3 col-md-2 col-5 text-center">
 														<label style="font-weight: bold;">생년월일</label>
 													</div>
@@ -260,15 +281,47 @@ select {
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script>
-	
+
+    $("#inputInvalid").keyup(function(){
+        let pwd1= $("#passwords").val();
+        let pwd2= $("#inputInvalid").val();
+
+        if(pwd1 != "" || pwd2 != ""){
+            if(pwd1 == pwd2){
+                $("#inputInvalid").removeClass('is-invalid');
+                $("#inputInvalid").addClass('is-valid')
+            }else{
+                $("#inputInvalid").addClass('is-invalid');
+                $("#inputInvalid").removeClass('is-valid')
+            }    
+        }
+    })
+
+
+    $("#passwords").keyup(function(){
+        let pwd1= $("#passwords").val();
+        let pwd2= $("#inputInvalid").val();
+
+        if(pwd1 != "" || pwd2 != ""){
+            if(pwd1 == pwd2){
+                $("#inputInvalid").removeClass('is-invalid');
+                $("#inputInvalid").addClass('is-valid')
+            }else{
+                $("#inputInvalid").addClass('is-invalid');
+                $("#inputInvalid").removeClass('is-valid')
+            }    
+        }
+    })
 	$('#imageUpload').filestyle({
 		buttonName : 'btn-info',
         buttonText : '사진 선택'
 	});
 	
 		$('.insert').click(function() {
-			
-			if (emptyCheck()&&fn_emailChk($('[name=email]').val())){
+			let pwd1= $("#passwords").val();
+	        let pwd2= $("#inputInvalid").val();
+	        if(pwd1 == pwd2){
+				if (emptyCheck()&&fn_emailChk($('[name=email]').val())){
 				var addFound = $('[name=address1]').val();
 				var addTyped = $('[name=address2]').val();
 				$('[name=address]').val(addFound + '/' +addTyped);
@@ -276,6 +329,9 @@ select {
 				$('#insert').submit();
 				
 			}
+	        }else{
+	        	alert('패스워드를 확인해주세요.');
+	        }
 		});
 	
 		
