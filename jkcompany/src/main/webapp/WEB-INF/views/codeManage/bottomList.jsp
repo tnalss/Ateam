@@ -59,8 +59,8 @@
 							</c:if>
 							<c:if test="${top.creater ne 'admin' }">
 								<tr>
-									<td class='text-center'><input type="text" value="${top.code_category }" name="code_category"/></td>
-									<td><input type="text" value="${top.code_name }" name="code_name"/></td>
+									<td class='text-center'><input type="text" class="form-control" value="${top.code_category }" name="code_category"/></td>
+									<td><input type="text" class="form-control" value="${top.code_name }" name="code_name"/></td>
 									<td>${top.create_date}</td>
 									<td>${top.emp_name eq null ? top.creater : top.emp_name }</td>
 								</tr>
