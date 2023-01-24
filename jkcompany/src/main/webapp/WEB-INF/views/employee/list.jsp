@@ -93,15 +93,15 @@ flex:0 0 auto;
 						검색</button>
 				</div>
 				<div class="col-4 mt-2">
-					<ul class=" d-flex align-items-center mb-0">
-						<li class=" px-2"><select name="pageList" class="w-px150  px-2">
+					<ul class=" d-flex align-items-center mb-0 justify-content-end">
+						<li class=""><select name="pageList" class="w-px150  px-2">
 								<c:forEach var='i' begin='1' end="6">
 									<option value="${i*10}"
 										${page.pageList eq i*10?' selected':'' }>${10*i}명씩</option>
 
 								</c:forEach>
 						</select></li>
-						<li class=" px-2"><select name="viewType" class="w-px150 px-2">
+						<li class=""><select name="viewType" class="w-px150 px-2">
 								<option value="list" ${page.viewType eq "list" ? " selected":"" }>리스트형태</option>
 								<option value="card" ${page.viewType eq "list" ? "" : " selected" }>카드형태</option>
 
@@ -183,18 +183,18 @@ flex:0 0 auto;
 										<div class="col-12 text-center">검색결과가 없습니다.</div>
 									
 								</c:if>
-<c:forEach var="vo" items="${ page.list }">
+<c:forEach var="vo" items="${page.list}">
           <div class="col-lg-2 col-md-6 d-flex p-3">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <img src="${vo.profile_path ne null ? 'vo.profile_path':'assets/img/user_profile.png'}" class="img-fluid p-2 profile ${vo.admin eq 'X0'? ' grayscale':' ' }" alt="">
+                <a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}"><img src="${vo.profile_path ne null ? vo.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile ${vo.admin eq 'X0'? ' grayscale':' ' }" alt=""></a>
                 <div class="social">
                   <a href="tel:${vo.phone}"><i class="bi bi-phone-fill"></i></a>
                   <a href="mailto:${vo.email}"><i class="bi bi-envelope-at-fill"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>${vo.emp_name }</h4>
+                <h4><a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}">${vo.emp_name }</a></h4>
                 <span>${vo.branch_name}/${vo.department_name}/${vo.rank_name }</span>
               </div>
             </div>
