@@ -65,7 +65,7 @@
 										<td class='text-center'>${vo.code_category }</td>
 										<td><a href='bottomCodeList.code?code=${vo.code_category}'>${vo.code_name }</a></td>
 										<td>${vo.create_date}</td>
-										<td>${vo.creater}</td>
+										<td>${vo.emp_name eq null ? vo.creater : vo.emp_name }</td>
 									</tr>
 								</c:forEach>
 							</tbody>

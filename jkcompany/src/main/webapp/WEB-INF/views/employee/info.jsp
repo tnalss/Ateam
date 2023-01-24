@@ -135,7 +135,7 @@
 											<div class="col-6"></div>
 											<div class="col-6">
 												<div class="mr-0">
-														<c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}' />
+														<c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}&viewType=${page.viewType}' />
 													<button type="button" class="btn btn-secondary"
 														onclick="location='list.emp?${params}'">사원목록</button>
 													<button type="button" class="btn btn-primary"

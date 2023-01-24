@@ -6,7 +6,10 @@
 
 <!-- 상위코드목록조회 -->
 <select id="topCodeList" resultType="code.CodeVO">
-	select * from tbl_top_code order by 1
+	select t.*, e.emp_name
+from tbl_top_code t left join tbl_emp e
+on t.creater = to_char(e.emp_no)
+order by 1
 </select>
 
 
@@ -24,6 +27,13 @@ select *
 from tbl_code
 where code_category = #{code}
 order by code_num asc
+</select>
+
+<!-- 상위코드 상세조회 -->
+<select id="topCodeInfo" resultType="code.CodeVO">
+	select t.*,e.emp_name from tbl_top_code t left join tbl_emp e
+	on t.creater =to_char(e.emp_no)
+	 where code_category = #{code}
 </select>
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>

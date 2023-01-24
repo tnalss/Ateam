@@ -187,14 +187,14 @@ flex:0 0 auto;
           <div class="col-lg-2 col-md-6 d-flex p-3">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}"><img src="${vo.profile_path ne null ? vo.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile ${vo.admin eq 'X0'? ' grayscale':' ' }" alt=""></a>
+                <a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}&viewType=${page.viewType}"><img src="${vo.profile_path ne null ? vo.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile ${vo.admin eq 'X0'? ' grayscale':' ' }" alt=""></a>
                 <div class="social">
                   <a href="tel:${vo.phone}"><i class="bi bi-phone-fill"></i></a>
                   <a href="mailto:${vo.email}"><i class="bi bi-envelope-at-fill"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4><a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}">${vo.emp_name }</a></h4>
+                <h4><a href="info.emp?id=${vo.emp_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}&viewType=${page.viewType}">${vo.emp_name }</a></h4>
                 <span>${vo.branch_name}/${vo.department_name}/${vo.rank_name }</span>
               </div>
             </div>

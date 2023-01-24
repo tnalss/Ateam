@@ -37,6 +37,8 @@ public class CodeManageController {
 	public String bottomCodeList(String code, Model model) {
 		//코드로 하위 코드 검색
 		List<CodeVO> list = sql.selectList("code.bottomCodeList",code);
+		model.addAttribute("top",sql.selectOne("code.topCodeInfo",code));
+		
 		model.addAttribute("list",list);
 		return "codeManage/bottomList";
 	}
