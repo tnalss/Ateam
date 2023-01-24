@@ -87,14 +87,7 @@ column-gap: 2rem;
 			</div>
 		</div>
 
-		<div class="row mx-0 mt-3">
-			<div class="col-sm-5 p-md-0"></div>
-			<div
-				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-				<button type="button" class="btn btn-primary"
-					onclick="location='newBottom.code'">신규 하위코드 등록</button>
-			</div>
-		</div>
+
 		<div class="row mt-3">
 			<div class="col-12 card p-0">
 				<div class="card-header">
@@ -157,7 +150,7 @@ $('.topModify').click(function(){
 				if (response) {
 					location = 'bottomCodeList.code?code='+'${top.code_category}';
 				} else {
-					alert('오류) 중복된 코드명 또는 입력 오류');
+					alert('오류) 업데이트 실패');
 				}
 			},
 			error : function(req, text) {

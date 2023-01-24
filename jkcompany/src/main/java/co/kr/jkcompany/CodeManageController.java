@@ -55,15 +55,25 @@ public class CodeManageController {
 		return "redirect:list.code";
 	}
 	
-	//코드 전체 조회
+	//상위 코드 수정
 	@ResponseBody
 	@RequestMapping("/updateTop.code")
 	public boolean updateTop(CodeVO vo) {
-		
 		int test = sql.update("code.updateTop",vo);
-		System.out.println(test);
-		
 		return test==1 ? true : false;
+	}
+	// 상위 코드 추가
+	//코드 전체 조회
+	@ResponseBody
+	@RequestMapping("/addTop.code")
+	public boolean addTop(CodeVO vo) {
+		int test = sql.selectOne("code.hasTop",vo);
+		if(test==1) {
+			return false;
+		}
+		sql.insert("code.insertTop",vo);
+		
+		return true;
 	}
 	
 }

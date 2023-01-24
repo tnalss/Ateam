@@ -54,7 +54,17 @@ UPDATE tbl_top_code
 SET code_name = #{code_name} , create_date= current_date, creater = #{emp_no}
 WHERE code_category = #{code_category}
 </update>
+<!-- 상위코드 유무 조회 -->
+<select id="hasTop" resultType="integer">
+select count(*) from tbl_top_code
+where code_category=#{code_category}
+</select>
 
+<!-- 상위 코드 신규 -->
+<insert id="insertTop">
+	insert into tbl_top_code (code_category,code_name,create_Date,creater)
+	values(#{code_category},#{code_name},current_date,#{emp_no})
+</insert>
 
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>
