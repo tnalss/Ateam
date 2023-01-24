@@ -138,7 +138,7 @@ public class EmployeeController {
 
 	// 신규사원등록
 	@RequestMapping("/insert.emp")
-	public String employee_insert(EmployeeVO vo, MultipartFile file ,HttpServletRequest request,CodeVO code) {
+	public String employee_insert(EmployeeVO vo, MultipartFile file ,HttpServletRequest request) {
 		if(file!=null) {
 			if(file.getSize()!=0) {
 			String path = common.fileUpload("profile",file,request);
@@ -146,7 +146,9 @@ public class EmployeeController {
 			}
 		}	
 		sql.insert("emp.insert", vo);
-		//sql.insert("emp.codeInsert", code);
+		String emp_no =sql.selectOne("emp.emp_no",vo);
+		vo.setEmp_no(emp_no);
+		sql.update("emp.orgtUpdate",vo);
 		return "redirect:info.emp?id=" + vo.getEmp_no();
 	}
 //	

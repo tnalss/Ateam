@@ -202,16 +202,17 @@ where emp_no=#{emp_no}
 </select>
 
 
-<!-- org 테이블 신규사원 코드 추가 -->
-<insert id="codeInsert">
-INSERT INTO tbl_org (emp_no,rank_code,branch_code,dept_code)
-VALUES (#{emp_no},#{rank_code},#{branch_code},#{dept_code})
-</insert>
+
 
 
 <update id="orgUpdate">
 UPDATE tbl_org
 SET rank_code=#{rank_code}, branch_code = #{branch_code},dept_code= #{dept_code}
+WHERE emp_no= #{emp_no}
+</update>
+<update id="orgtUpdate">
+UPDATE tbl_org
+SET rank_code=#{rank_name}, branch_code = #{branch_name},dept_code= #{department_name}
 WHERE emp_no= #{emp_no}
 </update>
 
