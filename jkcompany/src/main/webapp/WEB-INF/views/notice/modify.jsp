@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
+<style>
+.h-px300 {
+height: 300px;
+}
+</style>
+
 
   <main id="main">
 
@@ -30,21 +36,30 @@
       <h3>공지글 수정</h3>
 <form method='post' id='modify' action='update.no' enctype='multipart/form-data'>
 <input type='hidden' name='board_no' value='${vo.board_no}'>
-<table class='w-px1200'>
+<table class='table'>
 <tr><th class='w-px140'>제목</th>
-	<td><input type='text' name='board_title' class='full chk' title='제목' 
+	<td><input type='text' name='board_title' class='w-px300' title='제목' 
 				value="${vo.board_title}"></td>
 </tr>
+<tr>
+	<th>작성자</th>
+	<td>${vo.emp_name }</td>
+	</tr>
+	<tr>
+	<th>작성일</th>
+	<td>${vo.write_date }</td>
+	</tr>
+	
 <tr><th>내용</th>
-	<td><textarea name='board_content' class='full chk' title="내용">${vo.board_content}</textarea></td>
+	<td><textarea name='board_content' class='w-px1200 h-px300' title="내용">${vo.board_content}</textarea></td>
 </tr>
 
 </table>
 
 </form>
 <div class='btnSet'>
-	<a class='btn-fill save'>저장</a>
-	<a class='btn-empty' href='info.no?id=${vo.board_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>취소</a>
+	<a class='btn btn-primary save'>저장</a>
+	<a class='btn btn-secondary' href='info.no?id=${vo.board_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>취소</a>
 </div>
 <script>
 
