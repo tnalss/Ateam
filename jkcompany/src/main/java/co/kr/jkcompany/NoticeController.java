@@ -29,18 +29,35 @@ public class NoticeController {
 	@Autowired
 	private CommonService common;
 
+	//공지글수정저장처리 요청
+		@RequestMapping("/update.no")
+		public String update(NoticeVO vo, NoticePageVO page
+							, MultipartFile file, HttpServletRequest request){
+			sql.update("no.update", vo);
+			//응답화면연결
+			return "redirect:info.no?id=" + vo.getBoard_no();
+		}
+	
+	// 공지글수정화면 요청
+	@RequestMapping("/modify.no")
+	public String modify(Model model, int id, NoticePageVO page) {
+		// DB에서 해당 공지글을 조회한다 ->화면에 출력하도록 Model에 attribute로 담는다
+		model.addAttribute("vo", sql.selectOne("no.info", id));
+		return "notice/modify";
+	}
+
 	// 공지글등록(신규저장)처리 요청
 	@RequestMapping("/insert.no")
 	public String insert(NoticeVO vo, MultipartFile file, HttpServletRequest request) {
 		// 첨부된 파일이 있는 경우
 
 		sql.insert("no.insert", vo);
-		System.out.println("??");
+	
 		// 응답화면연결 - 목록화면
 		return "redirect:list.no";
 	}
 
-	// 신규공지글쓰기화면 
+	// 신규공지글쓰기화면
 	@RequestMapping("/new.no")
 	public String notice() {
 		return "notice/new";
