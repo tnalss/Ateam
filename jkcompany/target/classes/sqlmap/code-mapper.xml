@@ -35,6 +35,27 @@ order by code_num asc
 	on t.creater =to_char(e.emp_no)
 	 where code_category = #{code}
 </select>
+
+
+<!-- 소속 하위코드 삭제 -->
+<delete id="deleteBottom">
+	delete tbl_code
+	where code_category = #{id}
+</delete>
+
+<!-- 상위코드삭제 -->
+<delete id="deleteTop">
+	delete tbl_top_code
+	where code_category = #{id}
+</delete>
+
+<update id="updateTop">
+UPDATE tbl_top_code
+SET code_name = #{code_name} , create_date= current_date, creater = #{emp_no}
+WHERE code_category = #{code_category}
+</update>
+
+
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>
 select * from get_code_table (#{cate}) 

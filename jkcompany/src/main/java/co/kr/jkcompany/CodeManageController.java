@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import code.CodeVO;
 import common.CommonService;
@@ -41,6 +42,28 @@ public class CodeManageController {
 		
 		model.addAttribute("list",list);
 		return "codeManage/bottomList";
+	}
+	
+	
+	//상위 코드 삭제
+	@RequestMapping(value= "/deleteTop.code" , produces="text/html;charset=utf-8")
+	public String deleteTop(String id) {
+		
+		sql.delete("code.deleteBottom",id);
+		sql.delete("code.deleteTop",id);
+
+		return "redirect:list.code";
+	}
+	
+	//코드 전체 조회
+	@ResponseBody
+	@RequestMapping("/updateTop.code")
+	public boolean updateTop(CodeVO vo) {
+		
+		int test = sql.update("code.updateTop",vo);
+		System.out.println(test);
+		
+		return test==1 ? true : false;
 	}
 	
 }

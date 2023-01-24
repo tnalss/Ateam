@@ -3,7 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+<style>
+.buttons{
+column-gap: 2rem;
+}
+</style>
 <main id="main">
 
 	<!-- ======= Breadcrumbs ======= -->
@@ -37,6 +41,8 @@
 						코드 상세</h3>
 				</div>
 				<div class="card-body">
+				<form action="updateTop.code" method="post" id="updateTop">
+				<input type="hidden" name="emp_no" value="${loginInfo.emp_no }" />
 					<!-- 상위코드 상세부분 -->
 					<table class="table table-hover table-responsive-sm"
 						style="color: black; text-align: center;">
@@ -59,20 +65,29 @@
 							</c:if>
 							<c:if test="${top.creater ne 'admin' }">
 								<tr>
-									<td class='text-center'><input type="text" class="form-control" value="${top.code_category }" name="code_category"/></td>
-									<td><input type="text" class="form-control" value="${top.code_name }" name="code_name"/></td>
+									<td class='text-center'>${top.code_category }</td>
+									<td><input type="text" class="form-control chk" title="코드값란" value="${top.code_name }" name="code_name"/></td>
 									<td>${top.create_date}</td>
 									<td>${top.emp_name eq null ? top.creater : top.emp_name }</td>
 								</tr>
 							</c:if>
 						</tbody>
 					</table>
+					<c:if test="${top.creater ne 'admin' }">	
+		<div class="row mx-0 mt-3">
 
+			<div class="col-sm-12 d-flex justify-content-center buttons">
+				<button type="button" class="btn btn-primary topModify">수정</button>
+				<button type="button" class="btn btn-danger deleteTop">삭제</button>
+			</div>
+		</div>
+		</c:if>
+				</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="row mx-0">
+		<div class="row mx-0 mt-3">
 			<div class="col-sm-5 p-md-0"></div>
 			<div
 				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -126,7 +141,37 @@
 </main>
 <!-- End #main -->
 
-
+<script>
+$('.topModify').click(function(){
+	if (emptyCheck()){
+		$.ajax({
+			url : 'updateTop.code',
+			dataType:'json',
+			data : {
+				code_category : '${top.code_category}',
+				code_name : $('[name=code_name]').val(),
+				emp_no : $('[name=emp_no]').val()
+			},
+			success : function(response) {
+				console.log(response)
+				if (response) {
+					location = 'bottomCodeList.code?code='+'${top.code_category}';
+				} else {
+					alert('오류) 중복된 코드명 또는 입력 오류');
+				}
+			},
+			error : function(req, text) {
+				alert(text + ':' + req.status);
+			}
+		});
+	}	
+});
+$('.deleteTop').click(function() {
+	if (confirm('하위코드까지 모두 삭제됩니다.\n계속 하시겠습니까?')) {
+		location = 'deleteTop.code?id=${top.code_category}';
+	}
+});
+</script>
 
 
 
