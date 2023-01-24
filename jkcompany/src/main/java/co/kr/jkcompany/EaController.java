@@ -2,8 +2,6 @@ package co.kr.jkcompany;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.CommonService;
 import common.SimpleCode;
+import ea.EaFileVO;
 import ea.EaVO;
 
 @Controller
@@ -78,7 +77,7 @@ public class EaController {
 
 	}
 	
-	// 상신함 화면
+	// 결재함 화면
 		@RequestMapping(value = "/sign.ea", produces = "text/html;charset=utf-8")
 		public String ea_sign(Model model) {
 
@@ -99,6 +98,13 @@ public class EaController {
 			return "ea/retry";
 		}
 
+		//문서대장
+		@RequestMapping(value="/document.ea", produces="text/html;charset=utf-8")
+		public String ea_document(Model model) {
+			List<EaFileVO> flist = sql.selectList("ea.file_select_all");
+			model.addAttribute("flist",flist);
+			return "ea/document";
+		}
 
 //	//기안서 목록 불러오기
 //		@RequestMapping(value = "/ea_file_select", produces = "text/html;charset=utf-8")
