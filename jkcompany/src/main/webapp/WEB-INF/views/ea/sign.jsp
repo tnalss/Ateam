@@ -9,7 +9,9 @@
 	padding: 15px 0;
 	margin-bottom: 15px
 }
-
+.has-shadow.text-center {
+    width: 60px;
+}
 .project div[class*='col-'] {
 	border-right: 1px solid #eee
 }
@@ -69,6 +71,10 @@
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px
 		rgba(0, 0, 0, 0.05);
 	margin: 5px;
+}
+.project>.has-shadow:hover, .project>.has-shadow:focus {
+	box-shadow: 2px 2px 2px rgba(20, 120, 130, 0.4), -1px 0 2px
+		rgba(20, 120, 130, 0.4) !important;
 }
 </style>
 <main id="main">
@@ -179,7 +185,7 @@
 					<div class="project">
 						<div class="row bg-white has-shadow">
 							<div
-								class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
 								<div class="project-title d-flex align-items-center">
 									<div class="has-shadow text-center">
 										<small>${vo.ea_r_statuas}</small>
@@ -193,7 +199,7 @@
 									<span class="hidden-sm-down">${vo.ea_date}</span>
 								</div>
 							</div>
-							<div class="right-col col-lg-6 d-flex align-items-center">
+							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
 									<span class="hidden-sm-down">환경수질부</span>
 								</div>

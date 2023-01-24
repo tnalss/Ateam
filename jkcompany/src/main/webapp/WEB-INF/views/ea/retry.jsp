@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
@@ -10,8 +10,27 @@
 	margin-bottom: 15px
 }
 
+.has-shadow.text-center {
+	width: 60px;
+}
+
 .project div[class*='col-'] {
 	border-right: 1px solid #eee
+}
+
+.btn-warning {
+	margin-right: 5px;
+}
+
+.btn-glyphicon {
+	padding: 8px;
+	background: #ffffff;
+	margin-right: 4px;
+}
+
+.icon-btn {
+	padding: 1px 15px 2px;
+	border-radius: 50px;
 }
 
 .project .text h3 {
@@ -70,31 +89,37 @@
 		rgba(0, 0, 0, 0.05);
 	margin: 5px;
 }
+
+.project>.has-shadow:hover, .project>.has-shadow:focus {
+	box-shadow: 2px 2px 2px rgba(20, 120, 130, 0.4), -1px 0 2px
+		rgba(20, 120, 130, 0.4) !important;
+}
 </style>
-  <main id="main">
+<main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <!-- 경로를 나타내주는 부분입니다 해당하는 내용을 작성해주세요 -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
+	<!-- ======= Breadcrumbs ======= -->
+	<!-- 경로를 나타내주는 부분입니다 해당하는 내용을 작성해주세요 -->
+	<section id="breadcrumbs" class="breadcrumbs">
+		<div class="container">
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>회수함</h2>
-          <ol>
-            <li><a href="<c:url value='/'/>">홈</a></li>
-            <li>전자결재</li>
-          </ol>
-        </div>
+			<div class="d-flex justify-content-between align-items-center">
+				<h2>회수함</h2>
+				<ol>
+					<li><a href="<c:url value='/'/>">홈</a></li>
+					<li>전자결재</li>
+				</ol>
+			</div>
 
-      </div>
-    </section><!-- End Breadcrumbs -->
+		</div>
+	</section>
+	<!-- End Breadcrumbs -->
 
-		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
-    <!-- ======= Section ======= -->
-    <section id="" class="container">
-      <!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
-      <!-- 실질적으로 내용이 들어가는 부분 -->
-      <div class="row">
+	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
+	<!-- ======= Section ======= -->
+	<section id="" class="container">
+		<!-- 섹션의 id와 class는 알아서 추가 지정해주세요 -->
+		<!-- 실질적으로 내용이 들어가는 부분 -->
+		<div class="row">
 			<div class="col-12 col-lg-3">
 				<div class="card">
 					<div class="card-body">
@@ -104,13 +129,13 @@
 						<h5 class="my-3">전자 결재</h5>
 						<div class="fm-menu">
 							<div class="list-group list-group-flush">
-								<a href="draft.ea" class="list-group-item py-1"><i
-									class="bx bx-folder me-2"></i><span>상신함</span></a> <a
-									href="sign.ea" class="list-group-item py-1"><i
+								<a href="draft.ea" class="list-group-item py-1"> <i
+									class="bx bx-folder me-2"></i><span>상신함</span>
+								</a> <a href="sign.ea" class="list-group-item py-1"><i
 									class="bx bx-devices me-2"></i><span>결재함</span></a> <a
 									href="retry.ea" class="list-group-item py-1"><i
 									class="bx bx-analyse me-2"></i><span>회수함</span></a> <a
-									href="javascript:;" class="list-group-item py-1"><i
+									href="javascript:;" class="list-group-item py-1"> <i
 									class="bx bx-plug me-2"></i><span>공란함</span></a> <a
 									href="javascript:;" class="list-group-item py-1"><i
 									class="bx bx-trash-alt me-2"></i><span>참조함</span></a> <a
@@ -178,7 +203,7 @@
 					<div class="project">
 						<div class="row bg-white has-shadow">
 							<div
-								class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
 								<div class="project-title d-flex align-items-center">
 									<div class="has-shadow text-center">
 										<small>${vo.ea_status}</small>
@@ -192,15 +217,18 @@
 									<span class="hidden-sm-down">${vo.ea_date}</span>
 								</div>
 							</div>
-							<div class="right-col col-lg-6 d-flex align-items-center">
+							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
 									<span class="hidden-sm-down">환경수질부</span>
 								</div>
 								<div class="comments">
 									<span class="hidden-sm-down">부장</span>
 								</div>
-								<div class="name">
-									<span class="hidden-sm-down">여긴 또 뭐냐</span>
+								<div>
+									<a class="btn icon-btn btn-warning" href="#">상신</a>
+								</div>
+								<div>
+									<a class="btn icon-btn btn-danger" href="#">회수</a>
 								</div>
 							</div>
 						</div>
@@ -209,8 +237,10 @@
 			</div>
 		</div>
 
-    </section><!-- End Section -->
+	</section>
+	<!-- End Section -->
 
-   
 
-  </main><!-- End #main -->
+
+</main>
+<!-- End #main -->

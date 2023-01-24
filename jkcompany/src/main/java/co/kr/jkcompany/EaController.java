@@ -94,7 +94,7 @@ public class EaController {
 		//회수함 리스트
 		@RequestMapping(value="/retry.ea", produces="text/html;charset=utf-8")
 		public String ea_retry(Model model) {
-			List<EaVO> retry_list = sql.selectList("ea.retryboxlist",2);
+			List<EaVO> retry_list = sql.selectList("ea.retryboxlist",1);
 			model.addAttribute("retry_list",retry_list);
 			return "ea/retry";
 		}
