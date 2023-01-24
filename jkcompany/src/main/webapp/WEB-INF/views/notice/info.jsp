@@ -62,15 +62,13 @@
 </div>
 
     </section><!-- End Section -->
-
    
 <script type="text/javascript">
-
 
 $('.btn-delete').on('click', function(){
 	if( confirm('정말 삭제?') ){
 		location = 'delete.no?id=${vo.board_no}';
-		consol.log('여기옴?')
+		
 	}
 });
 </script>

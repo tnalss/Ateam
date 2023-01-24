@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import common.CommonService;
 import employee.EmployeePageVO;
@@ -21,12 +23,63 @@ import notice.NoticeVO;
 
 @Controller
 public class NoticeController {
-	@Autowired @Qualifier("hanul")
+	@Autowired
+	@Qualifier("hanul")
 	SqlSession sql;
 	@Autowired
 	private CommonService common;
-	
-		//조회하고 출력하는 예제
+
+	// 공지글등록(신규저장)처리 요청
+	@RequestMapping("/insert.no")
+	public String insert(NoticeVO vo, MultipartFile file, HttpServletRequest request) {
+		// 첨부된 파일이 있는 경우
+
+		sql.insert("no.insert", vo);
+		System.out.println("??");
+		// 응답화면연결 - 목록화면
+		return "redirect:list.no";
+	}
+
+	// 신규공지글쓰기화면 
+	@RequestMapping("/new.no")
+	public String notice() {
+		return "notice/new";
+	}
+
+	// 공지글 삭제
+	@RequestMapping("/delete.no")
+	public String delete(int id, NoticePageVO page, HttpSession session) {
+
+		sql.delete("no.delete", id);
+		return "redirect:list.no";
+	}
+
+	// 조회하고 출력하는 예제
+	@RequestMapping(value = "/list.no", produces = "text/html;charset=utf-8")
+	public String notice_list(HttpSession session, Model model, NoticePageVO page) {
+		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
+		session.setAttribute("notice", "no");
+		model.addAttribute("page", notice_list(page));
+		return "notice/list";
+	}
+
+	// 페이지 처리
+	public NoticePageVO notice_list(NoticePageVO page) {
+		page.setTotalList(sql.selectOne("no.total", page));
+		page.setList(sql.selectList("no.plist", page));
+		return page;
+	}
+
+	// 제목으로 상세내용
+	@RequestMapping(value = "/info.no", produces = "text/html;charset=utf-8")
+	public String notice_info(String id, Model model) {
+		NoticeVO vo = sql.selectOne("no.info", id);
+		sql.update("no.hits", id);
+		model.addAttribute("vo", vo);
+		return "notice/info";
+	}
+
+	// 조회하고 출력하는 예제
 //		@RequestMapping(value= "/list.no" , produces="text/html;charset=utf-8")
 //		public String notice_list(HttpSession session, Model model) {
 //			//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
@@ -37,40 +90,5 @@ public class NoticeController {
 //			//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 //			return "notice/list";
 //		}
-	
-	// 공지글 삭제
-	@RequestMapping("/delete.no")
-	public String delete( int id, NoticePageVO page, HttpSession session) { 
-		
-		sql.delete("no.delete", id);
-		
-		return "redirect:list.no";
-	}
-	
-		// 조회하고 출력하는 예제
-		@RequestMapping(value = "/list.no", produces = "text/html;charset=utf-8")
-		public String notice_list(HttpSession session, Model model,NoticePageVO page) {
-			// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-			session.setAttribute("notice", "no");
-			model.addAttribute("page", notice_list(page) );
-			return "notice/list";
-		}
-		
 
-		// 페이지 처리
-		public NoticePageVO notice_list(NoticePageVO page) {
-			page.setTotalList( sql.selectOne("no.total", page) ); 
-			page.setList( sql.selectList("no.plist", page) );
-			return page;
-		}
-		
-		
-		// 제목으로 상세내용
-		@RequestMapping(value= "/info.no" , produces="text/html;charset=utf-8")
-		public String notice_info(String id, Model model) {
-			NoticeVO vo = sql.selectOne("no.info",id);
-			sql.update("no.hits", id);
-			model.addAttribute("vo", vo);
-			return "notice/info";
-		}
 }
