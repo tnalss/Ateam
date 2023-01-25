@@ -11,6 +11,29 @@ on o.emp_no = e.emp_no
 where board_cate = 'O1'
 </select>
 
+<select id="total" resultType="integer">
+	SELECT count(*) FROM tbl_board where board_cate = 'O1'
+</select>
+
+
+<!-- 목록조회 번호 및 시작 과 끝 -->
+<select id="plist" resultType="notice.NoticeVO">
+SELECT * FROM 
+		(SELECT a.*,rownum AS rnum FROM (
+		SELECT
+			 b.board_no
+			 , b.board_content
+		     , b.board_title , b.EMP_NO
+		     , b.BOARD_HITS
+		     , to_char(write_date,'YYYY-MM-DD') write_date
+		FROM tbl_board b left outer join tbl_emp e
+        on b.emp_no = e.emp_no
+		WHERE board_cate ='O1'
+		ORDER BY board_no asc
+		) a  )b
+		WHERE rnum between #{beginList} and #{endList}
+		order by rnum desc
+</select>
 
 <!-- 익명게시판 목록 -->
 <select id="se_list" resultType='notice.NoticeVO'>
