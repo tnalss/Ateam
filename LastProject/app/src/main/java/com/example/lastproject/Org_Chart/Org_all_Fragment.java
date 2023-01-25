@@ -58,7 +58,7 @@ public class Org_all_Fragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (text_search.length() >=0){
-                new CommonMethod().setParams("keyword",text_search.getText().toString()).sendPost("org_all.org",(isResult, data) -> {
+                new CommonMethod().setParams("keyword",text_search.getText().toString()).sendPost("org_all_r.org",(isResult, data) -> {
                     list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>(){}.getType());
                     recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list,activity));
                     recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));

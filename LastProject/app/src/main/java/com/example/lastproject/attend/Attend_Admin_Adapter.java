@@ -59,21 +59,21 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
 
         if(list.get(position).getAttend_on()!=null) {
             holder.on.setText("출근"+list.get(position).getAttend_on().substring(11, 16));
-        } else {
-            holder.on.setText("");
-            holder.tv_on.setVisibility(View.GONE);
         }
 
 
         if(list.get(position).getAttend_off()!=null) {
             holder.off.setText("퇴근"+list.get(position).getAttend_off().substring(11, 16));
-        } else {
-            holder.off.setText("");
-            holder.tv_off.setVisibility(View.GONE);
         }
 
-        holder.now.setText(list.get(position).getAtt_state());
-
+        
+        if(  list.get(position).getWork_time()!=null){
+            holder.now.setText(list.get(position).getWork_time()+"시간");
+        }
+        if(list.get(position).getAtt_state()!= null)
+        {
+            holder.status.setText(list.get(position).getAtt_state());
+        }
 
     }
 
@@ -83,7 +83,7 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_emp_name, tv_emp_branch, tv_emp_dep, tv_emp_rank,now,date, on,off,tv_off, tv_on;
+        TextView tv_emp_name, tv_emp_branch, tv_emp_dep, tv_emp_rank,now,date, on,off,status;
         ImageView iv_emp_profile;
 
 
@@ -98,8 +98,9 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
-            tv_on = v.findViewById(R.id.tv_on);
-            tv_off=v.findViewById(R.id.tv_off);
+            //status = v.findViewById(R.id.status);
+
+
 
 
         }

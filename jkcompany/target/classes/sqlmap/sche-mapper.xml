@@ -22,6 +22,16 @@ order by SCHE_NO
 ]]>
 </select>
 
+<!-- 기간내 회사일정개수 -->
+<select id="countCompPeriod" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = 'C1' and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+]]>
+</select>
+
+
 <!-- 기간내 부서일정조회 -->
 <select id="deptPeriod" resultType="schedule.ScheduleVO">
 <![CDATA[
@@ -29,6 +39,22 @@ select *
 from tbl_sche
 where SCHE_type = #{dept_code} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 order by SCHE_NO
+]]>
+</select>
+
+<!-- 사번에 해당하는 부서의 전체 일정 조회 -->
+<select id="deptbyId" resultType="schedule.ScheduleVO">
+select *
+from tbl_sche
+where SCHE_type = (select dept_code from tbl_org where emp_no=#{id})
+</select>
+
+<!-- 사번에 해당하는 부서의 기간내 일정 개수 -->
+<select id="countDeptPeriod" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = (select dept_code from tbl_org where emp_no=#{id}) and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 ]]>
 </select>
 
@@ -42,6 +68,21 @@ order by SCHE_NO
 ]]>
 </select>
 
+<!-- 개인일정전체조회 -->
+<select id="personalbyId" resultType="schedule.ScheduleVO">
+select *
+from tbl_sche
+where SCHE_type = #{id}
+</select>
+
+<!-- 기간내 개인일정전체조회 -->
+<select id="countPeriodPersional" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = #{id} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+]]>
+</select>
 
 <insert id="dept_insert">
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)

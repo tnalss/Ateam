@@ -3,7 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+<style>
+.buttons{
+column-gap: 2rem;
+}
+</style>
 <main id="main">
 
 	<!-- ======= Breadcrumbs ======= -->
@@ -30,13 +34,61 @@
 	<section id="" class="container">
 		<!-- 섹션의 id와 class는 알아서 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
+		<div class="row">
+			<div class="col-12 card p-0">
+				<div class="card-header">
+					<h3 class="card-title text-center" style="font-weight: bold;">상위
+						코드 상세</h3>
+				</div>
+				<div class="card-body">
+				<form action="updateTop.code" method="post" id="updateTop">
+				<input type="hidden" name="emp_no" value="${loginInfo.emp_no }" />
+					<!-- 상위코드 상세부분 -->
+					<table class="table table-hover table-responsive-sm"
+						style="color: black; text-align: center;">
+						<thead>
+							<tr>
+								<th scope="col" width="50px">상위코드</th>
+								<th scope="col" width="100px">코드값</th>
+								<th scope="col" width="100px">생성일</th>
+								<th scope="col" width="150px">생성자</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${top.creater eq 'admin' }">
+								<tr>
+									<td class='text-center'>${top.code_category }</td>
+									<td>${top.code_name }</td>
+									<td>${top.create_date}</td>
+									<td>${top.emp_name eq null ? top.creater : top.emp_name }</td>
+								</tr>
+							</c:if>
+							<c:if test="${top.creater ne 'admin' }">
+								<tr>
+									<td class='text-center'>${top.code_category }</td>
+									<td><input type="text" class="form-control chk" title="코드값란" value="${top.code_name }" name="code_name"/></td>
+									<td>${top.create_date}</td>
+									<td>${top.emp_name eq null ? top.creater : top.emp_name }</td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
+					<c:if test="${top.creater ne 'admin' }">	
+		<div class="row mx-0 mt-3">
 
-
-		<div class="row mx-0">
-			<div class="col-sm-5 p-md-0">
-
-
+			<div class="col-sm-12 d-flex justify-content-center buttons">
+				<button type="button" class="btn btn-primary topModify">수정</button>
+				<button type="button" class="btn btn-danger deleteTop">삭제</button>
 			</div>
+		</div>
+		</c:if>
+				</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mx-0 mt-3">
+			<div class="col-sm-5 p-md-0"></div>
 			<div
 				class="col-sm-7 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 				<button type="button" class="btn btn-primary"
@@ -44,9 +96,10 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-12 card">
+			<div class="col-12 card p-0">
 				<div class="card-header">
-					<h3 class="card-title text-center" style="font-weight: bold;">하위 코드 목록</h3>
+					<h3 class="card-title text-center" style="font-weight: bold;">하위
+						코드 목록</h3>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -88,7 +141,37 @@
 </main>
 <!-- End #main -->
 
-
+<script>
+$('.topModify').click(function(){
+	if (emptyCheck()){
+		$.ajax({
+			url : 'updateTop.code',
+			dataType:'json',
+			data : {
+				code_category : '${top.code_category}',
+				code_name : $('[name=code_name]').val(),
+				emp_no : $('[name=emp_no]').val()
+			},
+			success : function(response) {
+				console.log(response)
+				if (response) {
+					location = 'bottomCodeList.code?code='+'${top.code_category}';
+				} else {
+					alert('오류) 중복된 코드명 또는 입력 오류');
+				}
+			},
+			error : function(req, text) {
+				alert(text + ':' + req.status);
+			}
+		});
+	}	
+});
+$('.deleteTop').click(function() {
+	if (confirm('하위코드까지 모두 삭제됩니다.\n계속 하시겠습니까?')) {
+		location = 'deleteTop.code?id=${top.code_category}';
+	}
+});
+</script>
 
 
 

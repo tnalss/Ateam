@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 
 
@@ -75,7 +76,7 @@
 
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">사번</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.emp_no }</div>
@@ -83,14 +84,14 @@
 											<hr />
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">성명</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.emp_name }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">성별</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.gender }</div>
@@ -98,21 +99,28 @@
 											<hr />
 
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">전화번호</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.phone }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">이메일</label>
 												</div>
 												<div class="col-md-8 col-6">${vo.email }</div>
 											</div>
 											<hr />
 											<div class="row">
-												<div class="col-sm-3 col-md-2 col-5">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
+													<label style="font-weight: bold;">주소</label>
+												</div>
+												<div class="col-md-8 col-6">${fn:replace(vo.address, '/', ' ')}</div>
+											</div>
+											<hr />
+											<div class="row">
+												<div class="col-sm-3 col-md-2 col-5 text-center">
 													<label style="font-weight: bold;">고용일</label>
 												</div>
 												<div class="col-md-8 col-6">
@@ -127,10 +135,11 @@
 											<div class="col-6"></div>
 											<div class="col-6">
 												<div class="mr-0">
+														<c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}&viewType=${page.viewType}' />
 													<button type="button" class="btn btn-secondary"
-														onclick="history.go(-1)">이전으로</button>
+														onclick="location='list.emp?${params}'">사원목록</button>
 													<button type="button" class="btn btn-primary"
-														onclick="location='modify.emp?id=${vo.emp_no}'">수정</button>
+														onclick="location='modify.emp?id=${vo.emp_no}&${params}'">수정</button>
 												</div>
 											</div>
 										</div>

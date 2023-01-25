@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-12 card">
+			<div class="col-12 card p-0">
 				<div class="card-header">
 					<h3 class="card-title text-center" style="font-weight: bold;">상위 코드 목록</h3>
 				</div>
@@ -65,7 +65,7 @@
 										<td class='text-center'>${vo.code_category }</td>
 										<td><a href='bottomCodeList.code?code=${vo.code_category}'>${vo.code_name }</a></td>
 										<td>${vo.create_date}</td>
-										<td>${vo.creater}</td>
+										<td>${vo.emp_name eq null ? vo.creater : vo.emp_name }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
