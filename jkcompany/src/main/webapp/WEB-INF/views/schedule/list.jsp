@@ -111,7 +111,7 @@
 								+title+"&sche_start="+moment(arg.start).format('YYYY/MM/DD')+"&sche_end="+moment(arg.end).format('YYYY/MM/DD'),
 						dataType : "json",
 						success : function(result) {
-							console.log('일정추가 완료 ');
+							//console.log('일정추가 완료 ');
 										/* var events = [];
 										if (result != null) {$.each(result,function(index,element) {
 											events.push({
@@ -157,7 +157,7 @@
 								url : "${pageContext.request.contextPath}/calendars?id="+${loginInfo.emp_no},
 								dataType : "json",
 								success : function(result) {
-									console.log(result);
+									//console.log(result);
 												var events = [];
 												if (result != null) {$.each(result,function(index,element) {
 													
@@ -172,7 +172,7 @@
 														color : element.color}); //.push()
 													}); //.each()
 
-													console.log(events);
+													//console.log(events);
 													}//if end                           
 														successCallback(events);
 													}//success: function end        
