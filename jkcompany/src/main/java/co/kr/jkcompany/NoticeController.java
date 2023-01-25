@@ -27,9 +27,10 @@ public class NoticeController {
 	private CommonService common;
 
 	// 답글쓰기
-	@RequestMapping("/reply.no")
-	public void reply_insert() {
-		
+	@RequestMapping("/reply_insert.no")
+	public String reply_insert(ReplyVO vo, Model model) {
+		model.addAttribute("board_no", sql.insert("re.reply_insert", vo));
+		return "redirect:info.no?id=" + vo.getBoard_no();
 	}
 
 	// 공지글수정저장처리 요청

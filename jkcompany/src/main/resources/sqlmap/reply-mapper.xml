@@ -12,7 +12,7 @@ order by 1 desc
 </select>
 
 <!-- 공지사항 댓글작성 -->
-<insert id="reply_no_insert">
+<insert id="reply_insert">
 insert into tbl_reply( BOARD_NO, EMP_NO, REPLY_CONTENT)
 values( #{board_no}, #{emp_no}, #{reply_content})
 </insert>
