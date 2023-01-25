@@ -4,6 +4,11 @@
 
 
 <!-- 전자결재 파일첨부 불러오기 -->
+<select id="file_select_all" resultType="ea.EaFileVO">
+select * from tbl_ea_file
+</select>
+
+<!-- 전자결재 파일첨부 불러오기 -->
 <select id="file_select" resultType="ea.EaFileVO">
 select * from tbl_ea_file where ea_num = #{ea_num}
 </select>
