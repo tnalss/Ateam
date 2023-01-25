@@ -48,12 +48,31 @@
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
 	<section id="" class="container">
-		<!-- 섹션의 id와 class는 알아서 지정해주세요 -->
-		<!-- 실질적으로 내용이 들어가는 부분 -->
+	
 		<div id='list-top'>
-			<button type="button" class="btn btn-primary"
+			<button type="button" class="btn btn-primary mb-3"
 				onclick="location='new.no'">글 작성</button>
 		</div>
+		
+		<!-- 검색 -->
+		<form method='post' action='list.emp' id="list">
+			<div id='list-top mt-3' class='w-px1200'>
+
+				<select class='w-px100' name='search'>
+					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
+					<option value='emp_no' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
+					<option value='emp_name'
+						${page.search eq 'content' ? 'selected':''}>작성자</option>
+				</select> <input type='text' class='w-px300' name='keyword'
+					value='${page.keyword}'>
+
+				<button type="button" class="btn btn-primary btn-search">
+					검색</button>
+			</div>
+			<input type='hidden' name='curPage' value='1'>
+		</form>
+		
+	<!-- 리스트 -->
 		<form method='post' action='list.no' id="list">
 		<input type='hidden' name='curPage' value='1'> 
 		</form>
@@ -96,8 +115,8 @@
 				</div>
 			</div>
 		</div>
-		
 
+		
 	</section>
 	<!-- End Section -->
 

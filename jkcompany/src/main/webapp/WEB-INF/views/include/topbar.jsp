@@ -44,7 +44,7 @@
 					</ul>
 				</li>
 				<li><a href="main.ea">전자결재</a></li>
-				<li><a href="portfolio.html">익명 게시판</a></li>
+				<li><a href="list.bo">익명 게시판</a></li>
 			
 				<li class="dropdown"><a href="#"><span>관리자</span>
 				<i class="bi bi-chevron-down"></i></a>

@@ -1,6 +1,5 @@
 package co.kr.jkcompany;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import common.CommonService;
-import employee.EmployeePageVO;
-import employee.EmployeeVO;
 import notice.NoticePageVO;
 import notice.NoticeVO;
+import notice.ReplyVO;
 
 @Controller
 public class NoticeController {
@@ -29,15 +29,15 @@ public class NoticeController {
 	@Autowired
 	private CommonService common;
 
-	//공지글수정저장처리 요청
-		@RequestMapping("/update.no")
-		public String update(NoticeVO vo, NoticePageVO page
-							, MultipartFile file, HttpServletRequest request){
-			sql.update("no.update", vo);
-			//응답화면연결
-			return "redirect:info.no?id=" + vo.getBoard_no();
-		}
-	
+
+	// 공지글수정저장처리 요청
+	@RequestMapping("/update.no")
+	public String update(NoticeVO vo, NoticePageVO page, MultipartFile file, HttpServletRequest request) {
+		sql.update("no.update", vo);
+		// 응답화면연결
+		return "redirect:info.no?id=" + vo.getBoard_no();
+	}
+
 	// 공지글수정화면 요청
 	@RequestMapping("/modify.no")
 	public String modify(Model model, int id, NoticePageVO page) {
@@ -52,7 +52,7 @@ public class NoticeController {
 		// 첨부된 파일이 있는 경우
 
 		sql.insert("no.insert", vo);
-	
+
 		// 응답화면연결 - 목록화면
 		return "redirect:list.no";
 	}
@@ -92,7 +92,9 @@ public class NoticeController {
 	public String notice_info(String id, Model model) {
 		NoticeVO vo = sql.selectOne("no.info", id);
 		sql.update("no.hits", id);
+		List<ReplyVO> reply = sql.selectList("re.reply_list", id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("notice", reply);
 		return "notice/info";
 	}
 

@@ -31,36 +31,25 @@
 		<!-- 섹션의 id와 class는 알아서 지정해주세요 -->
 		<!-- 실질적으로 내용이 들어가는 부분 -->
 		<h3 class="text-center">익명게시판</h3>
-		<div id='list-top'>
-			<button type="button" class="btn btn-primary"
-				onclick="location='new.no'">글 작성</button>
+		<div id='list-top' style='margin-bottom: 1rem;'>
+			<button type="button" class="btn btn-primary" onclick="location='new.no'" >글 작성</button>
 		</div>
 
-		<table class='table table-hover'>
-			<colgroup>
-				<col width='80px'>
-				<col width='200px'>
-				<col width="250px">
-				<col width='120px'>
-				<col width='120px'>
-			</colgroup>
-			<tr class='text-center'>
-				<th>번호</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th>날짜</th>
-			</tr>
+		<div class="row">
 			<c:forEach items='${list}' var='vo'>
-				<tr class='text-center'>
-					<td class='text-center'>${vo.board_no }</td>
-					<td><a href='info.notice?id=${vo.emp_no}'>${vo.board_title }</a></td>
-					<td>${vo.board_content }</td>
-					<td><fmt:formatDate pattern="yyyy/MM/dd"
-							value="${vo.write_date }" /></td>
-				</tr>
+				 <div class="col-4">
+         		 <div class="card" style='margin-top: 1rem;'>
+         		   <div class="card-header">
+            		 익명게시판
+           		 </div>
+           		 <div class="card-body">
+             	<p style='font-size: 23px;'><a href='info.notice?id=${vo.emp_no}'>${vo.board_title }</a></p>
+              <a href='info.notice?id=${vo.emp_no}'><span class="card-text">${vo.board_content }</span></a>
+            </div>
+          </div>
+        </div>
 			</c:forEach>
-		</table>
-		
+        </div>
 
 	</section>
       

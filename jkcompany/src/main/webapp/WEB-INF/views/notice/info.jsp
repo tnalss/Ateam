@@ -61,6 +61,41 @@
 	</c:if>
 </div>
 
+
+
+
+
+	<!-- 댓글 -->
+	<div id='reply.no' class="mt-4">
+   <p style='font-size: 22px;'>댓글</p>
+   
+   <c:forEach items='${notice }' var='reply'>
+   <div class="col-6">
+          <div class="card mt-3">
+            <div class="row no-gutters">
+              <div class="col-2 mt-2">
+                <img src="assets/img/user_profile.png" alt="" class="card-img" />
+                <p class='text-center'>${reply.emp_name }</p>
+              </div>
+              <div class="col-10">
+                <div class="card-body">
+                  <p class="card-text">${reply.reply_content }</p>
+                </div>
+                <div class="text-end" style='margin: 10px;'>
+                 <p class="card-text">2022.2.22</p>
+                <a class='btn btn-primary' href='#'>수정</a>
+				<a class='btn btn-danger btn-delete'>삭제</a>
+				</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          </c:forEach>
+          
+          </div>
+     
+
     </section><!-- End Section -->
    
 <script type="text/javascript">
