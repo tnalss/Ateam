@@ -215,7 +215,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.menu23.setOnClickListener(this);
         binding.menu31.setOnClickListener(this);
         binding.menu32.setOnClickListener(this);
-
+        binding.menu33.setOnClickListener(this);
+        
         binding.ivEmpDetail.setOnClickListener(this);
         binding.flOnOff.setOnClickListener(this);
         //버거메뉴
@@ -259,7 +260,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //조직도 눌렀을때 조직도 화면으로
            Intent orgIntent = new Intent(activity, Org_MainActivity.class);
            startActivity(orgIntent);
-        } else if(v.getId() == R.id.iv_burger){
+        }else if(v.getId() == R.id.menu3_3){
+            //출퇴근 화면으로
+            activity.btm_nav.setSelectedItemId(R.id.btm_item3);
+        }  else if(v.getId() == R.id.iv_burger){
             binding.draw.openDrawer(Gravity.RIGHT);
         } else if(v.getId() == R.id.ll_logout){
             //버거메뉴 로그아웃
