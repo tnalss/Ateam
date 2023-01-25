@@ -65,6 +65,8 @@ public class ScheduleController {
             event.put("title", each.getSche_title());
             event.put("end",each.getSche_end());
             event.put("color","#00FF00");
+            event.put("ep1", each.getSche_type());
+            event.put("ep2", each.getSche_no());
             eventList.add(event);
 		}
         for (ScheduleVO each : department) {
@@ -73,6 +75,8 @@ public class ScheduleController {
             event.put("title", each.getSche_title());
             event.put("end",each.getSche_end());
             event.put("color","#FF0000");
+            event.put("ep1", each.getSche_type());
+            event.put("ep2", each.getSche_no());
             eventList.add(event);
 		}
         for (ScheduleVO each : personal) {
@@ -81,8 +85,19 @@ public class ScheduleController {
             event.put("title", each.getSche_title());
             event.put("end",each.getSche_end());
             event.put("color","#0000FF");
+            event.put("ep1", each.getSche_type());
+            event.put("ep2", each.getSche_no());
             eventList.add(event);
 		}
         return eventList;
     }
+	
+	
+	
+	@RequestMapping(value= "/deleteOne.sche" , produces="text/html;charset=utf-8")
+	public String delete(ScheduleVO vo){
+		
+		sql.delete("sche.deleteOne",vo);
+		return "redirect:list.sche";
+	}
 }
