@@ -30,9 +30,9 @@
       
       
     </section><!-- End Breadcrumbs -->
-	<section id="header" >
+	<!-- <section id="header" >
 		
-	</section>
+	</section> -->
 		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
     <!-- ======= Section ======= -->
     <section id="main" class="container">
@@ -47,13 +47,13 @@
 					</div>
 					<h5 class="my-3">전자 결재</h5>
 					<div class="fm-menu">
-						<div class="list-group list-group-flush"> <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-folder me-2"></i><span>기안함</span></a>
-							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-devices me-2"></i><span>결재함</span></a>
-							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-analyse me-2"></i><span>회수함</span></a>
+						<div class="list-group list-group-flush"> <a href="draft.ea" class="list-group-item py-1"><i class="bx bx-folder me-2"></i><span>상신함</span></a>
+							<a href="sign.ea" class="list-group-item py-1"><i class="bx bx-devices me-2"></i><span>결재함</span></a>
+							<a href="retry.ea" class="list-group-item py-1"><i class="bx bx-analyse me-2"></i><span>회수함</span></a>
 							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-plug me-2"></i><span>공란함</span></a>
 							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-trash-alt me-2"></i><span>참조함</span></a>
 							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-image me-2"></i><span>부서수신함</span></a>
-							<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-file me-2"></i><span>문서대장</span></a>
+							<a href="document.ea" class="list-group-item py-1"><i class="bx bx-file me-2"></i><span>문서대장</span></a>
 						</div>
 					</div>
 				</div>

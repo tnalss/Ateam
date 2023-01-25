@@ -22,8 +22,7 @@ public class EaController {
 	SqlSession sql;
 	@Autowired
 	private CommonService common;
-	
-	
+
 //	//조회하고 출력하는 예제
 //		@RequestMapping(value= "/main.ea" , produces="text/html;charset=utf-8")
 //		public String emp_list(HttpSession session, Model model) {
@@ -40,39 +39,67 @@ public class EaController {
 //			//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 //			return "employee/list";
 //		}
-		
-		//전자결재 홈화면
-		@RequestMapping(value= "/main.ea" , produces="text/html;charset=utf-8")
-		public String ea_main(HttpSession session, Model model) {
-		
-			//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-			session.setAttribute("cate", "ea" );
-			
-			List<EaVO> list = sql.selectList("ea.recentlist",2);
-			model.addAttribute("list",list);
-			
-			//default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
-			//리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
-			return "ea/main";
-		}
-		
-		//전자결재 상신작성 화면
-		@RequestMapping(value= "/write.ea" , produces="text/html;charset=utf-8")
-		public String ea_write(HttpSession session, Model model) {
-		
-			
-			List<SimpleCode> doc_list = sql.selectList("emp.codeList","P"); 
-			model.addAttribute("doc_list",doc_list);
-			
-			//default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
-			//리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
-			return "ea/write";
-			
-		}
+
+	// 전자결재 홈화면
+	@RequestMapping(value = "/main.ea", produces = "text/html;charset=utf-8")
+	public String ea_main(Model model) {
+
+		List<EaVO> list = sql.selectList("ea.recentlist", 2);
+		model.addAttribute("list", list);
+
+		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
+		return "ea/main";
+	}
+
+	// 전자결재 상신작성 화면
+	@RequestMapping(value = "/write.ea", produces = "text/html;charset=utf-8")
+	public String ea_write(Model model) {
+
+		List<SimpleCode> doc_list = sql.selectList("emp.codeList", "P");
+		model.addAttribute("doc_list", doc_list);
+
+		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
+		return "ea/write";
+
+	}
+
+	// 상신함 화면
+	@RequestMapping(value = "/draft.ea", produces = "text/html;charset=utf-8")
+	public String ea_draft(Model model) {
+
+		List<EaVO> draft_list = sql.selectList("ea.recentlist", 2);
+		model.addAttribute("draft_list", draft_list);
+
+		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
+		return "ea/draft";
+
+	}
 	
+	// 상신함 화면
+		@RequestMapping(value = "/sign.ea", produces = "text/html;charset=utf-8")
+		public String ea_sign(Model model) {
+
+			List<EaVO> sign_list = sql.selectList("ea.signboxlist", 2);
+			model.addAttribute("sign_list", sign_list);
+
+			// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
+			// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
+			return "ea/sign";
+
+		}
 		
-		
-		
+		//회수함 리스트
+		@RequestMapping(value="/retry.ea", produces="text/html;charset=utf-8")
+		public String ea_retry(Model model) {
+			List<EaVO> retry_list = sql.selectList("ea.retryboxlist",1);
+			model.addAttribute("retry_list",retry_list);
+			return "ea/retry";
+		}
+
+
 //	//기안서 목록 불러오기
 //		@RequestMapping(value = "/ea_file_select", produces = "text/html;charset=utf-8")
 //		public String ea_file_select(String ea_num) {

@@ -127,9 +127,5 @@ public class MyInfoFragment extends Fragment {
 
         return binding.getRoot();
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding=null;
-    }
+
 }

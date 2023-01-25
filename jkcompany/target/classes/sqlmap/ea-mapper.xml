@@ -100,7 +100,7 @@ order by ea_date desc
 select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
 GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
 from tbl_ea e
-where ea_receiver = #{no}
+where ea_receiver = #{no} and e.ea_r_statuas != 'E4'
 order by ea_date desc
 </select>
 

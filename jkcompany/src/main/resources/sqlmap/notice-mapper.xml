@@ -11,14 +11,29 @@ on o.emp_no = e.emp_no
 where board_cate = 'O0'
 </select>
 
+<select id="total" resultType="integer">
+	SELECT count(*) FROM tbl_board where board_cate = 'O0'
+</select>
 
-<!-- 익명게시판 목록 -->
-<select id="se_list" resultType='notice.NoticeVO'>
-select *
-from tbl_board
-where board_cate = 'O1' 
-order by 1 desc
-</select> 
+
+<!-- 목록조회 번호 및 시작 과 끝 -->
+<select id="plist" resultType="notice.NoticeVO">
+SELECT * FROM 
+		(SELECT a.*,rownum AS rnum FROM (
+		SELECT e.emp_name
+			 ,b.board_no
+		     , b.board_title , b.EMP_NO
+		     , b.BOARD_HITS
+		     , to_char(write_date,'YYYY-MM-DD') write_date
+		FROM tbl_board b left outer join tbl_emp e
+        on b.emp_no = e.emp_no
+		WHERE board_cate ='O0'
+		ORDER BY board_no asc
+		) a  )b
+		WHERE rnum between #{beginList} and #{endList}
+		order by rnum desc
+</select>
+
 <!-- 글쓰기 -->
 <insert id="se_insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)
@@ -45,7 +60,7 @@ END;
 	</insert>
 
 <!-- 공지사항 / 익명게시판 내용 -->
-<select id="no_info" resultType="notice.NoticeVO">
+<select id="info" resultType="notice.NoticeVO">
 select o.*, e.emp_name
 from tbl_board o
 left join tbl_emp e 

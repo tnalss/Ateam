@@ -8,5 +8,5 @@ import lombok.Setter;
 
 @Getter @Setter
 public class EmployeePageVO extends PageVO{
-	private List<EmployeeVO> list;
+	public List<EmployeeVO> list;
 }

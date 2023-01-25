@@ -6,7 +6,7 @@ function emptyCheck(){
 			
 			
 			var title =    $(this).attr('placeholder') ?  $(this).attr('placeholder') :$(this).attr('title') ;
-			alert(title + ' 입력하세요');
+			alert(title + '을 입력하세요');
 			$(this).val('');
 			$(this).focus();
 			ok = false;

@@ -8,7 +8,6 @@
 
 <tiles:insertAttribute name="header" />
 <title>JK Company ${title}</title>
-<link rel='icon' type='image/x-icon' href='img/hanul.ico'>
 <link href='css/common.css?<%=new java.util.Date() %>' rel="stylesheet" type="text/css">
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"  />

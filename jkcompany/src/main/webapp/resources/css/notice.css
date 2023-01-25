@@ -1,9 +1,0 @@
-@charset "UTF-8";
-
-.bo_title {
-	width:70px;
-      padding:0 5px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-}
