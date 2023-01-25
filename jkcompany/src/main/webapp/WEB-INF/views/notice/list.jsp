@@ -55,7 +55,7 @@
 		</div>
 		
 		<!-- 검색 -->
-		<form method='post' action='list.emp' id="list">
+		<form method='post' action='list.no' id="list">
 			<div id='list-top mt-3' class='w-px1200'>
 
 				<select class='w-px100' name='search'>

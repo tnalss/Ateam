@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-
+#comment-list span { float: right; }
 </style>
   <main id="main">
 
@@ -16,7 +16,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>공지사항</h2>
+          <h2>상세내용</h2>
           <ol>
             <li><a href="<c:url value='/'/>">홈</a></li>
             <li>공지사항</li>
@@ -29,13 +29,12 @@
 		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
     <!-- ======= Section ======= -->
     <section id="" class="container">
-     <h3>공지글안내</h3>
+     <h3>게시판 내용</h3>
 <table class='table table-hover'>
 <tr><th class='w-px140'>제목</th>
 	<td colspan='5'>${vo.board_title}</td>
 </tr>
-<tr><th>작성자</th>
-	<td>${vo.emp_name}</td>
+<tr>
 	<th class='w-px160'>작성일자</th>
 	<td class='w-px160'>${vo.write_date}</td>
 	<th class='w-px140'>조회수</th>
@@ -49,22 +48,15 @@
 <c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'/>
 <div class='btnSet'>
 	<button type="button" class="btn btn-primary"
-				onclick="location='list.no'">공지목록 </button>
+				onclick="location='list.bo'">게시판 목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->
 	<c:if test='${loginInfo.emp_name eq vo.emp_name}'>
 	<a class='btn btn-primary' href='modify.no?id=${vo.board_no}'>정보수정</a>
 	<a class='btn btn-danger btn-delete'>정보삭제</a>
 	</c:if>
 	<!-- 로그인한 경우 답글쓰기 가능 -->
-	
 	<c:if test='${ ! empty loginInfo }'>
-	<form action="reply.no" method="post" id="insertReply">
-	<div class='mt-4'>
-	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_text' >
-	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-	<a class='btn btn-primary reply_btn'>답글쓰기</a>
-	</div>
-	</form>
+	<a class='btn btn-primary' href='reply.no?id=${vo.board_no}'>답글쓰기</a>
 	</c:if>
 </div>
 
@@ -106,13 +98,6 @@
     </section><!-- End Section -->
    
 <script type="text/javascript">
-$('.reply_btn').on('click', function(){
-	if( confirm('댓글을 등록하시겠습니까?') ) {
-		$('#insertReply').submit();
-		//location = 'reply_insert.no'
-	}
-});
-
 
 $('.btn-delete').on('click', function(){
 	if( confirm('정말 삭제?') ){

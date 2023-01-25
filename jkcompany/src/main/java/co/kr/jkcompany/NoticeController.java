@@ -13,9 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import common.CommonService;
 import notice.NoticePageVO;
 import notice.NoticeVO;
@@ -29,6 +26,11 @@ public class NoticeController {
 	@Autowired
 	private CommonService common;
 
+	// 답글쓰기
+	@RequestMapping("/reply.no")
+	public void reply_insert() {
+		
+	}
 
 	// 공지글수정저장처리 요청
 	@RequestMapping("/update.no")
@@ -97,17 +99,5 @@ public class NoticeController {
 		model.addAttribute("notice", reply);
 		return "notice/info";
 	}
-
-	// 조회하고 출력하는 예제
-//		@RequestMapping(value= "/list.no" , produces="text/html;charset=utf-8")
-//		public String notice_list(HttpSession session, Model model) {
-//			//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-//			session.setAttribute("notice", "no" );
-//			List<NoticeVO> list = sql.selectList("no.list");
-//			//조회해온 값을 모델로 list라는 곳에 담았습니다.
-//			model.addAttribute("list", list);			
-//			//리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
-//			return "notice/list";
-//		}
 
 }

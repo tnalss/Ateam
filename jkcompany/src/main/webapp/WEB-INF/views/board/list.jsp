@@ -32,24 +32,43 @@
 		<!-- 실질적으로 내용이 들어가는 부분 -->
 		<h3 class="text-center">익명게시판</h3>
 		<div id='list-top' style='margin-bottom: 1rem;'>
-			<button type="button" class="btn btn-primary" onclick="location='new.no'" >글 작성</button>
+			<button type="button" class="btn btn-primary" onclick="location='new.bo'" >글 작성</button>
 		</div>
 
+		<!-- 검색 -->
+ <form method='post' action='list.bo' id="list">
+			<div id='list-top mt-3' class='w-px1200'>
+
+				<select class='w-px100' name='search'>
+					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
+					<option value='board_title' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
+					<option value='board_content'
+						${page.search eq 'content' ? 'selected':''}>내용</option>
+				</select> <input type='text' class='w-px300' name='keyword'
+					value='${page.keyword}'>
+
+				<button type="button" class="btn btn-primary btn-search">
+					검색</button>
+			</div>
+			<input type='hidden' name='curPage' value='1'>
+		</form>
+
 		<div class="row">
-			<c:forEach items='${list}' var='vo'>
+			<c:forEach items='${page.list}' var='vo'>
 				 <div class="col-4">
          		 <div class="card" style='margin-top: 1rem;'>
          		   <div class="card-header">
-            		 익명게시판
+            		 <p style='font-size: 20px;'><a href='info.board?id=${vo.board_no}'>${vo.board_title }</a></p>
            		 </div>
            		 <div class="card-body">
-             	<p style='font-size: 23px;'><a href='info.notice?id=${vo.emp_no}'>${vo.board_title }</a></p>
-              <a href='info.notice?id=${vo.emp_no}'><span class="card-text">${vo.board_content }</span></a>
+             	
+              <a href='info.board?id=${vo.board_no}'><span class="card-text">${vo.board_content }</span></a>
             </div>
           </div>
         </div>
 			</c:forEach>
         </div>
+        <jsp:include page="/WEB-INF/views/include/page.jsp" />
 
 	</section>
       
