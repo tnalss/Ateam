@@ -2,17 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%
+Date nowTime = new Date();
+SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
+
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
 .pricing .container button[type=submit] {
-    background: #f03c02;
-    border: 0;
-    padding: 10px 24px;
-    color: #fff;
-    transition: 0.4s;
-    border-radius: 4px;
+	background: #f03c02;
+	border: 0;
+	padding: 10px 24px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
 }
+#time {
+color:#fff;
+}	
 </style>
 
 <main id="main">
@@ -29,32 +39,32 @@
 			</div>
 			</ol>
 		</div>
-
 	</section>
 	<!-- End Breadcrumbs -->
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
 	<div class='container'>
-		<h2>내 출퇴근 기록 조회</h2>
 		<section id="pricing" class="pricing">
 			<div class="container">
 				<div class="text-center">
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" float:left width:50%>
+					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
 						<div class="box featured aos-init aos-animate" data-aos="fade-up">
-							<h3>로그인한 회원의 이름</h3> 							
+							<h2 id="time"><%=sf.format(nowTime)%></h2>						
+							<h3></h3>					
+							
 						</div>
 					</div>
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" float:left  width:50%> 
-					<img src="assets/img/img_att.JPG" alt="" class="img-fluid"
-						width="320px" height="175px">
-					</div>					
+					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
+						<img src="assets/img/img_att.JPG" alt="" class="img-fluid"
+							width="320px" height="175px">
+					</div>
 				</div>
 				<button type="submit">Send Message</button>
 			</div>
 		</section>
 	</div>
-<section id="blog" class="blog">
+	<section id="blog" class="blog">
 		<div class="container">
 			<div class="blog-author d-flex align-items-center">
 				<img src="assets/img/blog/blog-author.jpg"
@@ -115,12 +125,12 @@
 						</h3>
 						<h4>출퇴근코드 =W4 아닌 값 건수 보여줍니다</h4>
 						<p class="description">자세히보기</p>
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>	
+	</section>
 </main>
 <!-- End main -->
 
