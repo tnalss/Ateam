@@ -7,6 +7,9 @@
 .buttons {
 	column-gap: 2rem;
 }
+i{
+color: red;
+}
 </style>
 
 <main id="main">
@@ -136,7 +139,7 @@
 						<td><input type="text" class="form-control" name="code_value2" /></td>
 						<td class="today"></td>
 						<td>${loginInfo.emp_name}</td>
-						<td><i class="bi bi-plus-circle addBottom"></i></td>
+						<td><i class="bi bi-plus-circle addBottom" style="color:#0d6efd"></i></td>
 						
 						
 						</tr>

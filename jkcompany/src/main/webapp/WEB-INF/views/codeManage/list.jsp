@@ -70,7 +70,7 @@ color: red;
 								<td><input type="text" class="form-control chk" title="상위코드값란" name="code_name"/></td>
 								<td class="today"></td>
 								<td>${loginInfo.emp_name}</td>
-								<td><i class="bi bi-plus-circle addTop"></i></td>
+								<td><i class="bi bi-plus-circle addTop" style="color:#0d6efd"></i></td>
 							
 							
 								</tr>
