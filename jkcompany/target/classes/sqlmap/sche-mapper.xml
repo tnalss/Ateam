@@ -107,6 +107,11 @@ insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_e
 values(#{emp_no}, #{emp_no} , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
 </insert>
 
+<insert id="insertOne">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_Start,sche_end,sche_status)
+values(#{emp_no}, #{emp_no} , #{sche_title}, #{sche_start}, #{sche_end},'L1')
+</insert>
+
 <!-- 스케줄 번호에 해당하는 사원명 찾아줌 -->
 <select id="findName" resultType="String">
 Select emp_name from tbl_Emp

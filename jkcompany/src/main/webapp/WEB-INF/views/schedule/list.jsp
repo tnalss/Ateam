@@ -21,6 +21,8 @@
 }
 
 </style>
+
+<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 <main id="main">
 
 	<!-- ======= Breadcrumbs ======= -->
@@ -101,12 +103,41 @@
 							allDay : arg.allDay,
 							backgroundColor : "yellow",
 							textColor : "blue"})
+							console.log(arg.start);
+							/*여기에서 ajax하면될듯  */
+							$.ajax({
+						type : "post",
+						url : "${pageContext.request.contextPath}/insertOne.sche?emp_no="+${loginInfo.emp_no}+"&sche_title="
+								+title+"&sche_start="+moment(arg.start).format('YYYY/MM/DD')+"&sche_end="+moment(arg.end).format('YYYY/MM/DD'),
+						dataType : "json",
+						success : function(result) {
+							console.log('일정추가 완료 ');
+										/* var events = [];
+										if (result != null) {$.each(result,function(index,element) {
+											events.push({
+												title : title,
+												start : element.start,
+												end : element.end,
+												sche_type : element.ep1,
+												sche_no : element.ep2,
+												//url : "${pageContext.request.contextPath }/deleteOne.sche?sche_no="+element.ep2,
+												color : element.color}); //.push()
+											}); //.each()
+
+											console.log(events);
+											}//if end                           
+												successCallback(events);*/
+											}//success: function end         
+										});	
+							
+							/*추가 ajax끝  */
+							
 							}
 							calendar.unselect()},
 				eventClick : function(arg) {
 					// 있는 일정 클릭시,
-					console.log("#등록된 일정 클릭#");
-					console.log(arg.event);
+					//console.log("#등록된 일정 클릭#");
+					//console.log(arg.event);
 
 					if (confirm('일정을 삭제하시겠습니까?')) {
 						//arg.event.remove()

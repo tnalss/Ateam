@@ -1,5 +1,6 @@
 package co.kr.jkcompany;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +65,7 @@ public class ScheduleController {
         	event.put("start", each.getSche_start());
             event.put("title", each.getSche_title());
             event.put("end",each.getSche_end());
-            event.put("color","#00FF00");
+            event.put("color","#764F82");
             event.put("ep1", each.getSche_type());
             event.put("ep2", each.getSche_no());
             eventList.add(event);
@@ -98,6 +99,15 @@ public class ScheduleController {
 	public String delete(ScheduleVO vo){
 		
 		sql.delete("sche.deleteOne",vo);
+		return "redirect:list.sche";
+	}
+	
+
+	//개인일정추가 
+	@RequestMapping(value= "/insertOne.sche" , produces="text/html;charset=utf-8")
+	public String insertOne(ScheduleVO vo){
+		
+		sql.insert("sche.insertOne",vo);
 		return "redirect:list.sche";
 	}
 }
