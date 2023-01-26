@@ -26,12 +26,13 @@ public class BoardController {
 	@Autowired
 	private CommonService common;
 
-	// 댓글 수정
-	@RequestMapping("/reply_update.bo")
-	public String reply_delete(Model model, int id) {
-		model.addAttribute("vo", sql.selectOne("re.info", id));
-		return "board/modify";
-	}
+	// 공지글수정저장처리 요청
+		@RequestMapping("/reply_update.bo")
+		public String update(ReplyVO vo) {
+			sql.update("re.reply_update", vo);
+			// 응답화면연결
+			return "redirect:info.bo?id=" + vo.getBoard_no();
+		}
 
 	// 댓글 삭제
 	@RequestMapping("/reply_delete.bo")

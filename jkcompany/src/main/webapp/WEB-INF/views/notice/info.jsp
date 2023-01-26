@@ -48,8 +48,8 @@
 				onclick="location='list.no'">공지목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->
 	<c:if test='${loginInfo.emp_name eq vo.emp_name}'>
-	<a class='btn btn-primary' href='modify.no?id=${vo.board_no}'>정보수정</a>
-	<a class='btn btn-danger btn-delete'>정보삭제</a>
+	<a class='btn btn-primary' href='modify.no?id=${vo.board_no}'>수정</a>
+	<a class='btn btn-danger btn-delete'>공지삭제</a>
 	</c:if>
 	<!-- 로그인한 경우 답글쓰기 가능 -->
 	

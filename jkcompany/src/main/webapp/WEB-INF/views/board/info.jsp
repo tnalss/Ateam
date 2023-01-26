@@ -48,17 +48,17 @@
 				onclick="location='list.bo'">글 목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->
 	<c:if test='${loginInfo.emp_name eq vo.emp_name}'>
-	<a class='btn btn-primary' href='modify.bo?id=${vo.board_no}'>정보수정</a>
-	<a class='btn btn-danger btn-delete'>정보삭제</a>
+	<a class='btn btn-primary' href='modify.bo?id=${vo.board_no}'>수정</a>
+	<a class='btn btn-danger btn-delete'>글삭제</a>
 	</c:if>
 	<!-- 로그인한 경우 답글쓰기 가능 -->
-	
 	<c:if test='${ ! empty loginInfo }'>
 	<form action="reply_insert.bo" method="post" id="insertReply">
 	<div class='mt-4'>
 	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_content'>
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
 	<input type="hidden" name="emp_no" value="${loginInfo.emp_no }"/>
+	<input type="hidden" name="reply_content" value="${reply.reply_content }"/>
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
@@ -78,19 +78,29 @@
               </div>
                <div class="col-9">
                 <div class="card-body">
-                  <p class="card-text" style="margin-left: -30px;">${reply.reply_content }</p>
+                <p class="card-text" id="reply_content" style="margin-left: -30px;">${reply.reply_content } </p>
+                					
+                <input type="text" id="reply_incontent" value="${reply.reply_content }" style="display: none"/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${reply.reply_create_date}" /></p>
-                <a class='btn btn-primary' href='modify_reply.bo'>수정</a>
+				<div id="modify_off" >			
+					<!-- 수정 전 화면 -->		
+                <a class='btn btn-primary modify_reply'>수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
+				</div>
+				
+				<div id="modify_on" style="display: none">
+				<!-- 수정 화면 -->		
+					<a class='btn btn-primary modify_ok'>저장</a>
+				<a class='btn btn-danger' id="modify_cancel">취소</a>
+				</div>
 				</div>
               </div>
             </div>
           </div>
         </div>
-
           </c:forEach>
         </div>  
           </div>
@@ -98,6 +108,32 @@
     </section><!-- End Section -->
    
 <script type="text/javascript">
+
+$('.modify_ok').on('click', function(){
+	location = 'reply_update.bo';
+	$('#modify_on').css({"display":"none"});
+	$('#modify_off').css({"display":"block"});
+	$('#reply_incontent').css({"display":"none"});
+	$('#reply_content').css({"display":"block"});
+	$('#reply_content').text($('#reply_incontent').val());
+});
+
+//수정 화면
+$('.modify_reply').on('click', function(){
+	$('#modify_on').css({"display":"block"});
+	$('#modify_off').css({"display":"none"});
+	$('#reply_content').css({"display":"none"});
+	$('#reply_incontent').css({"display":"block"});
+});
+//수정 취소
+$('#modify_cancel').on('click', function(){
+	$('#modify_on').css({"display":"none"});
+	$('#modify_off').css({"display":"block"});
+	$('#reply_incontent').css({"display":"none"});
+	$('#reply_content').css({"display":"block"});
+	
+});
+
 $('.btn-delete').on('click', function(){
 	if( confirm('정말 삭제?') ){
 		location = 'delete.bo?id=${vo.board_no}';
