@@ -191,6 +191,24 @@ and attend_date =  to_char(current_date, 'yyyy/mm/dd')
 </update>
 
 
+<!--로그인한 사원의 출근취소  -->
+<delete id = "on_cancel">
+delete 
+from tbl_attend
+where  emp_no = #{emp_no} 
+and attend_date =  to_char(current_date, 'yyyy/mm/dd') 
+</delete>
+
+
+<!-- 로그인한 사원 퇴근취소 --> 
+<update id="off_cancel">
+update tbl_attend
+set  attend_off = null  , att_code = 'W0'
+where emp_no=#{emp_no} 
+and attend_date =to_char(current_date,'yyyy/mm/dd')
+</update>
+
+
 
 
 

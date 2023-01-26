@@ -113,7 +113,7 @@ public class AttendController {
 	}
 	
 	
-	
+	//출근하기
 	@RequestMapping(value = "/attend_on.at", produces = "text/html;charset=utf-8")
 	public String attend_on(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
@@ -121,10 +121,27 @@ public class AttendController {
 		return "redirect:myattend";
 	}
 	
+	//퇴근하기
 	@RequestMapping(value = "/attend_off.at", produces = "text/html;charset=utf-8")
 	public String attend_off(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
 		sql.update("at.attend_off",vo.getEmp_no());	
+		return "redirect:myattend";
+	}  
+
+	//출근 취소 
+	@RequestMapping(value = "/on_cancel.at", produces = "text/html;charset=utf-8")
+	public String on_cancel(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.delete("at.on_cancel",vo.getEmp_no());	
+		return "redirect:myattend";
+	}
+	
+	//퇴근취소
+	@RequestMapping(value = "/off_cancel.at", produces = "text/html;charset=utf-8")
+	public String off_cancel(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.update("off_cancel",vo.getEmp_no());	
 		return "redirect:myattend";
 	}  
 

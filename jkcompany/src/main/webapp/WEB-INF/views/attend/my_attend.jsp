@@ -294,6 +294,14 @@ $('#btn2').on('click',function(){
 	}
 });
 
-	
-	
+/* 출근 취소 버튼 클릭시 */	
+$('#btn-on-cancel').on('click',function(){	
+	location.href="on_cancel.at";
+});
+
+/* 퇴근 취소 버튼 클릭시 */
+$('#btn-off-cancel').on('click',function(){	
+	alert('퇴근 취소시 현재 상태가 "출근"으로 표시됩니다.')
+	location.href="off_cancel.at";
+});
 </script>
