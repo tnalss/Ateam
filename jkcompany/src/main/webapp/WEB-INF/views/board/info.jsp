@@ -30,23 +30,20 @@
     <!-- ======= Section ======= -->
     <section id="" class="container">
      <h3>익명 글 안내</h3>
-<table class='table table-hover'>
-<tr><th class='w-px140'>제목</th>
-	<td colspan='5'>${vo.board_title}</td>
-</tr>
-<tr>
-	<th class='w-px160'>작성일자</th>
-	<td class='w-px160'>${vo.write_date}</td>
-	<th class='w-px140'>조회수</th>
-	<td class='w-px140'>${vo.board_hits}</td>
-</tr>
-<tr><th>내용</th>
-	<td colspan='5'>${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</td>
-</tr>
-
-</table>
+     
+     <div class="card text-center">
+  <div class="card-header">
+ <h5> 제목 : ${vo.board_title} </h5> 
+  </div>
+  <div class="card-body">
+    <p class="card-text">${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
+  </div>
+  <div class="card-footer text-muted">
+   작성일자 : ${vo.write_date} <span style='margin-left: 3rem;'>조회수 : ${vo.board_hits} </span> 
+  </div>
+</div>
 <c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'/>
-<div class='btnSet'>
+<div class='btnSet mt-3'>
 	<button type="button" class="btn btn-primary"
 				onclick="location='list.bo'">글 목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->

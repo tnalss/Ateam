@@ -30,6 +30,7 @@ height: 300px;
 		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
     <!-- ======= Section ======= -->
     <section id="" class="container">
+    
      <h3>익명 글 등록</h3>
 <form method='post' id='insert' action='insert.bo' enctype='multipart/form-data'>
 <input type='hidden' name='emp_no' value='${loginInfo.emp_no}'>

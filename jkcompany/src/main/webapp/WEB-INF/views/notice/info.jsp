@@ -5,9 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-<style>
 
-</style>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -30,24 +28,22 @@
     <!-- ======= Section ======= -->
     <section id="" class="container">
      <h3>공지글안내</h3>
-<table class='table table-hover'>
-<tr><th class='w-px140'>제목</th>
-	<td colspan='5'>${vo.board_title}</td>
-</tr>
-<tr><th>작성자</th>
-	<td>${vo.emp_name}</td>
-	<th class='w-px160'>작성일자</th>
-	<td class='w-px160'>${vo.write_date}</td>
-	<th class='w-px140'>조회수</th>
-	<td class='w-px140'>${vo.board_hits}</td>
-</tr>
-<tr><th>내용</th>
-	<td colspan='5'>${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</td>
-</tr>
-
-</table>
+     <div class="card text-center">
+  <div class="card-header">
+     <span style ="font-size: 20px"> 제목 : ${vo.board_title} </span> 
+  </div>
+  <div class="card-body">
+    <p class="card-text">${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
+  </div>
+  <div class="card-footer text-muted emp">
+  <span style='margin-left: 2rem'> 작성자 : ${vo.emp_name} </span> 
+   <span style='margin-left: 2rem'> 작성일자 : ${vo.write_date} </span>
+   <span style='margin-left: 2rem'> 조회수 : ${vo.board_hits} </span> 
+  </div>
+</div>
+     
 <c:set var='params' value='curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'/>
-<div class='btnSet'>
+<div class='btnSet mt-3'>
 	<button type="button" class="btn btn-primary"
 				onclick="location='list.no'">공지목록 </button>
 	<!-- 작성자가 로그인한 경우만 수정/삭제 가능 -->
