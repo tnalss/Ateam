@@ -370,7 +370,8 @@ select {
 		  return true;
 		}
 		
-		//이거해보는
+		//이미지 업로드프리뷰
+		
 		$(function(){
 			$('#imageUpload').change(function(){		
 				console.log( this.files[0] );//선택한 파일정보
@@ -400,9 +401,7 @@ select {
 				}		
 			});
 			
-			$('#delete-file').click(function(){
-				initAttach();
-			});
+		
 		});
 	</script>
 
