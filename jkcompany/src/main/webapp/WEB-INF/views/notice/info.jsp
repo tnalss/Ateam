@@ -58,10 +58,12 @@
 	<!-- 로그인한 경우 답글쓰기 가능 -->
 	
 	<c:if test='${ ! empty loginInfo }'>
-	<form action="reply.no" method="post" id="insertReply">
+	<form action="reply_insert.no" method="post" id="insertReply">
 	<div class='mt-4'>
-	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_text' >
+	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_content'>
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
+	<input type="hidden" name="emp_no" value="${ vo.emp_no}"/>
+	<input type="hidden" name="emp_name" value="${ vo.emp_name}"/>
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
