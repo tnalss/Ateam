@@ -23,6 +23,7 @@
 	color: #fff;
 	border: #fff;
 }
+
 #l:hover {
 	color: #fd5c28;
 }
@@ -51,7 +52,16 @@
 			<div class="row mt-5 justify-content-center aos-init aos-animate"
 				data-aos="fade-up">
 				<div class="col-lg-10">
-					<h3 id="h3">업무 상태 수정 신청</h3>
+					<div>
+
+						<i class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}&nbsp;</a><a
+							id="me">${loginInfo.rank_name}님의</a>
+						
+
+					</div>
+					<h2 class="entry-title">
+						<a>업무 상태 수정 신청</a>
+					</h2>
 					<form action="forms/contact.php" method="post" role="form"
 						class="php-email-form">
 						<div class="row">

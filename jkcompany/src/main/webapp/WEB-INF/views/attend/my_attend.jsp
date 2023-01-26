@@ -227,7 +227,8 @@ font-size: 25px;
 						<div class="icon">
 							<i class="bi bi-check-circle-fill"></i>
 						</div>
-						<a>정상 출퇴근 조회</a>
+						<h3 class="title">
+							<a href="my_attend_a.at">정상 업무 종료 조회</a>
 						</h3>
 						<h4>${code}건</h4>
 						<a href="my_attend_a.at"><p class="description">자세히보기</p></a>
@@ -242,7 +243,7 @@ font-size: 25px;
 							<i class="bi bi-alarm"></i>
 						</div>
 						<h3 class="title">
-							<a href="">지각 조회</a>
+							<a href="my_attend_late.at">지각 조회</a>
 						</h3>
 						<h4>${code2}건</h4>
 						<a href="my_attend_late.at"><p class="description">자세히보기</p></a>
@@ -256,7 +257,7 @@ font-size: 25px;
 							<i class="bi bi-emoji-sunglasses"></i>
 						</div>
 						<h3 class="title">
-							<a href="">결근 및 연차 사용 조회</a>
+							<a href="my_attend_n.at">결근 및 연차 사용 조회</a>
 						</h3>
 						<h4>${code3}건</h4>
 						<a href="my_attend_n.at"><p class="description">자세히보기</p></a>

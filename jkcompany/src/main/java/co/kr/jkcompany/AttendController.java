@@ -77,8 +77,7 @@ public class AttendController {
 	public String my_attend_a(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.code4list",vo.getEmp_no());
-		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
-		
+		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());		
 		model.addAttribute("list",list);		
 		model.addAttribute("since",since);
 		return "attend/my_attend_a";
