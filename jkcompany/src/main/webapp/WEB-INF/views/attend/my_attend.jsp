@@ -12,17 +12,59 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.pricing .container button[type=submit] {
-	background: #f03c02;
-	border: 0;
-	padding: 10px 24px;
-	color: #fff;
-	transition: 0.4s;
-	border-radius: 4px;
-}
 #time {
-color:#fff;
-}	
+	color: #fff;
+}
+#img{
+margin-top:50px;
+width:450px;
+height: 200px;
+margin-bottom: 30px;}
+
+.blog .blog-author img {
+	width: 120px;
+	height: 120px;
+}
+
+#box {
+	width: 700px;
+	margin-top: 55px;
+}
+
+#container2 {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#btn-set {
+	margin-left: 130px;
+	margin-bottom: 30px;
+}
+
+#on {
+	margin-left: 20px;
+}
+
+#on, #off {
+	border-color: #fff;
+	margin-left: 10px;
+	width: 200px;
+	height: 50px;
+	background: #fd5c28;
+}
+.a li {
+font-size: 20px;
+
+}
+#lt {
+	font-size:20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+}
+.rounded-circle {
+    border-radius: 50%!important;}
+    
 </style>
 
 <main id="main">
@@ -44,88 +86,107 @@ color:#fff;
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<div class='container'>
-		<section id="pricing" class="pricing">
-			<div class="container">
-				<div class="text-center">
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
-						<div class="box featured aos-init aos-animate" data-aos="fade-up">
-							<h2 id="time"><%=sf.format(nowTime)%></h2>						
-							<h3></h3>					
+	<section id="pricing" class="pricing">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="box aos-init aos-animate" data-aos="fade-right">
+					<h3>내 정보</h3>
+						<img src=${loginInfo.profile_path
+							}		class="testimonial-img img-fluid rounded-circle" alt="" width="150px"  
+}
+							height="150px">
+						<h4>
+							<sup>${loginInfo.emp_name}</sup>
+						</h4>
+						<ul>
+							<li>${loginInfo.branch_name}</li>
+							<li>${loginInfo.department_name}</li>
+							<li>${loginInfo.rank_name}</li>
+							<li>${loginInfo.email}</li>
+						</ul>						
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mt-4 mt-md-0" id="a">
+				<img src="assets/img/img_att.JPG" alt="" class="img-fluid" id="img">
+					<div class="box featured aos-init aos-animate" data-aos="fade-up">
+						<h3 id="time">
+							<%=sf.format(nowTime)%>
+						</h3>
+						<ul>
+							<li>${loginInfo.emp_name}님의출·퇴근현황을확인하세요</li>
+							<li id="lt">${today.att_state}</li>							
+						</ul>
+						<div class="btn-wrap">
+							<a href="#" class="btn-buy">자세히 보기</a>
+						</div>
+					</div>					
+				</div>
+				<div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+					<div class="box aos-init aos-animate" data-aos="fade-left">
+						<h3>Developer</h3>
+						<h4>
 							
+						</h4>
+						<ul>
+							<li>Aida dere</li>
+							<li>Nec feugiat nisl</li>
+							<li>Nulla at volutpat dola</li>
+							<li>Pharetra massa</li>
+							<li>Massa ultricies mi</li>
+						</ul>
+						<div class="btn-wrap">
+							<a href="#" class="btn-buy">Buy Now</a>
 						</div>
 					</div>
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
-						<img src="assets/img/img_att.JPG" alt="" class="img-fluid"
-							width="320px" height="175px">
-					</div>
-				</div>
-				<button type="submit">Send Message</button>
-			</div>
-		</section>
-	</div>
-	<section id="blog" class="blog">
-		<div class="container">
-			<div class="blog-author d-flex align-items-center">
-				<img src="assets/img/blog/blog-author.jpg"
-					class="rounded-circle float-left" alt="">
-				<div>
-					<h4>Jane Smith</h4>
-					<div class="social-links">
-						<a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-						<a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-						<a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-					</div>
-					<p>Itaque quidem optio quia voluptatibus dolorem dolor. Modi
-						eum sed possimus accusantium. Quas repellat voluptatem officia
-						numquam sint aspernatur voluptas. Esse et accusantium ut unde
-						voluptas.</p>
 				</div>
 			</div>
-			<!-- End blog author bio -->
 		</div>
 	</section>
 	<section id="services" class="services">
 		<div class="container">
 			<div class="row">
-				<!-- 이번주 근무시간  -->
-				<div class="col-lg-4 col-md-6">
-					<div class="icon-box aos-init aos-animate" data-aos="fade-up">
-						<div class="icon">
-							<i class="bi bi-briefcase"></i>
-						</div>
-						<h3 class="title">
-							<a href="">이번주 총 근무 시간</a>
-						</h3>
-						<h4>이번주 근무시간 보여줍니다</h4>
-						<p class="description">자세히보기</p>
-					</div>
-				</div>
+
+				<!-- 코드값 w4인 건수 보여주기 -->
 				<div class="col-lg-4 col-md-6">
 					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 						data-aos-delay="100">
 						<div class="icon">
-							<i class="bi bi-card-checklist"></i>
+							<i class="bi bi-check-circle-fill"></i>
 						</div>
-						<h3 class="title">
-							<a href="">정상 처리</a>
+						<a href="my_attend_detail.at">정상 출퇴근 조회</a>
 						</h3>
-						<h4>출퇴근코드 =W4 인 값 건수보여줍니다</h4>
+						<h4>${code}건</h4>
 						<p class="description">자세히보기</p>
+
 					</div>
 				</div>
+				<!-- 코드값 w3 & w7 인 건수 보여주기 -->
 				<div class="col-lg-4 col-md-6">
 					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 						data-aos-delay="200">
 						<div class="icon">
-							<i class="bi bi-bar-chart"></i>
+							<i class="bi bi-alarm"></i>
 						</div>
 						<h3 class="title">
-							<a href="">미처리</a>
+							<a href="">지각 및 결근 조회</a>
 						</h3>
-						<h4>출퇴근코드 =W4 아닌 값 건수 보여줍니다</h4>
+						<h4>${code2}건</h4>
 						<p class="description">자세히보기</p>
-
+					</div>
+				</div>
+				<!-- 코드값 인 건수 보여주기 -->
+				<div class="col-lg-4 col-md-6">
+					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
+						data-aos-delay="200">
+						<div class="icon">
+							<i class="bi bi-emoji-sunglasses"></i>
+						</div>
+						<h3 class="title">
+							<a href="">조퇴 및 연차 사용조회</a>
+						</h3>
+						<h4>${code2}건</h4>
+						<p class="description">자세히보기</p>
 					</div>
 				</div>
 			</div>
@@ -138,3 +199,7 @@ color:#fff;
 <a href="#"
 	class="back-to-top d-flex align-items-center justify-content-center"><i
 	class="bi bi-arrow-up-short"></i></a>
+
+<script>
+
+</script>

@@ -18,6 +18,7 @@ select *
 from tbl_board
 where board_cate = 'O1' 
 order by 1 desc
+
 </select> 
 <!-- 글쓰기 -->
 <insert id="se_insert">

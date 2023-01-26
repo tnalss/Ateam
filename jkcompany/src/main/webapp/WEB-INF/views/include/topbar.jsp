@@ -39,8 +39,7 @@
 				<li class="dropdown"><a href="#"><span>근태관리</span><!-- 이름만 근태관리임! -->
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
-						<li><a href="myattend">나의 출·퇴근기록</a></li>
-						<li><a href="myholiday">휴가 관리</a></li>
+						<li><a href="myattend">나의 출·퇴근 관리</a></li>
 					</ul>
 				</li>
 				<li><a href="main.ea">전자결재</a></li>
