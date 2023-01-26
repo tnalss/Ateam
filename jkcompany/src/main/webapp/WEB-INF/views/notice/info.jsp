@@ -77,21 +77,22 @@
 	<!-- 댓글 -->
 	<div id='reply.no' class="mt-4">
    <p style='font-size: 22px;'>댓글</p>
-   
+   <div class="row">
    <c:forEach items='${notice }' var='reply'>
-   <div class="col-6">
+   <div class="col-5">
           <div class="card mt-3">
             <div class="row no-gutters">
-              <div class="col-2 mt-2">
-                <img src="assets/img/user_profile.png" alt="" class="card-img" />
+              <div class="col-3 mt-2">
+               <img src="${reply.profile_path ne null ? reply.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile" alt="">
                 <p class='text-center'>${reply.emp_name }</p>
               </div>
-              <div class="col-10">
+              <div class="col-9">
                 <div class="card-body">
-                  <p class="card-text">${reply.reply_content }</p>
+                  <p class="card-text" style="margin-left: -30px;">${reply.reply_content }</p>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
-                 <p class="card-text">${reply.reply_create_date}</p>
+                 <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
+							value="${reply.reply_create_date}" /></p>
                 <a class='btn btn-primary' href='modify_reply.no'>수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
@@ -101,7 +102,7 @@
         </div>
 
           </c:forEach>
-          
+        </div>  
           </div>
      
 
