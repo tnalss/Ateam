@@ -274,42 +274,26 @@ font-size: 25px;
 	class="bi bi-arrow-up-short"></i></a>
 
 <script>
-	/*출근 버튼 클릭시  */
-	$('.btn-1').on('click',function(){
-		if( ${today.atten_on} ne null/*이미 today의 atten_on이 있으면  */){
-			alert('출근처리가 완료되었습니다')
-		}else{			
-			/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
-		
-		}
-	});
-	
-	
-	
-	/*퇴근 버튼 클릭시  */
-	$('.btn-2').on('click',function(){
-		
-	});
-	
 
-	/*출근 취소 버튼 클릭시  */
-	$('.btn-on-cancel').on('click',function(){
-		if( /* today의 atten_on이 없으면 */ ){
-			alert('출근 정보가 없습니다!')
-		}else {
-			alert('출근 처리를 취소하시겠습니까?')
-		}
-	});
-	
+/*출근 버튼 클릭시  */
+$('#btn1').on('click',function(){
+	if( ${today.attend_on ne null}){
+		alert('출근 처리가 완료되었습니다')
+	}
+	else{			
+		/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
+		location.href = "attend_on.at";
+	}
+});
+/*퇴근 버튼 클릭시  */
+$('#btn2').on('click',function(){
+	if( ${today.attend_off ne null}){
+		alert('퇴근 처리가 완료되었습니다')
+	}else{	
+		location.href = "attend_off.at";
+	}
+});
 
-	/*퇴근 취소 버튼 클릭시  */
-	$('.btn-on-cancel').on('click',function(){
-		if( /* today의 atten_off이 없으면 */ ){
-			alert('퇴근 정보가 없습니다!')
-		}else {
-			alert('퇴근 처리를 취소하시겠습니까?')
-		}
-	});
 	
 	
 </script>

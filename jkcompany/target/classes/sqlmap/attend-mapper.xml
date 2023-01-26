@@ -123,7 +123,7 @@ order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 <select id = "emp_today" resultType="attend.AttendVO">
 select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a
-where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  1  
+where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no = #{emp_no}
 </select>
 
 <!--  총건수 조회 -->
@@ -178,8 +178,8 @@ order by a.attend_date desc
 
 <!--로그인한 사원의 출근하기  -->
 <insert id ="attend_on">
-INSERT INTO tbl_attend (emp_no,attend_on,att_code)
-values(#{emp_no},to_char(current_date,'yyyy/mm/dd hh24:mi:ss'),'W0')
+INSERT INTO tbl_attend (attend_date,emp_no,attend_on,att_code)
+values(to_char(current_date,'yyyy/mm/dd'),#{emp_no},to_char(current_date,'yyyy/mm/dd hh24:mi:ss'),'W0')
 </insert>
 
 <!-- 로그인한 사원 퇴근하기 -->

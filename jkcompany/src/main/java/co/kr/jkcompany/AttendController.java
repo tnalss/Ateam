@@ -107,17 +107,26 @@ public class AttendController {
 	
 	@RequestMapping(value = "/my_attend_edit.at", produces = "text/html;charset=utf-8")
 	public String my_attend_edit(HttpSession session, Model model) {
-		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");		
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
 		
-		
-			
 		return "attend/my_attend_edit";
 	}
 	
 	
 	
-	  
-	  
+	@RequestMapping(value = "/attend_on.at", produces = "text/html;charset=utf-8")
+	public String attend_on(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.insert("at.attend_on",vo.getEmp_no());	
+		return "redirect:myattend";
+	}
+	
+	@RequestMapping(value = "/attend_off.at", produces = "text/html;charset=utf-8")
+	public String attend_off(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.update("at.attend_off",vo.getEmp_no());	
+		return "redirect:myattend";
+	}  
 
 	
 
