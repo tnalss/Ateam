@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-
+.h-px80 {
+height: 80px;
+}
 </style>
   <main id="main">
 
@@ -81,7 +83,7 @@
                 <div class="card-body">
                 <p class="card-text" id="reply_content" style="margin-left: -30px;">${reply.reply_content } </p>
                 					
-                <input type="text" id="reply_incontent" value="${reply.reply_content }" style="display: none"/>
+                <input type="text" class="w-px800 h-px80" id="reply_incontent" value="${reply.reply_content }" style="display: none"/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
