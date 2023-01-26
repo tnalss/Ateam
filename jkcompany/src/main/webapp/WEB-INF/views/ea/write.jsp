@@ -1,12 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<%
+Date nowTime = new Date();
+SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
 	rel="stylesheet">
 <style>
+#result {
+	position: absolute;
+	width: 100%;
+	max-width: 870px;
+	cursor: pointer;
+	overflow-y: auto;
+	max-height: 400px;
+	box-sizing: border-box;
+	z-index: 1001;
+}
+
+.link-class:hover {
+	background-color: #f1f1f1;
+}
+
 table {
 	border-collapse: collapse;
 	margin: 0 auto;
@@ -129,9 +152,20 @@ textarea {
 	margin-top: 20px;
 }
 
+.pull-left {
+	margin-top: 20px;
+}
+
 .text-danger {
 	margin: 30px auto;
 	text-align: center;
+}
+
+.v-center {
+	min-height: 200px;
+	display: flex;
+	justify-content: center;
+	flex-flow: column wrap;
 }
 </style>
 <main id="main">
@@ -244,63 +278,38 @@ textarea {
 							<div class="stepwizard-step">
 								<a href="#step-1" type="button"
 									class="btn btn-primary btn-circle">1</a>
-								<p>결재자(참조) 입력</p>
+								<p>기안양식 선택</p>
 							</div>
 							<div class="stepwizard-step">
 								<a href="#step-2" type="button"
 									class="btn btn-default btn-circle" disabled="disabled">2</a>
-								<p>제목/내용 작성</p>
+								<p>결재자(참조) 입력</p>
 							</div>
 							<div class="stepwizard-step">
 								<a href="#step-3" type="button"
 									class="btn btn-default btn-circle" disabled="disabled">3</a>
+								<p>제목/내용 작성</p>
+							</div>
+							<div class="stepwizard-step">
+								<a href="#step-4" type="button"
+									class="btn btn-default btn-circle" disabled="disabled">4</a>
 								<p>파일첨부/검토</p>
 							</div>
 						</div>
 					</div>
-					<form role="form">
+					<input type='hidden' name='curPage' value='1'> 
 						<div class="row setup-content" id="step-1">
 							<div class="col-xs-12">
 								<div class="col-md-12">
 									<h3>Step 1</h3>
-									<!-- <div class="form-group">
-										<label class="control-label">결재자</label> <input
-											maxlength="100" type="text" required="required"
-											class="form-control" placeholder="결재자를 입력하세요" />
-									</div> -->
-									<div class="container form-group">
-										<div class="row clearfix">
-											<div class="col-md-12 column">
-												<table class="table table-bordered table-hover"
-													id="tab_logic">
-													<thead>
-														<tr>
-															<th class="text-center">#</th>
-															<th class="text-center control-label">결재자</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr id='addr0'>
-															<td>1</td>
-															<td><input type="text" name='name0'
-																required="required" placeholder='결재자를 입력하세요'
-																class="form-control" /></td>
-														</tr>
-														<tr id='addr1'></tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<a id="add_row" class="btn btn-default pull-left">+ 결재라인
-											추가</a><a id='delete_row' class="pull-left btn btn-default">-
-											결재라인삭제 </a>
+									<div class="list-group" id="doc_list">
+													<p class="list-group-item active text-center">기안양식목록</p>
+												<c:forEach items='${doc_list}' var='vo'>		
+													<a href='#;return false;' class="list-group-item">${vo.code_value}<input
+														type="checkbox" name="chk" class="pull-right" onclick='checkOnlyOne(this)'></a>
+												</c:forEach>
 									</div>
-									<!-- 	<div class="form-group">
-										<label class="control-label">참조자(선택)</label> <input
-											maxlength="100" type="text" required="required"
-											class="form-control" placeholder="참조자를 입력하세요.(선택)" />
-									</div> -->
-									<button class="btn btn-primary nextBtn btn-lg pull-right"
+									<button class="btn btn-primary nextBtn btn-lg pull-right doc-botton"
 										type="button">다음</button>
 								</div>
 							</div>
@@ -309,20 +318,36 @@ textarea {
 							<div class="col-xs-12">
 								<div class="col-md-12">
 									<h3>Step 2</h3>
-									<div class="form-group">
-										<label class="control-label">기안제목</label> <input
-											maxlength="200" type="text" required="required"
-											class="form-control" placeholder="기안제목을 입력하세요" />
-									</div>
-									<div class="form-group">
-										<label class="control-label">내용</label> <input maxlength="200"
-											type="text" required="required" class="form-control"
-											placeholder="내용을 입력하세요" />
-									</div>
-									<button class="btn btn-primary nextBtn btn-lg pull-right"
+										<div class="row">
+											<div class="col-sm-4 col-sm-offset-1">
+												<div class="list-group" id="list1">
+													 <a href="#" class="list-group-item active"><span
+														class="glyphicon glyphicon-th-large"></span>전체 목록<input
+														title="toggle all" type="checkbox" class="all pull-right"></a>
+														<div class="ea-list"></div>
+												</div>
+												<jsp:include page="/WEB-INF/views/include/eapage.jsp" />
+											</div>
+											<div class="col-md-2 v-center">
+												<button title="Send to list 2"
+													class="btn btn-default center-block add">
+													<i class="bi bi-chevron-compact-right"></i>
+												</button>
+												<button title="Send to list 1"
+													class="btn btn-default center-block remove">
+													<i class="bi bi-chevron-compact-left"></i>
+												</button>
+											</div>
+											<div class="col-sm-4">
+												<div class="list-group" id="list2">
+													<a href="#" class="list-group-item active"><span
+														class="glyphicon glyphicon-th-large"></span>결재자 목록 <input
+														title="toggle all" type="checkbox" class="all pull-right"></a>
+												</div>
+											</div>
+										</div>
+									<button class="btn btn-primary nextBtn btn-lg pull-right sign-btn"
 										type="button">다음</button>
-									<button class="btn btn-primary prevBtn btn-lg pull-left"
-										type="button">이전</button>
 								</div>
 							</div>
 						</div>
@@ -330,44 +355,64 @@ textarea {
 							<div class="col-xs-12">
 								<div class="col-md-12">
 									<h3>Step 3</h3>
-									<h3 class="text-danger">업무지원요청합니다(제목)</h3>
+									<div class="form-group">
+										<label class="control-label">기안제목</label> <input id="ea_title"
+											maxlength="200" type="text" required="required"
+											class="form-control" placeholder="기안제목을 입력하세요" />
+									</div>
+									<div class="form-group">
+										<label class="control-label">내용</label>
+										<textarea id="ea_contents" class="form-control col-sm-5" rows="5" maxlength="200" required="required" placeholder="내용을 입력하세요"></textarea>
+									</div>
+									<button class="btn btn-primary nextBtn btn-lg pull-right asdf"
+										type="button">다음</button>
+									<button class="btn btn-primary prevBtn btn-lg pull-left"
+										type="button">이전</button>
+								</div>
+							</div>
+						</div>
+						<div class="row setup-content" id="step-4">
+							<div class="col-xs-12">
+								<div class="col-md-12">
+									<h3>Step 4</h3>
+									<h3 class="text-danger" id="e_title">업무지원요청합니다(제목)</h3>
 									<table class="table table-bordered success">
 										<thead>
-											<tr>
+											<tr class="text-center">
 												<th>기안양식</th>
-												<td>업무지원요청</td>
+												<td id="doc">업무지원요청</td>
 											</tr>
-											<tr>
+											<tr class="text-center">
 												<th class="info">기안자</th>
-												<td>박문수</td>
+												<td>${loginInfo.emp_name}</td>
 											</tr>
-											<tr>
+											<tr class="text-center">
 												<th class="info">부서</th>
-												<td>영업관리부</td>
+												<td>${loginInfo.department_name}</td>
 											</tr>
-											<tr>
+											<tr class="text-center">
 												<th class="info">보존연한</th>
 												<td>2년</td>
 											</tr>
-											<tr>
+											<tr class="text-center">
 												<th class="info">공개여부</th>
 												<td>전체공개</td>
 											</tr>
 
-											<tr>
+											<tr class="text-center">
 												<th valign="top" class="info">결재자</th>
-												<td>심청이,지현우,조현보</td>
+												<td id="sign">심청이,지현우,조현보</td>
 											</tr>
 
-											<tr>
+											<tr class="text-center">
 												<th class="info">상신날짜</th>
-												<td>2023-01-23</td>
+												<td><%=sf.format(nowTime)%></td>
 											</tr>
-											<tr>
-												<th class="info">내용</th>
-												<td>이러저러한 이유로 결재서 올리니 빠른시일 내에 결재해주세요</td>
+											<tr class="text-center">
+												<th class="info" style="vertical-align: middle;">내용</th>
+												<td id="e_contents">이러저러한 이유로 결재서 올리니 빠른시일 내에 결재해주세요</td>
 											</tr>
-											<tr>
+											<tr class="text-center">
 												<th>첨부파일</th>
 												<td>
 													<div class='align'>
@@ -382,65 +427,14 @@ textarea {
 											</tr>
 										</thead>
 									</table>
-									<button class="btn btn-success btn-lg pull-right" type="submit">상신하기</button>
+									<button class="btn btn-success btn-lg pull-right" type="button" id="ea_submit">상신하기</button>
 									<button class="btn btn-primary prevBtn btn-lg pull-left"
 										type="button">이전</button>
 								</div>
 							</div>
 						</div>
-					</form>
 				</div>
 			</div>
-			<%-- <form method="post" action='insert.ea' enctype='multipart/form-data'>
-					<table class='w-px900'>
-						<tr>
-							<th class='w-px150'>문서번호</th>
-							<td clas='w-px300'>자동채번</td>
-							<th class='w-px150'>기안일자</th>
-							<td clas='w-px300'>2023-01-23</td>
-						</tr>
-						<tr>
-							<th>기안자</th>
-							<td>박문수</td>
-							<th>기안부서</th>
-							<td>시설관리부</td>
-						</tr>
-						<tr>
-							<th>결재자</th>
-							<td><button> 찾기</button></td>
-							<th>참조자</th>
-							<td><button> 찾기</button></td>
-						</tr>
-						<tr>
-							<th>제목</th>
-							<td><input type='text' name='title' class='full chk'
-								title='제목'></td>
-						</tr>
-						<tr>
-							<th>내용</th>
-							<td><textarea name='content' class='full chk' title='내용'></textarea></td>
-						</tr>
-						<tr>
-							<th>첨부파일</th>
-							<td>
-								<div class='align'>
-									<label> <input type='file' name='file'
-										class='attach-file'> <a><i
-											class="font-b fa-solid fa-file-arrow-up"></i></a>
-									</label> <span class='file-name'></span> <span class='preview'></span>
-									<a class='delete-file'><i
-										class="font-r fa-regular fa-trash-can"></i></a>
-								</div>
-							</td>
-						</tr>
-					</table>
-					<input type='hidden' name='writer' value='${loginInfo.userid}'>
-				</form>
-				<div class='btnSet'>
-					<a class='btn-fill save'>저장</a> <a class='btn-empty cancel'>취소</a>
-				</div>
-				
-			</div> --%>
 	</section>
 	<!-- End Section -->
 
@@ -448,6 +442,70 @@ textarea {
 
 </main>
 <script>
+var title, contents, doc;
+var sign = [];
+var sign_no = [];
+
+$('.asdf').on('click',function(){
+	title = $('#ea_title').val();
+	contents = $('#ea_contents').val().replaceAll("/\r\n|\r|\n/", "<br/>");
+	document.getElementById("e_title").innerText=title;
+	document.getElementById("e_contents").innerText=contents;
+});
+
+$('.doc-botton').on('click',function(){
+	doc = $("input:checkbox[name='chk']:checked").closest("a").text();
+	document.getElementById("doc").innerText=doc;
+});
+
+$('.sign-btn').on('click', function(){
+	var length = $('#list2').children('a').siblings().length;
+	
+	for(var i=1; i<length ; i++){
+		console.log($('#list2').children('a').eq(i).find('input[type=hidden]').val());
+		sign.push($('#list2').children('a').eq(i).text()+"<br>");
+		sign_no.push( $('#list2').children('a').eq(i).find('input[type=hidden]').val() );
+	}
+	document.getElementById("sign").innerHTML=sign;
+	
+});
+$("#ea_submit").click(function(){
+	
+	sendRegData();
+});
+
+function sendRegData(){
+	$.ajax({
+		type:"POST",
+		url:"write_insert.ea",
+		traditional : true,
+		data:{ea_title: title,
+			  ea_contents: contents,
+			  ea_doc:doc,
+			  ea_signer: sign_no
+			},
+		dataType:"json",
+		success: function(data){
+			console.log("success");
+			console.log(data);
+			alert("상신완료");
+			var url = "${pageContext.request.contextPath}/draft.ea"
+			console.log(url);
+			location.replace(url);
+		}
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
 	/* $('.save').on('click', function() {
 		if (emptyCheck())
 			$('form').submit();
@@ -455,6 +513,7 @@ textarea {
 	$('.cancel').on('click', function() {
 		history.go(-1);
 	})
+
 	$(document)
 			.ready(
 					function() {
@@ -506,28 +565,80 @@ textarea {
 
 						$('div.setup-panel div a.btn-primary').trigger('click');
 
-						var i = 1;
-						$("#add_row")
-								.click(
-										function() {
-											$('#addr' + i)
-													.html(
-															"<td>"
-																	+ (i + 1)
-																	+ "</td><td><input name='name"+i+"' type='text' placeholder='결재자를 입력하세요'' class='form-control input-md'/>");
-
-											$('#tab_logic').append(
-													'<tr id="addr' + (i + 1)
-															+ '"></tr>');
-											i++;
-										});
-						$("#delete_row").click(function() {
-							if (i > 1) {
-								$("#addr" + (i - 1)).html('');
-								i--;
-							}
+						//결재자 선택
+						$('.add').click(function(){
+						    $('.all').prop("checked",false);
+						    var items = $("#list1 input:checked:not('.all')");
+						    var n = items.length;
+						  	if (n > 0) {
+						      items.each(function(idx,item){
+						        var choice = $(item);
+						        choice.prop("checked",false);
+						        choice.parent().appendTo("#list2");
+						      });
+						  	}
+						    else {
+						  		alert("한명이라도 선택해주세요.");
+						    }
 						});
 
+						$('.remove').click(function(){
+						    $('.all').prop("checked",false);
+						    var items = $("#list2 input:checked:not('.all')");
+							items.each(function(idx,item){
+						      var choice = $(item);
+						      choice.prop("checked",false);
+						      choice.parent().appendTo("#list1");
+						    });
+						});
+
+						/* toggle all checkboxes in group */
+						$('.all').click(function(e){
+							e.stopPropagation();
+							var $this = $(this);
+						    if($this.is(":checked")) {
+						    	$this.parents('.list-group').find("[type=checkbox]").prop("checked",true);
+						    }
+						    else {
+						    	$this.parents('.list-group').find("[type=checkbox]").prop("checked",false);
+						        $this.prop("checked",false);
+						    }
+						});
+
+						$('[type=checkbox]').click(function(e){
+						  e.stopPropagation();
+						});
+
+						/* toggle checkbox when list group item is clicked */
+						$('.list-group a').click(function(e){
+						  
+						    e.stopPropagation();
+						  
+						  	var $this = $(this).find("[type=checkbox]");
+						    if($this.is(":checked")) {
+						    	$this.prop("checked",false);
+						    }
+						    else {
+						    	$this.prop("checked",true);
+						    }
+						  
+						    if ($this.hasClass("all")) {
+						    	$this.trigger('click');
+						    }
+						});
+						
 					});
+	
+
+	function checkOnlyOne(element) {
+		  const checkboxes 
+		      = document.getElementsByName("chk");
+		  
+		  checkboxes.forEach((cb) => {
+		    cb.checked = false;
+		  })
+		  element.checked = true;
+		}
+	toPage(1);
 </script>
 <!-- End #main -->
