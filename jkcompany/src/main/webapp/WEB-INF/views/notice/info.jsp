@@ -92,7 +92,7 @@
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text">${reply.reply_create_date}</p>
-                <a class='btn btn-primary' href='#'>수정</a>
+                <a class='btn btn-primary' href='modify_reply.no'>수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
               </div>
