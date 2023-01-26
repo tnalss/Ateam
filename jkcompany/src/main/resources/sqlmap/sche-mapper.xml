@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sche">
 
+<!-- 삭제 -->
+<delete id="deleteOne">
+delete from tbl_sche
+where sche_no= #{sche_no}
+
+</delete>
+
+
 <!-- 회사일정조회 -->
 <select id="compSche" resultType="schedule.ScheduleVO">
 select *
@@ -97,6 +105,11 @@ values(#{emp_no}, 'C1' , #{sche_title},#{sche_content}, #{sche_start}, #{sche_en
 <insert id="personal_insert">
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
 values(#{emp_no}, #{emp_no} , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+</insert>
+
+<insert id="insertOne">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_Start,sche_end,sche_status)
+values(#{emp_no}, #{emp_no} , #{sche_title}, #{sche_start}, #{sche_end},'L1')
 </insert>
 
 <!-- 스케줄 번호에 해당하는 사원명 찾아줌 -->

@@ -27,9 +27,9 @@
           <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right"></div>
           <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch">
             <div class="content d-flex flex-column justify-content-center">
-              <h3 data-aos="fade-up">Voluptatem dignissimos provident quasi</h3>
+              <h3 data-aos="fade-up">한울 직업전문학교 수료생들로 이루어진 팀</h3>
               <p data-aos="fade-up">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                한울 직업전문 학교의 우수한 수업을 무사히 마치고 마침내 창업
               </p>
               <div class="row">
                 <div class="col-md-6 icon-box" data-aos="fade-up">
@@ -74,7 +74,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="assets/img/jyp.jpg" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -83,8 +83,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4>박주영</h4>
+                <span>A팀 막내</span>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
+                <h4>지현우</h4>
                 <span>Product Manager</span>
               </div>
             </div>
@@ -119,7 +119,7 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
+                <h4>박찬재</h4>
                 <span>CTO</span>
               </div>
             </div>
@@ -137,7 +137,7 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Amanda Jepson</h4>
+                <h4>최수민</h4>
                 <span>Accountant</span>
               </div>
             </div>

@@ -370,7 +370,39 @@ select {
 		  return true;
 		}
 		
+		//이미지 업로드프리뷰
 		
+		$(function(){
+			$('#imageUpload').change(function(){		
+				console.log( this.files[0] );//선택한 파일정보
+				var attached = this.files[0];
+				//파일을 실제 선택한 경우
+				if( attached ){
+					//$('#file-name').text(attached.name); //선택한 파일명이 보이게
+					//$('#delete-file').css('display', 'inline'); //선택한 파일삭제할 버튼 보이게
+					//미리보기 태그가 있는 경우 선택한 이미지파일을 보이게 처리
+					if( $("#imgProfile").length>0 ){
+						//실제 선택한 파일이 이미지인 경우만 
+						if( isImage(attached.name) ){
+							//$("#imgProfile").html( '<img class="profile">' );
+							var reader = new FileReader();
+							reader.onload = function(e){
+								$('#imgProfile').attr('src', e.target.result );
+							}
+							reader.readAsDataURL( attached );
+						}
+					}
+					
+				}else{
+					console.log( '여기' )
+//					$('#file-name').text(''); 				//보여졌던 파일명 없애기
+//					$('#delete-file').css('display', 'none');
+					initAttach();  //파일태그 클릭후 취소한 경우
+				}		
+			});
+			
+		
+		});
 	</script>
 
 

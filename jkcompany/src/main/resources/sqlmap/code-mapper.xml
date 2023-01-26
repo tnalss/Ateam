@@ -23,8 +23,9 @@ order by code_category asc ,code_num asc
 <!-- 하위코드목록조회 -->
 <select id="bottomCodeList" resultType='code.CodeVO'>
 
-select *
-from tbl_code
+select c.*, e.emp_name
+from tbl_code c left join tbl_emp e
+on c.creater = to_char(e.emp_no)
 where code_category = #{code}
 order by code_num asc
 </select>
@@ -54,7 +55,37 @@ UPDATE tbl_top_code
 SET code_name = #{code_name} , create_date= current_date, creater = #{emp_no}
 WHERE code_category = #{code_category}
 </update>
+<!-- 상위코드 유무 조회 -->
+<select id="hasTop" resultType="integer">
+select count(*) from tbl_top_code
+where code_category=#{code_category}
+</select>
 
+<!-- 상위 코드 신규 -->
+<insert id="insertTop">
+	insert into tbl_top_code (code_category,code_name,create_Date,creater)
+	values(#{code_category},#{code_name},current_date,#{emp_no})
+</insert>
+
+
+<!-- 하위코드 유무 조회 -->
+<select id="hasBottom" resultType="integer">
+select count(*) from tbl_code
+where code_category=#{code_category} and code_num=#{code_num}
+</select>
+
+<!-- 하위 코드 신규 -->
+<insert id="insertBottom">
+	insert into tbl_code (code_category, code_num, CREATE_DATE, creater, code_value, code_value2)
+	values(#{code_category}, #{code_num}, current_date, #{creater}, #{code_value}, #{code_value2,jdbcType=VARCHAR})
+</insert>
+
+<!-- 특정하위 코드 삭제  -->
+
+<delete id="deleteBottomOne">
+	delete tbl_code
+	where code_category = #{code_category} and code_num=#{code_num}
+</delete>
 
 <!-- 
 <select id="list" resultType='ea.EaCodeVO'>

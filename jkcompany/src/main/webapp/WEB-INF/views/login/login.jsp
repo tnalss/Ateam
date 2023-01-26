@@ -72,15 +72,15 @@
 		login();
 	});
  function login(){
-	 console.log( '여기' )
+	
 	if( emptyCheck() ){
-		console.log( '저기' )
+		
 		$.ajax({
 			url: 'jklogin',
 			data: { id:$('#id').val(), pw:$('#pw').val() },
 			dataType : "json", 
 			success: function( response ){
-				console.log( response )
+				
 				if( response ){
 					location = '<c:url value="/"/>';
 				}else{

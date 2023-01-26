@@ -1,5 +1,6 @@
 package co.kr.jkcompany;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -55,15 +56,52 @@ public class CodeManageController {
 		return "redirect:list.code";
 	}
 	
-	//코드 전체 조회
+	//상위 코드 수정
 	@ResponseBody
 	@RequestMapping("/updateTop.code")
 	public boolean updateTop(CodeVO vo) {
-		
 		int test = sql.update("code.updateTop",vo);
-		System.out.println(test);
-		
 		return test==1 ? true : false;
+	}
+	
+	
+	// 상위 코드 추가
+	//코드 전체 조회
+	@ResponseBody
+	@RequestMapping("/addTop.code")
+	public boolean addTop(CodeVO vo) {
+		int test = sql.selectOne("code.hasTop",vo);
+		if(test==1) {
+			return false;
+		}
+		sql.insert("code.insertTop",vo);
+		
+		return true;
+	}
+	
+	
+	//하위코드 추가
+	@ResponseBody
+	@RequestMapping("/addBottom.code")
+	public boolean addBottom(CodeVO vo) {
+		int test = sql.selectOne("code.hasBottom",vo);
+		if(test==1) {
+			return false;
+		}
+		sql.insert("code.insertBottom",vo);
+		
+		return true;
+	}
+
+	//하위 코드 삭제
+	@RequestMapping(value= "/deleteBottom.code" , produces="text/html;charset=utf-8")
+	public String deleteBottom(String code_category, String code_num) {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("code_category", code_category);
+		map.put("code_num", code_num);
+		sql.delete("code.deleteBottomOne",map);
+
+		return "redirect:bottomCodeList.code?code="+code_category;
 	}
 	
 }

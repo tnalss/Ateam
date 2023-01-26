@@ -18,7 +18,8 @@
 background-color: #FFFFFF;
 }
 .profile{
-width:200px
+width:200px;
+height:250px;
 }
 
 .col-lg-2 {
