@@ -25,7 +25,7 @@ order by a.attend_date
 <update id ="attend_off">
 UPDATE tbl_attend
 SET attend_off = to_char(current_date,'yyyy/mm/dd HH24:MI') , att_code='W1'
-<![CDATA[where attend_date <= to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no}  ]]>
+<![CDATA[where  attend_date =  to_char(current_date, 'yyyy/mm/dd')  and emp_no  =  #{emp_no}  ]]>
 </update>
 
 
@@ -67,7 +67,7 @@ order by a.attend_date desc, e.emp_name
 <!--  해당 날짜의 /지점별 /부서별 /직급별 직원의 출퇴근 상태 조회 -->
 <select id = "worktime_all" resultType="Attend.AttendAdminVO">
 select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
-c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , c4.code_value att_state
+c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , (TO_CHAR(ATTEND_OFF , 'hh24') - TO_CHAR(ATTEND_ON , 'hh24')) work_time ,c4.code_value att_state
 from tbl_attend a 
 left join tbl_emp e on a.emp_no = e.emp_no 
 left join tbl_org o on e.emp_no = o.emp_no 
@@ -75,8 +75,6 @@ left join tbl_code c on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
 left join tbl_code c3  on o.dept_code = c3.code_category||c3.code_num 
 left join tbl_code c4  on a.att_code = c4.code_category||c4.code_num
-
-
 where to_date(a.attend_date, 'yyyy/MM/dd')  = #{attend_date}
  <if test='branch_name != null'>
 and c2.code_value = #{branch_name,jdbcType=VARCHAR}
@@ -98,8 +96,8 @@ order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 
 <!-- 전체사원의 출근한 전체 날짜의 근무 시간 총합  조회   -->
 <select id ="worktime_day" resultType="Attend.AttendAdminVO">
-select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,c.code_value rank_name,e.emp_name,
-(TO_CHAR(ATTEND_OFF , 'hh24') - TO_CHAR(ATTEND_ON , 'hh24')) work_time
+select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,c.code_value rank_name,e.emp_name,a.attend_on, a.attend_off,
+(TO_CHAR(ATTEND_OFF , 'hh24') - TO_CHAR(ATTEND_ON , 'hh24')) work_time 
 from tbl_attend a
 left join tbl_emp e 
 on a.emp_no = e.emp_no
@@ -111,6 +109,6 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num 
 left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num 
-order by a.attend_date desc ,c2.code_value,c3.code_value,c.code_num, e.emp_name
+order by a.attend_date desc , e.emp_name
 </select>
 </mapper>

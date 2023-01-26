@@ -4,10 +4,6 @@
 
 
 
-<!--  총건수 조회 -->
-<select id='total' resultType='integer'>
-select count(*) from tbl_attend 
-</select>
 
 
 <!-- 전체사원의 출퇴근 현황 조회 -->
@@ -130,6 +126,11 @@ from tbl_attend a
 where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  1  
 </select>
 
+<!--  총건수 조회 -->
+<select id='total' resultType='integer'>
+select count(*) from tbl_attend 
+</select>
+
 
 <select id = "codeW4"  resultType="integer">
 select count (case when att_code='W4' then 1 end) AS Count_W4
@@ -137,13 +138,42 @@ from tbl_attend
 where emp_no=#{emp_no}
 </select>
 
-<select id = "codeW3nW7"  resultType="integer">
-select count (case when att_code='W3' or att_code='W7' then 1 end) AS cout_3n7
+<select id = "code4list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W4'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
+
+
+<select id = "codeW3"  resultType="integer">
+select count (case when att_code='W3' then 1 end) AS count_W3
 from tbl_attend
 where emp_no=#{emp_no}
 </select>
 
+<select id = "code3list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W3'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
 
+<select id = "codeW2"  resultType="integer">
+select count (case when att_code='W2' then 1 end) AS count_W2
+from tbl_attend
+where emp_no=#{emp_no}
+</select>
+
+<select id = "code2list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W2'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
 
 
 <!--로그인한 사원의 출근하기  -->
@@ -157,7 +187,7 @@ values(#{emp_no},to_char(current_date,'yyyy/mm/dd hh24:mi:ss'),'W0')
 UPDATE tbl_attend
 SET attend_off = to_char(current_date,'yyyy/mm/dd hh24:mi:ss') , att_code='W1' 
 WHERE emp_no= #{emp_no} 
-and attend_date =  to_char(current_date, 'yyyy/mm/dd') ;;
+and attend_date =  to_char(current_date, 'yyyy/mm/dd') 
 </update>
 
 

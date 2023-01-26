@@ -46,10 +46,9 @@ public class AttendController {
 	// 페이지 처리
 		public AttendPageVO attend_list(AttendPageVO page) {
 			page.setTotalList( sql.selectOne("at.total", page) ); 
-			page.setList( sql.selectList("at.admin_attend", page) );
+			page.setList( sql.selectList("at.admin_attend", page) );	
 			return page;
 		}
-
 	
 
 	//내 출퇴근 조회
@@ -61,14 +60,59 @@ public class AttendController {
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());				
 		List<AttendVO> list = sql.selectList("at.list_7days",vo.getEmp_no());
 		int code = sql.selectOne("at.codeW4",vo.getEmp_no());
-		int code2= sql.selectOne("at.codeW3nW7",vo.getEmp_no());
+		int code2= sql.selectOne("at.codeW3",vo.getEmp_no());
+		int code3= sql.selectOne("at.codeW2",vo.getEmp_no());
+		
+		//model.addAttribute("loginInfo",vo);
 		model.addAttribute("today",today);
 		model.addAttribute("list",list);
 		model.addAttribute("code",code);
 		model.addAttribute("code2",code2);
+		model.addAttribute("code3",code3);
 		return "attend/my_attend";
 	}
+	
+	
+	@RequestMapping(value = "/my_attend_a.at", produces = "text/html;charset=utf-8")
+	public String my_attend_a(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
+		List<AttendVO> list = sql.selectList("at.code4list",vo.getEmp_no());
+		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		
+		model.addAttribute("list",list);		
+		model.addAttribute("since",since);
+		return "attend/my_attend_a";
+	}	
+	
 
+	@RequestMapping(value = "/my_attend_late.at", produces = "text/html;charset=utf-8")
+	public String my_attend_late(HttpSession session, Model model,AttendPageVO page) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
+		List<AttendVO> list = sql.selectList("at.code3list",vo.getEmp_no());	
+		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		model.addAttribute("list",list);	
+		model.addAttribute("since",since);
+		return "attend/my_attend_late";
+	}	
+	
+	@RequestMapping(value = "/my_attend_n.at", produces = "text/html;charset=utf-8")
+	public String my_attend_n(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
+		List<AttendVO> list = sql.selectList("at.code2list",vo.getEmp_no());
+		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		model.addAttribute("list",list);	
+		model.addAttribute("since",since);
+		return "attend/my_attend_n";
+	}
+	
+	@RequestMapping(value = "/my_attend_edit.at", produces = "text/html;charset=utf-8")
+	public String my_attend_edit(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");		
+		
+		
+			
+		return "attend/my_attend_edit";
+	}
 	
 	
 	
