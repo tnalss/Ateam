@@ -146,6 +146,12 @@
 			<version>19.7.0.0</version>
 		</dependency>
 
+		<!-- poi 23/1/22 csm -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
 
 
 

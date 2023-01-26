@@ -1,5 +1,7 @@
 package login;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
  
@@ -9,9 +11,11 @@ public class LoginVO {
 	rank_name,branch_name,department_name;
 	private int salary;
 	private double commission_pct;
-	private String birth,hire_date,end_date;
-	
-	private String attend_date, attend_on, attend_off;
+	private Date birth,hire_date,end_date;	
+	private Date attend_date, attend_on, attend_off;
 	private String att_code;
 	private String profile_path;
+	
+
+	
 }

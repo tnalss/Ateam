@@ -1,17 +1,133 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%
+Date nowTime = new Date();
+SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
+
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.pricing .container button[type=submit] {
-    background: #f03c02;
-    border: 0;
-    padding: 10px 24px;
-    color: #fff;
-    transition: 0.4s;
-    border-radius: 4px;
+#time {
+	font-size: 45px;
+	margin-top: 90px;
+	color: #fd5c28;
+	justify-content: center;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#img {
+	margin-top: 30px;
+	width: 450px;
+	height: 200px;
+	margin-bottom: 18px;
+}
+
+.blog .blog-author img {
+	width: 120px;
+	height: 120px;
+}
+
+#box {
+	width: 700px;
+	margin-top: 55px;
+}
+
+#container2 {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#btn-set {
+	margin-left: 130px;
+	margin-bottom: 30px;
+}
+
+#on {
+	margin-left: 20px;
+}
+
+#on, #off {
+	border-color: #fff;
+	margin-left: 10px;
+	width: 200px;
+	height: 50px;
+	background: #fd5c28;
+}
+
+#o li {
+	font-size: 20px;
+	margin: 15px;
+}
+
+#aa {
+	margin-top: 45px;
+}
+
+.a li {
+	font-size: 20px;
+}
+
+#lt {
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+}
+
+.rounded-circle {
+	border-radius: 50% !important;
+}
+
+#s {
+	float: left;
+	display: flex;
+	justify-content: center;
+	display: flex;
+}
+
+#btn1 {
+	margin-top: 10px;
+	margin-left: 50px;
+	width: 150px;
+	margin-left: 50px;
+}
+
+#btn2 {
+	margin-top: 10px;
+	width: 150px;
+}
+
+#b {
+	margin-top: 17px;
+}
+
+#o {
+	margin-top: 30px;
+}
+
+#h3 {
+	display: block;
+	font-size: 2 rem;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}
+
+#h{
+margin-top:15px;
+font-size: 25px;
+
+
 }
 </style>
 
@@ -29,98 +145,126 @@
 			</div>
 			</ol>
 		</div>
-
 	</section>
 	<!-- End Breadcrumbs -->
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<div class='container'>
-		<h2>내 출퇴근 기록 조회</h2>
-		<section id="pricing" class="pricing">
-			<div class="container">
-				<div class="text-center">
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" float:left width:50%>
-						<div class="box featured aos-init aos-animate" data-aos="fade-up">
-							<h3>로그인한 회원의 이름</h3> 							
+	<section id="pricing" class="pricing">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="box aos-init aos-animate" data-aos="fade-right" id="aa">
+						<h3>내 정보</h3>
+						<img src="${loginInfo.profile_path ne null ? loginInfo.profile_path:'assets/img/user_profile.png'}"
+							class="testimonial-img img-fluid rounded-circle" alt=""
+							width="150px" height="150px">
+						<h4 id="h">	${loginInfo.emp_name}				</h4>
+						<ul>
+							<li>${loginInfo.branch_name}</li>
+							<li>${loginInfo.department_name}</li>
+							<li>${loginInfo.rank_name}</li>
+							<li>${loginInfo.email}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mt-4 mt-md-0" id="a">
+					<h3 id="time">
+						<%=sf.format(nowTime)%>
+					</h3>
+					<div class="box featured aos-init aos-animate" data-aos="fade-up"
+						id="o">
+						<ul>
+							<li>${loginInfo.emp_name}님의 출·퇴근 현황을 확인하세요</li>
+							<li id="lt">${today.att_state}</li>
+						</ul>
+
+						<div class="row" id="s">
+							<div class="btn-wrap" id="btn1">
+								<a href="#" class="btn-buy">출근</a>
+							</div>
+							<div class="btn-wrap" id="btn2">
+								<a href="#" class="btn-buy">퇴근</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+					<img src="assets/img/img_att.JPG" alt="" class="img-fluid" id="img">
+					<div class="box aos-init aos-animate" data-aos="fade-left"
+						style="height: 250px" id="o">
+						<h3>업무 상태 수정 바로가기</h3>
+						<div clas="row" id="s">
+							<div class="btn-wrap">
+								<a href="#" class="btn-buy" id="btn-on-cancel">출근 취소</a>
+							</div>
+							<div class="btn-wrap">
+								<a href="#" class="btn-buy" id="btn-off-cancel">퇴근 취소</a>
+							</div>
+						</div>
+						<div class="btn-wrap">
+							<a href="my_attend_edit.at" class="btn-buy" id="b">기타 사항</a>
 						</div>
 					</div>
-					<div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" float:left  width:50%> 
-					<img src="assets/img/img_att.JPG" alt="" class="img-fluid"
-						width="320px" height="175px">
-					</div>					
-				</div>
-				<button type="submit">Send Message</button>
-			</div>
-		</section>
-	</div>
-<section id="blog" class="blog">
-		<div class="container">
-			<div class="blog-author d-flex align-items-center">
-				<img src="assets/img/blog/blog-author.jpg"
-					class="rounded-circle float-left" alt="">
-				<div>
-					<h4>Jane Smith</h4>
-					<div class="social-links">
-						<a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-						<a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-						<a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-					</div>
-					<p>Itaque quidem optio quia voluptatibus dolorem dolor. Modi
-						eum sed possimus accusantium. Quas repellat voluptatem officia
-						numquam sint aspernatur voluptas. Esse et accusantium ut unde
-						voluptas.</p>
+
 				</div>
 			</div>
-			<!-- End blog author bio -->
+
+
+		</div>
 		</div>
 	</section>
 	<section id="services" class="services">
 		<div class="container">
+			<h3 data-aos="fade-up" id="h3">이번 주 나의 근무 현황 요약</h3>
 			<div class="row">
-				<!-- 이번주 근무시간  -->
-				<div class="col-lg-4 col-md-6">
-					<div class="icon-box aos-init aos-animate" data-aos="fade-up">
-						<div class="icon">
-							<i class="bi bi-briefcase"></i>
-						</div>
-						<h3 class="title">
-							<a href="">이번주 총 근무 시간</a>
-						</h3>
-						<h4>이번주 근무시간 보여줍니다</h4>
-						<p class="description">자세히보기</p>
-					</div>
-				</div>
+
+				<!-- 코드값 w4인 건수 보여주기 -->
 				<div class="col-lg-4 col-md-6">
 					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 						data-aos-delay="100">
 						<div class="icon">
-							<i class="bi bi-card-checklist"></i>
+							<i class="bi bi-check-circle-fill"></i>
 						</div>
-						<h3 class="title">
-							<a href="">정상 처리</a>
+						<a>정상 출퇴근 조회</a>
 						</h3>
-						<h4>출퇴근코드 =W4 인 값 건수보여줍니다</h4>
-						<p class="description">자세히보기</p>
+						<h4>${code}건</h4>
+						<a href="my_attend_a.at"><p class="description">자세히보기</p></a>
+
 					</div>
 				</div>
+				<!-- 코드값 w3인 건수 보여주기 -->
 				<div class="col-lg-4 col-md-6">
 					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 						data-aos-delay="200">
 						<div class="icon">
-							<i class="bi bi-bar-chart"></i>
+							<i class="bi bi-alarm"></i>
 						</div>
 						<h3 class="title">
-							<a href="">미처리</a>
+							<a href="">지각 조회</a>
 						</h3>
-						<h4>출퇴근코드 =W4 아닌 값 건수 보여줍니다</h4>
-						<p class="description">자세히보기</p>
-						
+						<h4>${code2}건</h4>
+						<a href="my_attend_late.at"><p class="description">자세히보기</p></a>
+					</div>
+				</div>
+				<!-- 코드값 2인 건수 보여주기 -->
+				<div class="col-lg-4 col-md-6">
+					<div class="icon-box aos-init aos-animate" data-aos="fade-up"
+						data-aos-delay="200">
+						<div class="icon">
+							<i class="bi bi-emoji-sunglasses"></i>
+						</div>
+						<h3 class="title">
+							<a href="">결근 및 연차 사용 조회</a>
+						</h3>
+						<h4>${code3}건</h4>
+						<a href="my_attend_n.at"><p class="description">자세히보기</p></a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>	
+	</section>
 </main>
 <!-- End main -->
 
@@ -128,3 +272,44 @@
 <a href="#"
 	class="back-to-top d-flex align-items-center justify-content-center"><i
 	class="bi bi-arrow-up-short"></i></a>
+
+<script>
+	/*출근 버튼 클릭시  */
+	$('.btn-1').on('click',function(){
+		if( ${today.atten_on} ne null/*이미 today의 atten_on이 있으면  */){
+			alert('출근처리가 완료되었습니다')
+		}else{			
+			/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
+		
+		}
+	});
+	
+	
+	
+	/*퇴근 버튼 클릭시  */
+	$('.btn-2').on('click',function(){
+		
+	});
+	
+
+	/*출근 취소 버튼 클릭시  */
+	$('.btn-on-cancel').on('click',function(){
+		if( /* today의 atten_on이 없으면 */ ){
+			alert('출근 정보가 없습니다!')
+		}else {
+			alert('출근 처리를 취소하시겠습니까?')
+		}
+	});
+	
+
+	/*퇴근 취소 버튼 클릭시  */
+	$('.btn-on-cancel').on('click',function(){
+		if( /* today의 atten_off이 없으면 */ ){
+			alert('퇴근 정보가 없습니다!')
+		}else {
+			alert('퇴근 처리를 취소하시겠습니까?')
+		}
+	});
+	
+	
+</script>

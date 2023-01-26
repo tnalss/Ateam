@@ -58,7 +58,6 @@ public class Org_MainActivity extends AppCompatActivity {
 
 
         mTabLayout = (TabLayout) findViewById(R.id.layout_tab);
-//        mTabLayout.addTab(mTabLayout.newTab().setText("홈"));
 
         mViewPager = (ViewPager2) findViewById(R.id.pager_content);
 

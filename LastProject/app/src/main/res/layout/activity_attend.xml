@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".attend.AttendActivity"
     android:padding="10dp">
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <!--상단메뉴바-->
@@ -57,7 +57,7 @@
             android:background="@drawable/item_radius2"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="600dp"
             android:orientation="vertical"
             android:layout_gravity="center">
             <TextView
@@ -75,7 +75,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recv_attend_record"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

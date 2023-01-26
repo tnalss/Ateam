@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sche">
 
+<!-- 삭제 -->
+<delete id="deleteOne">
+delete from tbl_sche
+where sche_no= #{sche_no}
+
+</delete>
+
+
 <!-- 회사일정조회 -->
 <select id="compSche" resultType="schedule.ScheduleVO">
 select *
@@ -22,6 +30,16 @@ order by SCHE_NO
 ]]>
 </select>
 
+<!-- 기간내 회사일정개수 -->
+<select id="countCompPeriod" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = 'C1' and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+]]>
+</select>
+
+
 <!-- 기간내 부서일정조회 -->
 <select id="deptPeriod" resultType="schedule.ScheduleVO">
 <![CDATA[
@@ -29,6 +47,22 @@ select *
 from tbl_sche
 where SCHE_type = #{dept_code} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 order by SCHE_NO
+]]>
+</select>
+
+<!-- 사번에 해당하는 부서의 전체 일정 조회 -->
+<select id="deptbyId" resultType="schedule.ScheduleVO">
+select *
+from tbl_sche
+where SCHE_type = (select dept_code from tbl_org where emp_no=#{id})
+</select>
+
+<!-- 사번에 해당하는 부서의 기간내 일정 개수 -->
+<select id="countDeptPeriod" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = (select dept_code from tbl_org where emp_no=#{id}) and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
 ]]>
 </select>
 
@@ -42,6 +76,21 @@ order by SCHE_NO
 ]]>
 </select>
 
+<!-- 개인일정전체조회 -->
+<select id="personalbyId" resultType="schedule.ScheduleVO">
+select *
+from tbl_sche
+where SCHE_type = #{id}
+</select>
+
+<!-- 기간내 개인일정전체조회 -->
+<select id="countPeriodPersional" resultType="Integer">
+<![CDATA[
+select count(*)
+from tbl_sche
+where SCHE_type = #{id} and TO_CHAR(current_date, 'yy/MM/dd') <= TO_CHAR(sche_end, 'yy/MM/dd')
+]]>
+</select>
 
 <insert id="dept_insert">
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
@@ -56,6 +105,11 @@ values(#{emp_no}, 'C1' , #{sche_title},#{sche_content}, #{sche_start}, #{sche_en
 <insert id="personal_insert">
 insert into tbl_Sche (emp_no,sche_type,sche_title,sche_content,sche_Start,sche_end,sche_status)
 values(#{emp_no}, #{emp_no} , #{sche_title},#{sche_content}, #{sche_start}, #{sche_end},'L1')
+</insert>
+
+<insert id="insertOne">
+insert into tbl_Sche (emp_no,sche_type,sche_title,sche_Start,sche_end,sche_status)
+values(#{emp_no}, #{emp_no} , #{sche_title}, #{sche_start}, #{sche_end},'L1')
 </insert>
 
 <!-- 스케줄 번호에 해당하는 사원명 찾아줌 -->

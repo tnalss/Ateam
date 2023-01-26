@@ -7,8 +7,8 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/p"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
+        android:layout_width="135dp"
+        android:layout_height="130dp"
         android:orientation="vertical">
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_gravity="center"
@@ -28,13 +28,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:textColor="@color/main_color"
-            android:id="@+id/tv_emp_name"
-            style="@style/sub_size"
-            android:text="사원명"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="@color/main_color"
+                android:id="@+id/tv_emp_name"
+                style="@style/sub_size"
+                android:text="사원명"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tv_emp_rank"
+                style="@style/sub_size"
+                android:text="직급"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,22 +65,17 @@
                 android:text="｜부서"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:id="@+id/tv_emp_rank"
-                style="@style/small_size"
-                android:text="｜직급"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginRight="22dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/p"
         android:gravity="center"
         android:orientation="vertical">
@@ -85,20 +93,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_on"
-                style="@style/small_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="" />
-
-            <TextView
                 android:id="@+id/on"
                 style="@style/small_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="09:00" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,13 +106,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_off"
-                style="@style/small_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="" />
 
             <TextView
                 android:id="@+id/off"
@@ -120,17 +113,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="09:00" />
+                android:text="" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/now"
-        style="@style/small_size"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
-        android:text="근무 상태" />
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
+
+        <TextView
+            style="@style/sub_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="근무 시간" />
+
+        <TextView
+            android:id="@+id/now"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
+
+        <TextView
+            style="@style/sub_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="근무 상태" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/small_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
 </RelativeLayout>

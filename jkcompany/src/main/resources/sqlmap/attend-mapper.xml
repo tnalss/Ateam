@@ -3,19 +3,16 @@
 <mapper namespace="at">
 
 
+
+
+
 <!-- 전체사원의 출퇴근 현황 조회 -->
 <select id = "admin_attend" resultType="attend.AttendVO">
-select  a.attend_date,e.emp_name,a.attend_on, a.attend_off,c.code_value attend_state
-from tbl_attend a left join tbl_emp e 
-on a.emp_no = e.emp_no left outer join tbl_code c on a.att_code = c.code_category||c.code_num
-order by a.attend_date desc, e.emp_name
-</select>
 
-
-<!--  날짜별 조회 -->
-<select id = "ad_date" resultType="attend.AttendVO">
-select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
-c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , c4.code_value att_state
+select * 
+from(
+select row_number() over(ORDER BY a.attend_date ) no, a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
+c.code_value rank_name,e.emp_name, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off , c4.code_value att_state
 from tbl_attend a 
 left join tbl_emp e on a.emp_no = e.emp_no 
 left join tbl_org o on e.emp_no = o.emp_no 
@@ -23,10 +20,14 @@ left join tbl_code c on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
 left join tbl_code c3  on o.dept_code = c3.code_category||c3.code_num 
 left join tbl_code c4  on a.att_code = c4.code_category||c4.code_num
-where to_date(a.attend_date, 'yyyy/MM/dd')  = #{attend_date}
+) b
+where no between ${beginList} and ${endList}	   
+order by b.attend_date desc
 </select>
 
-<!-- 날짜 선택 후 이름 검색 -->
+
+
+<!-- 전체사원 조회- 이름 검색 -->
 <select id = "ad_name" resultType="attend.AttendVO">
 select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
 c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , c4.code_value att_state
@@ -37,34 +38,8 @@ left join tbl_code c on o.rank_code = c.code_category||c.code_num
 left join tbl_code c2 on o.branch_code = c2.code_category||c2.code_num 
 left join tbl_code c3  on o.dept_code = c3.code_category||c3.code_num 
 left join tbl_code c4  on a.att_code = c4.code_category||c4.code_num
-where  to_date(a.attend_date, 'yyyy/MM/dd')  = #{attend_date}
-and e.emp_name like '%'||#{keyword}||'%' 
+where e.emp_name like '%'||#{keyword}||'%' 
 </select>
-
-
-
-<!--로그인한 사원의 출근처리 -->
-<update id = "attend_on">
-update tbl_attend
-set attend_on =current_date ,att_code = 'W0'  
-where emp_no =#{emp_no} and attend_date = to_char(current_Date,  'yyyy/mm/dd' )
-</update>
-
-
-<!--로그인한 사원의 오늘 출근 상태 조회 (지각이면 지각으로 나오게...) -->
-<select id = "emp_today" resultType="attend.AttendVO">
-select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
-from tbl_attend a
-where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  #{emp_no}   
-</select>
-
-
-<!--로그인한 사원의 퇴근 처리(지각이어도 퇴근으로 찍힘) -->
-<update id ="attend_off">
-UPDATE tbl_attend
-SET attend_off = to_char(current_date,'yyyy/mm/dd HH24:MI') , att_code='W1'
-where attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no  =  #{emp_no}  
-</update>
 
 
 <!--로그인한 회원의  날짜별 상태조회   -->
@@ -142,9 +117,82 @@ order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 </select>
 
 
-<select id = "check_attend_on"  parameterType="String" resultType="int">
-select count()
+
+
+<!--로그인한 사원의 오늘 출근 상태 조회 (지각이면 지각으로 나오게...) -->
+<select id = "emp_today" resultType="attend.AttendVO">
+select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  1  
+</select>
+
+<!--  총건수 조회 -->
+<select id='total' resultType='integer'>
+select count(*) from tbl_attend 
 </select>
 
 
+<select id = "codeW4"  resultType="integer">
+select count (case when att_code='W4' then 1 end) AS Count_W4
+from tbl_attend
+where emp_no=#{emp_no}
+</select>
+
+<select id = "code4list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W4'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
+
+
+<select id = "codeW3"  resultType="integer">
+select count (case when att_code='W3' then 1 end) AS count_W3
+from tbl_attend
+where emp_no=#{emp_no}
+</select>
+
+<select id = "code3list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W3'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
+
+<select id = "codeW2"  resultType="integer">
+select count (case when att_code='W2' then 1 end) AS count_W2
+from tbl_attend
+where emp_no=#{emp_no}
+</select>
+
+<select id = "code2list" resultType ="attend.AttendVO">
+   select a.attend_date, to_char(a.attend_on,'hh24:mi') attend_on,  to_char(a.attend_off,'hh24:mi') attend_off ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+from tbl_attend a
+where a.att_code = 'W2'
+and a.emp_no=#{emp_no}
+order by a.attend_date desc
+</select>
+
+
+<!--로그인한 사원의 출근하기  -->
+<insert id ="attend_on">
+INSERT INTO tbl_attend (emp_no,attend_on,att_code)
+values(#{emp_no},to_char(current_date,'yyyy/mm/dd hh24:mi:ss'),'W0')
+</insert>
+
+<!-- 로그인한 사원 퇴근하기 -->
+<update id ="attend_off">
+UPDATE tbl_attend
+SET attend_off = to_char(current_date,'yyyy/mm/dd hh24:mi:ss') , att_code='W1' 
+WHERE emp_no= #{emp_no} 
+and attend_date =  to_char(current_date, 'yyyy/mm/dd') 
+</update>
+
+
+
+
+
 </mapper>
+

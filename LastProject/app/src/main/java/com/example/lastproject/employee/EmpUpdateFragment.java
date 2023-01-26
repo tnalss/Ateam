@@ -307,9 +307,5 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
         startActivityForResult(intent,CAMERA_CODE);
 
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding=null;
-    }
+
 }

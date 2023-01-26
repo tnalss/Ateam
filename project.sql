@@ -609,3 +609,11 @@ begin
 end;
 /
 
+
+23/1/24 트리거 신규 회원 생성시 tbl_org 추가
+CREATE OR REPLACE TRIGGER trg_emp_org
+    AFTER INSERT ON tbl_emp
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO tbl_org VALUES(:NEW.emp_no,'R99' ,'B99','D99');
+    END;

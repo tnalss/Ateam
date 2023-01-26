@@ -1,7 +1,10 @@
 package co.kr.jkcompany;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +13,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import code.CodeVO;
 import common.CommonService;
 import employee.EmployeePageVO;
 import employee.EmployeeVO;
@@ -23,17 +28,24 @@ public class EmployeeController {
 	@Autowired
 	private CommonService common;
 
+	
 	// 조회하고 출력하는 예제
 	@RequestMapping(value = "/list.emp", produces = "text/html;charset=utf-8")
 	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {
-
+		int count =0;
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
 		session.setAttribute("cate", "emp");
-		int countRetired = sql.selectOne("emp.countRetired");
-
-
-		model.addAttribute("countRetired", countRetired);
-		model.addAttribute("page", emp_list(page) );
+		EmployeePageVO vo = emp_list(page);
+		model.addAttribute("page", vo );
+		for (EmployeeVO each : vo.list) {
+			if(each.getAdmin().equals("X0")) {
+				count++;
+			}
+		}
+		if(!page.getKeyword().equals("") && !page.getSearch().equals(""))
+			model.addAttribute("countRetired",count );
+		else
+			model.addAttribute("countRetired",sql.selectOne("emp.allCountRetired"));
 		
 		// 리턴을 통해 employee 폴더에 list.jsp 를 찾아갑니다.
 		return "employee/list";
@@ -46,7 +58,7 @@ public class EmployeeController {
 		page.setList( sql.selectList("emp.plist", page) );
 		return page;
 	}
-	
+
 	
 	
 	
@@ -64,9 +76,10 @@ public class EmployeeController {
 
 	// 사번으로 사원 정보조회
 	@RequestMapping(value = "/info.emp", produces = "text/html;charset=utf-8")
-	public String emp_info(String id, Model model) {
+	public String emp_info(String id, Model model, EmployeePageVO page) {
 		EmployeeVO vo = sql.selectOne("emp.info", id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("page",page);
 		return "employee/info";
 	}
 
@@ -86,24 +99,58 @@ public class EmployeeController {
 	// 정보 수정 확인 버튼
 
 	@RequestMapping("/update.emp")
-	public String employee_update(EmployeeVO vo) {
+	public String employee_update(EmployeeVO vo, MultipartFile file , HttpServletRequest request,EmployeePageVO page) throws UnsupportedEncodingException {
+		if(file!=null) {
+			if(file.getSize()!=0) {
+			String path = common.fileUpload("profile",file,request);
+			vo.setProfile_path(path);
+			}
+		}	
 		sql.update("emp.update", vo);
 		sql.update("emp.updateOrg", vo);
-		return "redirect:info.emp?id=" + vo.getEmp_no();
+		return "redirect:info.emp?id=" + vo.getEmp_no()+"&curPage="
+		+page.getCurPage()+"&search="+page.getSearch()+"&keyword="+
+		URLEncoder.encode(page.getKeyword(),"utf-8");
 	}
 
 	// 퇴사버튼
 
 	@RequestMapping("/fire.emp")
-	public String employee_fire(int id) {
+	public String employee_fire(int id,EmployeePageVO page) throws UnsupportedEncodingException {
 		sql.update("emp.fire", id);
-		return "redirect:info.emp?id=" + id;
+		return "redirect:info.emp?id=" + id+"&curPage="
+		+page.getCurPage()+"&search="+page.getSearch()+"&keyword="+
+		URLEncoder.encode(page.getKeyword(),"utf-8");
+	}
+
+	//신규사원 등록버튼
+	@RequestMapping("/new.emp")
+	public String employee_new(Model model) {
+
+		model.addAttribute("branches", sql.selectList("emp.codeList", 'B'));
+		model.addAttribute("departments", sql.selectList("emp.codeList", 'D'));
+		model.addAttribute("ranks", sql.selectList("emp.codeList", 'R'));
+
+		
+		return "employee/new";
 	}
 
 
-
 	// 신규사원등록
-
+	@RequestMapping("/insert.emp")
+	public String employee_insert(EmployeeVO vo, MultipartFile file ,HttpServletRequest request) {
+		if(file!=null) {
+			if(file.getSize()!=0) {
+			String path = common.fileUpload("profile",file,request);
+			vo.setProfile_path(path);
+			}
+		}	
+		sql.insert("emp.insert", vo);
+		String emp_no =sql.selectOne("emp.emp_no",vo);
+		vo.setEmp_no(emp_no);
+		sql.update("emp.orgtUpdate",vo);
+		return "redirect:info.emp?id=" + vo.getEmp_no();
+	}
 //	
 //	
 //	
