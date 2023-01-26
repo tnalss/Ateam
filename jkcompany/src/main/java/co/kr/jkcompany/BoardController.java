@@ -28,9 +28,8 @@ public class BoardController {
 
 	// 공지글수정저장처리 요청
 		@RequestMapping("/reply_update.bo")
-		public String update(ReplyVO vo) {
-			sql.update("re.reply_update", vo);
-			// 응답화면연결
+		public String update(ReplyVO vo, Model model) {
+			model.addAttribute("board_no", sql.update("re.reply_update", vo));
 			return "redirect:info.bo?id=" + vo.getBoard_no();
 		}
 

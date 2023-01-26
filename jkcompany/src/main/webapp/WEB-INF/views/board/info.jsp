@@ -65,18 +65,19 @@
 	</c:if>
 </div>
 
+<form action="reply_update.bo" method="post" id="updateReply">
 	<!-- 댓글 -->
 	<div id='reply.no' class="mt-4">
    <p style='font-size: 22px;'>댓글</p>
    <div class="row">
    <c:forEach items='${board }' var='reply'>
-    <div class="col-5 mt-2">
+    <div class="col-12 mt-2">
           <div class="card">
             <div class="row no-gutters">
-             <div class="col-3 mt-3">
+             <div class="col-2">
                <img src="assets/img/user_profile.png" class="img-fluid p-2 profile" alt="">
               </div>
-               <div class="col-9">
+               <div class="col-10">
                 <div class="card-body">
                 <p class="card-text" id="reply_content" style="margin-left: -30px;">${reply.reply_content } </p>
                 					
@@ -104,13 +105,14 @@
           </c:forEach>
         </div>  
           </div>
-
+</form>
     </section><!-- End Section -->
    
 <script type="text/javascript">
 
+// 수정 저장 버튼
 $('.modify_ok').on('click', function(){
-	location = 'reply_update.bo';
+	$('#updateReply').submit();
 	$('#modify_on').css({"display":"none"});
 	$('#modify_off').css({"display":"block"});
 	$('#reply_incontent').css({"display":"none"});
@@ -135,7 +137,7 @@ $('#modify_cancel').on('click', function(){
 });
 
 $('.btn-delete').on('click', function(){
-	if( confirm('정말 삭제?') ){
+	if( confirm('게시글을 삭제하시겠습니까?') ){
 		location = 'delete.bo?id=${vo.board_no}';
 	}
 });
@@ -148,7 +150,7 @@ $('.reply_btn').on('click', function(){
 });
 
 function delete_reply(no,board_no){
-	if(confirm('delete?')){
+	if(confirm('댓글을 삭제하시겠습니까?')){
     location = 'reply_delete.bo?id=' + board_no +'&reply_no=' +no;}
  };
 </script>
