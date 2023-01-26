@@ -42,7 +42,7 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c2.code_value = #{code}
-order by c2.code_value, e.emp_name,c.code_num
+order by c2.code_value, e.emp_name,c.code_value
 </select>
 
 <select id ="org_branch_n" resultType="Org.OrgVO">
@@ -56,7 +56,7 @@ on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c2.code_value = #{code}
 and e.emp_name like '%'||#{keyword}||'%' 
-order by c2.code_value, e.emp_name,c.code_num
+order by c2.code_value, e.emp_name,c.code_value
 </select>
 
 
@@ -75,7 +75,7 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c3.code_value = #{code}
-order by  c3.code_value,c.code_num, e.emp_name
+order by  c3.code_value,c.code_value, e.emp_name
 </select>
 
 
@@ -90,7 +90,7 @@ on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c3.code_value = #{code}
 and e.emp_name like '%'||#{keyword}||'%' 
-order by  c3.code_value,c.code_num, e.emp_name
+order by  c3.code_value,c.code_value, e.emp_name
 </select>
 
 
@@ -105,7 +105,7 @@ left join tbl_code c2
 on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c.code_value = #{code}
-order by  c.code_num, e.emp_name
+order by  c.code_value, e.emp_name
 </select>
 
 
@@ -120,7 +120,7 @@ on o.branch_code  = c2.code_category||c2.code_num left join tbl_code c3
 on o.dept_code  = c3.code_category||c3.code_num
 where c.code_value = #{code}
 and e.emp_name like '%'||#{keyword}||'%' 
-order by  c.code_num, e.emp_name
+order by c.code_value, e.emp_name
 </select>
 
 

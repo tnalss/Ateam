@@ -27,18 +27,20 @@
 	background: #fff;
 }
 
-#tab-1 { 700px;
-	
+#tab-1 { 700px;	
 }
 
 .tb-list, .text-center {
+	margin-top :20px;
 	align-content: center;
 	text-align: center;
 }
+
 .tt {
-margin-top: 30px;
-padding: 15px;
+	margin-top: 30px;
+	padding: 15px;
 }
+
 .tt>li {
 	height: 25px;
 }
@@ -85,6 +87,15 @@ padding: 15px;
 #btn-search {
 	margin-right: 10px;
 }
+
+#btn {
+	border-color: #fff;
+	background-color: #fd5c28;
+}
+
+#list-top {
+	
+}
 </style>
 <main id="main">
 	<!-- ======= Breadcrumbs ======= -->
@@ -106,9 +117,7 @@ padding: 15px;
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
 	<section id="a" class="container">
-
 		<div class="row">
-
 			<form method='post' action='admin_attend.at' id="list">
 				<input type='hidden' name='curPage' value='1'>
 			</form>
@@ -117,17 +126,17 @@ padding: 15px;
 				data-aos="fade-right">
 				<ul class="nav nav-tabs  flex-column" role="tablist">
 					<li class="nav-item" role="presentation"><a
-						class="nav-link show" data-bs-toggle="tab" href="#tab-1"
-						aria-selected="false" role="tab" tabindex="-1">
-							<h4>근태관리 전체 조회</h4>
-							<p>전체 사원의 근태상황을 확인할 수 있습니다.</p>
+						class="nav-link  active show" data-bs-toggle="tab" href="#tab-1"
+						aria-selected="true" role="tab" tabindex="-1"
+						style="margin-top: 17px;">
+							<h4>근태 조회</h4>
+							<p>전체 사원의 근태 상황을 확인할 수 있습니다.</p>
 					</a></li>
-
-					<li class="nav-item mt-2" role="presentation"><a
-						class="nav-link" data-bs-toggle="tab" href="#tab-2"
-						aria-selected="false" role="tab" tabindex="-1">
-							<h4>근태관리 전체 조회</h4>
-							<p>전체 사원의 근태상황을 확인할 수 있습니다.</p>
+					<li class="nav-item" role="presentation"><a
+						class="nav-link show" data-bs-toggle="tab" href="#tab-2"
+						aria-selected="false" role="tab" style="margin-top: 17px;">
+							<h4>근태 수정</h4>
+							<p>전체 사원의 근태 상황을 수정할 수 있습니다.</p>
 					</a></li>
 				</ul>
 			</div>
@@ -139,7 +148,6 @@ padding: 15px;
 				<div id="t" class="tab-content">
 					<div class="tab-pane active show" id="tab-1" role="tabpanel">
 						<figure>
-
 							<div class="row mt-3">
 								<div class="col-12 card p-0">
 									<div class="card-header">
@@ -155,9 +163,9 @@ padding: 15px;
 													<col width='100px'>
 													<col width='100px'>
 													<col width='100px'>
+													<col width='90px'>
+													<col width='90px'>
 													<col width='100px'>
-													<col width='100px'>
-													<col width='80px'>
 												</colgroup>
 												<tr class='text-center'>
 													<th>날짜</th>
@@ -207,43 +215,101 @@ padding: 15px;
 							</div>
 						</figure>
 					</div>
-					<div class="tab-pane" id="tab-2" role="tabpanel">
-						<div class="basic-dropdown">
-							<div class="dropdown">
-								<c:choose>
-									<c:when
-										test="${empStatus1.getEmpStatus() eq '업무종료' || empStatus1.getEmpOffTime() ne null}">
-										<select id="changeStatus" disabled="disabled">
-											<option value="업무상태선택">업무상태선택</option>
-											<option value="업무">업무</option>
-											<option value="업무종료" selected="selected">업무종료</option>
-											<option value="연차">연차</option>
-											<option value="외근">외근</option>
-										</select>
-									</c:when>
-
-									<c:otherwise>
-										<select id="changeStatus">
-											<option value="업무상태선택">업무상태선택</option>
-											<option value="업무"
-												<c:if test="${empStatus1.getEmpStatus() eq '업무'}">selected</c:if>>업무</option>
-											<option value="업무종료">업무종료</option>
-											<option value="연차"
-												<c:if test="${empStatus1.getEmpStatus() eq '연차'}">selected</c:if>>출장</option>
-											<option value="외근"
-												<c:if test="${empStatus1.getEmpStatus() eq '외근'}">selected</c:if>>반차</option>
-										</select>
-									</c:otherwise>
-								</c:choose>
+					<div class="tab-pane  " id="tab-2" role="tabpanel">
+						<figure>
+							<div class="row justify-content-center aos-init aos-animate"
+								data-aos="fade-up" style="justify-content: center;"
+								>						
 							</div>
-						</div>
+							<div class="row" style="margin-top: 20px; margin-left: 70px;">
+								<div class="col-2">
+									<select class="form-select" aria-label="Default select example">
+										<option selected>전체</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-2">
+									<select class="form-select" aria-label="Default select example">
+										<option selected>지점별</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-2 ">
+									<select class="form-select" aria-label="Default select example">
+										<option selected>부서별</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+
+								<div id="list-top" class="col-6">
+									<input type="text" class="w-px300" name="keyword" value="">
+									<button type="button" class="btn btn-primary btn-search"
+										id="btn">검색</button>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-12 card p-0">
+									<div class="card-body p-0">
+										<div class="table-responsive">
+											<table class='table table-hover text-center'>
+												<colgroup>
+													<col width='80px'>
+													<col width='100px'>
+													<col width='100px'>
+													<col width='100px'>
+													<col width='100px'>
+													<col width='90px'>
+													<col width='90px'>
+													<col width='100px'>
+												</colgroup>
+												<tr class='text-center'>
+													<th>날짜</th>
+													<th>지점명</th>
+													<th>부서명</th>
+													<th>직급명</th>
+													<th>이름</th>
+													<th>출근 시간</th>
+													<th>퇴근 시간</th>
+													<th>상태</th>
+
+												</tr>
+												<c:if test='${empty page.list}'>
+													<tr>
+														<td colspan='5'>검색결과가 없습니다</td>
+													</tr>
+												</c:if>
+												<c:forEach items='${page.list}' var='vo'>
+													<tr style="margin: 20px;">
+														<td>${vo.attend_date}</td>
+														<td>${vo.branch_name}</td>
+														<td>${vo.department_name}</td>
+														<td>${vo.rank_name}</td>
+														<td>${vo.emp_name}</td>
+														<td>${vo.attend_on}</td>
+														<td>${vo.attend_off}</td>
+														<td>${vo.att_state}</td>
+
+													</tr>
+												</c:forEach>
+											</table>
+											<jsp:include page="/WEB-INF/views/include/page.jsp" />
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</figure>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
-
 	</section>
 	<!-- End Section -->
 
