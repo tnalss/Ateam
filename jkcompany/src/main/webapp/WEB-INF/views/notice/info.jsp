@@ -70,19 +70,15 @@
 	</c:if>
 </div>
 
-
-
-
-
 	<!-- 댓글 -->
 	<div id='reply.no' class="mt-4">
    <p style='font-size: 22px;'>댓글</p>
    <div class="row">
    <c:forEach items='${notice }' var='reply'>
-   <div class="col-5">
+   <div class="col-5 mt-2">
           <div class="card">
             <div class="row no-gutters">
-              <div class="col-3 mt-2">
+              <div class="col-3 mt-3">
                <img src="${reply.profile_path ne null ? reply.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile" alt="">
                 <p class='text-center'>${reply.emp_name }</p>
               </div>
@@ -109,6 +105,11 @@
     </section><!-- End Section -->
    
 <script type="text/javascript">
+$('.btn-delete').on('click', function(){
+	if( confirm('공지글 삭제하시겠습니까?') ){
+		location = 'delete.no?id=${vo.board_no}';
+	}
+});
 $('.reply_btn').on('click', function(){
 	if( confirm('댓글을 등록하시겠습니까?') ) {
 		$('#insertReply').submit();
@@ -117,7 +118,7 @@ $('.reply_btn').on('click', function(){
 });
 
 function delete_reply(no,board_no){
-	if(confirm('delete?')){
+	if(confirm('댓글을 삭제하시겠습니까?')){
     location = 'reply_delete.no?id=' + board_no +'&reply_no=' +no;}
  };
 </script>

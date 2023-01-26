@@ -58,11 +58,11 @@
 				 <div class="col-4">
          		 <div class="card" style='margin-top: 1rem;'>
          		   <div class="card-header">
-            		 <p style='font-size: 20px;'><a href='info.board?id=${vo.board_no}'>${vo.board_title }</a></p>
+            		 <p style='font-size: 20px;'><a href='info.bo?id=${vo.board_no}'>${vo.board_title }</a></p>
            		 </div>
            		 <div class="card-body">
              	
-              <a href='info.board?id=${vo.board_no}'><span class="card-text">${vo.board_content }</span></a>
+              <a href='info.bo?id=${vo.board_no}'><span class="card-text">${vo.board_content }</span></a>
             </div>
           </div>
         </div>
