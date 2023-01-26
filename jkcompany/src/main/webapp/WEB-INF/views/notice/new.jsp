@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+<style>
+.h-px300 {
+height: 300px;
+}
+</style>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -32,10 +36,10 @@
 <input type='hidden' name='board_cate' value='O0'>
 <table class='table table-hover'>
 <tr><th>제목</th>
-	<td><input type='text' name='board_title' class='full chk' title='제목'></td>
+	<td><input type='text' name='board_title' class='w-px1000' title='제목'></td>
 </tr>
 <tr><th>내용</th>
-	<td><textarea name='board_content' class='full chk' title='내용'></textarea></td>
+	<td><textarea name='board_content' class='w-px1200 h-px300'></textarea></td>
 </tr>
 <tr><th>첨부파일</th>
 	<td class='text-left'>
