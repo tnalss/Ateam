@@ -80,7 +80,7 @@
    <div class="row">
    <c:forEach items='${notice }' var='reply'>
    <div class="col-5">
-          <div class="card mt-3">
+          <div class="card">
             <div class="row no-gutters">
               <div class="col-3 mt-2">
                <img src="${reply.profile_path ne null ? reply.profile_path:'assets/img/user_profile.png'}" class="img-fluid p-2 profile" alt="">
