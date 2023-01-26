@@ -27,11 +27,12 @@
 	background: #fff;
 }
 
-#tab-1 { 700px;	
+#tab-1 { 700px;
+	
 }
 
 .tb-list, .text-center {
-	margin-top :20px;
+	margin-top: 20px;
 	align-content: center;
 	text-align: center;
 }
@@ -85,16 +86,25 @@
 }
 
 #btn-search {
-	margin-right: 10px;
+	background: none;
+	padding: 10px;
+	margin: -1px;
+	background: #f03c02;
+	color: #fff;
+	border-radius: 4px;
+	line-height: 0;
+	border: 0;
 }
 
+}
 #btn {
 	border-color: #fff;
 	background-color: #fd5c28;
 }
 
 #list-top {
-	
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 </style>
 <main id="main">
@@ -160,7 +170,7 @@
 												<colgroup>
 													<col width='80px'>
 													<col width='100px'>
-													<col width='100px'>
+													<col width='120px'>
 													<col width='100px'>
 													<col width='100px'>
 													<col width='90px'>
@@ -200,16 +210,7 @@
 											<jsp:include page="/WEB-INF/views/include/page.jsp" />
 										</div>
 									</div>
-									<div class="search-form text-end">
-										<form style="margin-left: 550px; margin-bottom: 20px;"
-											action="">
-											<input type="text" name='keyword' class='w-px200'
-												style="margin-right: 20px;" value='${keyword}'>
-											<button id="btn-search" type="submit">
-												<a href="#">검색 <i class="bi bi-search"></i></a>
-											</button>
-										</form>
-									</div>
+
 
 								</div>
 							</div>
@@ -218,10 +219,8 @@
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
 							<div class="row justify-content-center aos-init aos-animate"
-								data-aos="fade-up" style="justify-content: center;"
-								>						
-							</div>
-							<div class="row" style="margin-top: 20px; margin-left: 70px;">
+								data-aos="fade-up" style="justify-content: center;"></div>
+							<div class="row" style="margin-top: 20px;">
 								<div class="col-2">
 									<select class="form-select" aria-label="Default select example">
 										<option selected>전체</option>
@@ -238,7 +237,7 @@
 										<option value="3">Three</option>
 									</select>
 								</div>
-								<div class="col-2 ">
+								<div class="col-3 ">
 									<select class="form-select" aria-label="Default select example">
 										<option selected>부서별</option>
 										<option value="1">One</option>
@@ -246,65 +245,65 @@
 										<option value="3">Three</option>
 									</select>
 								</div>
-
-								<div id="list-top" class="col-6">
-									<input type="text" class="w-px300" name="keyword" value="">
-									<button type="button" class="btn btn-primary btn-search"
-										id="btn">검색</button>
+								<div id="list-top" class="col-5">
+									<input type="text" class="w-px280" name="keyword" value=""
+										placeholder="사원의 이름을 입력하세요">
+									<button id="btn-search" type="submit" style="margin-left: 5px;">
+										<a href="#">검색 <i class="bi bi-search"></i></a>
+									</button>
 								</div>
-							</div>
-							<div class="row mt-3">
-								<div class="col-12 card p-0">
-									<div class="card-body p-0">
-										<div class="table-responsive">
-											<table class='table table-hover text-center'>
-												<colgroup>
-													<col width='80px'>
-													<col width='100px'>
-													<col width='100px'>
-													<col width='100px'>
-													<col width='100px'>
-													<col width='90px'>
-													<col width='90px'>
-													<col width='100px'>
-												</colgroup>
-												<tr class='text-center'>
-													<th>날짜</th>
-													<th>지점명</th>
-													<th>부서명</th>
-													<th>직급명</th>
-													<th>이름</th>
-													<th>출근 시간</th>
-													<th>퇴근 시간</th>
-													<th>상태</th>
-
-												</tr>
-												<c:if test='${empty page.list}'>
-													<tr>
-														<td colspan='5'>검색결과가 없습니다</td>
-													</tr>
-												</c:if>
-												<c:forEach items='${page.list}' var='vo'>
-													<tr style="margin: 20px;">
-														<td>${vo.attend_date}</td>
-														<td>${vo.branch_name}</td>
-														<td>${vo.department_name}</td>
-														<td>${vo.rank_name}</td>
-														<td>${vo.emp_name}</td>
-														<td>${vo.attend_on}</td>
-														<td>${vo.attend_off}</td>
-														<td>${vo.att_state}</td>
+								<div class="row mt-3">
+									<div class="col-12 card p-0">
+										<div class="card-body p-0">
+											<div class="table-responsive">
+												<table class='table table-hover text-center'>
+													<colgroup>
+														<col width='80px'>
+														<col width='100px'>
+														<col width='120px'>
+														<col width='100px'>
+														<col width='100px'>
+														<col width='90px'>
+														<col width='90px'>
+														<col width='100px'>
+													</colgroup>
+													<tr class='text-center'>
+														<th>날짜</th>
+														<th>지점명</th>
+														<th>부서명</th>
+														<th>직급명</th>
+														<th>이름</th>
+														<th>출근 시간</th>
+														<th>퇴근 시간</th>
+														<th>상태</th>
 
 													</tr>
-												</c:forEach>
-											</table>
-											<jsp:include page="/WEB-INF/views/include/page.jsp" />
+													<c:if test='${empty page.list}'>
+														<tr>
+															<td colspan='5'>검색결과가 없습니다</td>
+														</tr>
+													</c:if>
+													<c:forEach items='${page.list}' var='vo'>
+														<tr style="margin: 20px;">
+															<td>${vo.attend_date}</td>
+															<td>${vo.branch_name}</td>
+															<td>${vo.department_name}</td>
+															<td>${vo.rank_name}</td>
+															<td>${vo.emp_name}</td>
+															<td>${vo.attend_on}</td>
+															<td>${vo.attend_off}</td>
+															<td>${vo.att_state}</td>
+
+														</tr>
+													</c:forEach>
+												</table>
+												<jsp:include page="/WEB-INF/views/include/page.jsp" />
+											</div>
 										</div>
+
+
 									</div>
-
-
 								</div>
-							</div>
 						</figure>
 					</div>
 				</div>

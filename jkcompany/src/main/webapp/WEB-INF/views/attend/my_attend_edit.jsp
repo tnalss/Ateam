@@ -16,12 +16,15 @@
 	margin-top: 20px;
 }
 
-#submit{
-    width: 100px;
-    height: 30px;
-    background: #fd5c28;
-   color: #fff;
-    border: #fff;
+#submit {
+	width: 100px;
+	height: 30px;
+	background: #fd5c28;
+	color: #fff;
+	border: #fff;
+}
+#l:hover {
+	color: #fd5c28;
 }
 </style>
 <main id="main">
@@ -43,8 +46,8 @@
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<section id="features", class="features">
-	<div class="container">
+	<section id="features" , class="features">
+		<div class="container">
 			<div class="row mt-5 justify-content-center aos-init aos-animate"
 				data-aos="fade-up">
 				<div class="col-lg-10">
@@ -82,7 +85,7 @@
 						<div class="col-md-2 form-group mt-2 mt-md-0">
 							<select class="form-select" aria-label="Default select example"
 								id="combobox2">
-								<option selected> 업무 상태</option>
+								<option selected>업무 상태</option>
 								<option value="1">One</option>
 								<option value="2">Two</option>
 								<option value="3">Three</option>
@@ -97,6 +100,10 @@
 							<textarea class="form-control" name="message" rows="5"
 								placeholder="신청 사유를 입력하세요" required=""></textarea>
 						</div>
+						<div class="input-group mb-3" style="margin-top: 20px;">
+							<input type="file" class="form-control" id="inputGroupFile02">
+							<label id="l" class="input-group-text" for="inputGroupFile02">첨부하기</label>
+						</div>
 						<div class="my-3">
 							<div class="loading"></div>
 							<div class="error-message"></div>
@@ -104,11 +111,11 @@
 						</div>
 						<div class="text-center ">
 							<button type="submit" id="submit">신청하기</button>
-							<button type="submit" id="submit" >취소하기</button>
+							<button type="submit" id="submit">취소하기</button>
 						</div>
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</section>
 </main>

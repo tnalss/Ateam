@@ -4,10 +4,6 @@
 
 
 
-<!--  총건수 조회 -->
-<select id='total' resultType='integer'>
-select count(*) from tbl_attend 
-</select>
 
 
 <!-- 전체사원의 출퇴근 현황 조회 -->
@@ -128,6 +124,11 @@ order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 select a.* ,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a
 where a.attend_date = to_char(current_date, 'yyyy/mm/dd') and emp_no =  1  
+</select>
+
+<!--  총건수 조회 -->
+<select id='total' resultType='integer'>
+select count(*) from tbl_attend 
 </select>
 
 

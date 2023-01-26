@@ -197,10 +197,10 @@ font-size: 25px;
 						<h3>업무 상태 수정 바로가기</h3>
 						<div clas="row" id="s">
 							<div class="btn-wrap">
-								<a href="#" class="btn-buy">출근 취소</a>
+								<a href="#" class="btn-buy" id="btn-on-cancel">출근 취소</a>
 							</div>
 							<div class="btn-wrap">
-								<a href="#" class="btn-buy">퇴근 취소</a>
+								<a href="#" class="btn-buy" id="btn-off-cancel">퇴근 취소</a>
 							</div>
 						</div>
 						<div class="btn-wrap">
@@ -217,7 +217,7 @@ font-size: 25px;
 	</section>
 	<section id="services" class="services">
 		<div class="container">
-			<h3 data-aos="fade-up" id="h3">이번 달 나의 근무 현황 요약</h3>
+			<h3 data-aos="fade-up" id="h3">이번 주 나의 근무 현황 요약</h3>
 			<div class="row">
 
 				<!-- 코드값 w4인 건수 보여주기 -->
@@ -274,5 +274,42 @@ font-size: 25px;
 	class="bi bi-arrow-up-short"></i></a>
 
 <script>
+	/*출근 버튼 클릭시  */
+	$('.btn-1').on('click',function(){
+		if( ${today.atten_on} ne null/*이미 today의 atten_on이 있으면  */){
+			alert('출근처리가 완료되었습니다')
+		}else{			
+			/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
+		
+		}
+	});
+	
+	
+	
+	/*퇴근 버튼 클릭시  */
+	$('.btn-2').on('click',function(){
+		
+	});
+	
+
+	/*출근 취소 버튼 클릭시  */
+	$('.btn-on-cancel').on('click',function(){
+		if( /* today의 atten_on이 없으면 */ ){
+			alert('출근 정보가 없습니다!')
+		}else {
+			alert('출근 처리를 취소하시겠습니까?')
+		}
+	});
+	
+
+	/*퇴근 취소 버튼 클릭시  */
+	$('.btn-on-cancel').on('click',function(){
+		if( /* today의 atten_off이 없으면 */ ){
+			alert('퇴근 정보가 없습니다!')
+		}else {
+			alert('퇴근 처리를 취소하시겠습니까?')
+		}
+	});
+	
 	
 </script>
