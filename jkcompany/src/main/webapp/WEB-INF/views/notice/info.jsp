@@ -62,8 +62,8 @@
 	<div class='mt-4'>
 	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_content'>
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-	<input type="hidden" name="emp_no" value="${ vo.emp_no}"/>
-	<input type="hidden" name="emp_name" value="${ vo.emp_name}"/>
+	<input type="hidden" name="emp_no" value="${loginInfo.emp_no }"/>
+	<input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
@@ -91,9 +91,9 @@
                   <p class="card-text">${reply.reply_content }</p>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
-                 <p class="card-text">2022.2.22</p>
+                 <p class="card-text">${reply.reply_create_date}</p>
                 <a class='btn btn-primary' href='#'>수정</a>
-				<a class='btn btn-danger btn-delete'>삭제</a>
+				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
               </div>
             </div>
@@ -115,12 +115,9 @@ $('.reply_btn').on('click', function(){
 	}
 });
 
-
-$('.btn-delete').on('click', function(){
-	if( confirm('정말 삭제?') ){
-		location = 'delete.no?id=${vo.board_no}';
-		
-	}
-});
+function delete_reply(no,board_no){
+	if(confirm('delete?')){
+    location = 'reply_delete.no?id=' + board_no +'&reply_no=' +no;}
+ };
 </script>
   </main><!-- End #main -->
