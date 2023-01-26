@@ -449,7 +449,7 @@ var sign_no = [];
 $('.asdf').on('click',function(){
 	title = $('#ea_title').val();
 	contents = $('#ea_contents').val().replaceAll("/\r\n|\r|\n/", "<br/>");
-	document.getElementById("e_title").innerText=title;
+	document.getElementById("e_title").innerText="["+doc+"]"+title;
 	document.getElementById("e_contents").innerText=contents;
 });
 
