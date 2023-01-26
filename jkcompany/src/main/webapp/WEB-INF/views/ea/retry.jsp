@@ -225,10 +225,10 @@
 									<span class="hidden-sm-down">부장</span>
 								</div>
 								<div>
-									<a class="btn icon-btn btn-warning" href="#">상신</a>
+									<a class="btn icon-btn btn-warning" href="#" onclick="draft('${vo.ea_num}');">상신</a>
 								</div>
 								<div>
-									<a class="btn icon-btn btn-danger" href="#">회수</a>
+									<a class="btn icon-btn btn-danger" href="#" onclick="ea_delete('${vo.ea_num}');">삭제</a>
 								</div>
 							</div>
 						</div>
@@ -243,4 +243,23 @@
 
 
 </main>
+<script>
+
+function draft(a){
+    if(confirm("상신하시겠습니까?")){
+        location.href = "update_status.ea?ea_num="+a+"&&ea_status=E0";
+        return true;
+    } else {
+        return false;
+    }
+}
+function ea_delete(b){
+    if(confirm("삭제하시겠습니까?")){
+        location.href = "delete.ea?ea_num="+b+"&&ea_status=E";
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
 <!-- End #main -->
