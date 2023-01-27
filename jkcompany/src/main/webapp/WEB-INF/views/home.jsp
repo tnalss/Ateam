@@ -63,11 +63,11 @@
 
         <div class="row">
           <div class="col-lg-9 text-center text-lg-left">
-            <h3>We've created more than <span>200 websites</span> this year!</h3>
-            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h3>저희는 끊임없이 앞으로 나아갑니다.</h3>
+            <p>고객과의 소통. 발전된 기술. 원하는 디자인. 지금 JKCompany와 함께 하세요</p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Request a quote</a>
+            <a class="cta-btn align-middle" href="#">문의</a>
           </div>
         </div>
 
