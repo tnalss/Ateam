@@ -111,6 +111,8 @@ public class NoticeController {
 		List<ReplyVO> reply = sql.selectList("re.reply_list", id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("notice", reply);
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "notice/info";
 	}
 
