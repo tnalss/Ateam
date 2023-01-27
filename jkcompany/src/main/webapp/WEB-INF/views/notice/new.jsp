@@ -61,6 +61,8 @@ height: 300px;
 	<a class='btn btn-primary' href='list.no'>취소</a>
 </div>
 <script>
+
+
 $('.save').click(function(){
 	if( emptyCheck() ){
 		$('#insert').submit(); 

@@ -29,7 +29,8 @@ public class BoardController {
 	// 공지글수정저장처리 요청
 		@RequestMapping("/reply_update.bo")
 		public String update(ReplyVO vo, Model model) {
-			model.addAttribute("board_no", sql.update("re.reply_update", vo));
+			sql.update("re.reply_update", vo);
+			//model.addAttribute("board_no", );
 			return "redirect:info.bo?id=" + vo.getBoard_no();
 		}
 
@@ -95,7 +96,7 @@ public class BoardController {
 
 	// 페이지 처리
 	public NoticePageVO notice_list(NoticePageVO page) {
-		page.setTotalList(sql.selectOne("no.total", page));
+		page.setTotalList(sql.selectOne("bo.total", page));
 		page.setList(sql.selectList("bo.plist", page));
 		return page;
 	}
@@ -108,6 +109,8 @@ public class BoardController {
 		List<ReplyVO> reply = sql.selectList("re.reply_list", id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("board", reply);
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "board/info";
 	}
 

@@ -7,13 +7,6 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.no_title {
-	text-overflow:ellipsis;
-	overflow:hidden;
-	width:100px;
-	white-space:nowrap;
-}
-
 
 </style>
 <main id="main">
@@ -56,7 +49,7 @@
 
 				<select class='w-px100' name='search'>
 					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
-					<option value='emp_no' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
+					<option value='board_title' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
 					<option value='emp_name'
 						${page.search eq 'content' ? 'selected':''}>작성자</option>
 				</select> <input type='text' class='w-px300' name='keyword'
@@ -72,22 +65,22 @@
 		<form method='post' action='list.no' id="list">
 		<input type='hidden' name='curPage' value='1'> 
 		</form>
-		<div class="row mt-3">
+		<div class="row mt-3 ">
 			<div class="col-12 card p-0">
 				<div class="card-header">
 					<h3 class="card-title text-center" style="font-weight: bold;">공지사항</h3>
 				</div>
-				<div class="card-body p-0">
+				<div class="card-body">
 					<div class="table-responsive">
 						<table class='table table-hover'>
 			<colgroup>
 				<col width='80px'>
-				<col width='200px'>
+				<col class="no_title" >
 				<col width="250px">
 				<col width='120px'>
 				<col width='120px'>
 			</colgroup>
-			<tr class='text-center'> 
+			<tr class='text-center '> 
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -95,10 +88,10 @@
 				<th>조회수</th>
 			</tr>
 			<c:forEach items='${page.list}' var='vo'>
-				<tr class='text-center'>
+				<tr class='text-center '>
 					<td class='text-center'>${vo.rnum }</td>
-					<td class='no_title'><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
-					<td>${vo.emp_name}</td> 
+					<td class="no_title"><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
+					<td >${vo.emp_name}</td> 
 					<td><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${vo.write_date }" /></td>
 							<td>${vo.board_hits}</td>
@@ -116,7 +109,11 @@
 	</section>
 	<!-- End Section -->
 
-
+<script>
+$('.btn-search').click(function() {
+	$('#list').submit()
+});
+</script>
 
 </main>
 <!-- End #main -->
