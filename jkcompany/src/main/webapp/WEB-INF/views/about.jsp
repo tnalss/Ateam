@@ -138,7 +138,7 @@
               </div>
               <div class="member-info">
                 <h4>최수민</h4>
-                <span>Accountant</span>
+                <span>A팀 아저씨</span>
               </div>
             </div>
           </div>
