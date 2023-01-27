@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
@@ -9,6 +10,8 @@
 height: 300px;
 }
 </style>
+
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -17,10 +20,10 @@ height: 300px;
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>공지 글 등록</h2>
+          <h2>익명게시판</h2>
           <ol>
             <li><a href="<c:url value='/'/>">홈</a></li>
-            <li>공지사항</li>
+            <li>익명게시판</li>
           </ol>
         </div>
 
@@ -30,41 +33,36 @@ height: 300px;
 		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
     <!-- ======= Section ======= -->
     <section id="" class="container">
-     <h3>공지글등록</h3>
-<form method='post' id='insert' action='insert.no' enctype='multipart/form-data'>
-<input type='hidden' name='emp_no' value='${loginInfo.emp_no}'>
-<input type='hidden' name='board_cate' value='O0'>
-<table class='table table-hover'>
-<tr><th>제목</th>
-	<td><input type='text' name='board_title' class='w-px1000' title='제목'></td>
+      <h3>글 수정</h3>
+<form method='post' id='modify' action='update.bo' enctype='multipart/form-data'>
+<input type='hidden' name='board_no' value='${vo.board_no}'>
+<table class='table'>
+<tr><th class='w-px140'>제목</th>
+	<td><input type='text' name='board_title' class='w-px300' title='제목' 
+				value="${vo.board_title}"></td>
 </tr>
+	<tr>
+	<th>작성일</th>
+	<td>${vo.write_date }</td>
+	</tr>
+	
 <tr><th>내용</th>
-	<td><textarea name='board_content' class='w-px1200 h-px300'></textarea></td>
+	<td><textarea name='board_content' class='w-px1200 h-px300' title="내용">${vo.board_content}</textarea></td>
 </tr>
-<tr><th>첨부파일</th>
-	<td class='text-left'>
-		<div class='align'>
-		<label>
-			<input type='file' name='file' id='attach-file'>
-			<a><i class="font-b fa-solid fa-file-arrow-up"></i></a>
-		</label>
-		<span id='file-name'></span>
-		<span id='preview'></span>
-		<a id='delete-file'><i class="font-r fa-regular fa-trash-can"></i></a>
-		</div>
-	</td>
-</tr>
+
 </table>
+
 </form>
 <div class='btnSet'>
 	<a class='btn btn-primary save'>저장</a>
-	<a class='btn btn-primary' href='list.no'>취소</a>
+	<a class='btn btn-secondary' href='info.bo?id=${vo.board_no}&curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>취소</a>
 </div>
 <script>
+
 $('.save').click(function(){
-	if( emptyCheck() ){
-		$('#insert').submit(); 
-		consol.log('여기옴?');
+	if( emptyCheck() )  {
+	
+		$('#modify').submit();
 	}
 });
 </script>

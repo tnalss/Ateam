@@ -4,7 +4,7 @@
 
 <!-- 댓글 전체목록 --> 
 <select id="reply_list" resultType="notice.ReplyVO">
-select a.*, e.emp_name 
+select a.*, e.emp_name ,e.profile_path
 from tbl_reply a left join tbl_emp e 
 on a.emp_no = e.emp_no
 where a.board_no = #{board_no}

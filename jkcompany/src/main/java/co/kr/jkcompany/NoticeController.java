@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,21 @@ public class NoticeController {
 	SqlSession sql;
 	@Autowired
 	private CommonService common;
+
+	// 댓글 수
+	@RequestMapping("/reply_update.no")
+	public String reply_delete(Model model, int id) {
+		model.addAttribute("vo", sql.selectOne("re.info", id));
+		return "notice/modify";
+	}
+
+	// 댓글 삭제
+	@RequestMapping("/reply_delete.no")
+	public String reply_delete(int reply_no, int id, Model model) {
+		// model.addAttribute("btn-re-delete", );
+		sql.delete("re.reply_delete", reply_no);
+		return "redirect:info.no?id=" + id;
+	}
 
 	// 답글쓰기
 	@RequestMapping("/reply_insert.no")
@@ -52,10 +68,7 @@ public class NoticeController {
 	// 공지글등록(신규저장)처리 요청
 	@RequestMapping("/insert.no")
 	public String insert(NoticeVO vo, MultipartFile file, HttpServletRequest request) {
-		// 첨부된 파일이 있는 경우
-
 		sql.insert("no.insert", vo);
-
 		// 응답화면연결 - 목록화면
 		return "redirect:list.no";
 	}
