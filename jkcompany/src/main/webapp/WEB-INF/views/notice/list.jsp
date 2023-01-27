@@ -49,7 +49,7 @@
 
 				<select class='w-px100' name='search'>
 					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
-					<option value='emp_no' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
+					<option value='board_title' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
 					<option value='emp_name'
 						${page.search eq 'content' ? 'selected':''}>작성자</option>
 				</select> <input type='text' class='w-px300' name='keyword'
@@ -109,7 +109,11 @@
 	</section>
 	<!-- End Section -->
 
-
+<script>
+$('.btn-search').click(function() {
+	$('#list').submit()
+});
+</script>
 
 </main>
 <!-- End #main -->

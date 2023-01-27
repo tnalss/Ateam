@@ -12,7 +12,7 @@ where board_cate = 'O0'
 </select>
 
 <select id="total" resultType="integer">
-	SELECT count(*) FROM tbl_board where board_cate = 'O0'
+	SELECT count(*) FROM tbl_board where board_cate = 'O0' <include refid="notice_where"/>
 </select>
 
 
@@ -29,7 +29,7 @@ SELECT * FROM
         on b.emp_no = e.emp_no
 		WHERE board_cate ='O0'
 		ORDER BY board_no asc
-		) a  )b
+	<include refid="notice_where"/> ) a  )b
 		WHERE rnum between #{beginList} and #{endList}
 		order by rnum desc
 </select>
