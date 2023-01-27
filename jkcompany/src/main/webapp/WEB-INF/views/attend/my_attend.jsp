@@ -227,7 +227,8 @@ font-size: 25px;
 						<div class="icon">
 							<i class="bi bi-check-circle-fill"></i>
 						</div>
-						<a>정상 출퇴근 조회</a>
+						<h3 class="title">
+							<a href="my_attend_a.at">정상 업무 종료 조회</a>
 						</h3>
 						<h4>${code}건</h4>
 						<a href="my_attend_a.at"><p class="description">자세히보기</p></a>
@@ -242,7 +243,7 @@ font-size: 25px;
 							<i class="bi bi-alarm"></i>
 						</div>
 						<h3 class="title">
-							<a href="">지각 조회</a>
+							<a href="my_attend_late.at">지각 조회</a>
 						</h3>
 						<h4>${code2}건</h4>
 						<a href="my_attend_late.at"><p class="description">자세히보기</p></a>
@@ -256,7 +257,7 @@ font-size: 25px;
 							<i class="bi bi-emoji-sunglasses"></i>
 						</div>
 						<h3 class="title">
-							<a href="">결근 및 연차 사용 조회</a>
+							<a href="my_attend_n.at">결근 및 연차 사용 조회</a>
 						</h3>
 						<h4>${code3}건</h4>
 						<a href="my_attend_n.at"><p class="description">자세히보기</p></a>
@@ -274,42 +275,34 @@ font-size: 25px;
 	class="bi bi-arrow-up-short"></i></a>
 
 <script>
-	/*출근 버튼 클릭시  */
-	$('.btn-1').on('click',function(){
-		if( ${today.atten_on} ne null/*이미 today의 atten_on이 있으면  */){
-			alert('출근처리가 완료되었습니다')
-		}else{			
-			/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
-		
-		}
-	});
-	
-	
-	
-	/*퇴근 버튼 클릭시  */
-	$('.btn-2').on('click',function(){
-		
-	});
-	
 
-	/*출근 취소 버튼 클릭시  */
-	$('.btn-on-cancel').on('click',function(){
-		if( /* today의 atten_on이 없으면 */ ){
-			alert('출근 정보가 없습니다!')
-		}else {
-			alert('출근 처리를 취소하시겠습니까?')
-		}
-	});
-	
+/*출근 버튼 클릭시  */
+$('#btn1').on('click',function(){
+	if( ${today.attend_on ne null}){
+		alert('출근 처리가 완료되었습니다')
+	}
+	else{			
+		/*today의 attend_on이 없으면 : 매퍼의 attend_on 실행  */
+		location.href = "attend_on.at";
+	}
+});
+/*퇴근 버튼 클릭시  */
+$('#btn2').on('click',function(){
+	if( ${today.attend_off ne null}){
+		alert('퇴근 처리가 완료되었습니다')
+	}else{	
+		location.href = "attend_off.at";
+	}
+});
 
-	/*퇴근 취소 버튼 클릭시  */
-	$('.btn-on-cancel').on('click',function(){
-		if( /* today의 atten_off이 없으면 */ ){
-			alert('퇴근 정보가 없습니다!')
-		}else {
-			alert('퇴근 처리를 취소하시겠습니까?')
-		}
-	});
-	
-	
+/* 출근 취소 버튼 클릭시 */	
+$('#btn-on-cancel').on('click',function(){	
+	location.href="on_cancel.at";
+});
+
+/* 퇴근 취소 버튼 클릭시 */
+$('#btn-off-cancel').on('click',function(){	
+	alert('퇴근 취소시 현재 상태가 "출근"으로 표시됩니다.')
+	location.href="off_cancel.at";
+});
 </script>
