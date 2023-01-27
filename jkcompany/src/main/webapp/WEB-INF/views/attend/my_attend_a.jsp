@@ -11,7 +11,6 @@
 #me {
 	font-size: 20px;
 }
-
 </style>
 <main id="main">
 
@@ -40,15 +39,16 @@
 					</form>
 					<div class="col-lg-8 entries">
 						<article class="entry entry-single">
+							<div class="entry-meta">
+								<ul>
+									<li class="d-flex align-items-center"><i class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}&nbsp;</a><a
+										id="me">${loginInfo.rank_name}님의</a></li>
+								</ul>
+							</div>
 							<h2 class="entry-title">
 								<a>정상 업무 종료 조회</a>
 							</h2>
-							<div class="entry-meta">
-								<ul>
-									<li class="d-flex align-items-center"><i
-										class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}</a></li>
-								</ul>
-							</div>
+
 							<div class="entry-content">
 								<div class="row mt-3">
 									<div class="col-12 card p-0">
@@ -110,20 +110,20 @@
 							<h3 class="sidebar-title">최근 내역</h3>
 							<div class="sidebar-item recent-posts">
 								<c:forEach items="${since}" var="vo">
-								
-								<div class="post-item clearfix" id="b">
-								 <c:if test="${vo.att_code eq 'W4'}">
-									<img src="assets/img/icon_check.png" alt="">
-								</c:if>	
-								 <c:if test="${vo.att_code ne 'W4'}">
-									<img src="assets/img/icon_clock.png" alt="">
-								</c:if>	
-									<h4>${vo.att_state}</h4>
-									<time datetime="2020-01-01">${vo.attend_date}</time>
-								</div>
-								
-								</c:forEach>								
-						
+
+									<div class="post-item clearfix" id="b">
+										<c:if test="${vo.att_code eq 'W4'}">
+											<img src="assets/img/icon_check.png" alt="">
+										</c:if>
+										<c:if test="${vo.att_code ne 'W4'}">
+											<img src="assets/img/icon_clock.png" alt="">
+										</c:if>
+										<h4>${vo.att_state}</h4>
+										<time datetime="2020-01-01">${vo.attend_date}</time>
+									</div>
+
+								</c:forEach>
+
 							</div>
 						</div>
 					</div>

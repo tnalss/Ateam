@@ -4,11 +4,12 @@
 
 <!DOCTYPE html>
 <style>
-#top-list{
-color: #fd5c28;
+#top-list {
+	color: #fd5c28;
 }
+
 #me {
-font-size: 20px;
+	font-size: 20px;
 }
 </style>
 <main id="main">
@@ -38,15 +39,17 @@ font-size: 20px;
 					</form>
 					<div class="col-lg-8 entries">
 						<article class="entry entry-single">
-							<h2 class="entry-title">
-								<a href="blog-single.html">지각 조회</a>
-							</h2>
 							<div class="entry-meta">
 								<ul>
 									<li class="d-flex align-items-center"><i
-										class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}</a></li>
+										class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}&nbsp;</a><a
+										id="me">${loginInfo.rank_name}님의</a></li>
 								</ul>
 							</div>
+							<h2 class="entry-title">
+								<a href="blog-single.html">지각 조회</a>
+							</h2>
+
 							<div class="entry-content">
 								<div class="row mt-3">
 									<div class="col-12 card p-0">
@@ -98,7 +101,7 @@ font-size: 20px;
 							<h3 class="sidebar-title">목록</h3>
 							<div class="sidebar-item categories">
 								<ul>
-									<li><a href="my_attend_a.at">정상  </a></li>
+									<li><a href="my_attend_a.at">정상 </a></li>
 									<li><a href="my_attend_late.at">지각 </a></li>
 									<li><a href="my_attend_n.at">결근 및 연차 사용</a></li>
 									<li><a href="my_attend_edit.at">업무 상태 수정 신청</a></li>
@@ -107,19 +110,19 @@ font-size: 20px;
 							<h3 class="sidebar-title">최근 내역</h3>
 							<div class="sidebar-item recent-posts">
 								<c:forEach items="${since}" var="vo">
-								
-								<div class="post-item clearfix" id="b">
-								 <c:if test="${vo.att_code eq 'W4'}">
-									<img src="assets/img/icon_check.png" alt="">
-								</c:if>	
-								 <c:if test="${vo.att_code ne 'W4'}">
-									<img src="assets/img/icon_clock.png" alt="">
-								</c:if>	
-									<h4>${vo.att_state}</h4>
-									<time datetime="2020-01-01">${vo.attend_date}</time>
-								</div>
-								
-								</c:forEach>	
+
+									<div class="post-item clearfix" id="b">
+										<c:if test="${vo.att_code eq 'W4'}">
+											<img src="assets/img/icon_check.png" alt="">
+										</c:if>
+										<c:if test="${vo.att_code ne 'W4'}">
+											<img src="assets/img/icon_clock.png" alt="">
+										</c:if>
+										<h4>${vo.att_state}</h4>
+										<time datetime="2020-01-01">${vo.attend_date}</time>
+									</div>
+
+								</c:forEach>
 							</div>
 
 						</div>

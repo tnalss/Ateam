@@ -24,7 +24,7 @@ public class AttendController {
 	//로그인한 사원의 출근 처리
 		@RequestMapping(value="/attend_on.at", produces="text/html;charset=utf-8")
 		public String attend_on(String emp_no) {
-			sql.update("at.attend_on",emp_no);
+			sql.insert("at.attend_on",emp_no);
 			AttendVO vo = sql.selectOne("at.emp_today",emp_no);
 			return new Gson().toJson(vo).toString();		
 		}		

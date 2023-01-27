@@ -77,8 +77,7 @@ public class AttendController {
 	public String my_attend_a(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.code4list",vo.getEmp_no());
-		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
-		
+		List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());		
 		model.addAttribute("list",list);		
 		model.addAttribute("since",since);
 		return "attend/my_attend_a";
@@ -107,17 +106,43 @@ public class AttendController {
 	
 	@RequestMapping(value = "/my_attend_edit.at", produces = "text/html;charset=utf-8")
 	public String my_attend_edit(HttpSession session, Model model) {
-		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");		
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
 		
-		
-			
 		return "attend/my_attend_edit";
 	}
 	
 	
+	//출근하기
+	@RequestMapping(value = "/attend_on.at", produces = "text/html;charset=utf-8")
+	public String attend_on(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.insert("at.attend_on",vo.getEmp_no());	
+		return "redirect:myattend";
+	}
 	
-	  
-	  
+	//퇴근하기
+	@RequestMapping(value = "/attend_off.at", produces = "text/html;charset=utf-8")
+	public String attend_off(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.update("at.attend_off",vo.getEmp_no());	
+		return "redirect:myattend";
+	}  
+
+	//출근 취소 
+	@RequestMapping(value = "/on_cancel.at", produces = "text/html;charset=utf-8")
+	public String on_cancel(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.delete("at.on_cancel",vo.getEmp_no());	
+		return "redirect:myattend";
+	}
+	
+	//퇴근취소
+	@RequestMapping(value = "/off_cancel.at", produces = "text/html;charset=utf-8")
+	public String off_cancel(HttpSession session, Model model) {
+		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");			
+		sql.update("off_cancel",vo.getEmp_no());	
+		return "redirect:myattend";
+	}  
 
 	
 
