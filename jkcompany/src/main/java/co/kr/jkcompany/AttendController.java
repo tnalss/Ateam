@@ -6,21 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import attend.AttendPageVO;
 import attend.AttendVO;
 import common.CommonService;
-import employee.EmployeePageVO;
-import employee.EmployeeVO;
 import login.LoginVO;
 
 @Controller
@@ -61,11 +58,12 @@ public class AttendController {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		HashMap<String, String> tempMap = new HashMap<String, String>();
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());
+
 		List<AttendVO> list = sql.selectList("at.list_7days", vo.getEmp_no());
 		int code = sql.selectOne("at.codeW4", vo.getEmp_no());
 		int code2 = sql.selectOne("at.codeW3", vo.getEmp_no());
 		int code3 = sql.selectOne("at.codeW2", vo.getEmp_no());
-
+	
 		// model.addAttribute("loginInfo",vo);
 		model.addAttribute("today", today);
 		model.addAttribute("list", list);
@@ -79,9 +77,9 @@ public class AttendController {
 	public String my_attend_a(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.code4list", vo.getEmp_no());
-		// List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		 List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
 		model.addAttribute("list", list);
-		// model.addAttribute("since",since);
+		 model.addAttribute("since",since);
 		return "attend/my_attend_a";
 	}
 
@@ -89,9 +87,9 @@ public class AttendController {
 	public String my_attend_late(HttpSession session, Model model, AttendPageVO page) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.code3list", vo.getEmp_no());
-		// List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		 List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
 		model.addAttribute("list", list);
-		// model.addAttribute("since",since);
+		 model.addAttribute("since",since);
 		return "attend/my_attend_late";
 	}
 
@@ -99,9 +97,9 @@ public class AttendController {
 	public String my_attend_n(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.code2list", vo.getEmp_no());
-		// List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		 List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
 		model.addAttribute("list", list);
-		// model.addAttribute("since",since);
+		 model.addAttribute("since",since);
 		return "attend/my_attend_n";
 	}
 
@@ -109,19 +107,34 @@ public class AttendController {
 	public String my_attend_o(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<AttendVO> list = sql.selectList("at.codeotherslist", vo.getEmp_no());
-		// List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
+		 List<AttendVO> since = sql.selectList("at.list_7days",vo.getEmp_no());
 		model.addAttribute("list", list);
-		// model.addAttribute("since",since);
+		 model.addAttribute("since",since);
 		return "attend/my_attend_o";
 	}
 
 	@RequestMapping(value = "/my_attend_edit.at", produces = "text/html;charset=utf-8")
 	public String my_attend_edit(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
+		
+		//model.addAttribute("status", status);
 		model.addAttribute("att_code", sql.selectList("at.code_list", 'A'));
 		return "attend/my_attend_edit";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/attend_date.at")
+	public String attend_date(String emp_no, String attend_date) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();	
+		
+		map.put("emp_no", emp_no);
+		map.put("attend_date",attend_date );
+		AttendVO status = sql.selectOne("at.attend_list_date", map);
+		
+		return new Gson().toJson(status);
+		
+	}
 	// 출근하기
 	@RequestMapping(value = "/attend_on.at", produces = "text/html;charset=utf-8")
 	public String attend_on(HttpSession session, Model model) {

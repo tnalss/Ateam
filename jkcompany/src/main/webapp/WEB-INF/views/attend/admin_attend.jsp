@@ -156,7 +156,6 @@
 				<div id="t" class="tab-content">
 					<div class="tab-pane active show" id="tab-1" role="tabpanel">
 						<figure>
-
 							<form method='post' action='admin_attend.at' id="list">
 								<input type='hidden' name='curPage' value='1'>
 
@@ -264,108 +263,6 @@
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
 
-							<form method='post' action='admin_attend.at' id="list">
-								<input type='hidden' name='curPage' value='1'>
-
-								<div class="row justify-content-center aos-init aos-animate"
-									data-aos="fade-up" style="justify-content: center;"></div>
-								<div class="row" style="margin-top: 20px;">
-									<div class="col-2">
-										<select class="form-select" name='search'
-											aria-label="Default select example">
-											<option value="-1">전체</option>
-											<c:forEach items="${branches}" var="b">
-												<option value="${b.code}"
-													<c:if test ="${b.code eq page.search}">selected="selected"</c:if>>${b.code_value}</option>
-											</c:forEach>
-
-										</select>
-									</div>
-									<div class="col-3">
-										<select class="form-select" name='search_dept'
-											aria-label="Default select example">
-											<option value="-1">부서별</option>
-											<c:forEach items="${departments}" var="d">
-												<option
-													<c:if test ="${d.code eq page.search_dept}">selected="selected"</c:if>
-													value="${d.code}">${d.code_value}</option>
-											</c:forEach>
-										</select>
-									</div>
-									<div class="col-2 ">
-										<select class="form-select" name='search_rank'
-											aria-label="Default select example">
-											<option value="-1">직급별</option>
-											<c:forEach items="${ranks}" var="r">
-												<option
-													<c:if test ="${r.code eq page.search_rank}">selected="selected"</c:if>
-													value="${r.code}">${r.code_value}</option>
-											</c:forEach>
-
-										</select>
-									</div>
-									<div id="list-top" class="col-5">
-										<input type="text" class="w-px270" name="keyword" value=""
-											placeholder="사원의 이름을 입력하세요">
-										<button id="btn-search" type="submit"
-											style="margin-left: 5px;">
-											검색 <i class="bi bi-search"></i>
-										</button>
-									</div>
-								</div>
-							</form>
-							<div class="row mt-3">
-								<div class="col-12 card p-0">
-									<div class="card-body p-0">
-										<div class="table-responsive">
-											<table class='table table-hover text-center'>
-												<colgroup>
-													<col width='80px'>
-													<col width='100px'>
-													<col width='120px'>
-													<col width='100px'>
-													<col width='100px'>
-													<col width='80px'>
-													<col width='80px'>
-													<col width='130px'>
-												</colgroup>
-												<tr class='text-center'>
-													<th>날짜</th>
-													<th>지점명</th>
-													<th>부서명</th>
-													<th>직급명</th>
-													<th>이름</th>
-													<th>출근 시간</th>
-													<th>퇴근 시간</th>
-													<th>상태</th>
-
-												</tr>
-												<c:if test='${empty page.list}'>
-													<tr>
-														<td colspan='5'>검색결과가 없습니다</td>
-													</tr>
-												</c:if>
-												<c:forEach items='${page.list}' var='vo'>
-													<tr style="margin: 20px;">
-														<td>${vo.attend_date}</td>
-														<td>${vo.branch_name}</td>
-														<td>${vo.department_name}</td>
-														<td>${vo.rank_name}</td>
-														<td>${vo.emp_name}</td>
-														<td>${vo.attend_on}</td>
-														<td>${vo.attend_off}</td>
-														<td>${vo.att_state}</td>
-
-													</tr>
-												</c:forEach>
-											</table>
-											<jsp:include page="/WEB-INF/views/include/page.jsp" />
-										</div>
-									</div>
-
-
-								</div>
-							</div>
 						</figure>
 					</div>
 				</div>

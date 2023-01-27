@@ -19,11 +19,16 @@
 }
 
 #submit {
-	width: 100px;
-	height: 30px;
-	background: #fd5c28;
+	background: #f03c02;
+	border: 0;
+	padding: 10px 24px;
 	color: #fff;
-	border: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
+}
+
+#inputDate {
+	
 }
 
 #l:hover {
@@ -55,11 +60,8 @@
 				data-aos="fade-up">
 				<div class="col-lg-10">
 					<div>
-
 						<i class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}&nbsp;</a><a
 							id="me">${loginInfo.rank_name}님의</a>
-
-
 					</div>
 					<h2 class="entry-title">
 						<a>업무 상태 수정 신청</a>
@@ -67,6 +69,16 @@
 					<form action="forms/contact.php" method="post" role="form"
 						class="php-email-form">
 						<div class="row">
+							<div class="col-md-3 form-group mt-2 mt-md-0">
+								<input class="form-control" id="inputDate" type="date" name="date"
+									placeholder="날짜 선택">
+							</div>
+							<div class="col-md-4 form-group mt-2 mt-md-0 ">
+							<div  class="form-control status"> 업무 상태</div>
+							<!-- 날짜를 선택하면 해당 날짜의 로그인한 사원의 업무 상태 뜨도록  -->							
+							</div>
+							
+							
 							<div class="col-md-2 form-group mt-2 mt-md-0">
 								<select class="form-select" name='search_rank'
 									aria-label="Default select example">
@@ -76,9 +88,10 @@
 											<c:if test ="${a.code eq page.search_code}">selected="selected"</c:if>
 											value="${a.code}">${a.code_value}</option>
 									</c:forEach>
-
 								</select>
 							</div>
+
+
 
 							<div class="form-group mt-3">
 								<input type="text" class="form-control" name="subject"
@@ -108,3 +121,28 @@
 		</div>
 	</section>
 </main>
+
+<script>
+$('[name=date]').on('change', function() {
+	$.ajax({
+	      type:"POST",
+	      url:"attend_date.at",
+	
+	      data:{emp_no: ${loginInfo.emp_no},
+	           attend_date: $('[name=date]').val()
+	         },
+	      dataType:"json",
+	      success: function(data){
+	    	  if(data != null){
+	    		  
+	    		  
+	         $('.status').text(data.att_state);
+	    	  }else{
+	    		  $('.status').text("업무 기록이 없습니다.");
+	    	  }
+	         //console.log(data);
+	         //console.log(data.att_state);
+	      }
+	   })
+});
+</script>
