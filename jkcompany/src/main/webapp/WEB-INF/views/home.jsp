@@ -97,7 +97,7 @@
               <h4>당근마켓 클론</h4>
               <p>중고거래는 당근마켓!</p>
               <a href="assets/img/portfolio/dang.png" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="https://github.com/ekzm2302" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
 
@@ -117,7 +117,7 @@
               <h4>메가커피 클론</h4>
               <p>커피는 메가에서!</p>
               <a href="assets/img/portfolio/pizza.png" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="https://github.com/tnalss" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
           
@@ -147,7 +147,7 @@
               <h4>온더룩 클론</h4>
               <p>패션의 완성 온더룩!</p>
               <a href="assets/img/portfolio/look.png" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="https://github.com/jihyeunwoo" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
 
@@ -158,7 +158,7 @@
               <h4>마루과학</h4>
               <p>마루과학 쇼핑몰</p>
               <a href="assets/img/portfolio/maroo.PNG" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="https://tnalss.github.io/miniproject/" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
           
@@ -168,7 +168,7 @@
               <h4>나이키 러닝 클론</h4>
               <p>건강한 습관을 만드세요!</p>
               <a href="assets/img/portfolio/nike.png" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 4"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <a href="https://github.com/luna-jy" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
           
