@@ -7,7 +7,7 @@ import lombok.Setter;
 public class PageVO {
 
 	//검색관련 필드
-	private String search="all",keyword="";
+	private String search="all", keyword="", search_dept="-1", search_rank="-1", search_code="-1";
 	private String viewType ="list";
 	
 	//페이지당 보여질 목록의 수
