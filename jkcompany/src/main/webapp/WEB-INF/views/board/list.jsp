@@ -7,6 +7,11 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
+.page-list {
+	text-align: center;
+	column-gap: .5rem;
+}
+
 .text_over {
 margin-top : -8px;
   width: 340px;

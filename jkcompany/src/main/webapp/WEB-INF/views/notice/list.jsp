@@ -7,7 +7,10 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-
+.page-list {
+	text-align: center;
+	column-gap: .5rem;
+}
 </style>
 <main id="main">
 
@@ -49,7 +52,7 @@
 
 				<select class='w-px100' name='search'>
 					<option value='all' ${page.search eq 'all' ? 'selected':''}>전체</option>
-					<option value='board_title' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
+					<option value='emp_no' ${page.search eq 'board_title' ? 'selected':''}>제목</option>
 					<option value='emp_name'
 						${page.search eq 'content' ? 'selected':''}>작성자</option>
 				</select> <input type='text' class='w-px300' name='keyword'
@@ -98,7 +101,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<jsp:include page="/WEB-INF/views/include/page.jsp" />
+			<jsp:include page="/WEB-INF/views/include/page.jsp" />
 
 					</div>
 				</div>
@@ -109,11 +112,7 @@
 	</section>
 	<!-- End Section -->
 
-<script>
-$('.btn-search').click(function() {
-	$('#list').submit()
-});
-</script>
+
 
 </main>
 <!-- End #main -->
