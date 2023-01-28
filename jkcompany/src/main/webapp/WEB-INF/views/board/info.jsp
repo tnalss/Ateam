@@ -115,22 +115,19 @@ height: 400px;
     </section><!-- End Section -->
    
 <script type="text/javascript">
+//수정 취소
 function modify_cancel(no){
-	
 	$('#modify_on'+no).css({"display":"none"});
 	$('#modify_off'+no).css({"display":"block"});
 	$('.reply_incontent'+no).css({"display":"none"});
 	$('.reply_content'+no).css({"display":"block"});
 }
-//수정 취소
-
 
 $('.btn-delete').on('click', function(){
 	if( confirm('게시글을 삭제하시겠습니까?') ){
 		location = 'delete.bo?id=${vo.board_no}';
 	}
 });
-
 $('.reply_btn').on('click', function(){
 	if( confirm('댓글을 등록하시겠습니까?') ) {
 		$('#insertReply').submit();

@@ -27,11 +27,12 @@ public class NoticeController {
 	@Autowired
 	private CommonService common;
 
-	// 댓글 수
+	// 공지글수정저장처리 요청
 	@RequestMapping("/reply_update.no")
-	public String reply_delete(Model model, int id) {
-		model.addAttribute("vo", sql.selectOne("re.info", id));
-		return "notice/modify";
+	public String update(ReplyVO vo, Model model) {
+		sql.update("re.reply_update", vo);
+		// model.addAttribute("board_no", );
+		return "redirect:info.bo?id=" + vo.getBoard_no();
 	}
 
 	// 댓글 삭제
