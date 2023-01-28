@@ -198,10 +198,9 @@
 			</div>
 			<div class="col-12 col-lg-9">
 				<c:forEach items='${draft_list}' var='vo'>
-					<div class="project" onclick="info('${vo.ea_num}')">
+					<div class="project">
 						<div class="row bg-white has-shadow">
-							<div
-								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
+							<div class="left-col col-lg-8 d-flex align-items-center justify-content-between"  onclick="info('${vo.ea_num}')">
 								<div class="project-title d-flex align-items-center">
 									<div class="has-shadow text-center">
 										<small>${vo.ea_status}</small>

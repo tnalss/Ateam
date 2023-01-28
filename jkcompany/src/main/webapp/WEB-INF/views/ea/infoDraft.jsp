@@ -28,6 +28,11 @@ h5{
 card-deck .card-title{
 	margin-top: .7rem;
 }
+img{
+	display:block;
+	width:100%;
+	height:5rem;
+}
 </style>
 <main id="main">
 
@@ -184,6 +189,16 @@ card-deck .card-title{
                        	 </p>
                    	 </div>
                     	<div class="card-footer">
+                    		<c:choose>
+                    			<c:when test="${list.ea_r_statuas eq '결재완료' }">
+ 									${list.ea_a_date}
+ 									<img alt="결재완료" src="assets/img/ea_stamp_approved.png">							
+ 								</c:when>
+ 								<c:when test="${list.ea_r_statuas eq '반려' }">
+ 									${list.ea_a_date}
+ 									<img alt="반려" src="assets/img/ea_stamp_denied.png">							
+ 								</c:when>
+                    		</c:choose>
  							${list.ea_r_statuas eq '결재완료' ? list.ea_a_date :''}
  							<p>${list.ea_r_statuas}<p>
                     	</div>

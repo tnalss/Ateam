@@ -196,9 +196,11 @@ card-deck .card-title{
  									<a class="btn icon-btn btn-danger denied" href="#">반려</a>	 									
  								</c:when>
  								<c:when test="${list.ea_r_statuas eq '결재완료' }">
+ 									${list.ea_a_date}
  									<img alt="결재완료" src="assets/img/ea_stamp_approved.png">							
  								</c:when>
  								<c:when test="${list.ea_r_statuas eq '반려' }">
+ 									${list.ea_a_date}
  									<img alt="반려" src="assets/img/ea_stamp_denied.png">							
  								</c:when>
  								<c:otherwise>
@@ -278,7 +280,7 @@ $('.denied').click(function(){
 			console.log(data);
 			if(data){
 				div.empty();
-				div.html("<img alt='결재완료' src='assets/img/ea_stamp_denied.png'>");
+				div.html("<img alt='결재반려' src='assets/img/ea_stamp_denied.png'>");
 				
 			} else {
 			alert("실패");
