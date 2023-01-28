@@ -200,7 +200,7 @@
 			</div>
 			<div class="col-12 col-lg-9">
 				<c:forEach items='${retry_list}' var='vo'>
-					<div class="project">
+					<div class="project" onclick="info('${vo.ea_num}')">
 						<div class="row bg-white has-shadow">
 							<div
 								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
@@ -244,6 +244,9 @@
 
 </main>
 <script>
+function info(c){
+	location.href = "info.ea?ea_num="+c+"&&cnt=3";
+}
 
 function draft(a){
     if(confirm("상신하시겠습니까?")){
