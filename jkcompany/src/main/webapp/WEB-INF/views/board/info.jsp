@@ -41,7 +41,7 @@ height: 400px;
  <h5> 제목 : ${vo.board_title} </h5> 
   </div>
   <div class="card-body h-px500">
-    <p class="card-text" >${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
+    <p class="card-text text-start" >${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
   </div>
   <div class="card-footer text-muted"> 
    작성일자 : ${vo.write_date} <span style='margin-left: 3rem;'>조회수 : ${vo.board_hits} </span> 

@@ -11,6 +11,10 @@
 	text-align: center;
 	column-gap: .5rem;
 }
+.list_top{
+background-color: #ac75bd;
+    color: white;
+    }
 </style>
 <main id="main">
 
@@ -83,7 +87,7 @@
 				<col width='120px'>
 				<col width='120px'>
 			</colgroup>
-			<tr class='text-center '> 
+			<tr class='text-center list_top'> 
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>

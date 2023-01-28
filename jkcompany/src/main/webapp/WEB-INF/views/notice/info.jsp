@@ -12,6 +12,9 @@ height: 80px;
 .h-px500 {
 height: 400px;
 }
+.reply_content{
+
+
 </style>
   <main id="main">
 
@@ -40,7 +43,7 @@ height: 400px;
      <span style ="font-size: 20px" > 제목 : ${vo.board_title} </span> 
   </div>
   <div class="card-body h-px500">
-    <p class="card-text">${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
+    <p class="card-text text-start">${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
   </div>
   <div class="card-footer text-muted emp">
   <span style='margin-left: 2rem'> 작성자 : ${vo.emp_name} </span> 
@@ -88,12 +91,12 @@ height: 400px;
                 <p class='text-center'>${reply.emp_name }</p>
               </div>
               <div class="col-9">
-                <div class="card-body">
+                <div class="card-body"> 
                   <p class="card-text reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content }</p>
                   <input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                   <input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                    <input type="text" class="h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
+                    <input type="text" class="h-px80 text-start reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
