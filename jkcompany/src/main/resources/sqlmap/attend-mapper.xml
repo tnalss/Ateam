@@ -61,6 +61,17 @@
 		where code_category='V'
 	</select>
 
+<!--관리자가 보는 연차 신청 목록  -->
+<select id = "al_apply_list" resultType="al.AlVO">
+select a.emp_no, to_char(a.al_reg_date,'yyyy/mm/dd'), a.al_approved, c.code_value al_code
+from tbl_al a
+left join tbl_emp e 
+on a.emp_no = e.emp_no 
+left outer join tbl_code c 
+on a.al_code = c.code_category||c.code_num
+</select>
+
+
 
 	<!--로그인한 회원의 날짜별 상태조회 -->
 	<select id="attend_list_date" resultType="attend.AttendVO">

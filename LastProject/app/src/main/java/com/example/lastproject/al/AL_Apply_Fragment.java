@@ -211,8 +211,10 @@ public class AL_Apply_Fragment extends Fragment {
         });
 
 
-        /*로그인한 사원의 연차.휴가 신청 현황 */
+
         recv_al_apply= v.findViewById(R.id.recv_al_apply);
+        selectList();
+
 
         return v;
     }

@@ -6,24 +6,8 @@
     android:padding="5dp"
     android:layout_margin="2dp">
 
-    <TextView
-        android:id="@+id/apply_result"
-        style="@style/small_size"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
-        android:layout_centerVertical="true"
-        android:layout_gravity="right"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/item_radius4"
-        android:gravity="center"
-        android:padding="2dp"
-        android:text="승인완료"
-        android:textColor="@color/blue" />
+
     <LinearLayout
-        android:layout_toRightOf="@+id/apply_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
