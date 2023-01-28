@@ -55,22 +55,23 @@
 
 	<!-- 근태, 연차 코드 리스트 -->
 	<select id="code_list" resultType="common.SimpleCode">
-		select code_category||code_num code, code_value
+		select code_category||code_num
+		code, code_value
 		from tbl_code
-		where code_category='V'		
-		order by code_category , code_num
+		where code_category='V'
 	</select>
-
-
 
 
 	<!--로그인한 회원의 날짜별 상태조회 -->
 	<select id="attend_list_date" resultType="attend.AttendVO">
-		select a.attend_date, a.emp_no, a.attend_on,
-		a.attend_off,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
+		select a.attend_date,
+		a.emp_no, a.attend_on,
+		a.attend_off,GET_CODE_VALUE(a.ATT_CODE)
+		ATT_STATE
 		from tbl_attend a
 		where a.emp_no = #{emp_no}
-		and  a.attend_date = to_date( #{attend_date},'yyyy/mm/dd')
+		and a.attend_date
+		= to_date( #{attend_date},'yyyy/mm/dd')
 	</select>
 
 
@@ -241,9 +242,14 @@ and attend_date > = to_char(current_date-7, 'yyyy/mm/dd')]]>
 		=to_char(current_date,'yyyy/mm/dd')
 	</update>
 
+<!-- 로그인한 사원의 업무 상태 수정 신청하기  -->
+<insert id="edit_apply">
+insert into tbl_al(emp_no,al_reg_date,al_code,al_start_date,al_reason)
+values (#{emp_no},to_char(current_date, 'yyyy/mm/dd'),#{al_code},#{al_start_date},#{al_reason})
+</insert>
 
 
-
+<!-- 로그인한 사원의 업무 상태 수정 취소하기  -->
 
 </mapper>
 
