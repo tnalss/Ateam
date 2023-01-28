@@ -5,7 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
-
+<style>
+.h-px80 {
+height: 80px;
+}
+.h-px500 {
+height: 400px;
+}
+</style>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -30,9 +37,9 @@
      <h3>공지글안내</h3>
      <div class="card text-center">
   <div class="card-header">
-     <span style ="font-size: 20px"> 제목 : ${vo.board_title} </span> 
+     <span style ="font-size: 20px" > 제목 : ${vo.board_title} </span> 
   </div>
-  <div class="card-body">
+  <div class="card-body h-px500">
     <p class="card-text">${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
   </div>
   <div class="card-footer text-muted emp">
@@ -60,7 +67,7 @@
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
 	<input type="hidden" name="emp_no" value="${loginInfo.emp_no }"/>
 	<input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
-	<input type="hidden" name="reply_content" value="${reply.reply_content }"/>
+	
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
@@ -68,12 +75,12 @@
 </div>
 
 	<!-- 댓글 -->
-	<div id='reply.bo' class="mt-4">
+	<div id='reply.no' class="mt-4">
    <p style='font-size: 22px;'>댓글</p>
    <div class="row">
    <c:forEach items='${notice }' var='reply' varStatus='num'>
-   <form action="reply_update.no" method="post" id="updateReply${num.count }">
-   <div class="col-5 mt-2">
+   <form action="reply_update.no" method="post" id="updateReply${num.count }" class="col-6">
+   <div class="col-12 mt-2">
           <div class="card">
             <div class="row no-gutters">
               <div class="col-3 mt-3">
@@ -84,8 +91,9 @@
                 <div class="card-body">
                   <p class="card-text reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content }</p>
                   <input type="hidden" name="reply_no" value="${reply.reply_no }"/>
+                  <input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                    <input type="text" class="h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none"/>
+                    <input type="text" class="h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
@@ -144,6 +152,7 @@ function delete_reply(no,board_no){
 		$('.reply_incontent'+no).css({"display":"none"});
 		$('.reply_content'+no).css({"display":"block"});
 		$('.reply_content'+no).text($('.reply_incontent'+no).val());
+		//console.log($('.reply_content'+no).text($('.reply_incontent'+no).val()));
 		$('#updateReply'+no).submit();
 	}
 	//수정 취소
