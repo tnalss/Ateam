@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,22 @@ public class NoticeController {
 	SqlSession sql;
 	@Autowired
 	private CommonService common;
+
+	// 공지글수정저장처리 요청
+	@RequestMapping("/reply_update.no")
+	public String update(ReplyVO vo, Model model) {
+		sql.update("re.reply_update", vo);
+		// model.addAttribute("board_no", );
+		return "redirect:info.bo?id=" + vo.getBoard_no();
+	}
+
+	// 댓글 삭제
+	@RequestMapping("/reply_delete.no")
+	public String reply_delete(int reply_no, int id, Model model) {
+		// model.addAttribute("btn-re-delete", );
+		sql.delete("re.reply_delete", reply_no);
+		return "redirect:info.no?id=" + id;
+	}
 
 	// 답글쓰기
 	@RequestMapping("/reply_insert.no")
@@ -52,10 +69,7 @@ public class NoticeController {
 	// 공지글등록(신규저장)처리 요청
 	@RequestMapping("/insert.no")
 	public String insert(NoticeVO vo, MultipartFile file, HttpServletRequest request) {
-		// 첨부된 파일이 있는 경우
-
 		sql.insert("no.insert", vo);
-
 		// 응답화면연결 - 목록화면
 		return "redirect:list.no";
 	}
@@ -98,6 +112,8 @@ public class NoticeController {
 		List<ReplyVO> reply = sql.selectList("re.reply_list", id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("notice", reply);
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "notice/info";
 	}
 

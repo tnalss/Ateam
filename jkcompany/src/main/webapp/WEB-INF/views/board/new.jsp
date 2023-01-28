@@ -17,10 +17,10 @@ height: 300px;
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>공지 글 등록</h2>
+          <h2> 익명게시판</h2>
           <ol>
             <li><a href="<c:url value='/'/>">홈</a></li>
-            <li>공지사항</li>
+            <li>익명게시판</li>
           </ol>
         </div>
 
@@ -30,10 +30,11 @@ height: 300px;
 		<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
     <!-- ======= Section ======= -->
     <section id="" class="container">
-     <h3>공지글등록</h3>
-<form method='post' id='insert' action='insert.no' enctype='multipart/form-data'>
+    
+     <h3>익명 글 등록</h3>
+<form method='post' id='insert' action='insert.bo' enctype='multipart/form-data'>
 <input type='hidden' name='emp_no' value='${loginInfo.emp_no}'>
-<input type='hidden' name='board_cate' value='O0'>
+<input type='hidden' name='board_cate' value='O1'>
 <table class='table table-hover'>
 <tr><th>제목</th>
 	<td><input type='text' name='board_title' class='w-px1000' title='제목'></td>
@@ -58,11 +59,9 @@ height: 300px;
 </form>
 <div class='btnSet'>
 	<a class='btn btn-primary save'>저장</a>
-	<a class='btn btn-primary' href='list.no'>취소</a>
+	<a class='btn btn-primary' href='list.bo'>취소</a>
 </div>
 <script>
-
-
 $('.save').click(function(){
 	if( emptyCheck() ){
 		$('#insert').submit(); 

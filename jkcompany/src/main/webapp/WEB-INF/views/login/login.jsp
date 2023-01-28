@@ -29,8 +29,8 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">JK Company</h2>
+				<div class="col-md-12 text-center mb-5">
+					<a href="<c:url value='/'/>"><img src="assets/img/logo.png" style="width: 30%; height: 100%;" alt="" /></a>
 				</div>
 			</div>
 			<div class="row justify-content-center">

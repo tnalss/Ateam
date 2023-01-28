@@ -6,9 +6,35 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
+<style>
+.page-list {
+	text-align: center;
+	column-gap: .5rem;
+}
 
+.text_over {
+margin-top : -8px;
+  width: 340px;
+  height: 105px;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   word-break: break-word;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; 
+   -webkit-box-orient: vertical
+}
+
+.text_overheader {
+height : 45px;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   word-break: break-word;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; 
+   -webkit-box-orient: vertical
+}
+</style>
   <main id="main">
-
     <!-- ======= Breadcrumbs ======= -->
     <!-- 경로를 나타내주는 부분입니다 해당하는 내용을 작성해주세요 -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -57,12 +83,11 @@
 			<c:forEach items='${page.list}' var='vo'>
 				 <div class="col-4">
          		 <div class="card" style='margin-top: 1rem;'>
-         		   <div class="card-header">
-            		 <p style='font-size: 20px;'><a href='info.board?id=${vo.board_no}'>${vo.board_title }</a></p>
+         		   <div class="card-header text_overheader">
+            		 <p style='font-size: 20px; text-overflow: ellipsis;'><a href='info.bo?id=${vo.board_no}'>${vo.board_title }</a></p>
            		 </div>
-           		 <div class="card-body">
-             	
-              <a href='info.board?id=${vo.board_no}'><span class="card-text">${vo.board_content }</span></a>
+           		 <div class="card-body text_over">
+              <a href='info.bo?id=${vo.board_no}'><span class="card-text">${vo.board_content }</span></a>
             </div>
           </div>
         </div>

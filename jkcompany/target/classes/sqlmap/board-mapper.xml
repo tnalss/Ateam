@@ -44,7 +44,7 @@ order by 1 desc
 
 </select> 
 <!-- 글쓰기 -->
-<insert id="se_insert">
+<insert id="insert">
 insert into tbl_board (board_title, board_content, board_cate, emp_no)
 values (#{board_title}, #{board_content}, #{board_cate}, #{emp_no})
 </insert>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <style>
 #h3 {
@@ -16,13 +18,25 @@
 	margin-top: 20px;
 }
 
-#submit {
-	width: 100px;
-	height: 30px;
-	background: #fd5c28;
+.submit_apply {
+	background: #f03c02;
+	border: 0;
+	padding: 10px 24px;
 	color: #fff;
-	border: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
 }
+
+#submit_cancel {
+	background: #f03c02;
+	border: 0;
+	padding: 10px 24px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
+}
+
+
 #l:hover {
 	color: #fd5c28;
 }
@@ -35,83 +49,72 @@
 		<div class="container">
 			<div class="d-flex justify-content-between align-items-center">
 				<h2>근태 관리</h2>
-				<ol>
+			<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
 					<li>나의 출·퇴근</li>
-			</div>
 			</ol>
+			</div>
 		</div>
 	</section>
 	<!-- End Breadcrumbs -->
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<section id="features" , class="features">
+	<section id="features"  class="features">
 		<div class="container">
 			<div class="row mt-5 justify-content-center aos-init aos-animate"
 				data-aos="fade-up">
 				<div class="col-lg-10">
-					<h3 id="h3">업무 상태 수정 신청</h3>
-					<form action="forms/contact.php" method="post" role="form"
+					<div>
+						<i class="bi bi-person"></i> <a id="me">${loginInfo.emp_name}&nbsp;</a><a
+							id="me">${loginInfo.rank_name}님의</a>
+					</div>
+					<h2 class="entry-title">
+						<a>업무 상태 수정 신청</a>
+					</h2>
+					<form action="edit_apply.at" method="post" role="form" id="edit_apply"
 						class="php-email-form">
+						<input type="hidden" name ="emp_no" value="${loginInfo.emp_no}">
 						<div class="row">
-							<div class="col-md-2 form-group ">
-								<select class="form-select" aria-label="Default select example"
-									id="combobox1">
-									<option selected>지점 선택</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+							<div class="col-md-3 form-group mt-2 mt-md-0">
+								<input class="form-control" id="inputDate" type="date" name="date"
+									placeholder="날짜 선택">
+							</div>
+							<div class="col-md-4 form-group mt-2 mt-md-0 ">
+							<div  class="form-control status"> 업무 상태</div>
+							<!-- 날짜를 선택하면 해당 날짜의 로그인한 사원의 업무 상태 뜨도록  -->							
+							</div>
+							
+							
+							<div class="col-md-2 form-group mt-2 mt-md-0">
+								<select class="form-select" name='al_type'
+									aria-label="Default select example">
+									<option value="-1">업무 상태</option>
+									<c:forEach items="${att_code}" var="a">
+										<option
+											<c:if test ="${a.code eq page.search_code}">selected="selected"</c:if>
+											value="${a.code}">${a.code_value}</option>
+									</c:forEach>
 								</select>
 							</div>
-							<div class="col-md-2 form-group ">
-								<select class="form-select" aria-label="Default select example"
-									id="combobox1">
-									<option selected>부서 선택</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
+						
+							<div class="form-group mt-3">
+								<textarea class="form-control" name="message" rows="5"
+									placeholder="신청 사유를 입력하세요"></textarea>
 							</div>
-							<div class="col-md-3 form-group ">
-								<input type="number" class="form-control" name="emp_no" id="no"
-									placeholder="사번을 입력하세요" required="">
+							<div class="input-group mb-3" style="margin-top: 20px;">
+								<input type="file" class="form-control" id="inputGroupFile02">
+								<label id="l" class="input-group-text" for="inputGroupFile02">첨부하기</label>
 							</div>
-							<div class="col-md-4 form-group mt-3 mt-md-0">
-								<input type="name" class="form-control" name="name" id="name"
-									placeholder="이름을 입력하세요" required="">
+							<div class="my-3">
+								<div class="loading"></div>
+								<div class="error-message"></div>
+								<div class="sent-message"></div>
 							</div>
-						</div>
-						<div class="col-md-2 form-group mt-2 mt-md-0">
-							<select class="form-select" aria-label="Default select example"
-								id="combobox2">
-								<option selected>업무 상태</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
-						</div>
-
-						<div class="form-group mt-3">
-							<input type="text" class="form-control" name="subject"
-								id="subject" placeholder="제목" required="">
-						</div>
-						<div class="form-group mt-3">
-							<textarea class="form-control" name="message" rows="5"
-								placeholder="신청 사유를 입력하세요" required=""></textarea>
-						</div>
-						<div class="input-group mb-3" style="margin-top: 20px;">
-							<input type="file" class="form-control" id="inputGroupFile02">
-							<label id="l" class="input-group-text" for="inputGroupFile02">첨부하기</label>
-						</div>
-						<div class="my-3">
-							<div class="loading"></div>
-							<div class="error-message"></div>
-							<div class="sent-message"></div>
-						</div>
-						<div class="text-center ">
-							<button type="submit" id="submit">신청하기</button>
-							<button type="submit" id="submit">취소하기</button>
+							<div class="text-center ">
+								<button type="submit" class="submit_apply">신청하기</button>
+								<button type="submit" id="submit_cancel">취소하기</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -119,3 +122,37 @@
 		</div>
 	</section>
 </main>
+
+<script>
+
+
+
+/*날짜 선택  */
+$('[name=date]').on('change', function() {
+	$.ajax({
+	      type:"POST",
+	      url:"attend_date.at",
+	
+	      data:{emp_no: ${loginInfo.emp_no},
+	           attend_date: $('[name=date]').val()
+	         },
+	      dataType:"json",
+	      success: function(data){
+	    	  if(data != null){	    		  
+	    		  
+	         $('.status').text(data.att_state);
+	    	  }else{
+	    		  $('.status').text("업무 기록이 없습니다.");
+	    	  }
+	         //console.log(data);
+	         //console.log(data.att_state);
+	      }
+	   })
+});
+
+$('.submit_apply').on('click',function(){
+	$('#edit_apply').submit();}
+});
+
+
+</script>

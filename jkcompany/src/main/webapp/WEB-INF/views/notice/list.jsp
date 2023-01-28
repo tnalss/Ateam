@@ -7,14 +7,10 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.no_title {
-	text-overflow:ellipsis;
-	overflow:hidden;
-	width:100px;
-	white-space:nowrap;
+.page-list {
+	text-align: center;
+	column-gap: .5rem;
 }
-
-
 </style>
 <main id="main">
 
@@ -39,10 +35,6 @@
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
-	<section id="" class="container">
-		<div class="container">
-		</div>
-	</section>
 	<!-- End Breadcrumbs -->
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
@@ -76,22 +68,22 @@
 		<form method='post' action='list.no' id="list">
 		<input type='hidden' name='curPage' value='1'> 
 		</form>
-		<div class="row mt-3">
+		<div class="row mt-3 ">
 			<div class="col-12 card p-0">
 				<div class="card-header">
 					<h3 class="card-title text-center" style="font-weight: bold;">공지사항</h3>
 				</div>
-				<div class="card-body p-0">
+				<div class="card-body">
 					<div class="table-responsive">
 						<table class='table table-hover'>
 			<colgroup>
 				<col width='80px'>
-				<col width='200px'>
+				<col class="no_title" >
 				<col width="250px">
 				<col width='120px'>
 				<col width='120px'>
 			</colgroup>
-			<tr class='text-center'> 
+			<tr class='text-center '> 
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -99,17 +91,17 @@
 				<th>조회수</th>
 			</tr>
 			<c:forEach items='${page.list}' var='vo'>
-				<tr class='text-center'>
+				<tr class='text-center '>
 					<td class='text-center'>${vo.rnum }</td>
-					<td class='no_title'><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
-					<td>${vo.emp_name}</td> 
+					<td class="no_title"><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
+					<td >${vo.emp_name}</td> 
 					<td><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${vo.write_date }" /></td>
 							<td>${vo.board_hits}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<jsp:include page="/WEB-INF/views/include/page.jsp" />
+			<jsp:include page="/WEB-INF/views/include/page.jsp" />
 
 					</div>
 				</div>

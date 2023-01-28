@@ -39,6 +39,7 @@
 					</form>
 					<div class="col-lg-8 entries">
 						<article class="entry entry-single">
+
 							<div class="entry-meta">
 								<ul>
 									<li class="d-flex align-items-center"><i
@@ -47,7 +48,7 @@
 								</ul>
 							</div>
 							<h2 class="entry-title">
-								<a href="blog-single.html">지각 조회</a>
+								<a href="my_attend_o.at">기타 업무 상황 조회</a>
 							</h2>
 
 							<div class="entry-content">
@@ -67,6 +68,7 @@
 														<th>출근 시간</th>
 														<th>퇴근 시간</th>
 														<th>상태</th>
+
 													</tr>
 													<c:forEach items='${list}' var='vo'>
 														<tr style="margin: 20px;">

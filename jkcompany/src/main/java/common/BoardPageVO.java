@@ -4,14 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class PageVO {
+public class BoardPageVO {
 
 	//검색관련 필드
-	private String search="all", keyword="", search_dept="-1", search_rank="-1", search_code="-1";
+	private String search="all",keyword="";
 	private String viewType ="list";
 	
 	//페이지당 보여질 목록의 수
-	private int pageList = 10;
+	private int pageList = 12;
 	//블럭당 보여질 페이지의수 
 	private int blockPage= 10;
 
