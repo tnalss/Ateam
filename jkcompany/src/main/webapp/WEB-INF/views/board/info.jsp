@@ -41,7 +41,7 @@ height: 400px;
  <h5> 제목 : ${vo.board_title} </h5> 
   </div>
   <div class="card-body h-px500">
-    <p class="card-text" >${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
+    <p class="card-text text-start" >${fn: replace(  fn:replace( vo.board_content, lf, '<br>' )  , crlf, '<br>')}</p>
   </div>
   <div class="card-footer text-muted"> 
    작성일자 : ${vo.write_date} <span style='margin-left: 3rem;'>조회수 : ${vo.board_hits} </span> 
@@ -63,7 +63,6 @@ height: 400px;
 	<input type='text' size="60" placeholder="댓글을 작성하세요"  name='reply_content'>
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
 	<input type="hidden" name="emp_no" value="${loginInfo.emp_no }"/>
-	<input type="hidden" name="reply_content" value="${reply.reply_content }"/>
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
@@ -87,7 +86,7 @@ height: 400px;
                 <p class="card-text  reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content } </p>
                 	<input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                <input type="text" class="w-px800 h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none"/>
+                <input type="text" class="w-px800 h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none; margin-left: -30px;"/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"

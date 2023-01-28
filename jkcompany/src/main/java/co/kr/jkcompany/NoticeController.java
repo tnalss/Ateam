@@ -32,7 +32,7 @@ public class NoticeController {
 	public String update(ReplyVO vo, Model model) {
 		sql.update("re.reply_update", vo);
 		// model.addAttribute("board_no", );
-		return "redirect:info.bo?id=" + vo.getBoard_no();
+		return "redirect:info.no?id=" + vo.getBoard_no();
 	}
 
 	// 댓글 삭제
