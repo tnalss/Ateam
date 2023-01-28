@@ -27,12 +27,12 @@ public class BoardController {
 	private CommonService common;
 
 	// 공지글수정저장처리 요청
-		@RequestMapping("/reply_update.bo")
-		public String update(ReplyVO vo, Model model) {
-			sql.update("re.reply_update", vo);
-			//model.addAttribute("board_no", );
-			return "redirect:info.bo?id=" + vo.getBoard_no();
-		}
+	@RequestMapping("/reply_update.bo")
+	public String update(ReplyVO vo, Model model) {
+		sql.update("re.reply_update", vo);
+		// model.addAttribute("board_no", );
+		return "redirect:info.bo?id=" + vo.getBoard_no();
+	}
 
 	// 댓글 삭제
 	@RequestMapping("/reply_delete.bo")
@@ -47,6 +47,7 @@ public class BoardController {
 		model.addAttribute("board_no", sql.insert("re.reply_insert", vo));
 		return "redirect:info.bo?id=" + vo.getBoard_no();
 	}
+
 	// 공지글수정저장처리 요청
 	@RequestMapping("/update.bo")
 	public String update(NoticeVO vo, NoticePageVO page, MultipartFile file, HttpServletRequest request) {
