@@ -301,7 +301,6 @@ textarea {
 						<div class="row setup-content" id="step-1">
 							<div class="col-xs-12">
 								<div class="col-md-12">
-									<h3>Step 1</h3>
 									<div class="list-group" id="doc_list">
 													<p class="list-group-item active text-center">기안양식목록</p>
 												<c:forEach items='${doc_list}' var='vo'>		
@@ -317,7 +316,6 @@ textarea {
 						<div class="row setup-content" id="step-2">
 							<div class="col-xs-12">
 								<div class="col-md-12">
-									<h3>Step 2</h3>
 										<div class="row">
 											<div class="col-sm-4 col-sm-offset-1">
 												<div class="list-group" id="list1">
@@ -354,7 +352,6 @@ textarea {
 						<div class="row setup-content" id="step-3">
 							<div class="col-xs-12">
 								<div class="col-md-12">
-									<h3>Step 3</h3>
 									<div class="form-group">
 										<label class="control-label">기안제목</label> <input id="ea_title"
 											maxlength="200" type="text" required="required"
@@ -374,7 +371,6 @@ textarea {
 						<div class="row setup-content" id="step-4">
 							<div class="col-xs-12">
 								<div class="col-md-12">
-									<h3>Step 4</h3>
 									<h3 class="text-danger" id="e_title">업무지원요청합니다(제목)</h3>
 									<table class="table table-bordered success">
 										<thead>

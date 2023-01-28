@@ -17,6 +17,10 @@ select * from tbl_ea_file where ea_num = #{ea_num}
 <update id="status_update">
 update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
 </update>
+<!-- 결재(반려) 상태 변경 -->
+<update id="statuas_update">
+update tbl_ea set ea_status = #{ea_status} where ea_num=${ea_num}
+</update>
 
 <!-- 결재 상세정보 불러오기 -->
 <select id="info" resultType="ea.EaVO">

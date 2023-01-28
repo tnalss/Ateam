@@ -21,6 +21,7 @@ import common.SimpleCode;
 import ea.EaFileVO;
 import ea.EaVO;
 import employee.EmployeePageVO;
+import employee.EmployeeVO;
 import login.LoginVO;
 
 @Controller
@@ -139,6 +140,13 @@ public class EaController {
 		public String ea_retry(HttpSession session, Model model) {
 			LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 			List<EaVO> retry_list = sql.selectList("ea.retryboxlist",vo);
+			for(int i=0;i<retry_list.size();i++){
+                if(i>0){
+                    if(retry_list.get(i).getEa_num().equals(retry_list.get(i-1).getEa_num())){
+                        retry_list.remove(i);
+                    }
+                }
+			}
 			model.addAttribute("retry_list",retry_list);
 			return "ea/retry";
 		}
@@ -169,6 +177,68 @@ public class EaController {
 				
 			}
 			return "redirect:retry.ea";
+		}
+		
+		
+		//기안 상세정보 조회
+		@RequestMapping(value="/info.ea", produces="text/html;charset=utf-8")
+		public String ea_info(String ea_num, Model model, HttpSession session,String cnt) {
+			List<EaVO> list = sql.selectList("ea.info", ea_num);
+			
+			LoginVO vo =(LoginVO)session.getAttribute("loginInfo");
+			String form = list.get(0).getEa_title().substring(list.get(0).getEa_title().indexOf("[")+1,list.get(0).getEa_title().indexOf("]"));
+			HashMap<String,String> map = new HashMap<String, String>();
+			map.put("form", form);
+			map.put("ea_num",ea_num);
+			map.put("emp_name", list.get(0).getEmp_name());
+			map.put("emp_dep", list.get(0).getEa_dummy());
+			map.put("title", list.get(0).getEa_title());
+			map.put("content", list.get(0).getEa_content());
+			map.put("date",list.get(0).getEa_date().toString());
+			EmployeeVO evo = sql.selectOne("emp.info", list.get(0).getEmp_no());
+			map.put("rank_name",  evo.getRank_name());
+			model.addAttribute("map",map);
+			
+			
+			for(int i=0;i<list.size();i++) {
+					evo = sql.selectOne("emp.info", list.get(i).getEa_receiver());
+					
+					list.get(i).setEa_receiver_name(evo.getEmp_name());
+					list.get(i).setEa_receiver_rank(evo.getRank_name());
+					list.get(i).setEa_receiver_dep(evo.getDepartment_name());
+			}
+			
+			model.addAttribute("info_list",list);
+						
+			if(cnt.equals("1")) {
+				return "ea/infoDraft";
+			}else if(cnt.equals("2")) {
+				model.addAttribute("login", vo);
+				return "ea/infoSign";
+			}else if(cnt.equals("3")) {
+				return "ea/infoRetry";
+			}
+			return "";
+		}
+	
+		//문서 상태(대기,회수,결재완료,반려) 변경
+		@ResponseBody
+		@RequestMapping(value="/update_statuas.ea")
+		public boolean ea_status_update(String ea_r_statuas, String ea_receiver, String ea_num, String total) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("ea_num", ea_num);
+			m.put("ea_status", ea_r_statuas);
+			m.put("emp_no", ea_receiver);
+			int cnt = sql.selectOne("ea.howManySigned", ea_num);
+			if(total.equals(cnt+"")) {
+				sql.update("ea.allSignComplete",ea_num);
+			}
+			if(ea_r_statuas.equals("E2")) {
+				sql.update("ea.statuas_update",m);
+			}
+			if (sql.update("ea.sign_status", m) > 0)
+				return true;
+			return false;
 		}
 		
 //	//기안서 목록 불러오기

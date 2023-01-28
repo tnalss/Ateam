@@ -2,95 +2,31 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.project .row {
-	margin: 0;
-	padding: 15px 0;
-	margin-bottom: 15px
+table{
+	margin-top: 20px;
 }
-.btn-warning{
-	margin-right: 5px;
-}
-.btn-glyphicon {
-	padding: 8px;
-	background: #ffffff;
-	margin-right: 4px;
-}
-
-.icon-btn {
-	padding: 1px 15px 2px;
-	border-radius: 50px;
-}
-
-.has-shadow.text-center {
-	width: 60px;
-}
-
-.project div[class*='col-'] {
-	border-right: 1px solid #eee
-}
-
-.project .text h3 {
-	margin-bottom: 0;
-	color: #555;
-	font-size: 1.0em;
-}
-
-.project .text {
-	margin-left: 20px;
-}
-
-.project .text small {
-	color: #aaa;
-	font-size: 0.75em;
-}
-
-.project .project-date span {
-	font-size: 0.9em;
-	color: #999
-}
-
-.project .time, .project .comments, .project .project-progress {
+.table-light{
 	color: #999;
-	font-size: 0.9em;
-	margin-right: 20px
 }
-
-.project .time i, .project .comments i, .project .project-progress i {
-	margin-right: 5px
+table th:first-child,
+table td:first-child {
+	border-left: 0;
 }
-
-.project .project-progress {
-	width: 200px
+table th:last-child,
+table td:last-child {
+	border-right: 0;
 }
-
-.project .project-progress .progress {
-	height: 4px
+h5{
+	margin-top: 4rem;
 }
-
-.project .card {
-	margin-bottom: 0
+.card-deck .card{
+	margin: 2rem;
 }
-
-@media ( max-width : 991px) {
-	.project .right-col {
-		margin-top: 20px;
-		margin-left: 65px
-	}
-}
-
-.has-shadow {
-	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px
-		rgba(0, 0, 0, 0.05);
-	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px
-		rgba(0, 0, 0, 0.05);
-	margin: 5px;
-}
-
-.project>.has-shadow:hover, .project>.has-shadow:focus {
-	box-shadow: 2px 2px 2px rgba(20, 120, 130, 0.4), -1px 0 2px
-		rgba(20, 120, 130, 0.4) !important;
+card-deck .card-title{
+	margin-top: .7rem;
 }
 </style>
 <main id="main">
@@ -197,43 +133,77 @@
 				</div>
 			</div>
 			<div class="col-12 col-lg-9">
-				<c:forEach items='${draft_list}' var='vo'>
-					<div class="project" onclick="info('${vo.ea_num}')">
-						<div class="row bg-white has-shadow">
-							<div
-								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
-								<div class="project-title d-flex align-items-center">
-									<div class="has-shadow text-center">
-										<small>${vo.ea_status}</small>
-									</div>
-									<div class="text">
-										<small>기안번호 ${vo.ea_num}</small>
-										<h3 class="h4">${vo.ea_title}</h3>
-									</div>
-								</div>
-								<div class="project-date">
-									<span class="hidden-sm-down">${vo.ea_date}</span>
-								</div>
-							</div>
-							<div class="right-col col-lg-4 d-flex align-items-center">
-								<div class="time">
-									<span class="hidden-sm-down">환경수질부</span>
-								</div>
-								<div class="comments">
-									<span class="hidden-sm-down">부장</span>
-								</div>
-								<div>
-									<a class="btn icon-btn btn-warning" href="#" onclick="retry('${vo.ea_num}');">회수</a>
-								</div>
-								<div>
-									<a class="btn icon-btn btn-danger" href="#" onclick="ea_delete('${vo.ea_num}');">삭제</a>
-								</div>
-							</div>
-						</div>
-					</div>
+				<h3>${map["title"]}</h3>
+				<table class="table table-bordered">
+						<tr>
+							<td class="table-light">기안양식</td>
+ 							<td>${map["form"]}</td> 
+							<td class="table-light">문서번호</td>
+							<td>${map["ea_num"]}</td>
+						</tr>
+						<tr>
+							<td class="table-light">보존연한</td>
+ 							<td>2년</td> 
+							<td  class="table-light">공개여부</td>
+							<td>부서공개</td>
+						</tr>
+						<tr>
+							<td class="table-light">기안자</td>
+ 							<td>${map["emp_name"]}</td> 
+							<td class="table-light">기안부서</td>
+							<td>${map["emp_dep"]}</td>
+						</tr>
+				</table>
+				
+				<h5>결재선</h5><hr>
+				
+				 <div class="card-deck row">
+                	<div class="card text-center col-3">
+                    	<div class="card-block">
+                        	<p class="card-title">기안</p>
+                        	<hr>
+                        	<p class="card-text">
+                           		${map["emp_name"]}<br />
+                           		(${map["rank_name"]})<br />
+                            	${map["emp_dep"]}<br />
+                       	 </p>
+                   	 </div>
+                    	<div class="card-footer">
+                       	 	${map["date"]}
+                    	</div>
+                	</div>
+				<c:forEach items="${info_list}" var="list">
+                	<div class="card text-center col-3">
+                    	<div class="card-block">
+                        	<p class="card-title">결재</p>
+                        	<hr>
+                        	<p class="card-text">
+                           		${list.ea_receiver_name}<br />
+                           		(${list.ea_receiver_rank})<br />
+                            	${list.ea_receiver_dep}<br />
+                       	 </p>
+                   	 </div>
+                    	<div class="card-footer">
+ 							${list.ea_r_statuas eq '결재완료' ? list.ea_a_date :''}
+ 							<p>${list.ea_r_statuas}<p>
+                    	</div>
+                	</div>
 				</c:forEach>
+				</div>
+				<h5>기안내용</h5><hr>
+				<table class="table table-bordered">
+					<tr>
+						<td class="table-light">기안내용</td>
+ 						<td class="col-10">${map["content"]}</td>
+					</tr>
+					<tr>
+						<td class="table-light">파일첨부</td>
+ 						<td></td>  
+					</tr>
+				</table>
 			</div>
 		</div>
+
 
 	</section>
 	<!-- End Section -->
@@ -241,29 +211,4 @@
 
 
 </main>
-<script>
-
-
-function info(c){
-	location.href = "info.ea?ea_num="+c+"&&cnt=1";
-}
-
-function retry(a){
-    if(confirm("회수하시겠습니까?")){
-        location.href = "update_status.ea?ea_num="+a+"&&ea_status=E4";
-        return true;
-    } else {
-        return false;
-    }
-}
-function ea_delete(b){
-    if(confirm("삭제하시겠습니까?")){
-        location.href = "delete.ea?ea_num="+b+"&&ea_status=E4";
-        return true;
-    } else {
-        return false;
-    }
-}
-
-</script>
 <!-- End #main -->
