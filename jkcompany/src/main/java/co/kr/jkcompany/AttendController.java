@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import attend.AlPageVO;
 import attend.AttendPageVO;
 import attend.AttendVO;
 import common.CommonService;
@@ -31,19 +32,33 @@ public class AttendController {
 	// 관리자 모드 _ 페이지 처리
 	public AttendPageVO attend_list(AttendPageVO page) {
 		page.setTotalList(sql.selectOne("at.total", page));
-		page.setList(sql.selectList("at.admin_attend", page));
+		page.setList(sql.selectList("at.admin_attend", page));		
 		return page;
 	}
 
+	public AlPageVO al_list(AlPageVO page_al) {
+		page_al.setAl_list(sql.selectList("at.al_list",page_al));
+		return page_al;
+	}
+	
 	// 관리자 모드_ 근태관리화면_전체 가져오기
 	@RequestMapping(value = "/admin_attend.at", produces = "text/html;charset=utf-8")
-	public String admin_attend(HttpSession session, Model model, AttendPageVO page) {
+	public String admin_attend(HttpSession session, Model model, AttendPageVO page, AlPageVO page_al) {
 		AttendPageVO vo = attend_list(page);
+		AlPageVO vo2 = al_list(page_al);
+		int countV0 = sql.selectOne("at.countV0");
+		int countV1 = sql.selectOne("at.countV1");
+		
+		
 		model.addAttribute("page", vo);
-
 		model.addAttribute("branches", sql.selectList("emp.codeList", 'B'));
 		model.addAttribute("departments", sql.selectList("emp.codeList", 'D'));
 		model.addAttribute("ranks", sql.selectList("emp.codeList", 'R'));
+		
+		model.addAttribute("page_al",vo2);
+		model.addAttribute("countV0",countV0);
+		model.addAttribute("countV1",countV1);
+	
 
 		return "attend/admin_attend";
 	}
@@ -55,7 +70,6 @@ public class AttendController {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		HashMap<String, String> tempMap = new HashMap<String, String>();
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());
-
 		List<AttendVO> list = sql.selectList("at.list_7days", vo.getEmp_no());
 		int code = sql.selectOne("at.codeW4", vo.getEmp_no());
 		int code2 = sql.selectOne("at.codeW3", vo.getEmp_no());
@@ -180,4 +194,12 @@ public class AttendController {
 
 		return "redirect:my_attend_edit.at";
 	}
+	
+	// 수정 취소하기
+		@RequestMapping(value = "/edit_apply_cancel.at", produces = "text/html;charset=utf-8")
+		public String edit_apply_cancel(HttpSession session, Model model, String emp_no, String date, String al_type,
+				String message) {
+			
+			return "redirect:my_attend_edit.at";
+		}
 }

@@ -262,6 +262,90 @@
 					</div>
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
+							<!--수정신청 조회 화면 -->
+							<div class="row">
+								<!--연차 신청 건수   -->
+								<div class="col-lg-4 col-md-6">
+									<div class="icon-box aos-init aos-animate" data-aos="fade-up"
+										data-aos-delay="200">
+										<div class="icon">
+											<i class="bi bi-alarm"></i>
+										</div>
+										<h3 class="title">
+											<a >연차 신청 : ${countV0}건</a>
+										</h3>
+									</div>
+								</div>
+								<!--반차 신청 건수  -->
+								<div class="col-lg-4 col-md-6">
+									<div class="icon-box aos-init aos-animate" data-aos="fade-up"
+										data-aos-delay="200">
+										<div class="icon">
+											<i class="bi bi-alarm"></i>
+										</div>
+										<h3 class="title">
+											<a>반차 신청 : ${countV1}건 </a>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<!--신청 목록 화면 보이게 -->
+							<!--클릭시  사원의 출근 날짜, 시간, 현황 보이게 하고 W99(신청)에서 선택 코드로 바꾸는 업데이트처리  -->
+							<div class="row mt-3">
+								<div class="col-12 card p-0">
+									<div class="card-body p-0">
+										<div class="table-responsive">
+											<table class='table table-hover text-center'>											
+												<colgroup>
+													<col width='80px'>
+													<col width='100px'>
+													<col width='120px'>
+													<col width='100px'>
+													<col width='100px'>
+													<col width='80px'>
+													<col width='150px'>
+													<col width='130px'>
+												</colgroup>
+												<tr class='text-center'>
+													<th>지점명</th>
+													<th>부서명</th>
+													<th>직급명</th>
+													<th>이름</th>
+													<th>신청 날짜</th>
+													<th>신청 사유</th>
+													<th>승인 상태</th>
+
+												</tr>
+												<c:forEach items='${page_al.al_list}' var='vo2'>
+													<tr style="margin: 20px;">
+
+														<td>${vo2.branch_name}</td>
+														<td>${vo2.department_name}</td>
+														<td>${vo2.rank_name}</td>
+														<td>${vo2.emp_name}</td>
+														<td>${vo2.al_reg_date}</td>
+														<td>${vo2.al_reason}</td>
+														<c:choose>
+															<c:when test="${vo2.al_approved eq 'false'}">
+																<td>미승인</td>
+															</c:when>
+															<c:when test="${vo2.al_approved eq 'true'}">
+																<td>승인</td>
+															</c:when>
+														</c:choose>
+
+
+													</tr>
+												</c:forEach>
+												</div>
+											</table>
+											<jsp:include page="/WEB-INF/views/include/page.jsp" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+
 
 						</figure>
 					</div>
@@ -280,17 +364,16 @@
 		$('form').submit();
 	});
 
-	
 	$('[name=search]').on('change', function() {
 		$('#list').attr('action', 'admin_attend.at');
 		$('#list').submit();
 	});
-	
+
 	$('[name=search_dept]').on('change', function() {
 		$('#list').attr('action', 'admin_attend.at');
 		$('#list').submit();
 	});
-	
+
 	$('[name=search_rank]').on('change', function() {
 		$('#list').attr('action', 'admin_attend.at');
 		$('#list').submit();

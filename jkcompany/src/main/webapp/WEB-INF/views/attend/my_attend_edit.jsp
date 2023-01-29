@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <style>
 #h3 {
@@ -41,6 +42,9 @@
 	color: #fd5c28;
 }
 </style>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <main id="main">
 
 	<!-- ======= Breadcrumbs ======= -->
@@ -76,9 +80,10 @@
 						class="php-email-form">
 						<input type="hidden" name ="emp_no" value="${loginInfo.emp_no}">
 						<div class="row">
-							<div class="col-md-3 form-group mt-2 mt-md-0">
+							<div class="col-md-3 form-group mt-2 mt-md-0">							
 								<input class="form-control" id="inputDate" type="date" name="date"
 									placeholder="날짜 선택">
+								<fmt:formatDate value="${al_start_date}" pattern="yyyy/MM/dd" />	
 							</div>
 							<div class="col-md-4 form-group mt-2 mt-md-0 ">
 							<div  class="form-control status"> 업무 상태</div>
@@ -99,13 +104,10 @@
 							</div>
 						
 							<div class="form-group mt-3">
+							
 								<textarea class="form-control" name="message" rows="5"
-									placeholder="신청 사유를 입력하세요"></textarea>
-							</div>
-							<div class="input-group mb-3" style="margin-top: 20px;">
-								<input type="file" class="form-control" id="inputGroupFile02">
-								<label id="l" class="input-group-text" for="inputGroupFile02">첨부하기</label>
-							</div>
+									placeholder="신청 사유를 입력하세요">${vo.al_reason}</textarea>
+							</div>						
 							<div class="my-3">
 								<div class="loading"></div>
 								<div class="error-message"></div>
@@ -113,7 +115,7 @@
 							</div>
 							<div class="text-center ">
 								<button type="submit" class="submit_apply">신청하기</button>
-								<button type="submit" id="submit_cancel">취소하기</button>
+								<button type="submit" id="submit_cancel">취소하기</button> 
 							</div>
 						</div>
 					</form>
@@ -122,7 +124,6 @@
 		</div>
 	</section>
 </main>
-
 <script>
 
 
@@ -144,15 +145,22 @@ $('[name=date]').on('change', function() {
 	    	  }else{
 	    		  $('.status').text("업무 기록이 없습니다.");
 	    	  }
-	         //console.log(data);
-	         //console.log(data.att_state);
+	         console.log(data);
+	         console.log(data.att_state);
 	      }
 	   })
 });
 
-$('.submit_apply').on('click',function(){
-	$('#edit_apply').submit();}
-});
+    $(".submit_apply").click(function () {      
+       $('#edit_apply').submit();
+            
+    });
+    
+    $(".submit_cancel").click(function(){
+    	
+    })
+
+
 
 
 </script>
