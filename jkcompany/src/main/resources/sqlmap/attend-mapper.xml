@@ -40,11 +40,6 @@
 		e.emp_name
 	</select>
 
-	<!--관리자가 보는 연차 신청 목록 <select id="al_apply_list" resultType="attend.AttendVO"> 
-		select a.emp_no, to_char(a.al_reg_date,'yyyy/mm/dd'), a.al_approved, c.code_value 
-		al_code from tbl_al a left join tbl_emp e on a.emp_no = e.emp_no left outer 
-		join tbl_code c on a.al_code = c.code_category||c.code_num </select> -->
-
 
 
 
@@ -148,39 +143,63 @@
 	</select>
 
 
-	<!-- 근태, 연차 코드 리스트 -->
-	<select id="code_list" resultType="common.SimpleCode">
-		select code_category||code_num
-		code, code_value
-		from tbl_code
-		where code_category='V'
-	</select>
 
-	<!-- 로그인한 사원의 업무 상태 수정 신청하기 -->
-	<insert id="edit_apply">
-		insert into
-		tbl_al(emp_no,al_reg_date,al_code,al_start_date,al_reason)
-		values
-		(#{emp_no},to_char(current_date,'yyyy/mm/dd'),#{al_code},to_date(
-		#{al_start_date},'yyyy/mm/dd'),#{al_reason})
-	</insert>
+	<!--선택한 사원의 사원의 근무 코드 수정 -->
+	<update id="updateAttendCode">
+		UPDATE tbl_attend
+		SET att_code =#{att_code}
+		WHERE
+		emp_no= #{emp_no}
+	</update>
 
 
-	<!-- 신청 현황 -->
+
+	<!-- 신청한 사원의 승인 상태를 'L1':true 로 업데이트 -->
+	<update id="updateL1">
+		update tbl_al
+		set al_approved ='L1'
+		where #{emp_no}
+	</update>
+
+
+
+
+	<!--관리자가 보는 연차 신청 현황 -->
 	<select id="al_list" resultType="attend.AttendVO">
-   select c2.code_value branch_name,c3.code_value department_name, c4.code_value rank_name,e.emp_name, a.emp_no,
-                to_char(a.al_reg_date,'yyyy/mm/dd') al_reg_date, a.al_reason, c.code_value al_approved
-    from tbl_al a
-    left join tbl_emp e     on a.emp_no = e.emp_no 
-    left join tbl_org o     on e.emp_no = o.emp_no 
-    left join tbl_code c    on a.al_approved = c.code_category||c.code_num
-    left join tbl_code c2   on o.branch_code = c2.code_category||c2.code_num 
-    left join tbl_code c3   on o.dept_code = c3.code_category||c3.code_num 
-    left join tbl_code c4   on o.rank_code = c4.code_category||c4.code_num
-    order by a.al_reg_date desc, e.emp_no
- 
+		select c2.code_value
+		branch_name,c3.code_value department_name,
+		c4.code_value
+		rank_name,e.emp_name, a.emp_no,
+		to_char(a.al_reg_date,'yyyy/mm/dd')
+		al_reg_date,
+		GET_CODE_VALUE(a.al_code) al_code, c.code_value
+		al_approved
+		from tbl_al a
+		left join tbl_emp e on a.emp_no = e.emp_no
+		left join tbl_org o on e.emp_no = o.emp_no
+		left join tbl_code c on
+		a.al_approved = c.code_category||c.code_num
+		left join tbl_code c2 on
+		o.branch_code = c2.code_category||c2.code_num
+		left join tbl_code c3 on
+		o.dept_code = c3.code_category||c3.code_num
+		left join tbl_code c4 on
+		o.rank_code = c4.code_category||c4.code_num
+		order by a.al_reg_date
+		desc, e.emp_no
+
 	</select>
 
+	<!-- 관리자가 보는 사원 각각의 근태 현황 목록 조회 -->
+	<select id="attend_info" resultType="attend.AttendVO">
+		select a.attend_date,
+		a.emp_no, a.attend_on,
+		a.attend_off,GET_CODE_VALUE(a.ATT_CODE)
+		ATT_STATE
+		from tbl_attend a
+		where a.emp_no = #{emp_no}
+		order by attend_date desc
+	</select>
 
 
 	<!-- 연차 신청 상태가 대기중인 경우 건수 -->
@@ -199,17 +218,39 @@
 		from tbl_al a
 		where a.al_code ='V1'
 	</select>
+	
+	<!-- 기타 신청 상태가 대기중인 경우 건수 -->
+	<select id="countOthers" resultType="integer">
+		select count (case when
+		a.al_approved='L0' then 1 end) AS W99
+		from tbl_al a
+		left join tbl_attend
+		t
+		on a.emp_no = t.emp_no
+		where t.att_code ='W99'
+	</select>
 
 
-
-	<!-- 신청한 사원의 승인 상태를 'L1'으로 업데이트 -->
-	<update id="updateL1">
-		update tbl_al
-		set al_approved ='L1'
-		where #{emp_no}
-	</update>
+	<!-- 일반 회원 모드 -->
 
 
+	<!-- 로그인한 회원이 신청할때 연차 코드 리스트 -->
+	<select id="code_list" resultType="common.SimpleCode">
+		select code_category||code_num
+		code, code_value
+		from tbl_code
+		where code_category='V'
+	</select>
+
+
+	<!-- 로그인한 사원이 업무 상태 수정 신청하기 -->
+	<insert id="edit_apply">
+		insert into
+		tbl_al(emp_no,al_reg_date,al_code,al_start_date,al_reason)
+		values
+		(#{emp_no},to_char(current_date,'yyyy/mm/dd'),#{al_code},to_date(
+		#{al_start_date},'yyyy/mm/dd'),#{al_reason})
+	</insert>
 
 
 
@@ -315,7 +356,7 @@ and attend_date > = to_char(current_date-7, 'yyyy/mm/dd')]]>
 and attend_date <= to_char(current_date, 'yyyy/mm/dd')
 and attend_date > = to_char(current_date-7, 'yyyy/mm/dd')]]>
 	</select>
-	<!-- 결근 및 연차 사용조회 목록 조회 -->
+	<!-- 결근 목록 조회 -->
 	<select id="code2list" resultType="attend.AttendVO">
 		select a.attend_date,
 		to_char(a.attend_on,'hh24:mi') attend_on,

@@ -85,7 +85,7 @@
 	color: #fd5c28;
 }
 
-#btn-search {
+#btn-search  {
 	background: none;
 	padding: 10px;
 	margin: -1px;
@@ -96,7 +96,17 @@
 	border: 0;
 }
 
+#btn-edit{
+	padding: 10px;
+	margin: -1px;
+	background: #f03c02;
+	color: #fff;
+	border-radius: 4px;
+	line-height: 0;
+	border: 0;
 }
+
+
 #btn {
 	border-color: #fff;
 	background-color: #fd5c28;
@@ -143,8 +153,8 @@
 					<li class="nav-item" role="presentation"><a
 						class="nav-link show" data-bs-toggle="tab" href="#tab-2"
 						aria-selected="false" role="tab" style="margin-top: 17px;">
-							<h4>근태 수정</h4>
-							<p>전체 사원의 근태 상황을 수정할 수 있습니다.</p>
+							<h4>업무 상태 수정</h4>
+							<p>업무 상태의 수정 신청 현황을 확인할 수 있습니다.</p>
 					</a></li>
 				</ul>
 			</div>
@@ -158,7 +168,6 @@
 						<figure>
 							<form method='post' action='admin_attend.at' id="list">
 								<input type='hidden' name='curPage' value='1'>
-
 								<div class="row justify-content-center aos-init aos-animate"
 									data-aos="fade-up" style="justify-content: center;"></div>
 								<div class="row" style="margin-top: 20px;">
@@ -200,8 +209,7 @@
 										<input type="text" class="w-px270" name="keyword" value=""
 											placeholder="사원의 이름을 입력하세요">
 										<button id="btn-search" type="submit"
-											style="margin-left: 5px;">
-											검색 <i class="bi bi-search"></i>
+											style="margin-left: 5px;">검색 <i class="bi bi-search"></i>
 										</button>
 									</div>
 								</div>
@@ -243,7 +251,7 @@
 														<td>${vo.branch_name}</td>
 														<td>${vo.department_name}</td>
 														<td>${vo.rank_name}</td>
-														<td>${vo.emp_name}</td>
+														<td><a href='attend_info.at?id=${vo.emp_no}'>${vo.emp_name}</a></td>
 														<td>${vo.attend_on}</td>
 														<td>${vo.attend_off}</td>
 														<td>${vo.att_state}</td>
@@ -268,24 +276,34 @@
 								<div class="col-lg-4 col-md-6">
 									<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 										data-aos-delay="200">
-										<div class="icon">
-											<i class="bi bi-alarm"></i>
+
+										<div class="row">
+											<p class="col-6">연차 신청 :</p>
+											<p class="col-2" style="color: #fd5c28;">${countV0}</p>
+											<p class="col-1">건</p>
 										</div>
-										<h3 class="title">
-											<a >연차 신청 : ${countV0}건</a>
-										</h3>
 									</div>
 								</div>
 								<!--반차 신청 건수  -->
 								<div class="col-lg-4 col-md-6">
 									<div class="icon-box aos-init aos-animate" data-aos="fade-up"
 										data-aos-delay="200">
-										<div class="icon">
-											<i class="bi bi-alarm"></i>
+										<div class="row">
+											<p class="col-6">반차 신청 :</p>
+											<p class="col-2" style="color: #fd5c28;">${countV1}</p>
+											<p class="col-1">건</p>
 										</div>
-										<h3 class="title">
-											<a>반차 신청 : ${countV1}건 </a>
-										</h3>
+									</div>
+								</div>
+								<!--기타 신청 건수  -->
+								<div class="col-lg-4 col-md-6">
+									<div class="icon-box aos-init aos-animate" data-aos="fade-up"
+										data-aos-delay="200">
+										<div class="row">
+											<p class="col-6">기타 신청 :</p>
+											<p class="col-2" style="color: #fd5c28;">${countOthers}</p>
+											<p class="col-1">건</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -295,16 +313,16 @@
 								<div class="col-12 card p-0">
 									<div class="card-body p-0">
 										<div class="table-responsive">
-											<table class='table table-hover text-center'>											
+											<table class='table table-hover text-center'>
 												<colgroup>
-													<col width='80px'>
+													<col width='90px'>
+													<col width='120px'>
+													<col width='120px'>
+													<col width='100px'>
 													<col width='100px'>
 													<col width='120px'>
 													<col width='100px'>
 													<col width='100px'>
-													<col width='80px'>
-													<col width='150px'>
-													<col width='130px'>
 												</colgroup>
 												<tr class='text-center'>
 													<th>지점명</th>
@@ -312,8 +330,9 @@
 													<th>직급명</th>
 													<th>이름</th>
 													<th>신청 날짜</th>
-													<th>신청 사유</th>
+													<th>신청 내용</th>
 													<th>승인 상태</th>
+													<th>빠른 수정</th>
 
 												</tr>
 												<c:forEach items='${page_al.al_list}' var='vo2'>
@@ -324,7 +343,7 @@
 														<td>${vo2.rank_name}</td>
 														<td>${vo2.emp_name}</td>
 														<td>${vo2.al_reg_date}</td>
-														<td>${vo2.al_reason}</td>
+														<td>${vo2.al_code}</td>													
 														<c:choose>
 															<c:when test="${vo2.al_approved eq 'false'}">
 																<td>미승인</td>
@@ -333,6 +352,7 @@
 																<td>승인</td>
 															</c:when>
 														</c:choose>
+														<td><button id="btn-edit">수정하기</button></td>
 
 
 													</tr>
@@ -377,6 +397,10 @@
 	$('[name=search_rank]').on('change', function() {
 		$('#list').attr('action', 'admin_attend.at');
 		$('#list').submit();
+	});
+	
+	$('.btn-edit').on('click', function() {
+		
 	});
 </script>
 

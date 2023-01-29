@@ -3,6 +3,7 @@ package co.kr.jkcompany;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -19,7 +21,11 @@ import attend.AlPageVO;
 import attend.AttendPageVO;
 import attend.AttendVO;
 import common.CommonService;
+import employee.EmployeePageVO;
+import employee.EmployeeVO;
 import login.LoginVO;
+import notice.NoticePageVO;
+import notice.NoticeVO;
 
 @Controller
 public class AttendController {
@@ -27,19 +33,71 @@ public class AttendController {
 	@Qualifier("hanul")
 	SqlSession sql;
 	@Autowired
-	private CommonService common;
+	private CommonService common;	
+	
 
-	// 관리자 모드 _ 페이지 처리
+	// 페이지 처리
 	public AttendPageVO attend_list(AttendPageVO page) {
 		page.setTotalList(sql.selectOne("at.total", page));
 		page.setList(sql.selectList("at.admin_attend", page));		
 		return page;
 	}
-
+	// 페이지 처리
 	public AlPageVO al_list(AlPageVO page_al) {
 		page_al.setAl_list(sql.selectList("at.al_list",page_al));
 		return page_al;
 	}
+	
+
+	
+	
+	//사원 근태 정보 상세보기
+	@RequestMapping(value = "/attend_info.at", produces = "text/html;charset=utf-8")
+	public String attend_info(HttpSession session, Model model) {
+	
+		return "at/attend_info";
+	}
+	
+	
+	// attend-정보 수정 창으로 이동
+	@RequestMapping("/attend_modify.at")
+	public String attend_modify(int id, Model model) {
+		AttendVO vo = sql.selectOne("at.attend_info", id);
+				
+		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
+		model.addAttribute("vo",vo);
+		return "at/attend_modify";
+	}
+	
+	//attend-정보 수정 저장하기 
+	
+	@RequestMapping("/updateAttendCode.at")
+	public String updateAttendCode(AttendVO vo) {
+		sql.update("at.updateAttendCode", vo);
+		// 응답화면연결
+		return "redirect:attend_info.at?id=" + vo.getEmp_no();
+	}
+
+	
+	
+	
+	// al-정보 수정 창으로 이동
+		@RequestMapping("/al_modify.at")
+		public String al_modify(int id, Model model) {
+			
+		
+			return "at/al_modify";
+		}
+		
+		//al-정보 수정 저장하기 
+		
+		@RequestMapping("/updateL1.at")
+		public String updateL1(AttendVO vo) {
+			sql.update("at.update", vo);
+			// 응답화면연결
+			return "redirect:al_info.at?id=" + vo.getEmp_no();
+		}	
+	
 	
 	// 관리자 모드_ 근태관리화면_전체 가져오기
 	@RequestMapping(value = "/admin_attend.at", produces = "text/html;charset=utf-8")
@@ -48,6 +106,7 @@ public class AttendController {
 		AlPageVO vo2 = al_list(page_al);
 		int countV0 = sql.selectOne("at.countV0");
 		int countV1 = sql.selectOne("at.countV1");
+		int countOthers = sql.selectOne("at.countOthers");
 		
 		
 		model.addAttribute("page", vo);
@@ -58,6 +117,7 @@ public class AttendController {
 		model.addAttribute("page_al",vo2);
 		model.addAttribute("countV0",countV0);
 		model.addAttribute("countV1",countV1);
+		model.addAttribute("countOthers",countOthers);
 	
 
 		return "attend/admin_attend";
