@@ -50,14 +50,7 @@ public class AttendController {
 	
 
 	
-	
-	//사원 근태 정보 상세보기
-	@RequestMapping(value = "/attend_info.at", produces = "text/html;charset=utf-8")
-	public String attend_info(HttpSession session, Model model) {
-	
-		return "at/attend_info";
-	}
-	
+
 	
 	// attend-정보 수정 창으로 이동
 	@RequestMapping("/attend_modify.at")

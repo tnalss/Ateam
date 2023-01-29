@@ -2,6 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="at">
 
+
+
+
+	<!--선택한 사원의 사원의 근무 코드 수정 -->
+	<update id="updateAttendCode">
+		UPDATE tbl_attend
+		SET att_code =#{att_code}
+		WHERE
+		emp_no= #{emp_no}
+	</update>
+
+
+
+	<!-- 신청한 사원의 승인 상태를 'L1':true 로 수정-->
+	<update id="updateL1">
+		update tbl_al
+		set al_approved ='L1'
+		where #{emp_no}
+	</update>
+
+
+
+
+	<!--관리자가 보는 연차 신청 현황 -->
+	<select id="al_list" resultType="attend.AttendVO">
+		select c2.code_value
+		branch_name,c3.code_value department_name,
+		c4.code_value
+		rank_name,e.emp_name, a.emp_no,
+		to_char(a.al_reg_date,'yyyy/mm/dd')
+		al_reg_date,
+		GET_CODE_VALUE(a.al_code) al_code, c.code_value
+		al_approved
+		from tbl_al a
+		left join tbl_emp e on a.emp_no = e.emp_no
+		left join tbl_org o on e.emp_no = o.emp_no
+		left join tbl_code c on
+		a.al_approved = c.code_category||c.code_num
+		left join tbl_code c2 on
+		o.branch_code = c2.code_category||c2.code_num
+		left join tbl_code c3 on
+		o.dept_code = c3.code_category||c3.code_num
+		left join tbl_code c4 on
+		o.rank_code = c4.code_category||c4.code_num
+		where no between ${beginList} and ${endList}
+		order by a.al_reg_date		desc, e.emp_no
+	</select>
+
+	<!-- 관리자가 보는 사원 각각의 근태 현황 목록 조회 -->
+	<select id="attend_info" resultType="attend.AttendVO">
+		select a.attend_date,
+		a.emp_no, a.attend_on,
+		a.attend_off,GET_CODE_VALUE(a.ATT_CODE)
+		ATT_STATE
+		from tbl_attend a
+		where a.emp_no = #{emp_no}
+		order by attend_date desc
+	</select>
+
+
+<!--  -->
+
 	<!-- 해당 날짜의 /지점별 /부서별 /직급별 직원의 출퇴근 상태 조회 -->
 	<select id="state_search" resultType="attend.AttendVO">
 		select a.attend_date ,c2.code_value branch_name ,c3.code_value
@@ -141,67 +203,6 @@
 		order by b.attend_date
 		desc
 	</select>
-
-
-
-	<!--선택한 사원의 사원의 근무 코드 수정 -->
-	<update id="updateAttendCode">
-		UPDATE tbl_attend
-		SET att_code =#{att_code}
-		WHERE
-		emp_no= #{emp_no}
-	</update>
-
-
-
-	<!-- 신청한 사원의 승인 상태를 'L1':true 로 업데이트 -->
-	<update id="updateL1">
-		update tbl_al
-		set al_approved ='L1'
-		where #{emp_no}
-	</update>
-
-
-
-
-	<!--관리자가 보는 연차 신청 현황 -->
-	<select id="al_list" resultType="attend.AttendVO">
-		select c2.code_value
-		branch_name,c3.code_value department_name,
-		c4.code_value
-		rank_name,e.emp_name, a.emp_no,
-		to_char(a.al_reg_date,'yyyy/mm/dd')
-		al_reg_date,
-		GET_CODE_VALUE(a.al_code) al_code, c.code_value
-		al_approved
-		from tbl_al a
-		left join tbl_emp e on a.emp_no = e.emp_no
-		left join tbl_org o on e.emp_no = o.emp_no
-		left join tbl_code c on
-		a.al_approved = c.code_category||c.code_num
-		left join tbl_code c2 on
-		o.branch_code = c2.code_category||c2.code_num
-		left join tbl_code c3 on
-		o.dept_code = c3.code_category||c3.code_num
-		left join tbl_code c4 on
-		o.rank_code = c4.code_category||c4.code_num
-		order by a.al_reg_date
-		desc, e.emp_no
-
-	</select>
-
-	<!-- 관리자가 보는 사원 각각의 근태 현황 목록 조회 -->
-	<select id="attend_info" resultType="attend.AttendVO">
-		select a.attend_date,
-		a.emp_no, a.attend_on,
-		a.attend_off,GET_CODE_VALUE(a.ATT_CODE)
-		ATT_STATE
-		from tbl_attend a
-		where a.emp_no = #{emp_no}
-		order by attend_date desc
-	</select>
-
-
 	<!-- 연차 신청 상태가 대기중인 경우 건수 -->
 
 	<select id="countV0" resultType="integer">
@@ -229,9 +230,6 @@
 		on a.emp_no = t.emp_no
 		where t.att_code ='W99'
 	</select>
-
-
-	<!-- 일반 회원 모드 -->
 
 
 	<!-- 로그인한 회원이 신청할때 연차 코드 리스트 -->
