@@ -14,7 +14,7 @@ order by ea_date desc
 
 <!-- 전자결재 파일첨부 불러오기 -->
 <select id="file_select_all" resultType="ea.EaFileVO">
-select * from tbl_ea_file
+select * from tbl_ea_file order by file_no
 </select>
 
 <!-- 전자결재 파일첨부 불러오기 -->

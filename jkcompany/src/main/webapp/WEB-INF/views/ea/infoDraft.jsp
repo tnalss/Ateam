@@ -33,6 +33,9 @@ img{
 	width:100%;
 	height:5rem;
 }
+.btm_btn{
+	float: right;
+}
 </style>
 <main id="main">
 
@@ -198,9 +201,10 @@ img{
  									${list.ea_a_date}
  									<img alt="반려" src="assets/img/ea_stamp_denied.png">							
  								</c:when>
+ 								<c:otherwise>
+ 									<p>${list.ea_r_statuas}<p>
+ 								</c:otherwise>
                     		</c:choose>
- 							${list.ea_r_statuas eq '결재완료' ? list.ea_a_date :''}
- 							<p>${list.ea_r_statuas}<p>
                     	</div>
                 	</div>
 				</c:forEach>
@@ -216,6 +220,10 @@ img{
  						<td></td>  
 					</tr>
 				</table>
+				<div class="btm_btn">
+					<a class="btn icon-btn btn-warning" href="#" onclick="retry(${map['ea_num']});">회수</a>
+					<a class="btn icon-btn btn-danger" href="#" onclick="ea_delete(${map['ea_num']});">삭제</a>
+				</div>
 			</div>
 		</div>
 
@@ -227,3 +235,21 @@ img{
 
 </main>
 <!-- End #main -->
+<script>
+function retry(a){
+    if(confirm("회수하시겠습니까?")){
+        location.href = "update_status.ea?ea_num="+a+"&ea_status=E4";
+        return true;
+    } else {
+        return false;
+    }
+}
+function ea_delete(b){
+    if(confirm("삭제하시겠습니까?")){
+        location.href = "delete.ea?ea_num="+b+"&ea_status=E4";
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>

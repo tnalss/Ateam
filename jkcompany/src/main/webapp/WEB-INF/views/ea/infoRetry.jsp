@@ -29,6 +29,9 @@ table td:last-child {
 card-deck .card-title{
 	margin-top: .7rem;
 }
+.btm_btn{
+	float: right;
+}
 </style>
 <main id="main">
 
@@ -202,6 +205,10 @@ card-deck .card-title{
  						<td></td>  
 					</tr>
 				</table>
+				<div class="btm_btn">
+					<a class="btn icon-btn btn-warning" href="#" onclick="draft(${map['ea_num']});">상신</a>
+					<a class="btn icon-btn btn-danger" href="#" onclick="ea_delete(${map['ea_num']});">삭제</a>
+				</div>
 			</div>
 		</div>
 
@@ -213,3 +220,22 @@ card-deck .card-title{
 
 </main>
 <!-- End #main -->
+
+<script>
+function draft(a){
+    if(confirm("상신하시겠습니까?")){
+        location.href = "update_status.ea?ea_num="+a+"&&ea_status=E0";
+        return true;
+    } else {
+        return false;
+    }
+}
+function ea_delete(b){
+    if(confirm("삭제하시겠습니까?")){
+        location.href = "delete.ea?ea_num="+b+"&&ea_status=E";
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>

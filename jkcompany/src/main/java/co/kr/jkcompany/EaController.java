@@ -21,6 +21,7 @@ import common.SimpleCode;
 import ea.EaFileVO;
 import ea.EaVO;
 import employee.EmployeePageVO;
+import employee.EmployeePageVO2;
 import employee.EmployeeVO;
 import login.LoginVO;
 
@@ -57,12 +58,12 @@ public class EaController {
 
 	// 전자결재 상신작성 화면
 	@RequestMapping(value = "/write.ea", produces = "text/html;charset=utf-8")
-	public String ea_write(Model model, EmployeePageVO page) {
+	public String ea_write(Model model, EmployeePageVO2 page) {
 		
 		List<SimpleCode> doc_list = sql.selectList("emp.codeList", "P");
 		model.addAttribute("doc_list", doc_list);
 		
-		EmployeePageVO vo = emp_list(page);
+		EmployeePageVO2 vo = emp_list(page);
 		model.addAttribute("page", vo );
 		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
 		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
@@ -72,11 +73,12 @@ public class EaController {
 	// 전자결재 상신작성 화면
 		@ResponseBody
 		@RequestMapping(value = "/write_sign_list.ea", produces = "text/html;charset=utf-8")
-		public String ea_write_sign_list(EmployeePageVO page, int eapage) {
+		public String ea_write_sign_list(EmployeePageVO2 page, int eapage) {
 			
 
 			page.setCurPage(eapage);
-			EmployeePageVO vo = emp_list(page);
+			
+			EmployeePageVO2 vo = emp_list(page);
 			//model.addAttribute("page", vo );
 			// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
 			// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
@@ -86,7 +88,7 @@ public class EaController {
 
 
 	// 페이지 처리
-	public EmployeePageVO emp_list(EmployeePageVO page) {
+	public EmployeePageVO2 emp_list(EmployeePageVO2 page) {
 		page.setTotalList( sql.selectOne("emp.total", page) ); 
 		page.setList( sql.selectList("emp.plist", page) );
 		return page;
@@ -156,7 +158,7 @@ public class EaController {
 
 		//문서대장
 		@RequestMapping(value="/document.ea", produces="text/html;charset=utf-8")
-		public String ea_document(Model model) {
+		public String ea_document(Model model, String mode) {
 			List<EaFileVO> flist = sql.selectList("ea.file_select_all");
 			model.addAttribute("flist",flist);
 			return "ea/document";
@@ -228,19 +230,22 @@ public class EaController {
 		@ResponseBody
 		@RequestMapping(value="/update_statuas.ea")
 		public boolean ea_status_update(String ea_r_statuas, String ea_receiver, String ea_num, String total) {
+			int cnt=0;
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("ea_num", ea_num);
 			m.put("ea_status", ea_r_statuas);
 			m.put("emp_no", ea_receiver);
-			int cnt = sql.selectOne("ea.howManySigned", ea_num);
-			if(total.equals(cnt+"")) {
-				sql.update("ea.allSignComplete",ea_num);
-			}
+			
 			if(ea_r_statuas.equals("E2")) {
 				sql.update("ea.statuas_update",m);
 			}
-			if (sql.update("ea.sign_status", m) > 0)
+			if (sql.update("ea.sign_status", m) > 0) {
+				cnt = sql.selectOne("ea.howManySigned", ea_num);
+				if(total.equals(cnt+"")) {
+					sql.update("ea.allSignComplete",ea_num);
+				}
 				return true;
+			}
 			return false;
 		}
 		

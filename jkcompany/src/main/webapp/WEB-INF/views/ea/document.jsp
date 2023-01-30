@@ -117,26 +117,11 @@ select {
 				<div class="div1">
 					<div class="container">
 						<div class="row">
-							<div class="col-2">
-								<ul>
-									<li><select name='search' class='w-px100'>
-											<option value='all'>전체</option>
-											<option value='title'>제목</option>
-											<option value='content'>내용</option>
-											<option value='writer'>작성자</option>
-									</select></li>
-								</ul>
-							</div>
-							<div class="col-7">
-								<input class="form-control-lg d-inline float-left" type="text"
-									name="Youtube-url" required="" placeholder="검색할 단어를 입력하세요."
-									style="width: 100%; height: 36px;">
-							</div>
-							<div class="col">
-								<button class="btn btn-primary" type="button"
-									style="width: 150px; height: 36px;">
-									검색  <i class="icon ion-ios-arrow-thin-down"></i>
-								</button>
+							<div class="col-3">
+							 <a href="javascript:search('all')">전체</a> |
+							 <a href="javascript:search('stand')">표준</a> |
+							 <a href="javascript:search('work')">업무</a> |
+							 <a href="javascript:search('prod')">물품</a>
 							</div>
 						</div>
 					</div>
@@ -147,7 +132,7 @@ select {
 						<div class="container">
 							<div class="row">
 								<div class="col-1 d-inline float-none align-self-center">
-									<p>1</p>
+									<p>${vo.file_no}</p>
 								</div>
 								<div class="col-8">
 									<p>
@@ -156,9 +141,9 @@ select {
 									<p>파일명 | 2023-01-22</p>
 								</div>
 								<div class="col-1 align-self-center">
-									<button class="btn btn-primary" type="button"
-										style="width: 150px; height: 36px;">
-										다운로드  <i class="icon ion-ios-arrow-thin-down"></i>
+									<button class="btn btn-primary" type="button" onclick="location='${vo.file_path}'"
+										style="width: 110px; height: 40px;">
+										다운로드
 									</button>
 								</div>
 							</div>
@@ -174,4 +159,10 @@ select {
 
 
 </main>
+<script>
+function search(a){
+	
+}
+
+</script>
 <!-- End #main -->

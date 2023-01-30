@@ -363,8 +363,6 @@ textarea {
 									</div>
 									<button class="btn btn-primary nextBtn btn-lg pull-right asdf"
 										type="button">다음</button>
-									<button class="btn btn-primary prevBtn btn-lg pull-left"
-										type="button">이전</button>
 								</div>
 							</div>
 						</div>
