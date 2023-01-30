@@ -95,17 +95,19 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
 
         activity = (MainActivity) getActivity();
 
-        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)) {
-            Log.d("TAG", "onActivityResult: ");
-        }else{
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-            intent.setData(uri);
-            startActivity(intent);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R ) {
+
+            if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)) {
+                Log.d("TAG", "onActivityResult: ");
+            } else {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+
         }
-
-
         my_alert = new AlertDialog.Builder(getContext());
         line_vacation = v.findViewById(R.id.line_vacation);
         recv_sign_add = v.findViewById(R.id.recv_sign_add);

@@ -32,7 +32,7 @@ public class CommonService {
 	
 	public String fileUpload(String category, MultipartFile file, HttpServletRequest request) {
 		
-		String path = "/Users/parkcj/Documents/app"+request.getContextPath();
+		String path = "D://app"+request.getContextPath();
 		String upload = "/upload/"+category+"/"+ new SimpleDateFormat("yyyy_MM_dd").format(new Date()) ;
 		
 		path+=upload;

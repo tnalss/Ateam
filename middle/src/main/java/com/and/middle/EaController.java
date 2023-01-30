@@ -50,6 +50,10 @@ public class EaController {
 		map.put("ea_status", ea_status);
 		map.put("ea_num", ea_num);
 		sql.update("ea.sign_status", map);
+		if(ea_status.equals("E2")) {
+			map.put("status", ea_status);
+			sql.update("ea.status_update", map);
+		}
 		
 	}
 	//회수함에서 상신 업데이트
