@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.h-px80 {
-height: 80px;
+.h-px100 {
+height: 100px;
 }
 .h-px500 {
 height: 400px;
@@ -86,7 +86,7 @@ height: 400px;
                 <p class="card-text  reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content } </p>
                 	<input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                <input type="text" class="w-px800 h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none; margin-left: -30px;"/>
+                <textarea name="reply_content" style="display: none; margin-left: -30px;" class="w-px800 h-px100 reply_incontent${ num.count}">${fn: replace(  fn:replace( reply.reply_content, lf, '<br>' )  , crlf, '<br>')} </textarea>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"

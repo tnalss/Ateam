@@ -91,11 +91,11 @@ height: 220px;
               </div>
               <div class="col-9">
                 <div class="card-body"> 
-                  <p class="card-text reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content }</p>
+                  <p class="card-text reply_content${ num.count}" style="margin-left: -30px;">${fn: replace(  fn:replace( reply.reply_content, lf, '<br>' )  , crlf, '<br>')}</p>
                   <input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                   <input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                    <input type="text" class="h-px80 w-px300 text-start reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
+                	<textarea name="reply_content" style="display: none; margin-left: -30px;" class="w-px300 reply_incontent${ num.count}">${fn: replace(  fn:replace( reply.reply_content, lf, '<br>' )  , crlf, '<br>')} </textarea>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"

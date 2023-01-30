@@ -32,6 +32,8 @@ public class NoticeController {
 	public String update(ReplyVO vo, Model model) {
 		sql.update("re.reply_update", vo);
 		// model.addAttribute("board_no", );
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "redirect:info.no?id=" + vo.getBoard_no();
 	}
 
