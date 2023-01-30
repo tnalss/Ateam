@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <!-- 이 파일을 탬플릿으로 만들어 쓰시면 됩니다. -->
 <style>
-.h-px80 {
-height: 80px;
+.h-px100 {
+height: 100px;
 }
 .h-px500 {
 height: 400px;
@@ -86,17 +86,18 @@ height: 400px;
                 <p class="card-text  reply_content${ num.count}" style="margin-left: -30px;">${reply.reply_content } </p>
                 	<input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                <input type="text" class="w-px800 h-px80 reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none; margin-left: -30px;"/>
+                <textarea name="reply_content" style="display: none; margin-left: -30px;" class="w-px800 h-px100 reply_incontent${ num.count}">${fn: replace(  fn:replace( reply.reply_content, lf, '<br>' )  , crlf, '<br>')} </textarea>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${reply.reply_create_date}" /></p>
-				<div id="modify_off${num.count }" >			
 					<!-- 수정 전 화면 -->		
+				<c:if test='${loginInfo.emp_no eq reply.emp_no}'>
+				<div id="modify_off${num.count }" >			
                 <a class='btn btn-primary modify_reply' href="javascript:modify_reply(${num.count})">수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
-				
+				</c:if>
 				<div id="modify_on${num.count }" style="display: none">
 				<!-- 수정 화면 -->		
 					<a class='btn btn-primary'  href="javascript:modify_ok(${num.count})">저장</a>
