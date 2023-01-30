@@ -33,20 +33,13 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <ImageView
-            android:layout_toLeftOf="@+id/iv_burger"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:id="@+id/ic_back"
             android:src="@drawable/ic_back_c"
             android:layout_width="25dp"
             android:layout_height="25dp"   />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/iv_burger"
-            android:src="@drawable/ic_menu_c"
-            android:layout_width="25dp"
-            android:layout_height="25dp"   />
+
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout

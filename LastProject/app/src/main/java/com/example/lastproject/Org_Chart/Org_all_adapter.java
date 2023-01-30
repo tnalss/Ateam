@@ -47,6 +47,9 @@ public class Org_all_adapter extends RecyclerView.Adapter<Org_all_adapter.ViewHo
         if(list.get(position).getProfile_path()!=null){
             Glide.with(activity).load(list.get(position).getProfile_path()).error(R.drawable.error_user_profile).into(holder.iv_emp_profile);
         }
+        if(list.get(position).getBranch_name()!=null){
+
+        }
 
 
     }

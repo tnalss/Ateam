@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import Attend.AttendAdminVO;
 import al.AlVO;
 
 @RestController
@@ -26,6 +28,8 @@ public class AlController {
 		return new Gson().toJson(list).toString();
 	}
 	
+	
+	
 	//로그인한 사원의 휴가 신청  처리
 	@RequestMapping(value="/al_v_a.al", produces="text/html;charset=utf-8")
 	public String al_v0(String emp_no, String al_start_date , String al_end_date, String al_code) {
@@ -40,8 +44,7 @@ public class AlController {
 	}		
 
 
-		
-		
+	
 	
 	
 }

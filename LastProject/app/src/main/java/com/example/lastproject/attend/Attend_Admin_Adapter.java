@@ -43,10 +43,31 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.tv_emp_name.setText(list.get(position).getEmp_name());
-        holder.tv_emp_branch.setText(list.get(position).getBranch_name());
-        holder.tv_emp_dep.setText(list.get(position).getDepartment_name());
-        holder.tv_emp_rank.setText(list.get(position).getRank_name());
+        if(list.get(position).getEmp_name()!= null){
+            holder.tv_emp_name.setText(list.get(position).getEmp_name());
+        }else {
+            holder.tv_emp_name.setVisibility(View.GONE);
+        }
+
+        if(list.get(position).getBranch_name()!= null){
+            holder.tv_emp_branch.setText(list.get(position).getBranch_name());
+        } else{
+            holder.tv_emp_branch.setVisibility(View.GONE);
+        }
+
+
+        if(list.get(position).getDepartment_name()!=null){
+            holder.tv_emp_dep.setText(list.get(position).getDepartment_name());
+        }else {
+            holder.tv_emp_dep.setVisibility(View.GONE);
+        }
+
+        if(list.get(position).getRank_name()!=null) {
+            holder.tv_emp_rank.setText(list.get(position).getRank_name());
+        }else {
+            holder.tv_emp_rank.setVisibility(View.GONE);
+        }
+
         if(list.get(position).getProfile_path()!=null){
             Glide.with(activity).load(list.get(position).getProfile_path()).error(R.drawable.error_user_profile).into(holder.iv_emp_profile);
         }
@@ -54,27 +75,32 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
         if(list.get(position).getAttend_date()!=null){
             holder.date.setText(list.get(position).getAttend_date().substring(0,10));
         }else {
-            holder.date.setVisibility(View.GONE);
+            holder.date.setText("");
         }
 
         if(list.get(position).getAttend_on()!=null) {
-            holder.on.setText("출근"+list.get(position).getAttend_on().substring(11, 16));
+            holder.on.setText("출근 "+list.get(position).getAttend_on().substring(11, 16));
+        } else {
+            holder.on.setText(" ");
         }
 
 
         if(list.get(position).getAttend_off()!=null) {
-            holder.off.setText("퇴근"+list.get(position).getAttend_off().substring(11, 16));
+            holder.off.setText("퇴근 "+list.get(position).getAttend_off().substring(11, 16));
+        }else {
+            holder.off.setText(" ");
         }
 
         
         if(  list.get(position).getWork_time()!=null){
             holder.now.setText(list.get(position).getWork_time()+"시간");
-        }
-        if(list.get(position).getAtt_state()!= null)
-        {
-            //holder.status.setText(list.get(position).getAtt_state());
+        }else {
+            holder.now.setText(" ");
         }
 
+        if(list.get(position).getAtt_state() != null) {
+            holder.status.setText(list.get(position).getAtt_state());
+        } holder.status.setVisibility(View.GONE);
     }
 
     @Override
@@ -98,7 +124,7 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
             on= v.findViewById(R.id.on);
             off=v.findViewById(R.id.off);
             now = v.findViewById(R.id.now);
-            //status = v.findViewById(R.id.status);
+            status = v.findViewById(R.id.status);
 
 
 

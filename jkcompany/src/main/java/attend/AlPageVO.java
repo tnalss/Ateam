@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class AttendPageVO extends PageVO{
-	public List<AttendVO> list;
-	
+public class AlPageVO extends PageVO{	
+	public List<AttendVO> al_list;
 }
