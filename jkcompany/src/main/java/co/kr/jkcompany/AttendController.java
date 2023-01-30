@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import attend.AlPageVO;
 import attend.AttendPageVO;
 import attend.AttendVO;
 import common.CommonService;
@@ -26,24 +27,97 @@ public class AttendController {
 	@Qualifier("hanul")
 	SqlSession sql;
 	@Autowired
-	private CommonService common;
+	private CommonService common;	
+	
 
-	// 관리자 모드 _ 페이지 처리
+	// 페이지 처리
 	public AttendPageVO attend_list(AttendPageVO page) {
 		page.setTotalList(sql.selectOne("at.total", page));
-		page.setList(sql.selectList("at.admin_attend", page));
+		page.setList(sql.selectList("at.admin_attend", page));		
 		return page;
 	}
+	// 페이지 처리
+	public AlPageVO al_list(AlPageVO page_al) {
+		page_al.setAl_list(sql.selectList("at.al_list",page_al));
+		return page_al;
+	}
+	
 
+	
+
+	
+	// attend-정보 수정 창으로 이동
+	@RequestMapping("/attend_modify.at")
+	public String attend_modify(int id, Model model) {
+		AttendVO vo = sql.selectOne("at.attend_info", id);
+				
+		
+		model.addAttribute("vo",vo);
+		return "attend/attend_modify";
+	}
+	
+	//attend-정보 수정 저장하기 
+	
+//	@RequestMapping("/updateAttendCode.at")
+//	public String updateAttendCode(AttendVO vo) {
+//		sql.update("at.updateAttendCode", vo);
+//		// 응답화면연결
+//		return "redirect:attend_info.at?id=" + vo.getEmp_no();
+//	}
+
+	@ResponseBody @RequestMapping("/attend_state_update.at")
+	public boolean attend_state_update (AttendVO vo ) {
+		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
+	}
+	
+	@RequestMapping("/attend_info.at")
+	public String attend_info (String id, Model model ) {
+		List<AttendVO> vo = sql.selectList("at.attend_info", id);
+		model.addAttribute("info",vo);
+		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
+		return "attend/attend_info";
+	}
+	
+	
+	
+	// al-정보 수정 창으로 이동
+		@RequestMapping("/al_modify.at")
+		public String al_modify(int id, Model model) {
+			
+		
+			return "attend/al_modify";
+		}
+		
+		//al-정보 수정 저장하기 
+		
+		@RequestMapping("/updateL1.at")
+		public String updateL1(AttendVO vo) {
+			sql.update("at.update", vo);
+			// 응답화면연결
+			return "redirect:al_info.at?id=" + vo.getEmp_no();
+		}	
+	
+	
 	// 관리자 모드_ 근태관리화면_전체 가져오기
 	@RequestMapping(value = "/admin_attend.at", produces = "text/html;charset=utf-8")
-	public String admin_attend(HttpSession session, Model model, AttendPageVO page) {
+	public String admin_attend(HttpSession session, Model model, AttendPageVO page, AlPageVO page_al) {
 		AttendPageVO vo = attend_list(page);
+		AlPageVO vo2 = al_list(page_al);
+		int countV0 = sql.selectOne("at.countV0");
+		int countV1 = sql.selectOne("at.countV1");
+		int countOthers = sql.selectOne("at.countOthers");
+		
+		
 		model.addAttribute("page", vo);
-
 		model.addAttribute("branches", sql.selectList("emp.codeList", 'B'));
 		model.addAttribute("departments", sql.selectList("emp.codeList", 'D'));
 		model.addAttribute("ranks", sql.selectList("emp.codeList", 'R'));
+		
+		model.addAttribute("page_al",vo2);
+		model.addAttribute("countV0",countV0);
+		model.addAttribute("countV1",countV1);
+		model.addAttribute("countOthers",countOthers);
+	
 
 		return "attend/admin_attend";
 	}
@@ -55,7 +129,6 @@ public class AttendController {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		HashMap<String, String> tempMap = new HashMap<String, String>();
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());
-
 		List<AttendVO> list = sql.selectList("at.list_7days", vo.getEmp_no());
 		int code = sql.selectOne("at.codeW4", vo.getEmp_no());
 		int code2 = sql.selectOne("at.codeW3", vo.getEmp_no());
@@ -180,4 +253,12 @@ public class AttendController {
 
 		return "redirect:my_attend_edit.at";
 	}
+	
+	// 수정 취소하기
+		@RequestMapping(value = "/edit_apply_cancel.at", produces = "text/html;charset=utf-8")
+		public String edit_apply_cancel(HttpSession session, Model model, String emp_no, String date, String al_type,
+				String message) {
+			
+			return "redirect:my_attend_edit.at";
+		}
 }

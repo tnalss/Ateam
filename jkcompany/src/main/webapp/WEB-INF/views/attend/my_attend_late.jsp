@@ -89,15 +89,7 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="sidebar">
-							<h3 class="sidebar-title">Search</h3>
-							<div class="sidebar-item search-form">
-								<form action="">
-									<input type="text">
-									<button type="submit">
-										<i class="bi bi-search"></i>
-									</button>
-								</form>
-							</div>
+							
 							<h3 class="sidebar-title">목록</h3>
 							<div class="sidebar-item categories">
 								<ul>
