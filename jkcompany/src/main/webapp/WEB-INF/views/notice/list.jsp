@@ -44,12 +44,11 @@ background-color: #ac75bd;
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
 	<section id="" class="container">
-	
-		<div id='list-top'>
-			<button type="button" class="btn btn-primary mb-3"
-				onclick="location='new.no'">글 작성</button>
-		</div>
 		
+		<div id='list-top'>
+			<c:if test = "${loginInfo.admin eq 'L1' }" ><button type="button" class="btn btn-primary mb-3"
+				onclick="location='new.no'">글 작성</button></c:if>
+		</div>
 		<!-- 검색 -->
 		<form method='post' action='list.no' id="list">
 			<div id='list-top mt-3' class='w-px1200'>

@@ -32,6 +32,8 @@ public class NoticeController {
 	public String update(ReplyVO vo, Model model) {
 		sql.update("re.reply_update", vo);
 		// model.addAttribute("board_no", );
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
 		return "redirect:info.no?id=" + vo.getBoard_no();
 	}
 
@@ -107,8 +109,8 @@ public class NoticeController {
 	// 제목으로 상세내용
 	@RequestMapping(value = "/info.no", produces = "text/html;charset=utf-8")
 	public String notice_info(String id, Model model) {
-		NoticeVO vo = sql.selectOne("no.info", id);
 		sql.update("no.hits", id);
+		NoticeVO vo = sql.selectOne("no.info", id);
 		List<ReplyVO> reply = sql.selectList("re.reply_list", id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("notice", reply);

@@ -43,7 +43,7 @@
 		      			<input type="text" class="form-control rounded-left" id="id" placeholder="ID" required>
 		      		</div>
 	            <div class="form-group d-flex">
-	              <input type="password" class="form-control rounded-left" id="pw" placeholder="Password" required>
+	              <input type="password" class="form-control rounded-left" id="pw"  placeholder="Password" required>
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
@@ -57,7 +57,7 @@
 								</div>
 	            </div>
 	            <div class="form-group">
-	            	<a class="login btn btn-primary rounded submit p-3 px-5">로그인</a>
+	            	<a class="login btn btn-primary rounded submit p-3 px-5" id="login_on">로그인</a>
 	            </div>
 	          </form>
 	        </div>
@@ -68,6 +68,12 @@
 	</section>
 
  <script>
+$('#pw').keydown(function(e){
+	if(e.keyCode == 13) {
+	login();
+	}
+}) ;
+ 
  $('.login').click(function(){
 		login();
 	});
