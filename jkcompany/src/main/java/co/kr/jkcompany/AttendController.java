@@ -47,6 +47,7 @@ public class AttendController {
 	@RequestMapping("/attend_info.at")
 	public String attend_info (String id, Model model ) {
 		List<AttendVO> vo = sql.selectList("at.attend_info", id);
+		model.addAttribute("emp_name",vo.get(0).getEmp_name());
 		model.addAttribute("info",vo);
 		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
 		return "attend/attend_info";
@@ -57,22 +58,20 @@ public class AttendController {
 	public boolean attend_state_update (AttendVO vo ) {
 		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
 	}
-	
-
-	
+		
 		
 
 		@RequestMapping("/al_info.at")
 		public String al_info(String id, Model model) {
 			List<AttendVO> vo = sql.selectList("at.al_info", id);
-			model.addAttribute("info",vo);
-			model.addAttribute("attend", sql.selectList("emp.codeList", 'V'));		
+			model.addAttribute("info",vo);			
+			model.addAttribute("al", sql.selectList("emp.codeList", 'V'));		
 			return "attend/al_info";
 		}
 		
-		@ResponseBody @RequestMapping("/updateL1.at")
-		public boolean updateL1 (AttendVO vo ) {
-			return sql.update("at.updateL1", vo) ==1 ? true : false;
+		@ResponseBody @RequestMapping("/updateAlCode.at")
+		public boolean updateAlCode (AttendVO vo ) {
+			return sql.update("at.updateAlCode", vo) ==1 ? true : false;
 		}
 			
 		
@@ -168,7 +167,8 @@ public class AttendController {
 	public String my_attend_edit(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		// model.addAttribute("status", status);
-		model.addAttribute("att_code", sql.selectList("at.code_list", 'A'));
+		
+		model.addAttribute("al", sql.selectList("emp.codeList", 'V'));
 		return "attend/my_attend_edit";
 	}
 
@@ -226,7 +226,7 @@ public class AttendController {
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("emp_no", emp_no);
-		map.put("al_start_date", date);
+		map.put("al_start_date", date);	
 		map.put("al_code", al_type);
 		map.put("al_reason", message);
 		

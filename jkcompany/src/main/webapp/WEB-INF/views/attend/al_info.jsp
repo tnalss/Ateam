@@ -53,36 +53,23 @@
 							<tr class='text-center'>
 								<th>날짜</th>								
 								<th>업무상태</th>
-								<th>변경할 업무 상태</th>
 								<th>연차 변경</th>
 							</tr>
 							<c:forEach items='${info}' var='vo'>
 								<tr style="margin: 20px;">
-									<td>${vo.attend_date}</td>									
-									<td>${vo.att_state}</td>
+									<td>${vo.al_reg_date}</td>									
+									<td>${vo.att_state}</td>																		
 									<td>
 									<select class="form-select" name='search_att'
 										aria-label="Default select example">
 											<option value="-1">변경할 업무 상태</option>
-											<c:forEach items="${attend}" var="a">
+											<c:forEach items="${al}" var="a">
 												<option
-													<c:if test ="${vo.att_code eq a.code}">selected="selected"</c:if>
+													<c:if test ="${vo.al_code eq a.code}">selected="selected"</c:if>
 													value="${a.code}">${a.code_value}</option>
 											</c:forEach>
 									</select>
-									</td>
-											<td>
-									<select class="form-select" name='search_al'
-										aria-label="Default select example">
-											<option value="-1">변경할 업무 상태</option>
-											<c:forEach items="${al}" var="l">
-												<option
-													<c:if test ="${vo.al_code eq l.code}">selected="selected"</c:if>
-													value="${l.code}">${l.code_value}</option>
-											</c:forEach>
-									</select>
-									</td>
-
+									</td>									
 								</tr>
 							</c:forEach>
 						</table>

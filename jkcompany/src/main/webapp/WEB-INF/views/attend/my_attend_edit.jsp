@@ -55,7 +55,7 @@
 				<h2>근태 관리</h2>
 			<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
-					<li>나의 출·퇴근</li>
+					<li><a href="myattend.at">나의 출·퇴근</a></li>
 			</ol>
 			</div>
 		</div>
@@ -74,7 +74,7 @@
 							id="me">${loginInfo.rank_name}님의</a>
 					</div>
 					<h2 class="entry-title">
-						<a>업무 상태 수정 신청</a>
+						<a>연차 신청 및 수정 신청</a>
 					</h2>
 					<form action="edit_apply.at" method="post" role="form" id="edit_apply"
 						class="php-email-form">
@@ -84,7 +84,7 @@
 								<input class="form-control" id="inputDate" type="date" name="date"
 									placeholder="날짜 선택">
 								<fmt:formatDate value="${al_start_date}" pattern="yyyy/MM/dd" />	
-							</div>
+							</div>							
 							<div class="col-md-4 form-group mt-2 mt-md-0 ">
 							<div  class="form-control status"> 업무 상태</div>
 							<!-- 날짜를 선택하면 해당 날짜의 로그인한 사원의 업무 상태 뜨도록  -->							
@@ -94,8 +94,8 @@
 							<div class="col-md-2 form-group mt-2 mt-md-0">
 								<select class="form-select" name='al_type'
 									aria-label="Default select example">
-									<option value="-1">업무 상태</option>
-									<c:forEach items="${att_code}" var="a">
+									<option value="-1">선택하세요</option>
+									<c:forEach items="${al}" var="a">
 										<option
 											<c:if test ="${a.code eq page.search_code}">selected="selected"</c:if>
 											value="${a.code}">${a.code_value}</option>
@@ -108,14 +108,10 @@
 								<textarea class="form-control" name="message" rows="5"
 									placeholder="신청 사유를 입력하세요">${vo.al_reason}</textarea>
 							</div>						
-							<div class="my-3">
-								<div class="loading"></div>
-								<div class="error-message"></div>
-								<div class="sent-message"></div>
-							</div>
+							
 							<div class="text-center ">
-								<button type="submit" class="submit_apply">신청하기</button>
-								<button type="submit" id="submit_cancel">취소하기</button> 
+								<button class="submit_apply">신청하기</button>
+								<button  id="submit_cancel" onclick="history.go(-1);">돌아가기</button> 
 							</div>
 						</div>
 					</form>
@@ -153,12 +149,11 @@ $('[name=date]').on('change', function() {
 
     $(".submit_apply").click(function () {      
        $('#edit_apply').submit();
+            alert('신청이 완료되었습니다.')
+            location.href  ='myattend';
             
     });
     
-    $(".submit_cancel").click(function(){
-    	
-    })
 
 
 

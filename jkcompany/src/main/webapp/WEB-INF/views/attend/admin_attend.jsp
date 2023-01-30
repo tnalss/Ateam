@@ -269,7 +269,7 @@
 					</div>
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
-						
+
 							<!--수정신청 조회 화면 -->
 							<div class="row">
 								<!--연차 신청 건수   -->
@@ -306,7 +306,7 @@
 										</div>
 									</div>
 								</div>
-							</div>						
+							</div>
 							<!--신청 목록 화면 보이게 -->
 							<!--클릭시  사원의 출근 날짜, 시간, 현황 보이게 하고 W99(신청)에서 선택 코드로 바꾸는 업데이트처리  -->
 							<div class="row mt-3">
@@ -322,7 +322,7 @@
 													<col width='100px'>
 													<col width='120px'>
 													<col width='100px'>
-													
+
 												</colgroup>
 												<tr class='text-center'>
 													<th>지점명</th>
@@ -332,32 +332,30 @@
 													<th>신청 날짜</th>
 													<th>신청 내용</th>
 													<th>승인 상태</th>
-													
-
-												</tr>
-													<c:if test='${empty page.list}'>
-													<tr>
-														<td colspan='5'>검색결과가 없습니다</td>
-													</tr>
-												</c:if>
+												</tr>										
 												<c:forEach items='${page_al.al_list}' var='vo2'>
 													<tr style="margin: 20px;">
 														<td>${vo2.branch_name}</td>
 														<td>${vo2.department_name}</td>
 														<td>${vo2.rank_name}</td>
 														<td><a href='al_info.at?id=${vo2.emp_no}'>${vo2.emp_name}</a></td>
-														<td>${vo2.al_reg_date}</td>
-														<td>${vo2.al_code}</td>
-													 <c:choose>
+														<td>${vo2.al_reg_date}</td>											
+														<c:choose>
+															<c:when test="${vo2.al_code eq 'V0'}">
+																<td>연차</td>
+															</c:when>
+															<c:when test="${vo2.al_code eq 'V1'}">
+																<td>반차</td>
+															</c:when>
+														</c:choose>
+														<c:choose>
 															<c:when test="${vo2.al_approved eq 'false'}">
 																<td>미승인</td>
 															</c:when>
 															<c:when test="${vo2.al_approved eq 'true'}">
 																<td>승인</td>
 															</c:when>
-														</c:choose>
-														<%-- <td><button class="btn-edit">수정하기</button>
-														<input type="hidden" value="${vo2.emp_no }"></td> --%>
+														</c:choose>												
 
 													</tr>
 												</c:forEach>
@@ -370,7 +368,7 @@
 								</div>
 							</div>
 							</form>
-							
+
 
 
 						</figure>

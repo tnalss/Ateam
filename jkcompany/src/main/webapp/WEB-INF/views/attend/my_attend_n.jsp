@@ -22,7 +22,7 @@
 				<h2>근태 관리</h2>
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
-					<li>나의 출·퇴근</li>
+					<li><a href="myattend.at">나의 출·퇴근</a></li>
 				</ol>
 			</div>
 		</div>
