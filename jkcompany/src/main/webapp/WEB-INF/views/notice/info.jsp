@@ -13,7 +13,8 @@ height: 80px;
 height: 400px;
 }
 .reply_content{
-
+height: 220px;
+}
 
 </style>
   <main id="main">
@@ -62,7 +63,6 @@ height: 400px;
 	<a class='btn btn-danger btn-delete'>공지삭제</a>
 	</c:if>
 	<!-- 로그인한 경우 답글쓰기 가능 -->
-	
 	<c:if test='${ ! empty loginInfo }'>
 	<form action="reply_insert.no" method="post" id="insertReply">
 	<div class='mt-4'>
@@ -70,7 +70,6 @@ height: 400px;
 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
 	<input type="hidden" name="emp_no" value="${loginInfo.emp_no }"/>
 	<input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
-	
 	<a class='btn btn-primary reply_btn'>답글쓰기</a>
 	</div>
 	</form>
@@ -96,19 +95,20 @@ height: 400px;
                   <input type="hidden" name="reply_no" value="${reply.reply_no }"/>
                   <input type="hidden" name="emp_name" value="${loginInfo.emp_name }"/>
                 	<input type="hidden" name="board_no" value="${ vo.board_no}"/>
-                    <input type="text" class="h-px80 text-start reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
+                    <input type="text" class="h-px80 w-px300 text-start reply_incontent${ num.count}" name="reply_content" value="${reply.reply_content }" style="display: none ; margin-left: -30px; "/>
                 </div>
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${reply.reply_create_date}" /></p>
-                <div id="modify_off${num.count }" >			
+				<c:if test='${loginInfo.emp_no eq reply.emp_no}'>
 					<!-- 수정 전 화면 -->		
+                <div id="modify_off${num.count }" >			
                 <a class='btn btn-primary modify_reply' href="javascript:modify_reply(${num.count})">수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
-				
+				</c:if>
 				<div id="modify_on${num.count }" style="display: none">
-				<!-- 수정 화면 -->		
+					<!-- 수정 화면 -->		
 					<a class='btn btn-primary'  href="javascript:modify_ok(${num.count})">저장</a>
 				<a class='btn btn-danger' href="javascript:modify_cancel(${num.count})">취소</a>
 				</div>

@@ -91,12 +91,13 @@ height: 400px;
                 <div class="text-end" style='margin: 10px;'>
                  <p class="card-text"><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${reply.reply_create_date}" /></p>
-				<div id="modify_off${num.count }" >			
 					<!-- 수정 전 화면 -->		
+				<c:if test='${loginInfo.emp_no eq reply.emp_no}'>
+				<div id="modify_off${num.count }" >			
                 <a class='btn btn-primary modify_reply' href="javascript:modify_reply(${num.count})">수정</a>
 				<a class='btn btn-danger' href="javascript:delete_reply(${reply.reply_no},${vo.board_no })">삭제</a>
 				</div>
-				
+				</c:if>
 				<div id="modify_on${num.count }" style="display: none">
 				<!-- 수정 화면 -->		
 					<a class='btn btn-primary'  href="javascript:modify_ok(${num.count})">저장</a>
