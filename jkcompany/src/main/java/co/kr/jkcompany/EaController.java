@@ -43,10 +43,13 @@ public class EaController {
 			model.addAttribute("url", "login");
 			return "ea/alert";
 		}
-
+		
 		List<EaVO> list = sql.selectList("ea.recentlist", vo);
 		model.addAttribute("list", list);
-		
+		/*
+		 * int draft_cnt = sql.selectOne("ea.howManydraft", vo);
+		 * model.addAttribute("draft_cnt", draft_cnt);
+		 */		
 		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
 		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
 		return "ea/main";

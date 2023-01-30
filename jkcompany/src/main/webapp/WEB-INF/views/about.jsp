@@ -92,7 +92,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                 <img src="assets/img/ji.jpg" class="img-fluid" alt="" style="height:390px">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -102,7 +102,7 @@
               </div>
               <div class="member-info">
                 <h4>지현우</h4>
-                <span>Product Manager</span>
+                <span>A팀 삼촌</span>
               </div>
             </div>
           </div>

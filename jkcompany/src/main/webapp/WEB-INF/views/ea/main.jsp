@@ -11,6 +11,11 @@
 <style>
 .margin{margin: 30px;}
 .card{margin : 20px; padding: 10px;}
+.shadow-none:hover, .shadow-none:focus {
+	box-shadow: 2px 2px 2px rgba(20, 120, 130, 0.4), -1px 0 2px
+		rgba(20, 120, 130, 0.4) !important;
+	font-weight: 700;
+}
 </style>
   <main id="main">
 
@@ -104,25 +109,25 @@
 			<div class="card">
 					<div class="row mt-3">
 						<div class="col-12 col-lg-4">
-							<div class="card shadow-none border radius-15">
+							<div class="card shadow-none border radius-15 " onclick="list('draft')">
 								<div class="card-body text-center">
 									<h5 class="mt-3 mb-0 ">상신한 문서</h5>
-									<p class="mb-1 mt-4"><span>10건</span>
+									<p class="mb-1 mt-4"><span>18건</span>
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4">
-							<div class="card shadow-none border radius-15">
+							<div class="card shadow-none border radius-15" onclick="list('sign')">
 								<div class="card-body text-center">
-									<h5 class="mt-3 mb-0">반려된 문서</h5>
-									<p class="mb-1 mt-4"><span>0건</span>
+									<h5 class="mt-3 mb-0">결재할 문서</h5>
+									<p class="mb-1 mt-4"><span>4건</span>
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4">
-							<div class="card shadow-none border radius-15">
+							<div class="card shadow-none border radius-15" onclick="list('retry')">
 								<div class="card-body text-center">
 									<h5 class="mt-3 mb-0">회수한 문서</h5>
 									<p class="mb-1 mt-4"><span>3건</span>
@@ -196,7 +201,7 @@
 									<td>
 										<div class="font-weight-bold text-danger">${vo.ea_num }</div>
 									</td>
-									<td><a href='info.ea?id=${vo.ea_num}'>${vo.ea_title }</a></td>
+									<td><a href='info.ea?ea_num=${vo.ea_num}&cnt=1'>${vo.ea_title }</a></td>
 									<td>${vo.ea_date}</td>
 									<td>${vo.ea_status }</td>
 									<td><i class="fa fa-ellipsis-h font-24"></i>
@@ -215,3 +220,8 @@
    
 
   </main><!-- End #main -->
+<script>
+function list(a){
+	location.href = a+".ea";
+}
+</script>

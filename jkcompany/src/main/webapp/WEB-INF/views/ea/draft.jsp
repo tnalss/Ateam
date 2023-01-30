@@ -221,7 +221,7 @@
 								<div class="comments">
 									<span class="hidden-sm-down">부장</span>
 								</div>
-								<div>
+								 <div>
 									<a class="btn icon-btn btn-warning" href="#" onclick="retry('${vo.ea_num}');">회수</a>
 								</div>
 								<div>

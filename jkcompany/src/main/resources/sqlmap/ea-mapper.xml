@@ -3,6 +3,15 @@
 <mapper namespace="ea">
 
 
+<!-- 상신 미결재 갯수? -->
+<!-- <select id = "howManydraft" resultType="Integer">
+select count(*) 
+from (select distinct ea_num, ea_date,emp_no,ea_status from tbl_ea)  
+where emp_no = #{emp_no} and ea_status = 'E0'
+order by ea_date desc
+
+</select> -->
+
 <!-- 전자결재 파일첨부 불러오기 -->
 <select id="file_select_all" resultType="ea.EaFileVO">
 select * from tbl_ea_file
