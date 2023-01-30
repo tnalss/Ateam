@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <style>
 #h3 {
@@ -110,7 +111,7 @@
 							</div>						
 							
 							<div class="text-center ">
-								<button class="submit_apply">신청하기</button>
+								<a class="submit_apply" >신청하기</a>
 								<button  id="submit_cancel" onclick="history.go(-1);">돌아가기</button> 
 							</div>
 						</div>
@@ -137,20 +138,22 @@ $('[name=date]').on('change', function() {
 	      success: function(data){
 	    	  if(data != null){	    		  
 	    		  
-	         $('.status').text(data.att_state);
+	        	 $('.status').text(data.att_state);
 	    	  }else{
 	    		  $('.status').text("업무 기록이 없습니다.");
 	    	  }
 	         console.log(data);
-	         console.log(data.att_state);
+	         //console.log(data.att_state);
 	      }
 	   })
 });
 
-    $(".submit_apply").click(function () {      
-       $('#edit_apply').submit();
-            alert('신청이 완료되었습니다.')
-            location.href  ='myattend';
+    $(".submit_apply").click(function () {
+		console.log('clcick');
+      $('#edit_apply').submit();
+      console.log('submit');
+      alert('신청이 완료되었습니다.')
+      //location.href  ='myattend';
             
     });
     

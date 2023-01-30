@@ -135,6 +135,42 @@
 
 	<!-- 섹션을 나누어서 내용을 작성해주시면됩니다. 별다른 내용이 없다면 하나의 섹션만 써도 됨 -->
 	<!-- ======= Section ======= -->
+	<c:choose>
+		<c:when test="${pageCategory eq 1 }">
+			<script type="text/javascript">
+			window.onload = function(){
+				
+				$('a[href="#tab-1"]').tab('show');
+				
+		
+				/* list.jsp 상단에 히든 태그를 넣어서 현재 페이지를 날려준다!! */
+
+
+			}
+			function toPage(no){
+				$('[name=curPage]').val(no);
+				$('#list1').submit();
+
+			}
+			</script>
+		</c:when>
+		
+		<c:otherwise>
+				<script type="text/javascript">
+			window.onload = function(){
+				$('a[href="#tab-2"]').tab('show');
+				
+				
+			}
+			function toPage(no){
+				$('[name=curPage]').val(no);
+				$('#list2').submit();
+
+			}
+			</script>
+		</c:otherwise>
+	</c:choose>
+	
 	<section id="a" class="container">
 		<div class="row">
 
@@ -143,14 +179,14 @@
 				data-aos="fade-right">
 				<ul class="nav nav-tabs  flex-column" role="tablist">
 					<li class="nav-item" role="presentation"><a
-						class="nav-link  active show" data-bs-toggle="tab" href="#tab-1"
+						class="nav-link  active show" data-bs-toggle="tab" href="#tab-1" onclick="	$('#list1').submit();"
 						aria-selected="true" role="tab" tabindex="-1"
 						style="margin-top: 17px;">
 							<h4>근태 관리</h4>
 							<p>전체 사원의 근태 상황을 확인하고 수정할 수 있습니다.</p>
 					</a></li>
 					<li class="nav-item" role="presentation"><a
-						class="nav-link show" data-bs-toggle="tab" href="#tab-2"
+						class="nav-link show" data-bs-toggle="tab" href="#tab-2" onclick="	$('#list2').submit();"
 						aria-selected="false" role="tab" style="margin-top: 17px;">
 							<h4>연차 관리</h4>
 							<p>업무 상태의 수정 신청 현황을 확인할 수 있습니다.</p>
@@ -158,15 +194,16 @@
 				</ul>
 			</div>
 
-
+			
 
 			<div class="col-12 col-lg-9 ml-auto aos-init aos-animate"
 				data-aos="fade-left" data-aos-delay="100">
 				<div id="t" class="tab-content">
 					<div class="tab-pane active show" id="tab-1" role="tabpanel">
 						<figure>
-							<form method='post' action='admin_attend.at' id="list">
+							<form method='post' action='admin_attend.at' id="list1">
 								<input type='hidden' name='curPage' value='1'>
+										<input type="hidden" name="pageCategory" value="1">
 								<div class="row justify-content-center aos-init aos-animate"
 									data-aos="fade-up" style="justify-content: center;"></div>
 								<div class="row" style="margin-top: 20px;">
@@ -258,7 +295,7 @@
 													</tr>
 												</c:forEach>
 											</table>
-											<jsp:include page="/WEB-INF/views/include/page.jsp" />
+											<jsp:include page="/WEB-INF/views/include/page2.jsp" />
 										</div>
 									</div>
 
@@ -269,7 +306,8 @@
 					</div>
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
-
+							<form method='post' action='admin_attend.at' id="list2">
+							<input type="hidden" name="pageCategory" value="2">
 							<!--수정신청 조회 화면 -->
 							<div class="row">
 								<!--연차 신청 건수   -->
@@ -292,6 +330,7 @@
 											<p class="col-6">반차 신청 :</p>
 											<p class="col-2" style="color: #fd5c28;">${countV1}</p>
 											<p class="col-1">건</p>
+					
 										</div>
 									</div>
 								</div>
@@ -340,39 +379,41 @@
 														<td>${vo2.rank_name}</td>
 														<td><a href='al_info.at?id=${vo2.emp_no}'>${vo2.emp_name}</a></td>
 														<td>${vo2.al_reg_date}</td>											
-														<c:choose>
-															<c:when test="${vo2.al_code eq 'V0'}">
-																<td>연차</td>
-															</c:when>
-															<c:when test="${vo2.al_code eq 'V1'}">
-																<td>반차</td>
-															</c:when>
-														</c:choose>
-														<c:choose>
-															<c:when test="${vo2.al_approved eq 'false'}">
-																<td>미승인</td>
-															</c:when>
-															<c:when test="${vo2.al_approved eq 'true'}">
-																<td>승인</td>
-															</c:when>
-														</c:choose>												
+															<c:choose>
+																<c:when test="${vo2.al_code eq 'V0'}">
+																	<td>연차</td>
+																</c:when>
+																<c:when test="${vo2.al_code eq 'V1'}">
+																	<td>반차</td>
+																</c:when>
+															</c:choose>
+															
+															<c:choose>
+																<c:when test="${vo2.al_approved eq 'false'}">
+																	<td>미승인</td>
+																</c:when>
+																<c:when test="${vo2.al_approved eq 'true'}">
+																	<td>승인</td>
+																</c:when>
+															</c:choose>												
 
 													</tr>
 												</c:forEach>
 
 											</table>
-											<jsp:include page="/WEB-INF/views/include/page.jsp" />
+											<jsp:include page="/WEB-INF/views/include/page2.jsp" />
 										</div>
 									</div>
 
 								</div>
 							</div>
-							</form>
 
 
 
+					</form>
 						</figure>
 					</div>
+			
 				</div>
 			</div>
 		</div>
