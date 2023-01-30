@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -44,63 +45,44 @@ public class AttendController {
 	
 
 	
-
-	
-	// attend-정보 수정 창으로 이동
-	@RequestMapping("/attend_modify.at")
-	public String attend_modify(int id, Model model) {
-		AttendVO vo = sql.selectOne("at.attend_info", id);
-				
-		
-		model.addAttribute("vo",vo);
-		return "attend/attend_modify";
+	@RequestMapping("/attend_info.at")
+	public String attend_info (String id, Model model ) {
+		List<AttendVO> vo = sql.selectList("at.attend_info", id);
+		model.addAttribute("emp_name",vo.get(0).getEmp_name());
+		model.addAttribute("info",vo);
+		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
+		return "attend/attend_info";
 	}
-	
-	//attend-정보 수정 저장하기 
-	
-//	@RequestMapping("/updateAttendCode.at")
-//	public String updateAttendCode(AttendVO vo) {
-//		sql.update("at.updateAttendCode", vo);
-//		// 응답화면연결
-//		return "redirect:attend_info.at?id=" + vo.getEmp_no();
-//	}
+
 
 	@ResponseBody @RequestMapping("/attend_state_update.at")
 	public boolean attend_state_update (AttendVO vo ) {
 		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
 	}
-	
-	@RequestMapping("/attend_info.at")
-	public String attend_info (String id, Model model ) {
-		List<AttendVO> vo = sql.selectList("at.attend_info", id);
-		model.addAttribute("info",vo);
-		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
-		return "attend/attend_info";
-	}
-	
-	
-	
-	// al-정보 수정 창으로 이동
-		@RequestMapping("/al_modify.at")
-		public String al_modify(int id, Model model) {
-			
 		
-			return "attend/al_modify";
+		
+
+		@RequestMapping("/al_info.at")
+		public String al_info(String id, Model model) {
+			List<AttendVO> vo = sql.selectList("at.al_info", id);
+			model.addAttribute("info",vo);			
+			model.addAttribute("al", sql.selectList("emp.codeList", 'L'));		
+			return "attend/al_info";
 		}
 		
-		//al-정보 수정 저장하기 
+		@ResponseBody @RequestMapping("/updateAlCode.at")
+		public boolean updateAlCode (AttendVO vo ) {
+			return sql.update("at.updateAlCode", vo) >= 1 ? true : false;
+		}
+			
 		
-		@RequestMapping("/updateL1.at")
-		public String updateL1(AttendVO vo) {
-			sql.update("at.update", vo);
-			// 응답화면연결
-			return "redirect:al_info.at?id=" + vo.getEmp_no();
-		}	
+		
+		
 	
 	
 	// 관리자 모드_ 근태관리화면_전체 가져오기
 	@RequestMapping(value = "/admin_attend.at", produces = "text/html;charset=utf-8")
-	public String admin_attend(HttpSession session, Model model, AttendPageVO page, AlPageVO page_al) {
+	public String admin_attend(HttpSession session, Model model, AttendPageVO page, AlPageVO page_al , @RequestParam(value = "pageCategory", defaultValue="1") int pageCategory) {
 		AttendPageVO vo = attend_list(page);
 		AlPageVO vo2 = al_list(page_al);
 		int countV0 = sql.selectOne("at.countV0");
@@ -117,6 +99,7 @@ public class AttendController {
 		model.addAttribute("countV0",countV0);
 		model.addAttribute("countV1",countV1);
 		model.addAttribute("countOthers",countOthers);
+		model.addAttribute("pageCategory",pageCategory);
 	
 
 		return "attend/admin_attend";
@@ -127,6 +110,13 @@ public class AttendController {
 	public String myattend(HttpSession session, Model model) {
 		session.setAttribute("category", "attend");
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
+
+		if(vo ==null) {
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("url", "login");
+			return "ea/alert";
+		}
+		
 		HashMap<String, String> tempMap = new HashMap<String, String>();
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());
 		List<AttendVO> list = sql.selectList("at.list_7days", vo.getEmp_no());
@@ -187,7 +177,8 @@ public class AttendController {
 	public String my_attend_edit(HttpSession session, Model model) {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		// model.addAttribute("status", status);
-		model.addAttribute("att_code", sql.selectList("at.code_list", 'A'));
+		
+		model.addAttribute("al", sql.selectList("emp.codeList", 'V'));
 		return "attend/my_attend_edit";
 	}
 
@@ -238,20 +229,20 @@ public class AttendController {
 	}
 
 	// 수정 신청하기
-	@RequestMapping(value = "/edit_apply.at", produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/edit_apply.at")
 	public String edit_apply(HttpSession session, Model model, String emp_no, String date, String al_type,
 			String message) {
 
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("emp_no", emp_no);
-		map.put("al_start_date", date);
+		map.put("al_start_date", date);	
 		map.put("al_code", al_type);
 		map.put("al_reason", message);
 		
 		sql.insert("at.edit_apply",map);
 
-		return "redirect:my_attend_edit.at";
+		return "redirect:myattend";
 	}
 	
 	// 수정 취소하기
