@@ -20,7 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/about" , produces="text/html;charset=utf-8")
 	public String about(HttpSession session, Model model) {
 		
-		session.removeAttribute("category");
+		session.setAttribute("category","about");
 		return "about";
 	}
 	

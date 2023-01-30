@@ -11,6 +11,10 @@
 	text-align: center;
 	column-gap: .5rem;
 }
+.list_top{
+background-color: #ac75bd;
+    color: white;
+    }
 </style>
 <main id="main">
 
@@ -83,7 +87,7 @@
 				<col width='120px'>
 				<col width='120px'>
 			</colgroup>
-			<tr class='text-center '> 
+			<tr class='text-center list_top'> 
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -93,7 +97,7 @@
 			<c:forEach items='${page.list}' var='vo'>
 				<tr class='text-center '>
 					<td class='text-center'>${vo.rnum }</td>
-					<td class="no_title"><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
+					<td class="no_title text-start"><a href='info.no?id=${vo.board_no}'>${vo.board_title }</a></td>
 					<td >${vo.emp_name}</td> 
 					<td><fmt:formatDate pattern="yyyy/MM/dd"
 							value="${vo.write_date }" /></td>

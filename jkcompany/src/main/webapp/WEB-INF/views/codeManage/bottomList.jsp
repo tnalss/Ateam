@@ -24,7 +24,7 @@ color: red;
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
 					<li>관리자</li>
-					<li>상위 코드 관리</li>
+					<li><a href="<c:url value='list.code'/>">상위 코드 관리</a></li>
 					<li>하위 코드 관리</li>
 				</ol>
 			</div>

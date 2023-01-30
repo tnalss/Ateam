@@ -118,9 +118,9 @@
                   <a href=""><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
-              <div class="member-info">
+              <div class="member-info"> 
                 <h4>박찬재</h4>
-                <span>CTO</span>
+                <span>또치 주인</span>
               </div>
             </div>
           </div>

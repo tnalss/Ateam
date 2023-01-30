@@ -38,7 +38,7 @@ height: 300px;
 <input type='hidden' name='board_no' value='${vo.board_no}'>
 <table class='table'>
 <tr><th class='w-px140'>제목</th>
-	<td><input type='text' name='board_title' class='w-px300' title='제목' 
+	<td><input type='text' name='board_title' class='w-px1200' title='제목' 
 				value="${vo.board_title}"></td>
 </tr>
 <tr>

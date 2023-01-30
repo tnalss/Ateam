@@ -32,7 +32,7 @@ public class NoticeController {
 	public String update(ReplyVO vo, Model model) {
 		sql.update("re.reply_update", vo);
 		// model.addAttribute("board_no", );
-		return "redirect:info.bo?id=" + vo.getBoard_no();
+		return "redirect:info.no?id=" + vo.getBoard_no();
 	}
 
 	// 댓글 삭제
@@ -92,7 +92,7 @@ public class NoticeController {
 	@RequestMapping(value = "/list.no", produces = "text/html;charset=utf-8")
 	public String notice_list(HttpSession session, Model model, NoticePageVO page) {
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("notice", "no");
+		session.setAttribute("category", "no");
 		model.addAttribute("page", notice_list(page));
 		return "notice/list";
 	}

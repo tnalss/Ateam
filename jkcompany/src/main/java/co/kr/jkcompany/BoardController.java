@@ -90,7 +90,8 @@ public class BoardController {
 	@RequestMapping(value = "/list.bo", produces = "text/html;charset=utf-8")
 	public String notice_list(HttpSession session, Model model, NoticePageVO page) {
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("board", "bo");
+		session.setAttribute("category", "bo");
+		
 		model.addAttribute("page", notice_list(page));
 		return "board/list";
 	}

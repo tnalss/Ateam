@@ -34,7 +34,7 @@ public class EmployeeController {
 	public String emp_list(HttpSession session, Model model,EmployeePageVO page) {
 		int count =0;
 		// 각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("cate", "emp");
+		session.setAttribute("category", "admin");
 		EmployeePageVO vo = emp_list(page);
 		model.addAttribute("page", vo );
 		for (EmployeeVO each : vo.list) {

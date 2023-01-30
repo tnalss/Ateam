@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+.activeA a{
+	color:#f03c02;
+}
 
+</style>
 <!-- ======= Top Bar ======= -->
 <section id="topbar" class="d-flex align-items-center">
 	<div
@@ -33,14 +38,14 @@
 
 		<nav id="navbar" class="navbar">
 			<ul>
-				<li><a class="active" href="<c:url value='/'/>">홈</a></li>
-				<li><a href="about">회사소개</a></li>
-				<li><a href="list.no">공지사항</a></li>
-				<li><a href="myattend">나의 출·퇴근 관리</a></li>				
-				<li><a href="main.ea">전자결재</a></li>
-				<li><a href="list.bo">익명 게시판</a></li>
+				<li><a class="${empty category  ? 'active' :'' }" href="<c:url value='/'/>">홈</a></li>
+				<li><a class="${ category eq 'about' ? 'active' :'' }" href="about">회사소개</a></li>
+				<li><a class="${ category eq 'no' ? 'active' :'' }" href="list.no">공지사항</a></li>
+				<li><a class="${ category eq 'attend' ? 'active' :'' }"  href="myattend">나의 출·퇴근 관리</a></li>				
+				<li><a class="${category eq 'ea' ? 'active' :'' }" href="main.ea">전자결재</a></li>
+				<li><a class="${ category eq 'bo' ? 'active' :'' }" href="list.bo">익명 게시판</a></li>
 			<c:if test="${loginInfo.admin eq 'L1' }">
-				<li class="dropdown"><a href="#"><span>관리자</span>
+				<li class="dropdown ${ category eq 'admin' ? ' activeA' :'' }"><a href="#"><span>관리자</span>
 				<i class="bi bi-chevron-down"></i></a>
 					<ul>
 						<li><a href="list.emp">사원관리</a></li>
