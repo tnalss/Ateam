@@ -65,7 +65,7 @@
 									</tr>
 								</c:forEach>
 							</table>
-							<jsp:include page="/WEB-INF/views/include/page.jsp" />
+							
 						</div>
 					</div>
 

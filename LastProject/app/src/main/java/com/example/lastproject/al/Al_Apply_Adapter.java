@@ -40,10 +40,7 @@ public class Al_Apply_Adapter extends RecyclerView.Adapter<Al_Apply_Adapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
-        h.apply_what.setText(al_list.get(i).getCode_value());
-
-
-
+    h.apply_what.setText(al_list.get(i).getCode_value());
     h.apply_date.setText(al_list.get(i).getAl_reg_date().substring(0,10));
 
 

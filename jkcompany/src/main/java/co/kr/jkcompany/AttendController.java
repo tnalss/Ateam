@@ -3,7 +3,6 @@ package co.kr.jkcompany;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -21,11 +19,7 @@ import attend.AlPageVO;
 import attend.AttendPageVO;
 import attend.AttendVO;
 import common.CommonService;
-import employee.EmployeePageVO;
-import employee.EmployeeVO;
 import login.LoginVO;
-import notice.NoticePageVO;
-import notice.NoticeVO;
 
 @Controller
 public class AttendController {
@@ -57,20 +51,32 @@ public class AttendController {
 	public String attend_modify(int id, Model model) {
 		AttendVO vo = sql.selectOne("at.attend_info", id);
 				
-		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
+		
 		model.addAttribute("vo",vo);
-		return "at/attend_modify";
+		return "attend/attend_modify";
 	}
 	
 	//attend-정보 수정 저장하기 
 	
-	@RequestMapping("/updateAttendCode.at")
-	public String updateAttendCode(AttendVO vo) {
-		sql.update("at.updateAttendCode", vo);
-		// 응답화면연결
-		return "redirect:attend_info.at?id=" + vo.getEmp_no();
-	}
+//	@RequestMapping("/updateAttendCode.at")
+//	public String updateAttendCode(AttendVO vo) {
+//		sql.update("at.updateAttendCode", vo);
+//		// 응답화면연결
+//		return "redirect:attend_info.at?id=" + vo.getEmp_no();
+//	}
 
+	@ResponseBody @RequestMapping("/attend_state_update.at")
+	public boolean attend_state_update (AttendVO vo ) {
+		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
+	}
+	
+	@RequestMapping("/attend_info.at")
+	public String attend_info (String id, Model model ) {
+		List<AttendVO> vo = sql.selectList("at.attend_info", id);
+		model.addAttribute("info",vo);
+		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
+		return "attend/attend_info";
+	}
 	
 	
 	
@@ -79,7 +85,7 @@ public class AttendController {
 		public String al_modify(int id, Model model) {
 			
 		
-			return "at/al_modify";
+			return "attend/al_modify";
 		}
 		
 		//al-정보 수정 저장하기 

@@ -85,7 +85,7 @@
 	color: #fd5c28;
 }
 
-#btn-search  {
+#btn-search {
 	background: none;
 	padding: 10px;
 	margin: -1px;
@@ -96,7 +96,7 @@
 	border: 0;
 }
 
-#btn-edit{
+.btn-edit {
 	padding: 10px;
 	margin: -1px;
 	background: #f03c02;
@@ -105,7 +105,6 @@
 	line-height: 0;
 	border: 0;
 }
-
 
 #btn {
 	border-color: #fff;
@@ -174,7 +173,7 @@
 									<div class="col-2">
 										<select class="form-select" name='search'
 											aria-label="Default select example">
-											<option value="-1">전체</option>
+											<option value="all">전체</option>
 											<c:forEach items="${branches}" var="b">
 												<option value="${b.code}"
 													<c:if test ="${b.code eq page.search}">selected="selected"</c:if>>${b.code_value}</option>
@@ -202,14 +201,14 @@
 													<c:if test ="${r.code eq page.search_rank}">selected="selected"</c:if>
 													value="${r.code}">${r.code_value}</option>
 											</c:forEach>
-
 										</select>
 									</div>
 									<div id="list-top" class="col-5">
 										<input type="text" class="w-px270" name="keyword" value=""
 											placeholder="사원의 이름을 입력하세요">
 										<button id="btn-search" type="submit"
-											style="margin-left: 5px;">검색 <i class="bi bi-search"></i>
+											style="margin-left: 5px;">
+											검색 <i class="bi bi-search"></i>
 										</button>
 									</div>
 								</div>
@@ -270,6 +269,7 @@
 					</div>
 					<div class="tab-pane  " id="tab-2" role="tabpanel">
 						<figure>
+						
 							<!--수정신청 조회 화면 -->
 							<div class="row">
 								<!--연차 신청 건수   -->
@@ -307,6 +307,8 @@
 									</div>
 								</div>
 							</div>
+							<form method='post' action='admin_attend.at' id="list">
+								<input type='hidden' name='curPage' value='1'>
 							<!--신청 목록 화면 보이게 -->
 							<!--클릭시  사원의 출근 날짜, 시간, 현황 보이게 하고 W99(신청)에서 선택 코드로 바꾸는 업데이트처리  -->
 							<div class="row mt-3">
@@ -343,7 +345,7 @@
 														<td>${vo2.rank_name}</td>
 														<td>${vo2.emp_name}</td>
 														<td>${vo2.al_reg_date}</td>
-														<td>${vo2.al_code}</td>													
+														<td>${vo2.al_code}</td>
 														<c:choose>
 															<c:when test="${vo2.al_approved eq 'false'}">
 																<td>미승인</td>
@@ -352,12 +354,12 @@
 																<td>승인</td>
 															</c:when>
 														</c:choose>
-														<td><button id="btn-edit">수정하기</button></td>
-
+														<td><button class="btn-edit">수정하기</button>
+														<input type="hidden" value="${vo2.emp_no }"></td>
 
 													</tr>
 												</c:forEach>
-												</div>
+
 											</table>
 											<jsp:include page="/WEB-INF/views/include/page.jsp" />
 										</div>
@@ -365,6 +367,8 @@
 
 								</div>
 							</div>
+							</form>
+							
 
 
 						</figure>
@@ -398,9 +402,10 @@
 		$('#list').attr('action', 'admin_attend.at');
 		$('#list').submit();
 	});
-	
+
 	$('.btn-edit').on('click', function() {
-		
+		var sss = $(this).siblings('input').val();
+		location.href = 'al_modify.at?id='+sss;
 	});
 </script>
 

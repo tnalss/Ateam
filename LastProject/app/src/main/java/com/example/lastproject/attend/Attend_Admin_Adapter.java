@@ -100,7 +100,9 @@ public class Attend_Admin_Adapter extends RecyclerView.Adapter<Attend_Admin_Adap
 
         if(list.get(position).getAtt_state() != null) {
             holder.status.setText(list.get(position).getAtt_state());
-        } holder.status.setVisibility(View.GONE);
+        }else {
+            holder.status.setText(" ");
+        }
     }
 
     @Override

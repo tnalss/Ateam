@@ -11,6 +11,7 @@
 		SET att_code =#{att_code}
 		WHERE
 		emp_no= #{emp_no}
+		and attend_date = #{attend_date}
 	</update>
 
 
@@ -27,8 +28,7 @@
 
 	<!--관리자가 보는 연차 신청 현황 -->
 	<select id="al_list" resultType="attend.AttendVO">
-		select c2.code_value
-		branch_name,c3.code_value department_name,
+		select c2.code_value branch_name,c3.code_value department_name,
 		c4.code_value
 		rank_name,e.emp_name, a.emp_no,
 		to_char(a.al_reg_date,'yyyy/mm/dd')
@@ -45,8 +45,7 @@
 		left join tbl_code c3 on
 		o.dept_code = c3.code_category||c3.code_num
 		left join tbl_code c4 on
-		o.rank_code = c4.code_category||c4.code_num
-		where no between ${beginList} and ${endList}
+		o.rank_code = c4.code_category||c4.code_num	
 		order by a.al_reg_date		desc, e.emp_no
 	</select>
 
@@ -54,8 +53,7 @@
 	<select id="attend_info" resultType="attend.AttendVO">
 		select a.attend_date,
 		a.emp_no, a.attend_on,
-		a.attend_off,GET_CODE_VALUE(a.ATT_CODE)
-		ATT_STATE
+		a.attend_off,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE, ATT_CODE
 		from tbl_attend a
 		where a.emp_no = #{emp_no}
 		order by attend_date desc
@@ -160,6 +158,7 @@
 		<if test='search!="all"'>
 			AND o.branch_code LIKE '%' || #{search} || '%'
 		</if>
+
 		<if test='search_dept != "-1"'>
 			AND o.dept_code LIKE '%' || #{search_dept} || '%'
 		</if>
@@ -175,14 +174,10 @@
 	<!-- 전체사원의 출퇴근 현황 조회 -->
 	<select id="admin_attend" resultType="attend.AttendVO">
 		select *
-		from(
-		select row_number() over(ORDER BY a.attend_date ) no,
-		a.attend_date
-		,c2.code_value branch_name ,c3.code_value
-		department_name,
-		c.code_value rank_name,e.emp_name,
-		to_char(a.attend_on,'hh24:mi')
-		attend_on,
+		from(		select row_number() over(ORDER BY a.attend_date ) no,
+		a.attend_date		,c2.code_value branch_name ,c3.code_value		department_name,
+		c.code_value rank_name,e.emp_name,e.emp_no,
+		to_char(a.attend_on,'hh24:mi')		attend_on,
 		to_char(a.attend_off,'hh24:mi') attend_off , c4.code_value
 		att_state
 		from tbl_attend a
@@ -200,8 +195,7 @@
 		<include refid="emp_where" />
 		) b
 		where no between ${beginList} and ${endList}
-		order by b.attend_date
-		desc
+		order by b.attend_date		desc
 	</select>
 	<!-- 연차 신청 상태가 대기중인 경우 건수 -->
 
