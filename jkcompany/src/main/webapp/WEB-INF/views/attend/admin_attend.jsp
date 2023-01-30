@@ -146,13 +146,13 @@
 						class="nav-link  active show" data-bs-toggle="tab" href="#tab-1"
 						aria-selected="true" role="tab" tabindex="-1"
 						style="margin-top: 17px;">
-							<h4>근태 조회</h4>
-							<p>전체 사원의 근태 상황을 확인할 수 있습니다.</p>
+							<h4>근태 관리</h4>
+							<p>전체 사원의 근태 상황을 확인하고 수정할 수 있습니다.</p>
 					</a></li>
 					<li class="nav-item" role="presentation"><a
 						class="nav-link show" data-bs-toggle="tab" href="#tab-2"
 						aria-selected="false" role="tab" style="margin-top: 17px;">
-							<h4>업무 상태 수정</h4>
+							<h4>연차 관리</h4>
 							<p>업무 상태의 수정 신청 현황을 확인할 수 있습니다.</p>
 					</a></li>
 				</ul>
@@ -306,9 +306,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<form method='post' action='admin_attend.at' id="list">
-								<input type='hidden' name='curPage' value='1'>
+							</div>						
 							<!--신청 목록 화면 보이게 -->
 							<!--클릭시  사원의 출근 날짜, 시간, 현황 보이게 하고 W99(신청)에서 선택 코드로 바꾸는 업데이트처리  -->
 							<div class="row mt-3">
@@ -324,7 +322,7 @@
 													<col width='100px'>
 													<col width='120px'>
 													<col width='100px'>
-													<col width='100px'>
+													
 												</colgroup>
 												<tr class='text-center'>
 													<th>지점명</th>
@@ -334,19 +332,23 @@
 													<th>신청 날짜</th>
 													<th>신청 내용</th>
 													<th>승인 상태</th>
-													<th>빠른 수정</th>
+													
 
 												</tr>
+													<c:if test='${empty page.list}'>
+													<tr>
+														<td colspan='5'>검색결과가 없습니다</td>
+													</tr>
+												</c:if>
 												<c:forEach items='${page_al.al_list}' var='vo2'>
 													<tr style="margin: 20px;">
-
 														<td>${vo2.branch_name}</td>
 														<td>${vo2.department_name}</td>
 														<td>${vo2.rank_name}</td>
-														<td>${vo2.emp_name}</td>
+														<td><a href='al_info.at?id=${vo2.emp_no}'>${vo2.emp_name}</a></td>
 														<td>${vo2.al_reg_date}</td>
 														<td>${vo2.al_code}</td>
-														<c:choose>
+													 <c:choose>
 															<c:when test="${vo2.al_approved eq 'false'}">
 																<td>미승인</td>
 															</c:when>
@@ -354,8 +356,8 @@
 																<td>승인</td>
 															</c:when>
 														</c:choose>
-														<td><button class="btn-edit">수정하기</button>
-														<input type="hidden" value="${vo2.emp_no }"></td>
+														<%-- <td><button class="btn-edit">수정하기</button>
+														<input type="hidden" value="${vo2.emp_no }"></td> --%>
 
 													</tr>
 												</c:forEach>
@@ -403,9 +405,9 @@
 		$('#list').submit();
 	});
 
-	$('.btn-edit').on('click', function() {
+	/* $('.btn-edit').on('click', function() {
 		var sss = $(this).siblings('input').val();
 		location.href = 'al_modify.at?id='+sss;
-	});
+	}); */
 </script>
 

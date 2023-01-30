@@ -44,32 +44,6 @@ public class AttendController {
 	
 
 	
-
-	
-	// attend-정보 수정 창으로 이동
-	@RequestMapping("/attend_modify.at")
-	public String attend_modify(int id, Model model) {
-		AttendVO vo = sql.selectOne("at.attend_info", id);
-				
-		
-		model.addAttribute("vo",vo);
-		return "attend/attend_modify";
-	}
-	
-	//attend-정보 수정 저장하기 
-	
-//	@RequestMapping("/updateAttendCode.at")
-//	public String updateAttendCode(AttendVO vo) {
-//		sql.update("at.updateAttendCode", vo);
-//		// 응답화면연결
-//		return "redirect:attend_info.at?id=" + vo.getEmp_no();
-//	}
-
-	@ResponseBody @RequestMapping("/attend_state_update.at")
-	public boolean attend_state_update (AttendVO vo ) {
-		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
-	}
-	
 	@RequestMapping("/attend_info.at")
 	public String attend_info (String id, Model model ) {
 		List<AttendVO> vo = sql.selectList("at.attend_info", id);
@@ -77,25 +51,32 @@ public class AttendController {
 		model.addAttribute("attend", sql.selectList("emp.codeList", 'W'));		
 		return "attend/attend_info";
 	}
+
+
+	@ResponseBody @RequestMapping("/attend_state_update.at")
+	public boolean attend_state_update (AttendVO vo ) {
+		return sql.update("at.updateAttendCode", vo) ==1 ? true : false;
+	}
 	
+
 	
-	
-	// al-정보 수정 창으로 이동
-		@RequestMapping("/al_modify.at")
-		public String al_modify(int id, Model model) {
-			
 		
-			return "attend/al_modify";
+
+		@RequestMapping("/al_info.at")
+		public String al_info(String id, Model model) {
+			List<AttendVO> vo = sql.selectList("at.al_info", id);
+			model.addAttribute("info",vo);
+			model.addAttribute("attend", sql.selectList("emp.codeList", 'V'));		
+			return "attend/al_info";
 		}
 		
-		//al-정보 수정 저장하기 
+		@ResponseBody @RequestMapping("/updateL1.at")
+		public boolean updateL1 (AttendVO vo ) {
+			return sql.update("at.updateL1", vo) ==1 ? true : false;
+		}
+			
 		
-		@RequestMapping("/updateL1.at")
-		public String updateL1(AttendVO vo) {
-			sql.update("at.update", vo);
-			// 응답화면연결
-			return "redirect:al_info.at?id=" + vo.getEmp_no();
-		}	
+		
 	
 	
 	// 관리자 모드_ 근태관리화면_전체 가져오기
