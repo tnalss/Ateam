@@ -27,7 +27,7 @@ public class CodeManageController {
 	@RequestMapping(value= "/list.code" , produces="text/html;charset=utf-8")
 	public String simpleList(HttpSession session, Model model) {
 		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("cate", "code" );
+		session.setAttribute("category", "admin" );
 		List<CodeVO> list = sql.selectList("code.topCodeList");
 		model.addAttribute("list",list);
 		return "codeManage/list";

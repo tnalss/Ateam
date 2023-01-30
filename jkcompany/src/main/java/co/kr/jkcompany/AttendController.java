@@ -119,7 +119,7 @@ public class AttendController {
 	// 내 출퇴근 조회
 	@RequestMapping(value = "/myattend", produces = "text/html;charset=utf-8")
 	public String myattend(HttpSession session, Model model) {
-		session.setAttribute("cate", "attend");
+		session.setAttribute("category", "attend");
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		HashMap<String, String> tempMap = new HashMap<String, String>();
 		AttendVO today = sql.selectOne("at.emp_today", vo.getEmp_no());

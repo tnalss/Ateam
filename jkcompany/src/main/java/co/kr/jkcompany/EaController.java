@@ -36,7 +36,7 @@ public class EaController {
 	// 전자결재 홈화면
 	@RequestMapping(value = "/main.ea", produces = "text/html;charset=utf-8")
 	public String ea_main(HttpSession session, Model model) throws Exception {
-		
+		session.setAttribute("category","ea");
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		if(vo ==null) {
 			model.addAttribute("msg", "로그인이 필요합니다.");
