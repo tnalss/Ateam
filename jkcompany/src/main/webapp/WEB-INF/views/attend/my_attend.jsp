@@ -257,7 +257,7 @@ font-size: 25px;
 							<i class="bi bi-emoji-sunglasses"></i>
 						</div>
 						<h3 class="title">
-							<a href="my_attend_n.at">결근 및 연차 사용 조회</a>
+							<a href="my_attend_n.at">결근 조회</a>
 						</h3>
 						<h4>${code3}건</h4>
 						<a href="my_attend_n.at"><p class="description">자세히보기</p></a>

@@ -7,7 +7,18 @@
 <!DOCTYPE html>
 
 <style>
-
+#submit_cancel {
+	margin-left : 500px;
+	margin-top:10px;
+	justity-content:center;
+	align-items:center;
+	background: #f03c02;
+	border: 0;
+	padding: 10px 24px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 4px;
+}
 </style>
 
 <main id="main">
@@ -33,7 +44,6 @@
 			<div class="row mt-5 justify-content-center aos-init aos-animate"
 				data-aos="fade-up">
 				<h2 class="entry-title" style="margin-left: 100px;">${emp_name}님의 근태 목록입니다.</h2>		
-
 
 				<div class="table-responsive">
 					<table class='table table-hover text-center'
@@ -73,6 +83,7 @@
 							</tr>
 						</c:forEach>
 					</table>
+					<button  id="submit_cancel" onclick="history.go(-1);">목록으로</button>
 				</div>
 			</div>
 		</div>
