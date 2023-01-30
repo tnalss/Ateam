@@ -216,10 +216,10 @@
 							</div>
 							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
-									<span class="hidden-sm-down">환경수질부</span>
+									<span class="hidden-sm-down">${login.department_name}</span>
 								</div>
 								<div class="comments">
-									<span class="hidden-sm-down">부장</span>
+									<span class="hidden-sm-down">${login.rank_name}</span>
 								</div>
 								 <div>
 									<a class="btn icon-btn btn-warning" href="#" onclick="retry('${vo.ea_num}');">회수</a>

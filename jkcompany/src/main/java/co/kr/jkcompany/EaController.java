@@ -120,6 +120,7 @@ public class EaController {
 		LoginVO vo = (LoginVO) session.getAttribute("loginInfo");
 		List<EaVO> draft_list = sql.selectList("ea.recentlist", vo);
 		model.addAttribute("draft_list", draft_list);
+		model.addAttribute("login",vo);
 
 		// default를 앞에 붙여주고 폴더를 하나 거치면 tile 미적용으로 사이트가 연결됩니다.
 		// 리턴으로 employee폴더에 list.jsp를 타일 미적용으로 연결시켰습니다.
@@ -153,6 +154,7 @@ public class EaController {
                 }
 			}
 			model.addAttribute("retry_list",retry_list);
+			model.addAttribute("login", vo);
 			return "ea/retry";
 		}
 

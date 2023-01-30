@@ -200,10 +200,10 @@
 							</div>
 							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
-									<span class="hidden-sm-down">환경수질부</span>
+									<span class="hidden-sm-down">${vo.ea_receiver_dep}</span>
 								</div>
 								<div class="comments">
-									<span class="hidden-sm-down">부장</span>
+									<span class="hidden-sm-down">${vo.ea_receiver_rank}</span>
 								</div>
 								<div class="name">
 									<span class="hidden-sm-down">${vo.emp_name}</span>
