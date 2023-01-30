@@ -97,7 +97,7 @@
 									<li><a href="my_attend_late.at">지각 </a></li>
 									<li><a href="my_attend_n.at">결근 조회</a></li>
 									<li><a href="my_attend_o.at">기타 업무 상황 조회</a></li>
-									<li><a href="my_attend_edit.at">업무 상태 수정 신청</a></li>
+									<li><a href="my_attend_edit.at">연차 신청<</a></li>
 								</ul>
 							</div>
 							<h3 class="sidebar-title">최근 내역</h3>

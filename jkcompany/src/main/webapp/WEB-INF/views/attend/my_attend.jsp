@@ -204,7 +204,7 @@ font-size: 25px;
 							</div>
 						</div>
 						<div class="btn-wrap">
-							<a href="my_attend_edit.at" class="btn-buy" id="b">기타 사항</a>
+							<a href="my_attend_edit.at" class="btn-buy" id="b">연차 신청</a>
 						</div>
 					</div>
 
