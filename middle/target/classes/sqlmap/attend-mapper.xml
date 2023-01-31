@@ -66,7 +66,7 @@ order by a.attend_date desc, e.emp_name
 
 <!--  해당 날짜의 /지점별 /부서별 /직급별 직원의 출퇴근 상태 조회 -->
 <select id = "worktime_all" resultType="Attend.AttendAdminVO">
-select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
+select e.profile_path,a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
 c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , (TO_CHAR(ATTEND_OFF , 'hh24') - TO_CHAR(ATTEND_ON , 'hh24')) work_time ,c4.code_value att_state
 from tbl_attend a 
 left join tbl_emp e on a.emp_no = e.emp_no 

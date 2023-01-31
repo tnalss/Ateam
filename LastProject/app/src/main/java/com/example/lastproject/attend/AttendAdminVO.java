@@ -11,6 +11,7 @@ public class AttendAdminVO {
     private String rank_name;
     private String branch_name;
 
+private String profile_path;
 
 
     private String work_time;
@@ -46,7 +47,7 @@ public class AttendAdminVO {
         this.profile_path = profile_path;
     }
 
-    private String profile_path;
+
 
     public String getEmp_no() {
         return emp_no;

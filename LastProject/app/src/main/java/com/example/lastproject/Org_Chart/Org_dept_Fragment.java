@@ -33,7 +33,7 @@ public class Org_dept_Fragment extends Fragment {
 
     RecyclerView recyclerview;
     ArrayList<OrgVO> list;
-    MainActivity activity;
+
     EditText text_search;
     NiceSpinner spinner;
     ArrayList<SimpleCode> dep_list;
@@ -65,7 +65,7 @@ public class Org_dept_Fragment extends Fragment {
                 new CommonMethod().setParams("code",dep_list.get(i).getCode_value()).sendPost("org_dept.org",(isResult, data) -> {
                                 list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>() {
                                 }.getType());
-                               recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(), list, activity));
+                               recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(), list, (Org_MainActivity) getActivity()));
                                recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));
                           });
             }
@@ -81,7 +81,7 @@ public class Org_dept_Fragment extends Fragment {
                 if (text_search.length() >0){
                     new CommonMethod().setParams("code",spinner.getText().toString().trim()).setParams("keyword",text_search.getText().toString()).sendPost("org_dept_n.org",(isResult, data) -> {
                         list = new Gson().fromJson(data, new TypeToken<ArrayList<OrgVO>>(){}.getType());
-                        recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list,activity));
+                        recyclerview.setAdapter(new Org_all_adapter(getLayoutInflater(),list, (Org_MainActivity) getActivity()));
                         recyclerview.setLayoutManager(CommonMethod.getVManager(getContext()));
                     });
                 }
