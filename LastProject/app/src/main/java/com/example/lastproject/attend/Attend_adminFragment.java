@@ -45,7 +45,7 @@ import java.util.Date;
 
 public class Attend_adminFragment extends Fragment {
     RecyclerView recv_attend_admin;
-    MainActivity activity;
+
     ArrayList<AttendAdminVO> list;
     DatePickerDialog datePickerDialog;
     LinearLayout datepicker;
@@ -65,7 +65,7 @@ public class Attend_adminFragment extends Fragment {
 
         new CommonMethod().sendPost("worktime_day.at",(isResult, data) -> {
             list = new Gson().fromJson(data, new TypeToken<ArrayList<AttendAdminVO>>(){}.getType());
-            recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(),list,getContext(),activity));
+            recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(),list,getContext(), (MainActivity) getActivity()));
             recv_attend_admin.setLayoutManager(CommonMethod.getVManager(getContext()));
         });
 
@@ -180,7 +180,7 @@ public class Attend_adminFragment extends Fragment {
         new CommonMethod().setParams("param",new Gson().toJson(vo)).sendPost("worktime_all.at",(isResult, data) -> {
             if(isResult) {
             list = new Gson().fromJson(data, new TypeToken<ArrayList<AttendAdminVO>>(){}.getType());
-                recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(), list, getContext(), activity));
+                recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(), list, getContext(), (MainActivity) getActivity()));
                 recv_attend_admin.setLayoutManager(CommonMethod.getVManager(getContext()));
             }
         });

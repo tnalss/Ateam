@@ -34,7 +34,7 @@ SET attend_off = to_char(current_date,'yyyy/mm/dd HH24:MI') , att_code='W1'
 select a.*,GET_CODE_VALUE(a.ATT_CODE) ATT_STATE
 from tbl_attend a inner join tbl_emp e
 on a.emp_no = e.emp_no
-<![CDATA[WHERE a.attend_date < to_char(current_date, 'yyyy/mm/dd') ]]>
+<![CDATA[WHERE a.attend_date <= to_char(current_date, 'yyyy/mm/dd') ]]>
 and a.emp_no = #{emp_no}
 order by attend_date desc
 </select>
@@ -93,7 +93,7 @@ order by a.attend_date ,c2.code_value,c3.code_value,c.code_num, e.emp_name
 
 <!-- 전체사원의 출근한 전체 날짜의 근무 시간 총합  조회   -->
 <select id ="worktime_day" resultType="Attend.AttendAdminVO">
-select a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
+select  e.profile_path,a.attend_date ,c2.code_value branch_name ,c3.code_value department_name,
 c.code_value rank_name,e.emp_name, a.attend_on, a.attend_off , (TO_CHAR(ATTEND_OFF , 'hh24') - TO_CHAR(ATTEND_ON , 'hh24')) work_time ,c4.code_value att_state
 from tbl_attend a 
 left join tbl_emp e on a.emp_no = e.emp_no 
