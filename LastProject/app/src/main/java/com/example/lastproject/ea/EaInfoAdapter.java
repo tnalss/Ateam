@@ -135,7 +135,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
 //                               결재완료자 수가 리스트 사이즈랑 같다면 마지막 결재자가 결재할때
 //                               대기인 코드를 결재완료 코드로 바꿈!
 //                                       (안됨 리사이클러뷰라서..........)
-// 몇개인지 쿼리를 날리고 사이즈와 비교
+                                // 몇개인지 쿼리를 날리고 사이즈와 비교
 
                                 new CommonMethod().setParams("ea_status", "E7").setParams("emp_no", Common.loginInfo.getEmp_no()).setParams("ea_num", ea_list.get(0).getEa_num()).sendPost("sign_status.ea", (isResult, data) -> {
                                     Fragment f = new EaInfoFragment();
