@@ -138,13 +138,10 @@
 	<c:choose>
 		<c:when test="${pageCategory eq 1 }">
 			<script type="text/javascript">
-			window.onload = function(){
-				
-				$('a[href="#tab-1"]').tab('show');
-				
+			window.onload = function(){				
+				$('a[href="#tab-1"]').tab('show');				
 		
 				/* list.jsp 상단에 히든 태그를 넣어서 현재 페이지를 날려준다!! */
-
 
 			}
 			function toPage(no){
@@ -430,18 +427,19 @@
 	});
 
 	$('[name=search]').on('change', function() {
-		$('#list').attr('action', 'admin_attend.at');
-		$('#list').submit();
+		console.log('ㅁㅇ히ㅏ허ㅐ;ㅁㅎ');
+		$('#list1').attr('action', 'admin_attend.at');
+		$('#list1').submit();
 	});
 
 	$('[name=search_dept]').on('change', function() {
-		$('#list').attr('action', 'admin_attend.at');
-		$('#list').submit();
+		$('#list1').attr('action', 'admin_attend.at');
+		$('#list1').submit();
 	});
 
 	$('[name=search_rank]').on('change', function() {
-		$('#list').attr('action', 'admin_attend.at');
-		$('#list').submit();
+		$('#list1').attr('action', 'admin_attend.at');
+		$('#list1').submit();
 	});
 
 	/* $('.btn-edit').on('click', function() {

@@ -48,7 +48,7 @@
 								</ul>
 							</div>
 							<h2 class="entry-title">
-								<a href="blog-single.html">결근 및 연차 사용 조회</a>
+								<a href="blog-single.html">결근 조회</a>
 							</h2>
 
 							<div class="entry-content">
@@ -95,11 +95,11 @@
 							<h3 class="sidebar-title">목록</h3>
 							<div class="sidebar-item categories">
 								<ul>
-									<li><a href="my_attend_a.at">정상 </a></li>
-									<li><a href="my_attend_late.at">지각 </a></li>
-									<li><a href="my_attend_n.at">결근 및 연차 사용</a></li>
+									<li><a href="my_attend_a.at">정상 조회</a></li>
+									<li><a href="my_attend_late.at">지각 조회</a></li>
+									<li><a href="my_attend_n.at">결근 조회</a></li>
 										<li><a href="my_attend_o.at">기타 업무 상황 조회</a></li>
-									<li><a href="my_attend_edit.at">업무 상태 수정 신청</a></li>
+									<li><a href="my_attend_edit.at">연차 신청</a></li>
 								</ul>
 							</div>
 							<h3 class="sidebar-title">최근 내역</h3>
