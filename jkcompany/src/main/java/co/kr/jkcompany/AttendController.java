@@ -65,6 +65,7 @@ public class AttendController {
 		@RequestMapping("/al_info.at")
 		public String al_info(String id, Model model) {
 			List<AttendVO> vo = sql.selectList("at.al_info", id);
+			model.addAttribute("emp_name",vo.get(0).getEmp_name());
 			model.addAttribute("info",vo);			
 			model.addAttribute("al", sql.selectList("emp.codeList", 'L'));		
 			return "attend/al_info";

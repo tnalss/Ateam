@@ -69,8 +69,7 @@
 
 	<!-- 관리자가 보는 사원 각각의 연차 신청 현황 목록 조회 -->
 	<select id="al_info" resultType="attend.AttendVO">
-		select
-		e.emp_name, to_char(a.al_reg_date,'yyyy/MM/dd') al_reg_date, a.al_start_date ,
+		select		e.emp_name, to_char(a.al_reg_date,'yyyy/MM/dd') al_reg_date, a.al_start_date ,
 		get_code_value(a.al_approved) al_approved, c.code_value al_code_value
 		from tbl_al a
 		left join tbl_code c on a.al_code = c.code_category||c.code_num
