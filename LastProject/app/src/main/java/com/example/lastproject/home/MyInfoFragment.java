@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,8 @@ public class MyInfoFragment extends Fragment {
             alert.setTitle("비밀번호 확인");
             alert.setMessage("현재 비밀번호를 입력해주세요.");
             pw = new EditText(getContext());
+            pw.setSingleLine();
+            pw.setTransformationMethod( PasswordTransformationMethod.getInstance() );
             alert.setView(pw);
             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
