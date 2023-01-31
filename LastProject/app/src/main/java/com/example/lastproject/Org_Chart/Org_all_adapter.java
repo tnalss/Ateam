@@ -21,9 +21,9 @@ public class Org_all_adapter extends RecyclerView.Adapter<Org_all_adapter.ViewHo
 
     LayoutInflater inflater;
     ArrayList<OrgVO> list;
-    MainActivity activity;
+    Org_MainActivity activity;
 
-    public Org_all_adapter(LayoutInflater inflater, ArrayList<OrgVO> list, MainActivity activity) {
+    public Org_all_adapter(LayoutInflater inflater, ArrayList<OrgVO> list, Org_MainActivity activity) {
         this.inflater = inflater;
         this.list = list;
         this.activity = activity;
