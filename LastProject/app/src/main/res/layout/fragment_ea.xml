@@ -221,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="최근 문서 (최대 10건)"
+                android:text="최근 문서"
                 android:textColor="@color/black" />
 
             <com.google.android.material.tabs.TabLayout
