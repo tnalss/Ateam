@@ -154,7 +154,6 @@ function delete_reply(no,board_no){
 		$('#modify_off'+no).css({"display":"block"});
 		$('.reply_incontent'+no).css({"display":"none"});
 		$('.reply_content'+no).css({"display":"block"});
-		$('.reply_content'+no).text($('.reply_incontent'+no).val());
 		//console.log($('.reply_content'+no).text($('.reply_incontent'+no).val()));
 		$('#updateReply'+no).submit();
 	}
