@@ -13,6 +13,17 @@ public class AlVO implements Serializable {
     private String al_start_date;
     private String al_end_date;
 
+    public String getCode_value() {
+        return code_value;
+    }
+
+    public void setCode_value(String code_value) {
+        this.code_value = code_value;
+    }
+
+    private String code_value;
+
+
     public String getEa_status() {
         return ea_status;
     }

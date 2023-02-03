@@ -21,9 +21,9 @@ public class Org_all_adapter extends RecyclerView.Adapter<Org_all_adapter.ViewHo
 
     LayoutInflater inflater;
     ArrayList<OrgVO> list;
-    MainActivity activity;
+    Org_MainActivity activity;
 
-    public Org_all_adapter(LayoutInflater inflater, ArrayList<OrgVO> list, MainActivity activity) {
+    public Org_all_adapter(LayoutInflater inflater, ArrayList<OrgVO> list, Org_MainActivity activity) {
         this.inflater = inflater;
         this.list = list;
         this.activity = activity;
@@ -46,6 +46,9 @@ public class Org_all_adapter extends RecyclerView.Adapter<Org_all_adapter.ViewHo
         holder.tv_emp_rank.setText(list.get(position).getRank_name());
         if(list.get(position).getProfile_path()!=null){
             Glide.with(activity).load(list.get(position).getProfile_path()).error(R.drawable.error_user_profile).into(holder.iv_emp_profile);
+        }
+        if(list.get(position).getBranch_name()!=null){
+
         }
 
 

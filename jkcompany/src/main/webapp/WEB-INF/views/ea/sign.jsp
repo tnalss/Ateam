@@ -184,8 +184,7 @@
 				<c:forEach items='${sign_list}' var='vo'>
 					<div class="project">
 						<div class="row bg-white has-shadow">
-							<div
-								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
+							<div class="left-col col-lg-8 d-flex align-items-center justify-content-between"  onclick="info('${vo.ea_num}')">
 								<div class="project-title d-flex align-items-center">
 									<div class="has-shadow text-center">
 										<small>${vo.ea_r_statuas}</small>
@@ -201,10 +200,10 @@
 							</div>
 							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
-									<span class="hidden-sm-down">환경수질부</span>
+									<span class="hidden-sm-down">${vo.ea_receiver_dep}</span>
 								</div>
 								<div class="comments">
-									<span class="hidden-sm-down">부장</span>
+									<span class="hidden-sm-down">${vo.ea_receiver_rank}</span>
 								</div>
 								<div class="name">
 									<span class="hidden-sm-down">${vo.emp_name}</span>
@@ -221,4 +220,9 @@
 
 
 </main>
+<script>
+function info(c){
+	location.href = "info.ea?ea_num="+c+"&&cnt=2";
+}
+</script>
 <!-- End #main -->

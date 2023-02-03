@@ -130,8 +130,8 @@ font-size: 25px;
 
 }
 </style>
-
-<main id="main">
+<body onload="sijak()"></body>	
+<main id="main" >
 
 	<!-- ======= Breadcrumbs ======= -->
 	<!-- 경로를 나타내주는 부분입니다 해당하는 내용을 작성해주세요 -->
@@ -141,7 +141,7 @@ font-size: 25px;
 				<h2>근태 관리</h2>
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
-					<li>나의 출·퇴근</li>
+					<li><a href="myattend.at">나의 출·퇴근</a></li>
 			</div>
 			</ol>
 		</div>
@@ -170,7 +170,7 @@ font-size: 25px;
 				</div>
 				<div class="col-lg-4 col-md-6 mt-4 mt-md-0" id="a">
 					<h3 id="time">
-						<%=sf.format(nowTime)%>
+						
 					</h3>
 					<div class="box featured aos-init aos-animate" data-aos="fade-up"
 						id="o">
@@ -204,7 +204,7 @@ font-size: 25px;
 							</div>
 						</div>
 						<div class="btn-wrap">
-							<a href="my_attend_edit.at" class="btn-buy" id="b">기타 사항</a>
+							<a href="my_attend_edit.at" class="btn-buy" id="b">연차 신청</a>
 						</div>
 					</div>
 
@@ -257,7 +257,7 @@ font-size: 25px;
 							<i class="bi bi-emoji-sunglasses"></i>
 						</div>
 						<h3 class="title">
-							<a href="my_attend_n.at">결근 및 연차 사용 조회</a>
+							<a href="my_attend_n.at">결근 조회</a>
 						</h3>
 						<h4>${code3}건</h4>
 						<a href="my_attend_n.at"><p class="description">자세히보기</p></a>
@@ -305,4 +305,43 @@ $('#btn-off-cancel').on('click',function(){
 	alert('퇴근 취소시 현재 상태가 "출근"으로 표시됩니다.')
 	location.href="off_cancel.at";
 });
+
+
+function sijak() {
+
+    var onul=new Date();     /* 로컬컴퓨터에 설정된 표준시간대를 기준으로 한 현재 시간을 추출 */
+
+    var dd=["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+
+    var d=onul.getDay();     /*현재 '요일'을 숫자로 추출 */
+	
+    var h=onul.getHours();  /*현재 '시'를 숫자로 추출 */
+
+    var m=onul.getMinutes();   /*현재 '분'을 숫자로 추출 */
+
+    var s=onul.getSeconds();     /*현재 '초'를 숫자로 추출 */
+
+    var dal = onul.getMonth();
+    var il = onul.getDate();
+    var she = onul.getYear();
+    
+    m = dasi(m);
+
+    s = dasi(s);
+
+    document.getElementById('time').innerHTML = "2"+ she-100 + "년 " + dal+1 +"월"+ il +"일" +"\n" + dd[d]+ "&nbsp;" +h+":"+m+":"+s;
+
+    var t = setTimeout(function(){sijak()},1000);    /* 1초마다 갱신(refresh)  */
+
+}
+
+
+
+function dasi(i) {
+
+    if (i<10) {i = "0" + i};
+
+    return i;
+
+}
 </script>

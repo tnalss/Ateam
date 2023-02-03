@@ -9,4 +9,5 @@ import lombok.Setter;
 @Getter @Setter
 public class AttendPageVO extends PageVO{
 	public List<AttendVO> list;
+	
 }

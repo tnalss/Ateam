@@ -156,16 +156,16 @@ public class EmpUpdateFragment extends Fragment implements View.OnClickListener 
 
             new CommonMethod().setParams("param",vo).sendPostFile("update.emp",img_path,(isResult, data) -> {
                 if(isResult) {
-//                    EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
-//                    Bundle bundle2 = new Bundle();
-//                    bundle2.putSerializable("vo",vo2);
-//                    bundle2.putString("status",vo2.getAtt_code());
-//                    Fragment fragment = new EmpDetailFragment();
-//                    fragment.setArguments(bundle2);
-//                    activity.changeFragment(fragment);
-                    activity.getSupportFragmentManager().popBackStack();
+                   EmployeeVO vo2 = new Gson().fromJson(data,EmployeeVO.class);
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putSerializable("vo",vo2);
+                    bundle2.putString("status",vo2.getAtt_code());
+                    Fragment fragment = new EmpDetailFragment();
+                    fragment.setArguments(bundle2);
+                    activity.changeFragment(fragment);
+//                    activity.getSupportFragmentManager().popBackStack();
                     //팝백스택이 되면 update.emp 스프링도 바꿔야되는데? 버그있나 더 확인하고 바꾸기
-
+                    //activity.getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
                 }
             });
 

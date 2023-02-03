@@ -35,7 +35,7 @@ public class ScheduleController {
 	public String emp_list(HttpSession session, Model model) {
 		LoginVO info = null;
 		//각 컨트롤러 입장 메소드는 category에 속성을 넣어주세요!
-		session.setAttribute("cate", "sche" );
+		session.setAttribute("category", "admin" );
 
 		info = (LoginVO) session.getAttribute("loginInfo");
 

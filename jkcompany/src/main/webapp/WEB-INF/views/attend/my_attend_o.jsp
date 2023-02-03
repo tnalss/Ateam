@@ -22,7 +22,7 @@
 				<h2>근태 관리</h2>
 				<ol>
 					<li><a href="<c:url value='/'/>">홈</a></li>
-					<li>나의 출·퇴근</li>
+					<li><a href="myattend.at">나의 출·퇴근</a></li>
 				</ol>
 			</div>
 		</div>
@@ -91,21 +91,13 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="sidebar">
-							<h3 class="sidebar-title">Search</h3>
-							<div class="sidebar-item search-form">
-								<form action="">
-									<input type="text">
-									<button type="submit">
-										<i class="bi bi-search"></i>
-									</button>
-								</form>
-							</div>
+							
 							<h3 class="sidebar-title">목록</h3>
 							<div class="sidebar-item categories">
 								<ul>
 									<li><a href="my_attend_a.at">정상 </a></li>
 									<li><a href="my_attend_late.at">지각 </a></li>
-									<li><a href="my_attend_n.at">결근 및 연차 사용</a></li>
+									<li><a href="my_attend_n.at">결근 조회</a></li>
 									<li><a href="my_attend_o.at">기타 업무 상황 조회</a></li>
 									<li><a href="my_attend_edit.at">업무 상태 수정 신청</a></li>
 								</ul>

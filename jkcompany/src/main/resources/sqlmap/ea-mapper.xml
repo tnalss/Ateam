@@ -3,9 +3,18 @@
 <mapper namespace="ea">
 
 
+<!-- 상신 미결재 갯수? -->
+<!-- <select id = "howManydraft" resultType="Integer">
+select count(*) 
+from (select distinct ea_num, ea_date,emp_no,ea_status from tbl_ea)  
+where emp_no = #{emp_no} and ea_status = 'E0'
+order by ea_date desc
+
+</select> -->
+
 <!-- 전자결재 파일첨부 불러오기 -->
 <select id="file_select_all" resultType="ea.EaFileVO">
-select * from tbl_ea_file
+select * from tbl_ea_file order by file_no
 </select>
 
 <!-- 전자결재 파일첨부 불러오기 -->
@@ -16,6 +25,10 @@ select * from tbl_ea_file where ea_num = #{ea_num}
 <!-- 결재 상태 변경 -->
 <update id="status_update">
 update tbl_ea set ea_status = #{status} where ea_num=${ea_num}
+</update>
+<!-- 결재(반려) 상태 변경 -->
+<update id="statuas_update">
+update tbl_ea set ea_status = #{ea_status} where ea_num=${ea_num}
 </update>
 
 <!-- 결재 상세정보 불러오기 -->
@@ -103,7 +116,9 @@ order by ea_date desc
 <!-- 결재함 리스트 -->
 <select id="signboxlist" resultType="ea.EaVO">
 select ea_num, ea_title, GET_CODE_VALUE(ea_status) ea_status , ea_date, ea_a_date,
-GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name  
+GET_CODE_VALUE(ea_r_statuas) ea_r_statuas, (select emp_name from tbl_emp where emp_no = e.emp_no ) emp_name,
+(select GET_CODE_VALUE(dept_code) from tbl_org where emp_no = e.emp_no ) ea_receiver_dep,
+(select GET_CODE_VALUE(rank_code) from tbl_org where emp_no = e.emp_no ) ea_receiver_rank
 from tbl_ea e
 where ea_receiver = #{emp_no} and e.ea_r_statuas != 'E4'
 order by ea_date desc

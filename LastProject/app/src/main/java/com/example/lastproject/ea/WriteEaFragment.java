@@ -4,6 +4,7 @@ package com.example.lastproject.ea;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -95,17 +96,19 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
 
         activity = (MainActivity) getActivity();
 
-        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)) {
-            Log.d("TAG", "onActivityResult: ");
-        }else{
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-            intent.setData(uri);
-            startActivity(intent);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R ) {
+
+            if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(activity, Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)) {
+                Log.d("TAG", "onActivityResult: ");
+            } else {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+
         }
-
-
         my_alert = new AlertDialog.Builder(getContext());
         line_vacation = v.findViewById(R.id.line_vacation);
         recv_sign_add = v.findViewById(R.id.recv_sign_add);
@@ -527,9 +530,22 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
         final String type= split[0];
         final String[] tempSplit = split[1].split("/");
 
+
+
         if ("primary".equalsIgnoreCase(type)) {
             path = Environment.getExternalStorageDirectory() + "/" + (split.length > 1 ? split[1] : ""); //split[1];
-        } else   {
+        } else if ( "msf".equalsIgnoreCase(type)){
+            final String selection = "_id=?";
+            final String[] selectionArgs = new String[] { split[1] };
+           // path = Environment.getExternalStorageDirectory() + "/" ;
+
+            //path = new CommonMethod().getRealPath(uri, getContext(), 1111);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                path = getDataColumn(getContext(), MediaStore.Downloads.EXTERNAL_CONTENT_URI, selection, selectionArgs);
+            }
+
+        }else   {
             path = Environment.getExternalStorageDirectory() +"/" + tempSplit[4]+ "/" + tempSplit[5];// (split.length > 1 ? split[1] : ""); //split[1];
         }
 
@@ -594,5 +610,26 @@ public class WriteEaFragment extends Fragment implements View.OnClickListener  {
 //            adapter.notifyDataSetChanged();
         }
     }
+
+
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
 
 }

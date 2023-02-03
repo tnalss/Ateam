@@ -202,8 +202,7 @@
 				<c:forEach items='${retry_list}' var='vo'>
 					<div class="project">
 						<div class="row bg-white has-shadow">
-							<div
-								class="left-col col-lg-8 d-flex align-items-center justify-content-between">
+							<div class="left-col col-lg-8 d-flex align-items-center justify-content-between"  onclick="info('${vo.ea_num}')">
 								<div class="project-title d-flex align-items-center">
 									<div class="has-shadow text-center">
 										<small>${vo.ea_status}</small>
@@ -219,10 +218,10 @@
 							</div>
 							<div class="right-col col-lg-4 d-flex align-items-center">
 								<div class="time">
-									<span class="hidden-sm-down">환경수질부</span>
+									<span class="hidden-sm-down">${login.department_name}</span>
 								</div>
 								<div class="comments">
-									<span class="hidden-sm-down">부장</span>
+									<span class="hidden-sm-down">${login.rank_name}</span>
 								</div>
 								<div>
 									<a class="btn icon-btn btn-warning" href="#" onclick="draft('${vo.ea_num}');">상신</a>
@@ -244,6 +243,9 @@
 
 </main>
 <script>
+function info(c){
+	location.href = "info.ea?ea_num="+c+"&&cnt=3";
+}
 
 function draft(a){
     if(confirm("상신하시겠습니까?")){
@@ -261,5 +263,6 @@ function ea_delete(b){
         return false;
     }
 }
+
 </script>
 <!-- End #main -->

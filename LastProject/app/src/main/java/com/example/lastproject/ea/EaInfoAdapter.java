@@ -85,14 +85,13 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                         h.tv_info_date.setVisibility((View.GONE));
                     }else {
 
-
                         if (ea_list.get(i - 1).getEa_r_statuas().equals("결재완료")) {
                             h.imgv_stamp.setVisibility(View.VISIBLE);
                             h.line_btn_sign.setVisibility(View.GONE);
                             h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
                         }else if(ea_list.get(i - 1).getEa_r_statuas().equals("반려")){
-                            h.imgv_stamp.setImageResource(R.drawable.ea_stamp_denied);
                             h.imgv_stamp.setVisibility(View.VISIBLE);
+                            h.imgv_stamp.setImageResource(R.drawable.ea_stamp_denied);
                             h.line_btn_sign.setVisibility(View.GONE);
                             h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
 
@@ -136,7 +135,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
 //                               결재완료자 수가 리스트 사이즈랑 같다면 마지막 결재자가 결재할때
 //                               대기인 코드를 결재완료 코드로 바꿈!
 //                                       (안됨 리사이클러뷰라서..........)
-// 몇개인지 쿼리를 날리고 사이즈와 비교
+                                // 몇개인지 쿼리를 날리고 사이즈와 비교
 
                                 new CommonMethod().setParams("ea_status", "E7").setParams("emp_no", Common.loginInfo.getEmp_no()).setParams("ea_num", ea_list.get(0).getEa_num()).sendPost("sign_status.ea", (isResult, data) -> {
                                     Fragment f = new EaInfoFragment();
@@ -202,6 +201,11 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                         h.imgv_stamp.setVisibility(View.VISIBLE);
                         h.tv_info_date.setVisibility(View.VISIBLE);
                         h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
+                    }else if(ea_list.get(i - 1).getEa_r_statuas().equals("반려")){
+                        h.imgv_stamp.setVisibility(View.VISIBLE);
+                        h.imgv_stamp.setImageResource(R.drawable.ea_stamp_denied);
+                        h.tv_info_date.setVisibility(View.VISIBLE);
+                        h.tv_info_date.setText(ea_list.get(i - 1).getEa_a_date().toString());
                     } else {
                         h.tv_info_date.setVisibility((View.GONE));
                         h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
@@ -227,7 +231,7 @@ public class EaInfoAdapter extends RecyclerView.Adapter<EaInfoAdapter.ViewHolder
                     h.tv_info_dep.setText(vo.getDepartment_name());
                     h.tv_info_date.setVisibility(View.GONE);
                     h.tv_info_status.setVisibility(View.VISIBLE);
-                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_r_statuas());
+                    h.tv_info_status.setText(ea_list.get(i - 1).getEa_status());
 
                 });
             }

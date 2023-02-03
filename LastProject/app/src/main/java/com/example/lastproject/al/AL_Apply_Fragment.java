@@ -58,7 +58,7 @@ public class AL_Apply_Fragment extends Fragment {
 
 
         AlVO vo = new AlVO();
-        selectList();
+        //selectList();
 
         date_start = v.findViewById(R.id.date_start);
         date_end = v.findViewById(R.id.date_end);
@@ -165,7 +165,7 @@ public class AL_Apply_Fragment extends Fragment {
 //
 //                                        }
 //                                    }));
-                            selectList();
+                            //selectList();
 
                         }
                     });
@@ -197,7 +197,7 @@ public class AL_Apply_Fragment extends Fragment {
 //
 //                                        }
 //                                    }));
-                            selectList();
+                            //selectList();
                         }
                     });
                 }
@@ -211,12 +211,14 @@ public class AL_Apply_Fragment extends Fragment {
         });
 
 
-        /*로그인한 사원의 연차.휴가 신청 현황 */
-        recv_al_apply= v.findViewById(R.id.recv_al_apply);
+
+     /*   recv_al_apply= v.findViewById(R.id.recv_al_apply);
+        selectList();
+*/
 
         return v;
     }
-
+/*
     public void selectList(){
         new CommonMethod().setParams("emp_no", Common.loginInfo.getEmp_no()).sendPost("al_list.al", (isResult, data) -> {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -228,5 +230,5 @@ public class AL_Apply_Fragment extends Fragment {
 
         });
 
-    }
+    }*/
 }

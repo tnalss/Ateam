@@ -45,7 +45,7 @@ import java.util.Date;
 
 public class Attend_adminFragment extends Fragment {
     RecyclerView recv_attend_admin;
-    MainActivity activity;
+
     ArrayList<AttendAdminVO> list;
     DatePickerDialog datePickerDialog;
     LinearLayout datepicker;
@@ -62,16 +62,16 @@ public class Attend_adminFragment extends Fragment {
 
         /*리사이클러뷰 - 사원 전체의 출퇴근 기록 */
         recv_attend_admin = v.findViewById(R.id.recv_attend_admin);
+
         new CommonMethod().sendPost("worktime_day.at",(isResult, data) -> {
             list = new Gson().fromJson(data, new TypeToken<ArrayList<AttendAdminVO>>(){}.getType());
-            recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(),list,getContext(),activity));
+            recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(),list,getContext(), (MainActivity) getActivity()));
             recv_attend_admin.setLayoutManager(CommonMethod.getVManager(getContext()));
-
         });
 
 
         datepicker = v.findViewById(R.id.datepicker);
-        d = v.findViewById(R.id.d);
+       // d = v.findViewById(R.id.d);
         datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +88,7 @@ public class Attend_adminFragment extends Fragment {
                                 //1월은 0부터 시작하기 때문에 +1을 해준다.
                                 month = month + 1;
                                 String date = year + "/" + month + "/" + day;
-                                d.setText(date);
+                               // d.setText(date);
                                 vo.setAttend_date(date);
                                 selectlist();
                             }
@@ -180,7 +180,7 @@ public class Attend_adminFragment extends Fragment {
         new CommonMethod().setParams("param",new Gson().toJson(vo)).sendPost("worktime_all.at",(isResult, data) -> {
             if(isResult) {
             list = new Gson().fromJson(data, new TypeToken<ArrayList<AttendAdminVO>>(){}.getType());
-                recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(), list, getContext(), activity));
+                recv_attend_admin.setAdapter(new Attend_Admin_Adapter(getLayoutInflater(), list, getContext(), (MainActivity) getActivity()));
                 recv_attend_admin.setLayoutManager(CommonMethod.getVManager(getContext()));
             }
         });

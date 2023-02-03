@@ -40,9 +40,8 @@ public class Al_Apply_Adapter extends RecyclerView.Adapter<Al_Apply_Adapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
 
-    h.apply_what.setText(al_list.get(i).getAl_code_value());
+    h.apply_what.setText(al_list.get(i).getCode_value());
     h.apply_date.setText(al_list.get(i).getAl_reg_date().substring(0,10));
-    h.apply_result.setText(al_list.get(i).getEa_status());
 
 
 
@@ -54,12 +53,12 @@ public class Al_Apply_Adapter extends RecyclerView.Adapter<Al_Apply_Adapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-       TextView apply_result,   apply_what, apply_date ;
+       TextView    apply_what, apply_date ;
 
 
         public ViewHolder(@NonNull View v) {
             super(v);
-            apply_result = v.findViewById(R.id.apply_result);
+
             apply_what = v.findViewById(R.id.apply_what);
             apply_date = v.findViewById(R.id.apply_date);
 

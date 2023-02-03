@@ -97,7 +97,7 @@ public class BoardController {
 			model.addAttribute("url", "login");
 			return "ea/alert";
 		}
-		session.setAttribute("board", "bo");
+		session.setAttribute("category", "bo");
 		model.addAttribute("page", notice_list(page));
 		return "board/list";
 	}

@@ -31,6 +31,7 @@
 function toPage(no){
 	$('[name=curPage]').val(no);
 	$('#list').submit();
+
 }
 /* list.jsp 상단에 히든 태그를 넣어서 현재 페이지를 날려준다!! */
 
