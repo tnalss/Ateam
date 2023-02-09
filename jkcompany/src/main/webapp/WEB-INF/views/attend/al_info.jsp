@@ -54,7 +54,7 @@
 		<div class="container">
 			<div class="row mt-5 justify-content-center aos-init aos-animate"
 				data-aos="fade-up">
-				<%-- <h2 class="entry-title" style="margin-left: 100px;">${emp_name}님의	연차 신청 목록입니다.</h2> --%>
+				 <h2 class="entry-title" style="margin-left: 100px;">${emp_name}님의	연차 신청 목록입니다.</h2> 
 				<div class="table-responsive">
 					<table class='table table-hover text-center'
 						style='margin: 0 auto; max-width: 1200px;'>
@@ -98,7 +98,7 @@
 						</c:forEach>
 
 					</table>
-					<button id="submit_cancel" onclick="history.go(-1);">목록으로</button>
+					<!-- <button id="submit_cancel" onclick="history.go(-1);">목록으로</button> -->
 				</div>
 
 			</div>
